@@ -180,15 +180,15 @@ public class WebConfig implements WebMvcConfigurer {
 	// <=> <mvc:view-controller .../>
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		// mappa la URL /X nella vista "Y" (funziona senza un controller, ma cosi` la vista non riceve un contesto)
+		//mappa la URL /X nella vista "Y" (funziona senza un controller, ma cosi` la vista non riceve un contesto)
 		//registry.addViewController("X").setViewName("Y");
 		
-		// configura delle redirezioni
-//        registry.addViewController("/login").setViewName("login");
+		//configura delle redirezioni
+        //registry.addViewController("/login").setViewName("login");
 
-//        registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
-//		registry.addRedirectViewController("/", "/singers/list");
-errore	//registry.addRedirectViewController("/singers/", "/singers/list/");
+        //registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
+		//registry.addRedirectViewController("/", "/singers/list");
+		registry.addRedirectViewController("/", "/");
 
 	}
 }

@@ -19,9 +19,9 @@ public interface UserDetailsDao {
 	
 	void delete(User user);
 
-	public String encryptPassword(String password);
+	// public String encryptPassword(String password);
 	
-	void setPasswordEncoder(PasswordEncoder passwordEncoder);
+	// void setPasswordEncoder(PasswordEncoder passwordEncoder);
 	
-	PasswordEncoder getpasswordEncoder();
+	// PasswordEncoder getpasswordEncoder();
 }

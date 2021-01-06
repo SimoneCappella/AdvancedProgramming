@@ -27,17 +27,6 @@ public class User implements Serializable {
   @Column(name = "ENABLED", nullable = false)
   private boolean enabled;
 
-  @ManyToMany
-  @JoinTable( 
-      name = "users_roles", 
-      joinColumns = @JoinColumn(
-        name = "username", referencedColumnName = "username"), 
-      inverseJoinColumns = @JoinColumn(
-        name = "role_id", referencedColumnName = "id")) 
-  private Set<Role> roles = new HashSet<Role>();
-  
-  @OneToMany(mappedBy="user")
-  private Set<Authorities> authorities = new HashSet<Authorities>();
   
   public String getUsername() {
 	  return this.username;
@@ -62,28 +51,5 @@ public class User implements Serializable {
   public void setEnabled(boolean enabled) {
 	  this.enabled = enabled;
   } 
-  
-  /*
-  public Set<Role> roles () {
-	  return this.roles;
-  }*/
-
-  public Set<Role> getRoles() {
-	  return this.roles;
-  }
-  
-  public void addRole(Role role) {
-	  if (this.roles == null) {
-		  this.roles = new HashSet<Role>();
-	  }
-	  
-	  this.roles.add(role);
-  }
-  
-  public void setRoles(Set<Role> roles) {
-	  this.roles = roles;
-  }
-  
-  
   
 }

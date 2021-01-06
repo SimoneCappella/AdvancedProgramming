@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController {
 	
 	@Autowired
-	String appName; // = "Home Health Care App";
+	String appName;
 
 	/**
 	 * Simply selects the home view to render by returning its name.

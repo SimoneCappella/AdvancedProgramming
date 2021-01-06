@@ -39,19 +39,19 @@ public class UserDetailsDaoDefault extends DefaultDao implements UserDetailsDao 
 		
 	}
 
-	@Override
+	/* @Override
 	public String encryptPassword(String password) {
 		return this.passwordEncoder.encode(password);
-	}
+	}*/
 	
-	@Override
+	/*@Override
 	public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
 		this.passwordEncoder = passwordEncoder;
-	}
+	}*/
 	
-	@Override
-	public PasswordEncoder getpasswordEncoder() {
-		return this.passwordEncoder;
-	}
+//	@Override
+//	public PasswordEncoder getpasswordEncoder() {
+//		return this.passwordEncoder;
+//	}
 
 }
