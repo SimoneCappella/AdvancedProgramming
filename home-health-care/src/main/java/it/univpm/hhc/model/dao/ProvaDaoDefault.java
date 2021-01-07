@@ -34,7 +34,10 @@ public class ProvaDaoDefault extends DefaultDao implements ProvaDao {
 	@Override
 //	@Transactional
 	public Prova create(String title) {
-		return this.create(title);
+		Prova p=new Prova();
+		p.setTitle(title);
+		this.getSession().save(p);
+		return p;
 	}
 
 	@Override

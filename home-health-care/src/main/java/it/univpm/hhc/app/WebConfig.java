@@ -188,7 +188,7 @@ public class WebConfig implements WebMvcConfigurer {
 
         //registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
 		//registry.addRedirectViewController("/", "/singers/list");
-		registry.addRedirectViewController("/", "/");
+		registry.addRedirectViewController("/", "/list");
 
 	}
 }
