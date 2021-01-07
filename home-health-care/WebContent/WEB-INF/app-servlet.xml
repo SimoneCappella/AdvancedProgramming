@@ -11,6 +11,6 @@
 
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
-	<context:component-scan base-package="it.univpm.advprog" />
+	<context:component-scan base-package="it.univpm.hhc" />
 	
 </beans:beans>

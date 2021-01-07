@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import it.univpm.hhc.model.entities.Prova;
 
 //@Transactional
-@Repository("albumDao")
+@Repository("provaDao")
 public class ProvaDaoDefault extends DefaultDao implements ProvaDao {
 	
 	@Override

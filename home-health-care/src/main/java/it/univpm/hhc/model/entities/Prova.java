@@ -16,7 +16,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
 @Entity
-@Table(name="album")
+@Table(name="prova")
 public class Prova implements Serializable {
 
 	private Long id;

@@ -32,13 +32,13 @@ public class ProvaController {
 	@GetMapping(value="/add")
 	public String add(Model uiModel) {
 		
-		uiModel.addAttribute("album", new Prova());
+		uiModel.addAttribute("prova", new Prova());
 		
 		return "prove/form";
 	}
 	
 	@PostMapping(value="/save")
-	public String save(@ModelAttribute("album") Prova prova, BindingResult bindingResult) {
+	public String save(@ModelAttribute("prova") Prova prova, BindingResult bindingResult) {
 		
 		this.provaService.update(prova);
 		

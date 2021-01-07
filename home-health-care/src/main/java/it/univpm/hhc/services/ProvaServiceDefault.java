@@ -9,9 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import it.univpm.hhc.model.dao.ProvaDao;
 import it.univpm.hhc.model.entities.Prova;
-
+//con transactional abbiamo la gestione automatica delle transazioni, con service indichiamo che stiamo facendo un servizio
 @Transactional
-@Service("albumService")
+@Service("provaService")
 public class ProvaServiceDefault implements ProvaService {
 
 	private ProvaDao provaDao;
