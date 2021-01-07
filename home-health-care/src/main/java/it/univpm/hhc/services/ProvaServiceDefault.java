@@ -14,7 +14,7 @@ import it.univpm.hhc.model.entities.Prova;
 @Service("provaService")
 public class ProvaServiceDefault implements ProvaService {
 
-	private ProvaDao provaDao;
+	ProvaDao provaDao;
 	
 	@Override
 	public List<Prova> findAll() {
@@ -22,26 +22,27 @@ public class ProvaServiceDefault implements ProvaService {
 	}
 
 	@Override
-	public Prova create(String title) {
-		return this.provaDao.create(title);
-	}
-	
-	@Override
-	public Prova findById(Long id) {
+	public Prova findById(String id) {
 		return this.provaDao.findById(id);
 	}
 
 	@Override
-	public void delete(Prova prova) {
-		this.provaDao.delete(prova);
-
+	public Prova create(String id, String title, String description) {
+		return this.provaDao.create(id, title, description);
 	}
-
+	
 	@Override
 	public Prova update(Prova prova) {
 		return this.provaDao.update(prova);
 	}
 
+	@Override
+	public void delete(String provaId) {
+		Prova prova= this.provaDao.findById(provaId);
+		this.provaDao.delete(prova);
+
+	}
+	
 	@Autowired
 	public void setProvaDao(ProvaDao provaDao) {
 		this.provaDao = provaDao;

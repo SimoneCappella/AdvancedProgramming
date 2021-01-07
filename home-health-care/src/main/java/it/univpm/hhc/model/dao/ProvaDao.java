@@ -10,16 +10,17 @@ public interface ProvaDao {
 	Session getSession();
 	public void setSession(Session session);
 
+	Prova findByTitle(String name);
 	
-	List<Prova> findAll();
+	List <Prova> findAll();
 	
-	Prova findById(Long id);
+	Prova findById(String id);
 
-	Prova create(String title);
+	Prova create(String id, String title, String description);
 	
 	Prova update(Prova prova);
 	
-	void delete(Prova prova);
+	void delete(Prova contact);
 
 
 }

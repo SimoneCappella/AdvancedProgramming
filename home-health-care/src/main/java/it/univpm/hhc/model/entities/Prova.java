@@ -1,5 +1,7 @@
 package it.univpm.hhc.model.entities;
 
+import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -19,37 +21,34 @@ import javax.persistence.Version;
 @Table(name="prova")
 public class Prova implements Serializable {
 
-	private Long id;
+	private String provaId;
 	private String title;
-	private int version;
+	private String description;
 	
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID")
-	public Long getId() {
-		return this.id;
+	@Column(name = "PROVA_ID")
+	public String getProvaId() {
+		return this.provaId;
+	}
+	public void setProvaId(String provaId){
+		this.provaId= provaId;
 	}
 
-	@Version
-	@Column(name = "VERSION")
-	public int getVersion() {
-		return version;
-	}
-
-	@Column
+	@Column(name ="TITLE")
 	public String getTitle() {
 		return this.title;
+	}
+	
+	@Column(name = "DESCRIPTION")
+	public String getDescription() {
+		return this.description;
 	}
 
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
-	public void setVersion(int version) {
-		this.version = version;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }

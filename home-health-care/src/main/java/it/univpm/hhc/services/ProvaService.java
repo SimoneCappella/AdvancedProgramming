@@ -6,16 +6,15 @@ import it.univpm.hhc.model.entities.Prova;
 
 public interface ProvaService {
 
-	public List<Prova> findAll();
+	List<Prova> findAll();
 	
-	public Prova create(String name);
+	Prova findById(String id);
 	
-	public Prova findById(Long id);
+	Prova create(String id, String title, String description);
 	
-	public void delete(Prova prova);
+	Prova update(Prova prova);
 	
-	public Prova update(Prova prova);
-
+	void delete(String instrumentId);
 	
 	
 }

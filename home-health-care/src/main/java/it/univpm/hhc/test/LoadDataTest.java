@@ -39,9 +39,9 @@ public class LoadDataTest {
 				
 				session.beginTransaction();
 
-				provaDao.create("Provola");
-				provaDao.create("Nervino");
-				provaDao.create("Ciccio");
+				provaDao.create("1","Provola","ciao questa è desc");
+				provaDao.create("2","Nervino","descrizione unica");
+				provaDao.create("3","Ciccio","balla ccciccione");
 
 				List<Prova> all= provaDao.findAll();
 								
@@ -53,7 +53,7 @@ public class LoadDataTest {
 				System.out.println("Numero di prove: " + all.size());
 				for (Prova p : all) 
 				{
-					System.out.println(" - " + p.getId() + "_" + p.getId() + " : " + p.getVersion());
+					System.out.println(" - " + p.getProvaId() + "_" + p.getTitle() + " : " + p.getDescription());
 				}
 				
 				
