@@ -21,16 +21,17 @@ import javax.persistence.Version;
 @Table(name="prova")
 public class Prova implements Serializable {
 
-	private String provaId;
+	private Long provaId;
 	private String title;
 	private String description;
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "PROVA_ID")
-	public String getProvaId() {
+	public Long getProvaId() {
 		return this.provaId;
 	}
-	public void setProvaId(String provaId){
+	public void setProvaId(Long provaId){
 		this.provaId= provaId;
 	}
 

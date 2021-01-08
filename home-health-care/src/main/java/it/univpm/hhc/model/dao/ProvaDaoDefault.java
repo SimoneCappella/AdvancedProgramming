@@ -21,7 +21,7 @@ public class ProvaDaoDefault extends DefaultDao implements ProvaDao {
 
 	@Override
 //	@Transactional(readOnly = true)
-	public Prova findById(String id) {
+	public Prova findById(Long id) {
 		return getSession().find(Prova.class, id);
 	}
 
@@ -38,9 +38,8 @@ public class ProvaDaoDefault extends DefaultDao implements ProvaDao {
 
 	@Override
 //	@Transactional
-	public Prova create(String id,String title, String description) {
+	public Prova create(String title, String description) {
 		Prova p=new Prova();
-		p.setProvaId(id);
 		p.setTitle(title);
 		p.setDescription(description);
 		this.getSession().save(p);

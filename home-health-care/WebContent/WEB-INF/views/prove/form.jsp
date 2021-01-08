@@ -8,10 +8,7 @@
         <form:form method="POST" action="${action_url}" modelAttribute="prova">
              <table>
 				<c:if test="${empty prova.provaId}">
-               <tr>
-                    <td><form:label path="provaId">Prova Id</form:label></td>
-                    <td><form:input path="provaId"/></td>
-                </tr>
+               
 				</c:if>
                <tr>
                     <td><form:label path="title">Title</form:label></td>

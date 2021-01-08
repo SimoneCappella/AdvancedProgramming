@@ -22,13 +22,13 @@ public class ProvaServiceDefault implements ProvaService {
 	}
 
 	@Override
-	public Prova findById(String id) {
+	public Prova findById(Long id) {
 		return this.provaDao.findById(id);
 	}
 
 	@Override
-	public Prova create(String id, String title, String description) {
-		return this.provaDao.create(id, title, description);
+	public Prova create(String title, String description) {
+		return this.provaDao.create( title, description);
 	}
 	
 	@Override
@@ -37,7 +37,7 @@ public class ProvaServiceDefault implements ProvaService {
 	}
 
 	@Override
-	public void delete(String provaId) {
+	public void delete(Long provaId) {
 		Prova prova= this.provaDao.findById(provaId);
 		this.provaDao.delete(prova);
 

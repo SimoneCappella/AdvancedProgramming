@@ -8,13 +8,13 @@ public interface ProvaService {
 
 	List<Prova> findAll();
 	
-	Prova findById(String id);
+	Prova findById(Long id);
 	
-	Prova create(String id, String title, String description);
+	Prova create( String title, String description);
 	
 	Prova update(Prova prova);
 	
-	void delete(String instrumentId);
+	void delete(Long provaId);
 	
 	
 }

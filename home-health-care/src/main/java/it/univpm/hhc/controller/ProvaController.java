@@ -42,7 +42,7 @@ public class ProvaController {
 	
 	@GetMapping(value = "/{provaId}/delete")
 	public String delete(@PathVariable("provaId") String provaId) {
-		this.provaService.delete(provaId);
+		this.provaService.delete(new Long(provaId));
 		
 		return "redirect:/prove/list";
 	}
@@ -59,34 +59,44 @@ public class ProvaController {
 	public String edit(@PathVariable("provaId") String provaId, 
 			Model uiModel) {
 		
-		Prova p = this.provaService.findById(provaId);
+		Prova p = this.provaService.findById(new Long(provaId));
 		uiModel.addAttribute("prova", p);
 		
 		return "prove/form";
 	}
-
-	private void sanitizeId(String provaId) {
-		if (provaId.contains("/")) {
-			throw new RuntimeException("Id prova malformato");
-		}
-	}
+// serve qualora ho un id che non va bene e non uso autoincrement
+//	private void sanitizeId(String provaId) {
+//		if (provaId.contains("/")) {
+//			throw new RuntimeException("Id prova malformato");
+//		}
+//	}
+//	
+//	@PostMapping(value="/save")
+//	public String save(@ModelAttribute("prova") Prova prova, 
+//			BindingResult br, Model uiModel) {
+//		
+//		try {
+//			this.sanitizeId(prova.getProvaId());
+//			
+//			this.provaService.update(prova);
+//			
+//			String strMessage = "Prova (" + prova.getProvaId() + "," + prova.getTitle() +"," + prova.getDescription() + ") salvato correttamente";
+//			//uiModel.addAttribute("message", strMessage);
+//			
+//			return "redirect:/prove/list?message=" + strMessage;
+//		} catch (RuntimeException e) {
+//			return "redirect:/prove/list?message=" + e.getMessage();
+//		}
+//	}
 	
-	@PostMapping(value="/save")
-	public String save(@ModelAttribute("prova") Prova prova, 
-			BindingResult br, Model uiModel) {
+	@PostMapping(value = "/save")
+	public String save(@ModelAttribute("newProva") Prova newProva, BindingResult br) {
+		this.provaService.update(newProva);
 		
-		try {
-			this.sanitizeId(prova.getProvaId());
-			
-			this.provaService.update(prova);
-			
-			String strMessage = "Prova (" + prova.getProvaId() + "," + prova.getTitle() +"," + prova.getDescription() + ") salvato correttamente";
-			//uiModel.addAttribute("message", strMessage);
-			
-			return "redirect:/prove/list?message=" + strMessage;
-		} catch (RuntimeException e) {
-			return "redirect:/prove/list?message=" + e.getMessage();
-		}
+		return "redirect:/prove/list/";
+		
+		// return "redirect:singers/list"; // NB questo non funzionerebbe!
+		
 	}
 	
 	@Autowired

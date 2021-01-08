@@ -39,9 +39,9 @@ public class LoadDataTest {
 				
 				session.beginTransaction();
 
-				provaDao.create("1","Provola","ciao questa è desc");
-				provaDao.create("2","Nervino","descrizione unica");
-				provaDao.create("3","Ciccio","balla ccciccione");
+				provaDao.create("Provola","ciao questa è desc");
+				provaDao.create("Nervino","descrizione unica");
+				provaDao.create("Ciccio","balla ccciccione");
 
 				List<Prova> all= provaDao.findAll();
 								
