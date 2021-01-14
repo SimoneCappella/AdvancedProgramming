@@ -12,9 +12,9 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import it.univpm.hhc.model.dao.ProvaDao;
-import it.univpm.hhc.model.dao.UserDetailsDao;
+//import it.univpm.hhc.model.dao.UserDetailsDao;
 import it.univpm.hhc.model.entities.Prova;
-import it.univpm.hhc.model.entities.User;
+//import it.univpm.hhc.model.entities.User;
 
 public class LoadDataTest {
 
@@ -28,12 +28,12 @@ public class LoadDataTest {
 			
 			ProvaDao provaDao = ctx.getBean("provaDao", ProvaDao.class);
 			
-			UserDetailsDao userDao = ctx.getBean(UserDetailsDao.class);
+			//UserDetailsDao userDao = ctx.getBean(UserDetailsDao.class);
 			
 			try (Session session = sf.openSession()) {
 				
 				provaDao.setSession(session);
-				userDao.setSession(session);
+				//userDao.setSession(session);
 				
 				// phase 1 : add data to database
 				
@@ -61,15 +61,15 @@ public class LoadDataTest {
 				session.getTransaction().commit();
 				
 				// phase 3 : create user
-				session.beginTransaction();
-				
-				User u1 = userDao.create("user1", "user1", true);				
-				User u2 = userDao.create("user2", "user2", true);				
-				User u3 = userDao.create("user3", "user3", true);				
-				
-				userDao.update(u1);
-				userDao.update(u2);
-				session.getTransaction().commit();
+//				session.beginTransaction();
+//				
+//				User u1 = userDao.create("user1", "user1", true);				
+//				User u2 = userDao.create("user2", "user2", true);				
+//				User u3 = userDao.create("user3", "user3", true);				
+//				
+//				userDao.update(u1);
+//				userDao.update(u2);
+//				session.getTransaction().commit();
 			}
 
 		} catch (Exception e) {
