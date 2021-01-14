@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name ="cart item")
+@Table(name ="cart_item")
 public class Cart_item {
 	private Long cart_item_id;
 	private Long cart_code;
