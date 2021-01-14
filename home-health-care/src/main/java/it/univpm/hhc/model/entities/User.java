@@ -1,7 +1,10 @@
+
 package it.univpm.hhc.model.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,14 +16,18 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 
 @Entity
-@Table(name = "USERS")
+@Table(name = "user")
 public class User implements Serializable {
 	private Long user_id;
-	private Long sub_code;
+	private Sub sub;
 	private Long address_code;
 	private String password;
 	private String email;
@@ -35,7 +42,10 @@ public class User implements Serializable {
 	@Column(name = "USER_ID")
 	public Long getUser_id() {
 		return user_id;
-	}	
+	}
+	public void setUser_id(Long user_id) {
+		this.user_id = user_id;
+	}
 
 	@Column(name = "PASSWORD", nullable = false) //nullable serve per i campi non vuoti, in questo modo dico che la pass è obbligatoria
 	public String getPassword() {
@@ -73,6 +83,7 @@ public class User implements Serializable {
 		this.surname = surname;
 	}
 	
+	@Temporal(TemporalType.DATE)
 	@Column(name = "SUBSCRIPTION_EXPIRATION") 
 	public Date getSubexp() {
 		return subexp;
@@ -96,8 +107,18 @@ public class User implements Serializable {
 		  return this.active;
 	  }
 	  
-	public void setEnabled(boolean active) {	  
+	public void setActive(boolean active) {	  
 		this.active = active;
 	}
+	
+	@ManyToOne
+	@JoinColumn(name = "SUB_CODE")
+	public Sub getSub() {
+		return this.sub;
+	}
+	
+	public void setSub(Sub sub) {
+		this.sub = sub;
+	}
   
-}
+} 
