@@ -19,7 +19,7 @@ public class Cart implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column
+	@Column(name = "CART_ID")
 	public Long getCart_id() {
 		return cart_id;
 	}
@@ -28,7 +28,7 @@ public class Cart implements Serializable {
 		this.cart_id = cart_id;
 	}
 	
-	@Column
+	@Column(name = "USER_CODE")
 	public Long getUser_code() {
 		return user_code;
 	}
@@ -37,7 +37,7 @@ public class Cart implements Serializable {
 		this.user_code = user_code;
 	}
 	
-	@Column
+	@Column(name = "TOTAL")
 	public double getTotal() {
 		return total;
 	}
@@ -46,7 +46,7 @@ public class Cart implements Serializable {
 		this.total = total;
 	}
 	
-	@Column
+	@Column(name = "ITEM_NUM")
 	public int getItem_num() {
 		return item_num;
 	}
