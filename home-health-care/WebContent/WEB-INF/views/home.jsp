@@ -10,4 +10,5 @@
 	<li>Album: <a href="<c:url value="/albums/list/" />">lista</a> - <a href="<c:url value="/albums/add/" />">aggiungi</a> 
 	<li>Strumenti: <a href="<c:url value="/instruments/list/" />">lista</a> - <a href="<c:url value="/instruments/add/" />">aggiungi</a> 
 	<li>Prove: <a href="<c:url value="/prove/list/" />">lista</a> 
+	<li>Subs: <a href="<c:url value="/subs/list/" />">sub</a> 
 </ul>
