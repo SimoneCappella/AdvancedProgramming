@@ -10,14 +10,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="cart")
 public class Cart implements Serializable {
 	private Long cart_id;
-	private Long user_code;
+	private User user;
 	private double total;
 	private int item_num;
 	
@@ -34,13 +36,14 @@ public class Cart implements Serializable {
 		this.cart_id = cart_id;
 	}
 	
-	@Column(name = "USER_CODE")
-	public Long getUser_code() {
-		return user_code;
+	@OneToOne
+	@JoinColumn(name = "USER_CODE")
+	public User getUser() {
+		return this.user;
 	}
 	
-	public void setUser_code(Long user_code) {
-		this.user_code = user_code;
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 	@Column(name = "TOTAL")

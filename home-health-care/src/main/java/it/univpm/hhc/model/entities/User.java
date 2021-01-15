@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,6 +19,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -35,8 +37,10 @@ public class User implements Serializable {
 	private String surname;
 	private Date subexp; //data di scadenza dell'abbonamento
 	private Boolean role; // 0=user 1=admin
-	private Boolean active; // è is_enable del prof
+	private Boolean active; // ï¿½ is_enable del prof
 
+	private Set<Cart> carts = new HashSet<Cart>();
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "USER_ID")
@@ -47,7 +51,7 @@ public class User implements Serializable {
 		this.user_id = user_id;
 	}
 
-	@Column(name = "PASSWORD", nullable = false) //nullable serve per i campi non vuoti, in questo modo dico che la pass è obbligatoria
+	@Column(name = "PASSWORD", nullable = false) //nullable serve per i campi non vuoti, in questo modo dico che la pass ï¿½ obbligatoria
 	public String getPassword() {
 		return password;
 	}
@@ -119,6 +123,21 @@ public class User implements Serializable {
 	
 	public void setSub(Sub sub) {
 		this.sub = sub;
+	}
+	
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL,
+			orphanRemoval = true)
+	public Set<Cart> getCarts(){
+		return this.carts;
+	}
+	
+	public void addCart(Cart cart) {
+		cart.setUser(this);
+		this.carts.add(cart);
+	}
+	
+	public void setCarts(Set<Cart> carts) {
+		this.carts = carts;
 	}
   
 } 
