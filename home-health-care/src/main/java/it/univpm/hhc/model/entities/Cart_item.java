@@ -5,13 +5,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name ="cart_item")
 public class Cart_item {
 	private Long cart_item_id;
-	private Long cart_code;
+	private Cart cart;
 	private Long item_code;
 	private int quantity;
 	
@@ -26,13 +28,14 @@ public class Cart_item {
 		this.cart_item_id = cart_item_id;
 	}
 	
-	@Column(name = "CART_CODE")
-	public Long getCart_code() {
-		return cart_code;
+	@ManyToOne
+	@JoinColumn(name = "CART_CODE")
+	public Cart getCart() {
+		return this.cart;
 	}
 	
-	public void setCart_code(Long cart_code) {
-		this.cart_code = cart_code;
+	public void setCart(Cart cart) {
+		this.cart = cart;
 	}
 	
 	@Column(name = "USER_CODE")
