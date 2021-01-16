@@ -38,8 +38,8 @@ public class User implements Serializable {
 	private Date subexp; //data di scadenza dell'abbonamento
 	private Boolean role; // 0=user 1=admin
 	private Boolean active; // � is_enable del prof
-
-	private Set<Cart> carts = new HashSet<Cart>();
+	private Cart cart = new Cart();
+	//private Set<Cart> carts = new HashSet<Cart>();
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -125,19 +125,37 @@ public class User implements Serializable {
 		this.sub = sub;
 	}
 	
+	/*
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL,
 			orphanRemoval = true)
 	public Set<Cart> getCarts(){
 		return this.carts;
+	}*/
+	
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL,
+			orphanRemoval = true)
+	public Cart getCarts(){
+		return this.cart;
 	}
 	
+	/*
 	public void addCart(Cart cart) {
 		cart.setUser(this);
 		this.carts.add(cart);
+	}*/
+	
+	public void addCart(Cart cart) {
+		//cart.setUser(this);
+		this.cart = cart;
 	}
 	
+	/*
 	public void setCarts(Set<Cart> carts) {
 		this.carts = carts;
+	}*/
+	
+	public void setCarts(Cart cart) {
+		this.cart = cart;
 	}
   
 } 
