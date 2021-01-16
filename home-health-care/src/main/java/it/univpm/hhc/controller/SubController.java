@@ -22,7 +22,7 @@ import it.univpm.hhc.services.SubService;
 @Controller
 public class SubController {
 	
-	private final Logger logger = LoggerFactory.getLogger(ProvaController.class);
+	private final Logger logger = LoggerFactory.getLogger(SubController.class);
 	
 	private SubService subService;
 	
@@ -76,7 +76,7 @@ public class SubController {
 	}
 	
 	@Autowired
-	public void setProvaService(SubService subService) {
+	public void setSubService(SubService subService) {
 		this.subService = subService;
 	}
 }

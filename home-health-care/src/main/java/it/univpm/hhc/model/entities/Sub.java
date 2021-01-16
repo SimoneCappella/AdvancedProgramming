@@ -23,7 +23,7 @@ public class Sub implements Serializable {
 	private Long sub_id;
 	private String name;
 	private int discount; //sconto in percentuale
-	private Double price;
+	private Long price;
 	
 	private Set<User> users = new HashSet<User>();
 	
@@ -58,11 +58,11 @@ public class Sub implements Serializable {
 	}
 	
 	@Column(name = "PRICE", nullable = false) 
-	public Double getPrice() {
+	public Long getPrice() {
 		return price;
 	}
 	
-	public void setPrice(Double price) {
+	public void setPrice(Long price) {
 		this.price= price;
 	
 	}

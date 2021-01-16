@@ -27,7 +27,7 @@ public class SubServiceDefault implements SubService {
 	}
 
 	@Override
-	public Sub create(String name, Double price, int discount) {
+	public Sub create(String name, Long price, int discount) {
 		return this.subDao.create( name, price,discount);
 	}
 	

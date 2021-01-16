@@ -10,13 +10,13 @@ public interface SubDao {
 	Session getSession();
 	public void setSession(Session session);
 
-	Sub findByTitle(String name);
+	//Sub findByTitle(String name);non la usiamo
 	
 	List <Sub> findAll();
 	
 	Sub findById(Long id);
 
-	Sub create(String name, Double price, int discount);
+	Sub create(String name, Long price, int discount);
 	
 	Sub update(Sub sub);
 	
