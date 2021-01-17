@@ -22,40 +22,31 @@ import it.univpm.hhc.services.CartService;
 @Controller
 public class CartController {
 	
+	//Dovremo inserire di mostrare le info del carrello dell'utente loggato e la possibilità di visualizzare tutti gli item nel carrello, 
+	//di eliminarne uno o più e modificare le quantità
+	
 	private final Logger logger = LoggerFactory.getLogger(CartController.class);
 	
 	private CartService cartService;
 	
 	@GetMapping(value = "/list")//adesso fa vedere tutti i carrelli, ci servira poi un solo carrello da ritornare
-	public String list(@RequestParam(value = "message", required=false) String message, Model uiModel) {
+	public String list(Model uiModel) {
 		logger.info("Listing carts");
 		List<Cart> allCarts = this.cartService.findAll();
-		
 		uiModel.addAttribute("carts", allCarts);  //quello che restituisco alla vista
-		
-		// TODO ricevere un parametro via GET (es. per messaggio di esito operazione)
-		uiModel.addAttribute("message", message);
-		
 		return "carts/list";
 	}
 	
-	@GetMapping(value = "/{cartId}/delete")//occhio devo gestire la rimozione a cascata
+	@GetMapping(value = "/{cart_Id}/delete")//occhio devo gestire la rimozione a cascata
 	public String delete(@PathVariable("cartId") String cartId) {
 		this.cartService.delete(new Long(cartId));
 		
 		return "redirect:/carts/list";
 	}
 	
-	@GetMapping(value = "/add")
-	public String add(Model uiModel) {
-		
-		uiModel.addAttribute("cart", new Cart());
-		
-		return "carts/form";
-	}
 
-	@GetMapping(value="/{cartId}/edit")//occhio devo gestire la modifica a cascata
-	public String edit(@PathVariable("cartId") String cartId, 
+	@GetMapping(value="/{cart_id}/edit")//occhio devo gestire la modifica a cascata
+	public String edit(@PathVariable("cart_id") String cartId, 
 			Model uiModel) {
 		
 		Cart c = this.cartService.findById(new Long(cartId));

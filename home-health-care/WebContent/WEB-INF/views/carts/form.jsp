@@ -5,29 +5,14 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
     
 		<c:url value="/subs/save" var="action_url" />
-        <form:form method="POST" action="${action_url}" modelAttribute="sub">
+        <form:form method="POST" action="${action_url}" modelAttribute="cart">
              <table>
-				<c:if test="${empty sub.sub_id}">
+				<c:if test="${empty cart.cart_id}">
                
 				</c:if>
                <tr>
-                    <td><form:label path="name">Name sub</form:label></td>
-                    <td><form:input path="name"/></td>
+                    <td><form:label path="cart_id">Id carrello</form:label></td>
+                    <td><form:input path="cart_id"/></td>
                 </tr>
-				<tr>
-                    <td><form:label path="discount">discount</form:label></td>
-                    <td><form:input path="discount"/></td>
-                </tr>
-				<tr>
-                    <td><form:label path="price">Price</form:label></td>
-                    <td><form:input path="price"/></td>
-                </tr>
-				<tr>
-					<td><form:hidden path="sub_id" /></td>
-				</tr>
-                <tr>
-					<td><input type="submit" value="Submit"/></td>
-                </tr>
-
             </table>
 		</form:form>
