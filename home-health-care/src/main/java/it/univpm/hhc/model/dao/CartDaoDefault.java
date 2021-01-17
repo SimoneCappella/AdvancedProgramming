@@ -19,7 +19,7 @@ public class CartDaoDefault extends DefaultDao implements CartDao {
 
 	@Override
 	public List<Cart> findAll() { 
-		return getSession().createQuery("from cart c",Cart.class).getResultList();
+		return getSession().createQuery("from Cart c", Cart.class).getResultList();
 	}
 
 	@Override
@@ -27,7 +27,7 @@ public class CartDaoDefault extends DefaultDao implements CartDao {
 		Cart c = new Cart();
 		c.setItem_num(item_num);
 		c.setTotal(total);
-		c.setUser(user); //potrebbe dare errore (come passargli uno user?)
+		//c.setUser(user); //potrebbe dare errore (come passargli uno user?)
 		this.getSession().save(c);
 		return c;
 	}

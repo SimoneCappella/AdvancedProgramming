@@ -7,7 +7,7 @@ import it.univpm.hhc.model.entities.User;
 
 public interface CartService {
 	
-	List <Cart> findAll();
+	List<Cart> findAll();
 	
 	Cart findById(Long id);
 	

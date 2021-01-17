@@ -13,7 +13,7 @@ public interface CartDao {
 	
 	Cart findById(Long id);
 	
-	List <Cart> findAll();
+	List<Cart> findAll();
 	
 	Cart create(int item_num, double total, User user);
 	
