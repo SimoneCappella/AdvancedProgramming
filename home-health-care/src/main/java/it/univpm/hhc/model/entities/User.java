@@ -2,9 +2,10 @@
 package it.univpm.hhc.model.entities;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -36,7 +37,7 @@ public class User implements Serializable {
 	private String name;
 	private String surname;
 	private Date subexp; //data di scadenza dell'abbonamento
-	private Boolean role; // 0=user 1=admin
+	private Boolean role; // 0-false=user 1-true=admin
 	private Boolean active; // � is_enable del prof
 	private Cart cart = new Cart();
 	//private Set<Cart> carts = new HashSet<Cart>();
@@ -97,23 +98,24 @@ public class User implements Serializable {
 		this.subexp= subexp;
 	}
 	
-	@Column(name = "ROLE", nullable = false)
-	public boolean getRole() {
+	@Column(name = "ROLE", nullable = false) //nullable
+	public Boolean getRole() {
 		  return this.role;
 	  }
 	  
-	public void setRole(boolean role) {	  
+	public void setRole(Boolean role) {	  
 		this.role= role;
 	}
 	
-	@Column(name = "ACTIVE", nullable = false)
-	public boolean isActive() {
+	@Column(name = "ACTIVE", nullable = false) //nullable
+	public Boolean getActive() {
 		  return this.active;
 	  }
 	  
-	public void setActive(boolean active) {	  
+	public void setActive(Boolean active) {	  
 		this.active = active;
 	}
+	
 	
 	@ManyToOne
 	@JoinColumn(name = "SUB_CODE")
