@@ -2,9 +2,9 @@ package it.univpm.hhc.model.dao;
 
 import java.util.List;
 
+
 import org.springframework.stereotype.Repository;
 
-import com.mysql.cj.Session;
 
 import it.univpm.hhc.model.entities.Cart;
 import it.univpm.hhc.model.entities.User;
