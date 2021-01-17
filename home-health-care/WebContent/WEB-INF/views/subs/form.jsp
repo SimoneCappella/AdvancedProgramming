@@ -4,6 +4,7 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
     
+ 
 		<c:url value="/subs/save" var="action_url" />
         <form:form method="POST" action="${action_url}" modelAttribute="sub">
              <table>
