@@ -21,7 +21,7 @@
 <tr>
 	<td>[<a href="<c:url value="/carts/${s.cart_item_id}/edit/" />">+</a>]</td>
 	<td>${s.item_code}</td>
-	<td>${s.quantity}€</td>
+	<td>${s.quantity}</td>
 	<td>${s.cart.cart_id}</td>
 	<td>[<a href="<c:url value="/carts/${s.cart_item_id}/delete/"/>">X</a>]</td>
 </tr>

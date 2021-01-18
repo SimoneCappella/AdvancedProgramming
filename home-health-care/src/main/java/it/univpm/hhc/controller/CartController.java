@@ -39,7 +39,7 @@ public class CartController {
 	@GetMapping(value = "/{cart_id}/list")//adesso fa vedere tutti i carrelli, ci servira poi un solo carrello da ritornare
 	public String list(@PathVariable("cart_id") Long cart_id, Model uiModel) {
 		logger.info("Listing carts");
-		List<Cart_item> allItem = this.cartItemService.findAll();
+		List<Cart_item> allItem = this.cartItemService.findByCart(cart_id);
 		uiModel.addAttribute("items", allItem);  //quello che restituisco alla vista
 		return "carts/list";
 	}

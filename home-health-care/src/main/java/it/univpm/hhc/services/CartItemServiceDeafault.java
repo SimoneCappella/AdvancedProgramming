@@ -25,6 +25,12 @@ public class CartItemServiceDeafault implements CartItemService{
 	public Cart_item findByid(Long id) {
 		return this.cartItemDao.findById(id);
 	}
+	
+	@Override
+	public List<Cart_item> findByCart(Long id) {
+		return this.cartItemDao.findByCart(id);
+	}
+
 
 	@Override
 	public Cart_item create(Cart cart, Long item_code, int quantity) {

@@ -3,6 +3,7 @@ package it.univpm.hhc.model.dao;
 import java.util.List;
 
 
+
 import org.springframework.stereotype.Repository;
 
 
@@ -16,6 +17,11 @@ public class CartItemDaoDefault extends DefaultDao implements CartItemDao {
 	@Override
 	public Cart_item findById(Long id) {
 		return  getSession().find(Cart_item.class, id);
+	}
+	
+	@Override
+	public List<Cart_item> findByCart(Long id) {
+		return getSession().createQuery("from Cart_item c where cart_code = '"+id+"'", Cart_item.class).getResultList();
 	}
 
 	@Override

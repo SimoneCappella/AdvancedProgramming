@@ -13,6 +13,8 @@ public interface CartItemDao {
 	
 	Cart_item findById(Long id);
 	
+	List<Cart_item> findByCart (Long id);
+	
 	List<Cart_item> findAll();
 	
 	Cart_item create(Cart cart, Long item_code, int quantity);
