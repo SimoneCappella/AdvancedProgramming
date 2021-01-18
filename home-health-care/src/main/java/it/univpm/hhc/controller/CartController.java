@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import it.univpm.hhc.model.entities.Cart;
+import it.univpm.hhc.model.entities.Cart_item;
+import it.univpm.hhc.services.CartItemService;
 import it.univpm.hhc.services.CartService;
 
 @RequestMapping("/carts")
@@ -27,13 +29,18 @@ public class CartController {
 	
 	private final Logger logger = LoggerFactory.getLogger(CartController.class);
 	
-	private CartService cartService;
 	
-	@GetMapping(value = "/list")//adesso fa vedere tutti i carrelli, ci servira poi un solo carrello da ritornare
-	public String list(Model uiModel) {
+	
+	private CartService cartService;
+	private CartItemService cartItemService;
+	
+	//probabilmente mi servirà il getCarts di user per ottenere il suo carrello e da li ottengo il codice del carrello
+	//anche se non so come passare l'id del carrello all'url
+	@GetMapping(value = "/{cart_id}/list")//adesso fa vedere tutti i carrelli, ci servira poi un solo carrello da ritornare
+	public String list(@PathVariable("cart_id") Long cart_id, Model uiModel) {
 		logger.info("Listing carts");
-		List<Cart> allCarts = this.cartService.findAll();
-		uiModel.addAttribute("carts", allCarts);  //quello che restituisco alla vista
+		List<Cart_item> allItem = this.cartItemService.findAll();
+		uiModel.addAttribute("items", allItem);  //quello che restituisco alla vista
 		return "carts/list";
 	}
 	
@@ -67,8 +74,13 @@ public class CartController {
 	}
 	
 	@Autowired
-	public void setProvaService(CartService cartService) {
+	public void setCartService(CartService cartService) {
 		this.cartService = cartService;
+	}
+	
+	@Autowired
+	public void setCartItemService(CartItemService cartItemService) {
+		this.cartItemService = cartItemService;
 	}
 }
 

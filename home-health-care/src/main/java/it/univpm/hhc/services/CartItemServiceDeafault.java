@@ -3,11 +3,15 @@ package it.univpm.hhc.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import it.univpm.hhc.model.dao.CartItemDao;
 import it.univpm.hhc.model.entities.Cart;
 import it.univpm.hhc.model.entities.Cart_item;
 
+@Transactional
+@Service("cartItemService")
 public class CartItemServiceDeafault implements CartItemService{
 	
 	CartItemDao cartItemDao;

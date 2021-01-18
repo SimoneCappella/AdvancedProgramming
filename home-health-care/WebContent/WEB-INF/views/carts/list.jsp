@@ -12,20 +12,18 @@
 <table>
 <thead>
 	<td></td>
-	<td>Id carrello</td>
-	<td>Totale</td>
-	<td>Numero oggetti</td>
-	<td>Utente associato</td>
+	<td>Id oggetto</td>
+	<td>Quantità</td>
+	<td>Carrello associato</td>
 	<td></td>
 </thead>
-<c:forEach items="${carts}" var="s">
+<c:forEach items="${items}" var="s">
 <tr>
-	<td>[<a href="<c:url value="/carts/${s.cart_id}/edit/" />">+</a>]</td>
-	<td>${s.cart_id}</td>
-	<td>${s.total}€</td>
-	<td>${s.item_num}</td>
-	<td>${s.user.user_id}</td>
-	<td>[<a href="<c:url value="/carts/${s.cart_id}/delete/"/>">X</a>]</td>
+	<td>[<a href="<c:url value="/carts/${s.cart_item_id}/edit/" />">+</a>]</td>
+	<td>${s.item_code}</td>
+	<td>${s.quantity}€</td>
+	<td>${s.cart.cart_id}</td>
+	<td>[<a href="<c:url value="/carts/${s.cart_item_id}/delete/"/>">X</a>]</td>
 </tr>
 </c:forEach>
 </table>
