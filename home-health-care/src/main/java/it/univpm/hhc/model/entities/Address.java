@@ -22,11 +22,12 @@ import javax.persistence.Table;
 public class Address implements Serializable {
 	
 	private Long address_id;
+	private Long address_code;
 	private int cap;
 	private String city;
  	private String street;//via
 	private int civ_num;
-	
+
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,6 +39,14 @@ public class Address implements Serializable {
 		this.address_id = address_id;
 	}
 	
+	@Column(name = "ADDRESS_CODE", nullable = false) 
+	public Long getAddress_code() {
+		return address_code;
+	}
+	
+	public void setAddress_code(Long address_code) {
+		this.address_code = address_code;
+	}
 
 	@Column(name = "CAP", nullable = false) 
 	public int getCap() {
@@ -77,6 +86,5 @@ public class Address implements Serializable {
 		this.civ_num= civ_num;
 	
 	}
-	
 
 }
