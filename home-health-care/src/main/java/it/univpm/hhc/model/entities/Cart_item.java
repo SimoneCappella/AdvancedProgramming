@@ -1,11 +1,16 @@
 package it.univpm.hhc.model.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -34,14 +39,17 @@ public class Cart_item {
 		return this.cart;
 	}
 	
+	
 	public void setCart(Cart cart) {
 		this.cart = cart;
 	}
 	
-	@Column(name = "USER_CODE")
+	@Column(name = "ITEM_CODE")
 	public Long getItem_code() {
 		return item_code;
 	}
+		
+	
 	
 	public void setItem_code(Long item_code) {
 		this.item_code = item_code;
@@ -56,5 +64,5 @@ public class Cart_item {
 		this.quantity = quantity;
 	}
 	
-	
+
 }
