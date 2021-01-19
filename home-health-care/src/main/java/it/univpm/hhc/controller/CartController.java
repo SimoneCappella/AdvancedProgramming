@@ -20,7 +20,7 @@ import it.univpm.hhc.model.entities.Cart_item;
 import it.univpm.hhc.services.CartItemService;
 import it.univpm.hhc.services.CartService;
 
-@RequestMapping("/carts")
+@RequestMapping("/cart")
 @Controller
 public class CartController {
 	
@@ -34,21 +34,23 @@ public class CartController {
 	private CartService cartService;
 	private CartItemService cartItemService;
 	
-	//probabilmente mi servirà il getCarts di user per ottenere il suo carrello e da li ottengo il codice del carrello
-	//anche se non so come passare l'id del carrello all'url
-	@GetMapping(value = "/{cart_id}/list")//adesso fa vedere tutti i carrelli, ci servira poi un solo carrello da ritornare
+	//Ritorna correttamente gli  item nel carrello dell'utente "loggato", da implementare il get dell'id carrello associato all'utente in maniera dinamica
+	@GetMapping(value = "/{cart_id}/list")
 	public String list(@PathVariable("cart_id") Long cart_id, Model uiModel) {
 		logger.info("Listing carts");
 		List<Cart_item> allItem = this.cartItemService.findByCart(cart_id);
 		uiModel.addAttribute("items", allItem);  //quello che restituisco alla vista
-		return "carts/list";
+		return "cart/list";
 	}
 	
-	@GetMapping(value = "/{cart_Id}/delete")//occhio devo gestire la rimozione a cascata
-	public String delete(@PathVariable("cartId") String cartId) {
-		this.cartService.delete(new Long(cartId));
-		
-		return "redirect:/carts/list";
+	//Ok, funzionante
+	@GetMapping(value = "/{cart_item_id}/delete")
+	public String delete(@PathVariable("cart_item_id") Long cart_item_id) {
+		Cart_item item = cartItemService.findByid(cart_item_id); //ottengo un'istanza del cart_item in questione
+		this.cartItemService.delete(cart_item_id); 
+		Cart cart = item.getCart();	//ottengo il carrello associato per poi ricavarmi l'id da passare alla vista
+		Long cart_id = cart.getCart_id();
+		return "redirect:/cart/"+cart_id+"/list";
 	}
 	
 
@@ -62,7 +64,7 @@ public class CartController {
 		return "carts/form";
 	}
 
-	
+	/*
 	@PostMapping(value = "/save")
 	public String save(@ModelAttribute("newCart") Cart newCart, BindingResult br) {
 		this.cartService.update(newCart);
@@ -71,7 +73,7 @@ public class CartController {
 		
 		// return "redirect:singers/list"; // NB questo non funzionerebbe!
 		
-	}
+	}*/
 	
 	@Autowired
 	public void setCartService(CartService cartService) {

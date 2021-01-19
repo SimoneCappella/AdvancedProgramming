@@ -3,10 +3,10 @@
    Foundation//DTD Tiles  Configuration 3.0//EN"
    "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
-  <definition extends="default" name="carts/list">
-   <put-attribute name="body" value="/WEB-INF/views/carts/list.jsp" />
+  <definition extends="default" name="cart/list">
+   <put-attribute name="body" value="/WEB-INF/views/cart/list.jsp" />
   </definition>
-  <definition extends="default" name="carts/form">
-   <put-attribute name="body" value="/WEB-INF/views/carts/form.jsp" />
+  <definition extends="default" name="cart/form">
+   <put-attribute name="body" value="/WEB-INF/views/cart/form.jsp" />
 </definition>
 </tiles-definitions>

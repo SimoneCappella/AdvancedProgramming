@@ -17,13 +17,13 @@
 	<td>Carrello associato</td>
 	<td></td>
 </thead>
-<c:forEach items="${items}" var="s">
+<c:forEach items="${items}" var="i">
 <tr>
-	<td>[<a href="<c:url value="/carts/${s.cart_item_id}/edit/" />">+</a>]</td>
-	<td>${s.item_code}</td>
-	<td>${s.quantity}</td>
-	<td>${s.cart.cart_id}</td>
-	<td>[<a href="<c:url value="/carts/${s.cart_item_id}/delete/"/>">X</a>]</td>
+	<td>[<a href="<c:url value="/cart/${i.cart_item_id}/edit/" />">+</a>]</td>
+	<td>${i.item_code}</td>
+	<td>${i.quantity}</td>
+	<td>${i.cart.cart_id}</td>
+	<td>[<a href="<c:url value="/cart/${i.cart_item_id}/delete/"/>">Rimuovi</a>]</td>
 </tr>
 </c:forEach>
 </table>
