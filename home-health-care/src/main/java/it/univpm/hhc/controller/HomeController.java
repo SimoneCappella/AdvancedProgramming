@@ -40,7 +40,12 @@ public class HomeController {
 		Long cart_id = (long) 1; //potrò ricavare il codice del carrello dell'utente loggato dopo la funzione login
 		List<Cart_item> items = cartItemService.findByCart(cart_id);
 		int item_number = items.size();
-		model.addAttribute("item_number", item_number); //NON TIENE CONTO DEL FATTO DI UN OGGETTO CHE È STATO AGGIUNTO CON QUANTITA' MAGGIORE DI UNO
+		for (Cart_item i : items){
+			if(i.getQuantity() > 1) {
+				item_number += i.getQuantity()-1;
+			}
+		}
+		model.addAttribute("item_number", item_number);
 		return "home";
 	}
 	
