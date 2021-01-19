@@ -14,7 +14,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,11 +24,10 @@ import javax.persistence.Table;
 public class Purchase implements Serializable {
 	
 	private Long purchase_id;
-	private Long cart_code;
+	private Cart cart;
 	private String pay_method;
 	private String date;
-	private Long user_code;
-	private Long add_code;
+	private User user;
 	private double total;
 	
 	
@@ -40,15 +41,16 @@ public class Purchase implements Serializable {
 		this.purchase_id = purchase_id;
 	}
 	
-
-	@Column(name = "CART_CODE", nullable = false) 
-	public Long getCart_code() {
-		return cart_code;
+	@ManyToOne
+	@JoinColumn(name = "CART_CODE")
+	public Cart getCart() {
+		return this.cart;
 	}
 	
-	public void setCart_code(Long cart_code) {
-		this.cart_code = cart_code;
+	public void setCart(Cart cart) {
+		this.cart = cart;
 	}
+	
 	
 	@Column(name = "PAY_METHOD", nullable = false) 
 	public String getPay_method() {
@@ -69,26 +71,17 @@ public class Purchase implements Serializable {
 	
 	}
 	
-	
-	@Column(name = "USER_CODE", nullable = false) 
-	public Long getUser_code() {
-		return user_code;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "USER_CODE", referencedColumnName = "USER_ID")
+	public User getUser() {
+		return this.user;
 	}
 	
-	public void setUser_code(Long user_code) {
-		this.user_code= user_code;
-	
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
-	@Column(name = "ADD_CODE", nullable = false) 
-	public Long getAdd_code() {
-		return add_code;
-	}
 	
-	public void setAdd_code(Long add_code) {
-		this.add_code= add_code;
-	
-	}
 	@Column(name = "TOTAL", nullable = false) 
 	public double getTotal() {
 		return total;

@@ -1,8 +1,13 @@
 package it.univpm.hhc.model.entities;
+
 import java.io.Serializable;
+import java.time.LocalDate;
+
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,66 +16,71 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 
 @Entity
 @Table(name = "item")
 public class Item implements Serializable {
 	
+	private Long id_item;
+	private String title;
+	private String description;
+	private double price;
+	private String image;
+	
+	
   @Id	
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "ID_ITEM")
-  private String id_item;
-  
-  @Column(name = "TITLE", nullable = false)
-  private String title;
-  
-  @Column(name = "DESCRIPTION")
-  private String description;
-
-  @Column(name = "PRICE", nullable = false)
-  private double price;
-
-  @Column(name = "IMAGE")
-  private String image;
-
-  
-  public String getItemId() {
+  public Long getItemId() {
 	  return this.id_item;
   }
+  public void setItemId(Long id_item) {
+	  this.id_item = id_item;
+  }
   
-  public String getTitle() {
+  @Column(name = "TITLE")
+  public String getItemTitle() {
 	  return this.title;
   }
   
-  public void setTitle(String title) {
+  public void setItemTitle(String title) {
 	  this.title = title;
   }
   
-  public String getDescription() {
+  @Column(name = "DESCRIPTION")
+  public String getItemDescription() {
 	  return this.description;
   }
-  
-  public void setDescription(String description) {
+  public void setItemDescription(String description) {
 	  this.description = description;
   }
-  
-  public String getPrice() {
-	  return this.description;
+
+  @Column(name = "PRICE")
+  public double getItemPrice() {
+	  return this.price;
   }
   
-  public void setPrice(double price) {
+  public void setItemPrice(double price) {
 	  this.price = price;
   }
-  
-  public String getImage() {
+
+  @Column(name = "IMAGE")
+  public String getItemImage() {
 	  return this.image;
   }
   
-  public void setImage(String image) {
+  public void setItemImage(String image) {
 	  this.image = image;
   }
+
+  
   
  /*   
   public boolean isEnabled() {
