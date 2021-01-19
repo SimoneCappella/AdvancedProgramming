@@ -23,7 +23,7 @@
 	<td>${i.item_code}</td>
 	<td>${i.quantity}</td>
 	<td>${i.cart.cart_id}</td>
-	<td>[<a href="<c:url value="/cart/${i.cart_item_id}/delete/"/>">Rimuovia</a>]</td>
+	<td>[<a href="<c:url value="/cart/${i.cart_item_id}/delete/"/>">Rimuovi</a>]</td>
 </tr>
 </c:forEach>
 </table>
