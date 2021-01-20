@@ -29,14 +29,15 @@ public class CartController {
 	
 	private final Logger logger = LoggerFactory.getLogger(CartController.class);
 	
-	
-	
+	private Long currentCart;
+
 	private CartService cartService;
 	private CartItemService cartItemService;
 	
 	//Ritorna correttamente gli  item nel carrello dell'utente "loggato", da implementare il get dell'id carrello associato all'utente in maniera dinamica
 	@GetMapping(value = "/{cart_id}/list")
 	public String list(@PathVariable("cart_id") Long cart_id, Model uiModel) {
+		setCurrentCart(cart_id);
 		logger.info("Listing carts");
 		List<Cart_item> allItem = this.cartItemService.findByCart(cart_id);
 		uiModel.addAttribute("items", allItem);  //quello che restituisco alla vista
@@ -54,26 +55,31 @@ public class CartController {
 	}
 	
 
-	@GetMapping(value="/{cart_id}/edit")//occhio devo gestire la modifica a cascata
-	public String edit(@PathVariable("cart_id") String cartId, 
-			Model uiModel) {
+	@GetMapping(value="/{cart_item_id}/edit")//occhio devo gestire la modifica a cascata
+	public String edit(@PathVariable("cart_item_id") long cart_item_id, Model uiModel) {
 		
-		Cart c = this.cartService.findById(new Long(cartId));
-		uiModel.addAttribute("cart", c);
-		
-		return "carts/form";
+		Cart_item i = this.cartItemService.findByid(cart_item_id);
+		uiModel.addAttribute("item", i);
+		return "cart/form";
 	}
 
-	/*
+	
 	@PostMapping(value = "/save")
-	public String save(@ModelAttribute("newCart") Cart newCart, BindingResult br) {
-		this.cartService.update(newCart);
-		
-		return "redirect:/carts/list/";
-		
-		// return "redirect:singers/list"; // NB questo non funzionerebbe!
-		
-	}*/
+	public String save(@ModelAttribute("newCartItem") Cart_item newCartItem,BindingResult br) {
+		Cart c = cartService.findById(getCurrentCart());
+		newCartItem.setCart(c);
+		this.cartItemService.update(newCartItem);
+		Long cart_id = getCurrentCart();
+		return "redirect:/cart/"+cart_id+"/list";
+	}
+	
+	public Long getCurrentCart() {
+		return currentCart;
+	}
+
+	public void setCurrentCart(Long currentCart) {
+		this.currentCart = currentCart;
+	}
 	
 	@Autowired
 	public void setCartService(CartService cartService) {
