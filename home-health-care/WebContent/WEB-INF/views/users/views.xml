@@ -9,4 +9,10 @@
   <definition extends="default" name="users/form">
    <put-attribute name="body" value="/WEB-INF/views/users/form.jsp" />
 </definition>
+<definition extends="default" name="users/cartform">
+   <put-attribute name="body" value="/WEB-INF/views/users/cartform.jsp" />
+</definition>
+<definition extends="default" name="users/cartlist">
+   <put-attribute name="body" value="/WEB-INF/views/users/cartlist.jsp" />
+</definition>
 </tiles-definitions>

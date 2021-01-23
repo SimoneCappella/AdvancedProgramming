@@ -19,11 +19,11 @@
 </thead>
 <c:forEach items="${items}" var="i">
 <tr>
-	<td>[<a href="<c:url value="/cart/${i.cart_item_id}/edit/" />">Modifica</a>]</td>
+	<td>[<a href="<c:url value="/users/${i.cart_item_id}/cartedit/" />">Modifica</a>]</td>
 	<td>${i.item_code}</td>
 	<td>${i.quantity}</td>
 	<td>${i.cart.cart_id}</td>
-	<td>[<a href="<c:url value="/cart/${i.cart_item_id}/delete/"/>">Rimuovi</a>]</td>
+	<td>[<a href="<c:url value="/users/${i.cart_item_id}/cartdelete/"/>">Rimuovi</a>]</td>
 </tr>
 </c:forEach>
 </table>
