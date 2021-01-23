@@ -26,26 +26,10 @@ import it.univpm.hhc.services.UserService;
 @Controller
 public class UserController {
 	
+	private PublicController PC;
 	private UserService userService;
 	
-	@GetMapping(value = "/list")
-	public String list(@RequestParam(value = "message", required=false) String message, Model uiModel) {
-		List<User> allUsers = this.userService.findAll();
-		
-		uiModel.addAttribute("users", allUsers);  //quello che restituisco alla vista
-		
-		// TODO ricevere un parametro via GET (es. per messaggio di esito operazione)
-		uiModel.addAttribute("message", message);
-		
-		return "users/list";
-	}
-	
-	@GetMapping(value = "/{userId}/delete")//occhio devo gestire la rimozione a cascata
-	public String delete(@PathVariable("userId") String userId) {
-		this.userService.delete(new Long(userId));
-		
-		return "redirect:/users/list";
-	}
+
 //	dovrebbe non servire	
 //	@GetMapping(value = "/add") //prima era add
 //	public String add(Model uiModel) {
@@ -63,6 +47,13 @@ public class UserController {
 		uiModel.addAttribute("user", u);
 		
 		return "users/form";
+	}
+	
+	@GetMapping(value = "/{userId}/delete")//occhio devo gestire la rimozione a cascata
+	public String delete(@PathVariable("userId") String userId) {
+		this.userService.delete(new Long(userId));//anziché eliminare dovrà disabilitare (DA CAMBIARE)
+		//QUI DA RICHIAMARE IL LOGOUT
+		return "redirect:/";
 	}
 
 	

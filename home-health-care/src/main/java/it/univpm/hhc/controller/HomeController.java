@@ -27,7 +27,7 @@ public class HomeController {
 
 	/**
 	 * Simply selects the home view to render by returning its name.
-	 */
+	 */      
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		System.out.println("Home Page Requested,  locale = " + locale);
