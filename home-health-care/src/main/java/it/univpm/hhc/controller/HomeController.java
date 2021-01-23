@@ -1,4 +1,4 @@
-package it.univpm.hhc.controller;
+/*package it.univpm.hhc.controller;
 
 
 import java.text.DateFormat;
@@ -25,10 +25,8 @@ public class HomeController {
 	@Autowired
 	String appName;
 
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */      
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	     
+	@RequestMapping(value = "/asdasdads", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		System.out.println("Home Page Requested,  locale = " + locale);
 		Date date = new Date();
@@ -59,4 +57,4 @@ public class HomeController {
 		this.cartItemService = cartItemService;
 	}
 
-}
+}*/

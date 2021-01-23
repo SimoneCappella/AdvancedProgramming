@@ -1,4 +1,4 @@
-package it.univpm.hhc.controller;
+/*package it.univpm.hhc.controller;
 
 import java.util.List;
 
@@ -79,4 +79,4 @@ public class SubController {
 	public void setSubService(SubService subService) {
 		this.subService = subService;
 	}
-}
+}*/

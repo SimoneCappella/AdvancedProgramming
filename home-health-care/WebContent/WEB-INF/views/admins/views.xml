@@ -9,4 +9,10 @@
   <definition extends="default" name="admins/userform">
    <put-attribute name="body" value="/WEB-INF/views/admins/userform.jsp" />
 </definition>
+  <definition extends="default" name="admins/sublist">
+   <put-attribute name="body" value="/WEB-INF/views/admins/sublist.jsp" />
+  </definition>
+  <definition extends="default" name="admins/subform">
+   <put-attribute name="body" value="/WEB-INF/views/admins/subform.jsp" />
+</definition>
 </tiles-definitions>

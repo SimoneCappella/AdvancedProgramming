@@ -3,10 +3,10 @@
    Foundation//DTD Tiles  Configuration 3.0//EN"
    "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
-  <definition extends="default" name="subs/list">
-   <put-attribute name="body" value="/WEB-INF/views/subs/list.jsp" />
+  <definition extends="default" name="admins/sublist">
+   <put-attribute name="body" value="/WEB-INF/views/admins/sublist.jsp" />
   </definition>
-  <definition extends="default" name="subs/form">
-   <put-attribute name="body" value="/WEB-INF/views/subs/form.jsp" />
+  <definition extends="default" name="admins/subform">
+   <put-attribute name="body" value="/WEB-INF/views/admins/subform.jsp" />
 </definition>
 </tiles-definitions>
