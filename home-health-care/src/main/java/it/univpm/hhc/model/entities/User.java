@@ -38,7 +38,7 @@ public class User implements Serializable {
 	private String surname;
 	private Date subexp; //data di scadenza dell'abbonamento
 	private Boolean role; // 0-false=user 1-true=admin
-	private Boolean active; // � is_enable del prof
+	private boolean enabled; // � is_enable del prof
 	private Cart cart = new Cart();
 	//private Set<Cart> carts = new HashSet<Cart>();
 	
@@ -107,15 +107,14 @@ public class User implements Serializable {
 		this.role= role;
 	}
 	
-	@Column(name = "ACTIVE", nullable = false) //nullable
-	public Boolean getActive() {
-		  return this.active;
-	  }
-	  
-	public void setActive(Boolean active) {	  
-		this.active = active;
+	@Column(name = "ENABLED", nullable = false) //nullable
+	 public boolean isEnabled() {
+		return this.enabled;
 	}
-	
+	  
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	} 
 	
 	@ManyToOne
 	@JoinColumn(name = "SUB_CODE")
