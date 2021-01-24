@@ -34,7 +34,6 @@ public class Item implements Serializable {
 	private double price;
 	private String image;
 	
-	
   @Id	
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "ID_ITEM")
@@ -80,8 +79,11 @@ public class Item implements Serializable {
 	  this.image = image;
   }
 
+   //Relazione MM tra item e cart
+   @ManyToMany(mappedBy = "items")
+	private Set<Cart> carts = new HashSet<Cart>();
   
-  
+ 
  /*   
   public boolean isEnabled() {
 	  return this.enabled;
