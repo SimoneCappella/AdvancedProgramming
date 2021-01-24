@@ -1,4 +1,3 @@
-
 package it.univpm.hhc.model.entities;
 
 import java.io.Serializable;
@@ -14,7 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,11 +23,11 @@ import javax.persistence.Table;
 public class Address implements Serializable {
 	
 	private Long address_id;
-	private Long address_code;
 	private int cap;
 	private String city;
  	private String street;//via
 	private int civ_num;
+	private User user;
 
 	
 	@Id
@@ -39,14 +40,17 @@ public class Address implements Serializable {
 		this.address_id = address_id;
 	}
 	
-	@Column(name = "ADDRESS_CODE", nullable = false) 
-	public Long getAddress_code() {
-		return address_code;
-	}
-	
-	public void setAddress_code(Long address_code) {
-		this.address_code = address_code;
-	}
+	//relazione ManyToOne con user
+	@ManyToOne
+	@JoinColumn(name = "USER_CODE")
+		public User getUser() {
+			return this.user;
+		}
+			
+		public void setUser(User user) {
+			this.user = user;
+		}
+
 
 	@Column(name = "CAP", nullable = false) 
 	public int getCap() {
