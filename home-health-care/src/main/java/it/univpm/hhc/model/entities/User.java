@@ -31,7 +31,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "user")
 
-public class User implements Serializable {​​​​​
+public class User implements Serializable {
 	private Long user_id;
 	private Sub sub;
 	private Long address_code;
@@ -51,155 +51,154 @@ public class User implements Serializable {​​​​​
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "USER_ID")
-	public Long getUser_id() {​​​​​
+	public Long getUser_id() {
 		return user_id;
 	}
-	​​​​​
-	public void setUser_id(Long user_id) {​​​​​
+	public void setUser_id(Long user_id) {
 		this.user_id = user_id;
-	}​​​​​
+	}
 
 
 	@Column(name = "PASSWORD", nullable = false) //nullable serve per i campi non vuoti, in questo modo dico che la pass ï¿½ obbligatoria
-	public String getPassword() {​​​​​
+	public String getPassword() {
 		return password;
-	}​​​​​
+	}
 
-	public void setPassword(String password) {​​​​​
+	public void setPassword(String password) {
 		this.password = password;
-	}​​​​​
+	}
 
 	@Column(name = "EMAIL", nullable = false)
-	public String getEmail() {​​​​​
+	public String getEmail() {
 		return email;
-	}​​​​​
+	}
 
-	public void setEmail(String email) {​​​​​
+	public void setEmail(String email) {
 		this.email = email;
-	}​​​​​
+	}
 
 	@Column(name = "NAME", nullable = false)
-	public String getName() {​​​​​
+	public String getName() {
 		return name;
-	}​​​​​
+	}
 
-	public void setName(String name) {​​​​​
+	public void setName(String name) {
 		this.name = name;
-	}​​​​​
+	}
 
 	@Column(name = "SURNAME", nullable = false)
-	public String getSurname() {​​​​​
+	public String getSurname() {
 		return surname;
-	}​​​​​
+	}
 
-	public void setSurname(String surname) {​​​​​
+	public void setSurname(String surname) {
 		this.surname = surname;
-	}​​​​​
+	}
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "SUBSCRIPTION_EXPIRATION")
-	public Date getSubexp() {​​​​​
+	public Date getSubexp() {
 		return subexp;
-	}​​​​​
+	}
 
-	public void setSubexp(Date subexp) {​​​​​
+	public void setSubexp(Date subexp) {
 		this.subexp= subexp;
-	}​​​​​
+	}
 
 	@Column(name = "ROLE", nullable = false) //nullable
-	public Boolean getRole() {​​​​​
+	public Boolean getRole() {
 		return this.role;
-	}​​​​​
+	}
 
-	public void setRole(Boolean role) {​​​​​
+	public void setRole(Boolean role) {
 		this.role= role;
-	}​​​​​
+	}
 
 	@Column(name = "ACTIVE", nullable = false) //nullable
-	public Boolean getActive() {​​​​​
+	public Boolean getActive() {
 		return this.active;
-	}​​​​​
+	}
 
-	public void setActive(Boolean active) {​​​​​
+	public void setActive(Boolean active) {
 		this.active = active;
-	}​​​​​
+	}
 
 
 	@ManyToOne
 	@JoinColumn(name = "SUB_CODE")
-	public Sub getSub() {​​​​​
+	public Sub getSub() {
 		return this.sub;
-	}​​​​​
+	}
 
-	public void setSub(Sub sub) {​​​​​
+	public void setSub(Sub sub) {
 		this.sub = sub;
-	}​​​​​
+	}
 
 /*
 @OneToOne(mappedBy = "user", cascade = CascadeType.ALL,
 orphanRemoval = true)
-public Set<Cart> getCarts(){​​​​​
+public Set<Cart> getCarts(){
 return this.carts;
-}​​​​​*/
+}*/
 
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL,
 	orphanRemoval = true)
-	public Cart getCarts(){​​​​​
+	public Cart getCarts(){
 		return this.cart;
-	}​​​​​
+	}
 
 /*
-public void addCart(Cart cart) {​​​​​
+public void addCart(Cart cart) {
 cart.setUser(this);
 this.carts.add(cart);
-}​​​​​*/
+}*/
 
-	public void addCart(Cart cart) {​​​​​
+	public void addCart(Cart cart) {
 		//cart.setUser(this);
 		this.cart = cart;
-	}​​​​​
+	}
 
 /*
-public void setCarts(Set<Cart> carts) {​​​​​
+public void setCarts(Set<Cart> carts) {
 this.carts = carts;
-}​​​​​*/
+}*/
 
-	public void setCarts(Cart cart) {​​​​​
+	public void setCarts(Cart cart) {
 		this.cart = cart;
-	}​​​​​
+	}
 
 	//relazione OneToMany con purchase
 	@OneToMany(mappedBy="user", cascade = CascadeType.ALL,
 	orphanRemoval = true)
-	public Set<Purchase> getPurchase(){​​​​​
+	public Set<Purchase> getPurchase(){
 		return this.purchase;
-	}​​​​​
+	}
 
-	public void addPurchase(Purchase purchase) {​​​​​
+	public void addPurchase(Purchase purchase) {
 		purchase.setUser(this);
 		this.purchase.add(purchase);
-	}​​​​​
+	}
 
-	public void setPurchase(Set<Purchase> purchase) {​​​​​
+	public void setPurchase(Set<Purchase> purchase) {
 	this.purchase = purchase;
-	}​​​​​
+	}
 
 	//relazione OneToMany con address
 	@OneToMany(mappedBy="user", cascade = CascadeType.ALL,
 	orphanRemoval = true)
-	public Set<Address> getAddress(){​​​​​
+	public Set<Address> getAddress(){
 		return this.address;
-	}​​​​​
+	}
 
-	public void addAddress(Address address) {​​​​​
+	public void addAddress(Address address) {
 		address.setUser(this);
 		this.address.add(address);
-	}​​​​​
+	}
 
- 	public void setAddress(Set<Address> address) {​​​​​
+ 	public void setAddress(Set<Address> address) {
 		this.address = address;
-	}​​​​​
+	}
 
 
 
-}​​​​​
+}
