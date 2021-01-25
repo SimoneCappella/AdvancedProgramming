@@ -11,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -24,7 +26,7 @@ public class Cart implements Serializable {
 	private int item_num;
 	
 	private Set<Cart_item> cart_items = new HashSet<Cart_item>();
-	
+	private Set<Item> items = new HashSet<Item>();
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "CART_ID")
@@ -79,5 +81,29 @@ public class Cart implements Serializable {
 	public void setCart_items(Set<Cart_item> cart_items) {
 		this.cart_items = cart_items;
 	}
+	
+	//Relazione MM tra item e cart
+		@ManyToMany
+		  @JoinTable(name = "cartitem",
+		  joinColumns = @JoinColumn(name = "cart_id", referencedColumnName = "cart_id"),
+		  inverseJoinColumns = @JoinColumn(name = "id_item", referencedColumnName = "id_item"))
+		  
+
+			
+		  public Set<Item> getItem() {
+		  return this.items;
+		  }
+
+		   public void addItem(Item item) {
+		  if (this.items == null) {
+		  this.items = new HashSet<Item>();
+		  }
+
+		   this.items.add(item);
+		  }
+
+		   public void setItem(Set<Item> items) {
+		  this.items = items;
+		  }
 	
 }

@@ -1,4 +1,3 @@
-
 package it.univpm.hhc.model.entities;
 
 import java.io.Serializable;
@@ -38,9 +37,12 @@ public class User implements Serializable {
 	private String surname;
 	private Date subexp; //data di scadenza dell'abbonamento
 	private Boolean role; // 0-false=user 1-true=admin
-	private boolean enabled; // � is_enable del prof
+	private boolean enabled;  // � is_enable del prof
 	private Cart cart = new Cart();
 	//private Set<Cart> carts = new HashSet<Cart>();
+	private Set<Purchase> purchase = new HashSet<Purchase>();
+	private Set<Address> address = new HashSet<Address>();
+	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -116,6 +118,7 @@ public class User implements Serializable {
 		this.enabled = enabled;
 	} 
 	
+	
 	@ManyToOne
 	@JoinColumn(name = "SUB_CODE")
 	public Sub getSub() {
@@ -159,4 +162,36 @@ public class User implements Serializable {
 		this.cart = cart;
 	}
   
+	//relazione OneToMany con purchase
+	@OneToMany(mappedBy="user", cascade = CascadeType.ALL,
+			orphanRemoval = true)
+	public Set<Purchase> getPurchase(){
+		return this.purchase;
+	}
+	
+	public void addPurchase(Purchase purchase) {
+		purchase.setUser(this);
+		this.purchase.add(purchase);
+	}
+	
+	public void setPurchase(Set<Purchase> purchase) {
+		this.purchase = purchase;
+	}
+	
+	//relazione OneToMany con address
+	@OneToMany(mappedBy="user", cascade = CascadeType.ALL,
+			orphanRemoval = true)
+	public Set<Address> getAddress(){
+		return this.address;
+	}
+	
+	public void addAddress(Address address) {
+		address.setUser(this);
+		this.address.add(address);
+	}
+	
+	public void setAddress(Set<Address> address) {
+		this.address = address;
+	}
+
 } 

@@ -24,7 +24,6 @@ import javax.persistence.Table;
 public class Purchase implements Serializable {
 	
 	private Long purchase_id;
-	private Cart cart;
 	private String pay_method;
 	private String date;
 	private User user;
@@ -39,16 +38,6 @@ public class Purchase implements Serializable {
 	}
 	public void setPurchase_id(Long purchase_id) {
 		this.purchase_id = purchase_id;
-	}
-	
-	@ManyToOne
-	@JoinColumn(name = "CART_CODE")
-	public Cart getCart() {
-		return this.cart;
-	}
-	
-	public void setCart(Cart cart) {
-		this.cart = cart;
 	}
 	
 	
@@ -71,8 +60,9 @@ public class Purchase implements Serializable {
 	
 	}
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "USER_CODE", referencedColumnName = "USER_ID")
+	//relazione ManyToOne con user
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "USER_CODE")
 	public User getUser() {
 		return this.user;
 	}
