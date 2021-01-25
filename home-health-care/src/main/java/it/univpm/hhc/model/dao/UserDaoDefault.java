@@ -3,15 +3,12 @@ package it.univpm.hhc.model.dao;
 
 import java.util.List;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import it.univpm.hhc.model.entities.User;
 
 @Repository("userDao")
 public class UserDaoDefault extends DefaultDao implements UserDao {
-	
-	private PasswordEncoder passwordEncoder;
 	
 	@Override
 	public List<User> findAll() {
@@ -20,11 +17,6 @@ public class UserDaoDefault extends DefaultDao implements UserDao {
 			getResultList();
 	}
 
-	@Override
-	public User findByEmail(String email) {
-		return getSession().createQuery("from User u where email = '"+email+"'", User.class).getSingleResult();
-	}
-	
 	@Override
 	public User findById(Long id) {
 		return getSession().find(User.class, id);
@@ -53,26 +45,10 @@ public class UserDaoDefault extends DefaultDao implements UserDao {
 		u.setEmail(email);
 		u.setName(name);
 		u.setSurname(surname);
-		u.setRole(false); //alla creazione ï¿½ false, poi gli passo il permesso per essere admin
-		u.setEnabled(true);
+		u.setRole(false); //alla creazione è false, poi gli passo il permesso per essere admin
+		u.setActive(true);
 		this.getSession().save(u);
 		return u;
 		}
-	
-	@Override
-	public String encryptPassword(String password) {
-		return this.passwordEncoder.encode(password);
-	}
-	
-	@Override
-	public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
-		this.passwordEncoder = passwordEncoder;
-	}
-	
-	@Override
-	public PasswordEncoder getPasswordEncoder() {
-		return this.passwordEncoder;
-	}
-	
 	
 }
