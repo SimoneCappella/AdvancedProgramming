@@ -16,13 +16,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import it.univpm.hhc.model.entities.Sub;
 import it.univpm.hhc.model.entities.User;
 import it.univpm.hhc.services.SubService;
-import it.univpm.hhc.services.UserService;
+import it.univpm.hhc.services.UserDetailsService;
 
 @RequestMapping("/admins")
 @Controller
 public class AdminController {
 
-	private UserService userService;
+	private UserDetailsService userService;
 
 	
 	@GetMapping(value = "/userlist")
@@ -66,7 +66,7 @@ public class AdminController {
 	}
 	
 	@Autowired
-	public void setUserService(UserService userService) {
+	public void setUserService(UserDetailsService userService) {
 		this.userService = userService;
 	}
 	

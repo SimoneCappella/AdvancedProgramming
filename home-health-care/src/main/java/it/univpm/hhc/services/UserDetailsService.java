@@ -4,7 +4,7 @@ import java.util.List;
 
 import it.univpm.hhc.model.entities.User;
 
-public interface UserService {
+public interface UserDetailsService {
 
 	List<User> findAll();
 	

@@ -7,14 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import it.univpm.hhc.model.dao.UserDao;
+import it.univpm.hhc.model.dao.UserDetailsDao;
 import it.univpm.hhc.model.entities.User;
 //con transactional abbiamo la gestione automatica delle transazioni, con service indichiamo che stiamo facendo un servizio
 @Transactional
-@Service("userService")
-public class UserServiceDefault implements UserService {
+@Service("userDetailsService")
+public class UserDetailsServiceDefault implements UserDetailsService {
 
-	UserDao userDao;
+	UserDetailsDao userDao;
 	
 	@Override
 	public List<User> findAll() {
@@ -44,7 +44,7 @@ public class UserServiceDefault implements UserService {
 	}
 	
 	@Autowired
-	public void setUserDao(UserDao userDao) {
+	public void setUserDao(UserDetailsDao userDao) {
 		this.userDao = userDao;
 	}
 }

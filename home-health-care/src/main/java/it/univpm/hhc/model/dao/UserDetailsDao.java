@@ -7,7 +7,7 @@ import org.hibernate.Session;
 
 import it.univpm.hhc.model.entities.User;
 
-public interface UserDao {
+public interface UserDetailsDao {
 	Session getSession();
 	public void setSession(Session session);
 

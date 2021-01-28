@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 
 import it.univpm.hhc.model.entities.User;
 
-@Repository("userDao")
-public class UserDaoDefault extends DefaultDao implements UserDao {
+@Repository("userDetailsDao")
+public class UserDetailsDaoDefault extends DefaultDao implements UserDetailsDao {
 	
 	@Override
 	public List<User> findAll() {
