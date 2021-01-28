@@ -50,5 +50,11 @@ public class UserDetailsDaoDefault extends DefaultDao implements UserDetailsDao 
 		this.getSession().save(u);
 		return u;
 		}
+
+	@Override
+	public User findByemail(String email) {
+		return getSession().createQuery("from User u where email = '"+email+"'", User.class).getSingleResult();
+		
+	}
 	
 }

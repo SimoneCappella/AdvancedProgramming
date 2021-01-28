@@ -20,7 +20,7 @@ import it.univpm.hhc.model.entities.Cart_item;
 import it.univpm.hhc.model.entities.User;
 import it.univpm.hhc.services.CartItemService;
 import it.univpm.hhc.services.CartService;
-import it.univpm.hhc.services.UserDetailsService;
+import it.univpm.hhc.services.UserService;
 
 @RequestMapping("/")
 @Controller
@@ -67,7 +67,7 @@ public class PublicController {
 	}
 	
 	/////////////////////////////////////////////////////////////////////////////////////////
-	private UserDetailsService userService;
+	private UserService userService;
 	
     @GetMapping(value = "/login")
     public String loginPage(@RequestParam(value = "error", required = false) String error, 
@@ -104,7 +104,7 @@ public class PublicController {
 	}
     
     @Autowired
-	public void setUserService(UserDetailsService userService) {
+	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
 }

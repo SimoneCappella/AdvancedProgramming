@@ -21,5 +21,5 @@ public interface UserDetailsDao {
 	
 	void delete(User contact);
 
-
+	User findByemail(String email);
 }

@@ -23,7 +23,7 @@ import it.univpm.hhc.model.entities.User;
 import it.univpm.hhc.services.CartItemService;
 import it.univpm.hhc.services.CartService;
 import it.univpm.hhc.services.SubService;
-import it.univpm.hhc.services.UserDetailsService;
+import it.univpm.hhc.services.UserService;
 import net.bytebuddy.asm.Advice.This;
 
 @RequestMapping("/users")
@@ -31,7 +31,7 @@ import net.bytebuddy.asm.Advice.This;
 public class UserController {
 	
 	private PublicController PC;
-	private UserDetailsService userService;
+	private UserService userService;
 	private SubService subService;
 	
 
@@ -73,7 +73,7 @@ public class UserController {
 	}
 	
 	@Autowired
-	public void setUserService(UserDetailsService userService) {
+	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
 	
