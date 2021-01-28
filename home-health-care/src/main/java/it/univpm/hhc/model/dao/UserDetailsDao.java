@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import it.univpm.hhc.model.entities.User;
 
@@ -22,4 +23,10 @@ public interface UserDetailsDao {
 	void delete(User contact);
 
 	User findByEmail(String email);
+	
+	public String encryptPassword(String password);
+	
+	void setPasswordEncoder(PasswordEncoder passwordEncoder);
+	
+	PasswordEncoder getpasswordEncoder();
 }

@@ -32,9 +32,7 @@ public class PublicController {
 	@Autowired
 	String appName;
 
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {       //DA METTERE NELLO USER CONTROLLER
 		System.out.println("Home Page Requested,  locale = " + locale);

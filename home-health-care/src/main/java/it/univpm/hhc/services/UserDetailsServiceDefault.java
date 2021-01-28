@@ -54,7 +54,7 @@ public class UserDetailsServiceDefault implements UserService, UserDetailsServic
 		UserBuilder builder = null;
 		if(user != null ) {
 			builder = org.springframework.security.core.userdetails.User.withUsername(email);
-			builder.disabled(!user.isEnabled());
+			builder.disabled(!user.getActive());
 			builder.password(user.getPassword());
 			
 			String role = null;
