@@ -52,7 +52,7 @@ public class UserDetailsDaoDefault extends DefaultDao implements UserDetailsDao 
 		}
 
 	@Override
-	public User findByemail(String email) {
+	public User findByEmail(String email) {
 		return getSession().createQuery("from User u where email = '"+email+"'", User.class).getSingleResult();
 		
 	}
