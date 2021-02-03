@@ -1,6 +1,5 @@
 package it.univpm.hhc.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import it.univpm.hhc.model.entities.Cart;

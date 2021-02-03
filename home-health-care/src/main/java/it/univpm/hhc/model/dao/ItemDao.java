@@ -3,7 +3,6 @@ package it.univpm.hhc.model.dao;
 import org.hibernate.Session;
 import java.util.List;
 import it.univpm.hhc.model.entities.Item;
-import it.univpm.hhc.model.entities.Prova;
 
 public interface ItemDao {
 

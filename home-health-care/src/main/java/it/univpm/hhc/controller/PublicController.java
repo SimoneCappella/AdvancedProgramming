@@ -22,7 +22,6 @@ import it.univpm.hhc.services.CartItemService;
 import it.univpm.hhc.services.CartService;
 import it.univpm.hhc.services.UserService;
 
-@RequestMapping("/")
 @Controller
 public class PublicController {
 
@@ -67,7 +66,7 @@ public class PublicController {
 	
 	/////////////////////////////////////////////////////////////////////////////////////////
 	private UserService userService;
-	
+	/*
     @GetMapping(value = "/login")
     public String loginPage(@RequestParam(value = "error", required = false) String error, 
 //                            @RequestParam(value = "logout", required = false) String logout,
@@ -100,7 +99,8 @@ public class PublicController {
 		
 		return "redirect:/";
 		
-	}
+	}*/
+	
     
     @Autowired
 	public void setUserService(UserService userService) {

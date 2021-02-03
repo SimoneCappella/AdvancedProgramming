@@ -2,11 +2,14 @@ package it.univpm.hhc.app;
 
 
 import javax.servlet.Filter;
+
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import it.univpm.hhc.security.WebSecurityConfig;
+
+//import it.univpm.hhc.security.WebSecurityConfig;
 
 
 public class WebInit extends AbstractAnnotationConfigDispatcherServletInitializer {
