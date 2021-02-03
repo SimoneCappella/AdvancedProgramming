@@ -5,6 +5,8 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import it.univpm.hhc.model.dao.ProvaDao;
 import it.univpm.hhc.model.dao.UserDetailsDao;
 import it.univpm.hhc.model.entities.Prova;
