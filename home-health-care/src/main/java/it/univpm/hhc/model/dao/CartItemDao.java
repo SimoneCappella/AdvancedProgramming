@@ -2,7 +2,6 @@ package it.univpm.hhc.model.dao;
 
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.List;
 import it.univpm.hhc.model.entities.Cart;
 import it.univpm.hhc.model.entities.Cart_item;

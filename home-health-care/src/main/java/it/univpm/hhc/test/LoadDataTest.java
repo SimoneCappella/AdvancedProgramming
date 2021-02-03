@@ -1,16 +1,10 @@
 package it.univpm.hhc.test;
 
 
-import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
 import it.univpm.hhc.model.dao.ProvaDao;
 //import it.univpm.hhc.model.dao.UserDetailsDao;
 import it.univpm.hhc.model.entities.Prova;
@@ -39,7 +33,7 @@ public class LoadDataTest {
 				
 				session.beginTransaction();
 
-				provaDao.create("Provola","ciao questa è desc");
+				provaDao.create("Provola","ciao questa ï¿½ desc");
 				provaDao.create("Nervino","descrizione unica");
 				provaDao.create("Ciccio","balla ccciccione");
 

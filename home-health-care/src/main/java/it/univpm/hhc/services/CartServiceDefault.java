@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import it.univpm.hhc.model.dao.CartDao;
-import it.univpm.hhc.model.dao.SubDao;
 import it.univpm.hhc.model.entities.Cart;
 import it.univpm.hhc.model.entities.User;
 

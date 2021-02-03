@@ -1,6 +1,5 @@
 package it.univpm.hhc.model.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import it.univpm.hhc.model.entities.Cart;
 import it.univpm.hhc.model.entities.Cart_item;
-import it.univpm.hhc.model.entities.User;
 
 @Repository("cartItemDao")
 public class CartItemDaoDefault extends DefaultDao implements CartItemDao {
