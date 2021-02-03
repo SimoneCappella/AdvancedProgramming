@@ -68,6 +68,7 @@ public class Item implements Serializable {
 	  this.image = image;
   }
 
+  /*
    //Relazione MM tra item e cart
    @ManyToMany(mappedBy = "items")
 	private Set<Cart> carts = new HashSet<Cart>();

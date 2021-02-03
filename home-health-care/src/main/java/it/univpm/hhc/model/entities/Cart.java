@@ -26,7 +26,7 @@ public class Cart implements Serializable {
 	private int item_num;
 	
 	private Set<Cart_item> cart_items = new HashSet<Cart_item>();
-	private Set<Item> items = new HashSet<Item>();
+	//private Set<Item> items = new HashSet<Item>();
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "CART_ID")
@@ -82,7 +82,7 @@ public class Cart implements Serializable {
 		this.cart_items = cart_items;
 	}
 	
-	//Relazione MM tra item e cart
+	/*Relazione MM tra item e cart
 		@ManyToMany
 		  @JoinTable(name = "cartitem",
 		  joinColumns = @JoinColumn(name = "cart_id", referencedColumnName = "cart_id"),
@@ -104,6 +104,6 @@ public class Cart implements Serializable {
 
 		   public void setItem(Set<Item> items) {
 		  this.items = items;
-		  }
+		  }*/
 	
 }
