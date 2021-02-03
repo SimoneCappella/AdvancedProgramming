@@ -28,6 +28,7 @@ public class PublicController {
 
 	private CartService cartService;
 	private CartItemService cartItemService;
+	private UserService UserService;
 	
 	@Autowired
 	String appName;

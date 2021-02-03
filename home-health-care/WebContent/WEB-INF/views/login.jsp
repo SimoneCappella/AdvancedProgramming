@@ -9,8 +9,8 @@
 <form name='login' action="<c:url value="/login" />" method='POST'>
 	<table>
 		<tr>
-			<td>UserName:</td>
-			<td><input type='text' name='username' value=''></td>
+			<td>E-mail:</td>
+			<td><input type='text' name='username' ></td>
 		</tr>
 		<tr>
 			<td>Password:</td>

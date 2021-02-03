@@ -60,10 +60,10 @@ public class UserDetailsServiceDefault implements UserService, UserDetailsServic
 			String role = null;
 			try {
 					if(user.getRole()) {
-						role = "admin";
+						role = "ADMIN";
 			}
 					else if(!user.getRole()) {
-						role = "user";
+						role = "USER";
 					}
 			}
 			catch (Exception e) {

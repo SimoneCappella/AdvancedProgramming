@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+ù<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <h2>${appName} - Registrazione Form</h2>
 
