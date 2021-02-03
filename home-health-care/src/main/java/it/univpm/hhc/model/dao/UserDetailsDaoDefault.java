@@ -45,7 +45,8 @@ public class UserDetailsDaoDefault extends DefaultDao implements UserDetailsDao 
 //				(lastName == null || lastName.length() == 0)) {
 //			throw new RuntimeException("A singer must have a first name or a last name");
 //		}
-		u.setPassword(password);
+		setPasswordEncoder(passwordEncoder);
+		u.setPassword(encryptPassword(password));
 		u.setEmail(email);
 		u.setName(name);
 		u.setSurname(surname);
