@@ -5,8 +5,8 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 	<hr/>
-	<sec:authorize access="hasRole('ADMIN')" var="isAdmin" />
-	<sec:authorize access="hasRole('USER')" var="isUser" />
+	<sec:authorize access="hasRole('ROLE_admin')" var="isAdmin" />
+	<sec:authorize access="hasRole('ROLE_user')" var="isUser" />
 	<sec:authorize access="isAuthenticated()" var="isAuth" />
 	
 	<a href="<c:url value="/" />">Home</a> 

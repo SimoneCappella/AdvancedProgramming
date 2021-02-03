@@ -3,12 +3,16 @@ package it.univpm.hhc.model.dao;
 
 import java.util.List;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import it.univpm.hhc.model.entities.User;
 
-@Repository("userDao")
-public class UserDaoDefault extends DefaultDao implements UserDao {
+@Repository("userDetailsDao")
+public class UserDetailsDaoDefault extends DefaultDao implements UserDetailsDao {
+	
+
+	private PasswordEncoder passwordEncoder;
 	
 	@Override
 	public List<User> findAll() {
@@ -50,5 +54,26 @@ public class UserDaoDefault extends DefaultDao implements UserDao {
 		this.getSession().save(u);
 		return u;
 		}
+
+	@Override
+	public User findByEmail(String email) {
+		return getSession().createQuery("from User u where email = '"+ email+"'", User.class).getSingleResult();
+		
+		
+	}
+	@Override
+	public String encryptPassword(String password) {
+		return this.passwordEncoder.encode(password);
+	}
+	
+	@Override
+	public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+		this.passwordEncoder = passwordEncoder;
+	}
+	
+	@Override
+	public PasswordEncoder getpasswordEncoder() {
+		return this.passwordEncoder;
+	}
 	
 }

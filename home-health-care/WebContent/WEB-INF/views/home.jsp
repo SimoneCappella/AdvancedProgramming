@@ -9,5 +9,6 @@
 	<li>Oggetti nel carrello: ${item_number} Totale: 40€<a href="<c:url value="/users/${cart_id = 1}/cartlist/" />">Vai a Carrello</a> 
 	<li>Subs: <a href="<c:url value="/admins/sublist/" />">sub</a>
 	<li>Users: <a href="<c:url value="/admins/userlist/" />">user</a> 
-	<li>Registrati: <a href="<c:url value="/register/" />">user</a> 
+	<li>Registrati: <a href="<c:url value="/register/" />">user</a>
+	<li>Aggiungi una sub a un utente: <a href="<c:url value="/link/sub" />">Add</a> 
 </ul>

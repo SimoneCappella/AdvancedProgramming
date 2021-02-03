@@ -2,6 +2,7 @@ package it.univpm.hhc.controller;
 
 import java.util.List;
 
+import org.hibernate.mapping.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import it.univpm.hhc.model.entities.Cart;
 import it.univpm.hhc.model.entities.Cart_item;
+import it.univpm.hhc.model.entities.Sub;
 import it.univpm.hhc.model.entities.User;
 import it.univpm.hhc.services.CartItemService;
 import it.univpm.hhc.services.CartService;
+import it.univpm.hhc.services.SubService;
 import it.univpm.hhc.services.UserService;
+import net.bytebuddy.asm.Advice.This;
 
 @RequestMapping("/users")
 @Controller
@@ -28,6 +32,7 @@ public class UserController {
 	
 	private PublicController PC;
 	private UserService userService;
+	private SubService subService;
 	
 
 //	dovrebbe non servire	
@@ -38,7 +43,8 @@ public class UserController {
 //		
 //		return "users/form";
 //	}
-
+	
+	//USER///////////////////////////////////////////////////////////////////////////////////////////////////////
 	@GetMapping(value="/{userId}/edit")//occhio devo gestire la modifica a cascata
 	public String edit(@PathVariable("userId") String userId, 
 			Model uiModel) {
@@ -71,7 +77,7 @@ public class UserController {
 		this.userService = userService;
 	}
 	
-	////////////////////////////////////////////////////////////////////////////////////////
+	//CART//////////////////////////////////////////////////////////////////////////////////////
 	
 	private Long currentCart;
 
@@ -134,6 +140,51 @@ public class UserController {
 		this.cartItemService = cartItemService;
 	}
 	
-	////////////////////////////////////////////////////////////////////////////////////////////////
+	//SUB//////////////////////////////////////////////////////////////////////////////////////////////
+	private Long currentUser;
+	
+	@GetMapping("/link/sub")
+	public String link(Model uiModel)
+	{
+		uiModel.addAttribute("subs", this.subService.findAll());
+		uiModel.addAttribute("users", this.subService.findAll());
+		return "users/addsub";	
+	}
+	
+	
+	@GetMapping("/link")
+	public String link(
+			@RequestParam(value = "next",required = false)String next,
+			@RequestParam(value="user")Long userId,
+			@RequestParam(value="sub")Long subId)
+	{
+		User user=this.userService.findById(userId);
+		Sub sub=this.subService.findById(subId);
+		
+		user.getSub().addUser(user);
+		sub.getUsers().add(user);
+		this.userService.update(user);
+		
+		if(next ==null || next.length()==0) {
+			next="/";// da modificare o
+		}
+		return "redirect:" + next;
+	}
+	
+	
+//	User corrente	
+//	public Long getCurrentUser() {
+//		return currentUser;
+//	}
+//	
+//	public void SetCurrentUser(Long currentUser) {
+//		this.currentUser=currentUser;
+//		
+//	}
+	
+	@Autowired
+	public void setSubService(SubService subService) {
+		this.subService = subService;
+	}
 	
 }

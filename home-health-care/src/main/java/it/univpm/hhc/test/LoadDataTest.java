@@ -6,9 +6,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import it.univpm.hhc.model.dao.ProvaDao;
-//import it.univpm.hhc.model.dao.UserDetailsDao;
+import it.univpm.hhc.model.dao.UserDetailsDao;
 import it.univpm.hhc.model.entities.Prova;
-//import it.univpm.hhc.model.entities.User;
+import it.univpm.hhc.model.entities.User;
 
 public class LoadDataTest {
 
@@ -22,12 +22,14 @@ public class LoadDataTest {
 			
 			ProvaDao provaDao = ctx.getBean("provaDao", ProvaDao.class);
 			
-			//UserDetailsDao userDao = ctx.getBean(UserDetailsDao.class);
+			UserDetailsDao userDao = ctx.getBean(UserDetailsDao.class);
+			
+			userDao.setPasswordEncoder(new BCryptPasswordEncoder());
 			
 			try (Session session = sf.openSession()) {
 				
 				provaDao.setSession(session);
-				//userDao.setSession(session);
+				userDao.setSession(session);
 				
 				// phase 1 : add data to database
 				
@@ -35,7 +37,7 @@ public class LoadDataTest {
 
 				provaDao.create("Provola","ciao questa � desc");
 				provaDao.create("Nervino","descrizione unica");
-				provaDao.create("Ciccio","balla ccciccione");
+				provaDao.create("Ciccio","balla ccciccio");
 
 				List<Prova> all= provaDao.findAll();
 								
@@ -55,15 +57,20 @@ public class LoadDataTest {
 				session.getTransaction().commit();
 				
 				// phase 3 : create user
-//				session.beginTransaction();
-//				
-//				User u1 = userDao.create("user1", "user1", true);				
-//				User u2 = userDao.create("user2", "user2", true);				
-//				User u3 = userDao.create("user3", "user3", true);				
-//				
-//				userDao.update(u1);
-//				userDao.update(u2);
-//				session.getTransaction().commit();
+				session.beginTransaction();
+				
+				User u1 = userDao.create(userDao.encryptPassword("user1"), "user1","cristiano","rossi");				
+				User u2 = userDao.create("user1", "user2@gmail.com","matteo","bianchi");
+				User u3 = userDao.create("user1", "user3@gmail.com","lorenzo","verdi");
+				
+				u1.setRole(false);
+				u2.setRole(true);
+				u3.setRole(false);
+				userDao.update(u1);
+				userDao.update(u2);
+				userDao.update(u3);
+				
+				session.getTransaction().commit();
 			}
 
 		} catch (Exception e) {
