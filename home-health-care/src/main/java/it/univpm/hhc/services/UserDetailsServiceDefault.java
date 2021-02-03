@@ -15,7 +15,7 @@ import it.univpm.hhc.model.dao.UserDetailsDao;
 import it.univpm.hhc.model.entities.User;
 //con transactional abbiamo la gestione automatica delle transazioni, con service indichiamo che stiamo facendo un servizio
 @Transactional
-@Service("userDetailsService")
+@Service("userService")
 public class UserDetailsServiceDefault implements UserService, UserDetailsService {
 
 	UserDetailsDao userDao;
