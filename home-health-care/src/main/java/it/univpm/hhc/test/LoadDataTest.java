@@ -30,6 +30,8 @@ public class LoadDataTest {
 			
 			UserDetailsDao userDao = ctx.getBean(UserDetailsDao.class);
 			
+			userDao.setPasswordEncoder(new BCryptPasswordEncoder());
+			
 			try (Session session = sf.openSession()) {
 				
 				provaDao.setSession(session);
@@ -39,7 +41,7 @@ public class LoadDataTest {
 				
 				session.beginTransaction();
 
-				provaDao.create("Provola","ciao questa è desc");
+				provaDao.create("Provola","ciao questa ï¿½ desc");
 				provaDao.create("Nervino","descrizione unica");
 				provaDao.create("Ciccio","balla ccciccio");
 
@@ -63,7 +65,7 @@ public class LoadDataTest {
 				// phase 3 : create user
 				session.beginTransaction();
 				
-				User u1 = userDao.create("user1", "user1@gmail.com","cristiano","rossi");				
+				User u1 = userDao.create(userDao.encryptPassword("user1"), "user1","cristiano","rossi");				
 				User u2 = userDao.create("user1", "user2@gmail.com","matteo","bianchi");
 				User u3 = userDao.create("user1", "user3@gmail.com","lorenzo","verdi");
 				
