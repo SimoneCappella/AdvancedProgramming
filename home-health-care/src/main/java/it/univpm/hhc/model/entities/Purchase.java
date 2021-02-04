@@ -2,6 +2,9 @@
 package it.univpm.hhc.model.entities;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -21,7 +25,7 @@ public class Purchase implements Serializable {
 	private String date;
 	private User user;
 	private double total;
-	
+	private Set<Cart_item> cart_items = new HashSet<Cart_item>();
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -64,6 +68,22 @@ public class Purchase implements Serializable {
 		this.user = user;
 	}
 	
+	//Relazione OneToMany con Cart_item
+	@OneToMany(mappedBy="purchase", cascade = CascadeType.ALL,
+			orphanRemoval = true)
+	public Set<Cart_item> getCart_items(){
+		return this.cart_items;
+	}
+	
+	public void addCart_item(Cart_item cart_item) {
+		cart_item.setPurchase(this);
+		this.cart_items.add(cart_item);
+	}
+	
+	public void setCart_items(Set<Cart_item> cart_items) {
+		this.cart_items = cart_items;
+	}
+
 	
 	@Column(name = "TOTAL", nullable = false) 
 	public double getTotal() {

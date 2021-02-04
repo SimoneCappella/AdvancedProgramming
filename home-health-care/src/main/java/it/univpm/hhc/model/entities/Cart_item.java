@@ -17,6 +17,7 @@ public class Cart_item {
 	private Item item;
 	//private Long item_code;
 	private int quantity;
+	private Purchase purchase;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,6 +62,19 @@ public class Cart_item {
 	public void setItem_code(Long item_code ) {
 		this.item_code = item_code;
 	}*/
+	
+	//Relazione ManyToOne con Purchase
+	@ManyToOne
+	@JoinColumn(name = "CART_ITEM_CODE")
+	public Purchase getPurchase() {
+		return this.purchase;
+	}
+	
+	
+	public void setPurchase(Purchase purchase) {
+		this.purchase = purchase;
+	}
+
 	
 	@Column(name = "QUANTITY")
 	public int getQuantity() {
