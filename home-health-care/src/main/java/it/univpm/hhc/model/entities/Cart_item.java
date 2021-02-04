@@ -14,7 +14,8 @@ import javax.persistence.Table;
 public class Cart_item {
 	private Long cart_item_id;
 	private Cart cart;
-	private Long item_code;
+	private Item item;
+	//private Long item_code;
 	private int quantity;
 	
 	@Id
@@ -39,16 +40,27 @@ public class Cart_item {
 		this.cart = cart;
 	}
 	
-	@Column(name = "ITEM_CODE")
+	@ManyToOne
+	@JoinColumn(name = "ITEM_CODE")
+	public Item getItem() {
+		return this.item;
+	}
+	
+	
+	public void setItem(Item item) {
+		this.item = item;
+	}
+	
+	/*@Column(name = "ITEM_CODICE")
 	public Long getItem_code() {
-		return item_code;
+		return this.item_code;//getItemId();//item_code;
 	}
 		
 	
 	
-	public void setItem_code(Long item_code) {
+	public void setItem_code(Long item_code ) {
 		this.item_code = item_code;
-	}
+	}*/
 	
 	@Column(name = "QUANTITY")
 	public int getQuantity() {

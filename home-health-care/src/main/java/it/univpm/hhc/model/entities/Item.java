@@ -4,12 +4,14 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -22,7 +24,8 @@ public class Item implements Serializable {
 	private String description;
 	private double price;
 	private String image;
-	
+	private Set<Cart_item> cart_items = new HashSet<Cart_item>();
+  
   @Id	
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "ID_ITEM")
@@ -68,6 +71,21 @@ public class Item implements Serializable {
 	  this.image = image;
   }
 
+  @OneToMany(mappedBy="item", cascade = CascadeType.ALL,
+			orphanRemoval = true)
+	public Set<Cart_item> getCart_items(){
+		return this.cart_items;
+	}
+	
+	public void addCart_item(Cart_item cart_item) {
+		cart_item.setItem(this);
+		this.cart_items.add(cart_item);
+	}
+	
+	public void setCart_items(Set<Cart_item> cart_items) {
+		this.cart_items = cart_items;
+	}
+  
   /*
    //Relazione MM tra item e cart
    @ManyToMany(mappedBy = "items")

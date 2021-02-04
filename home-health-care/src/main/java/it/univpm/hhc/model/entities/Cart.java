@@ -82,28 +82,4 @@ public class Cart implements Serializable {
 		this.cart_items = cart_items;
 	}
 	
-	/*Relazione MM tra item e cart
-		@ManyToMany
-		  @JoinTable(name = "cartitem",
-		  joinColumns = @JoinColumn(name = "cart_id", referencedColumnName = "cart_id"),
-		  inverseJoinColumns = @JoinColumn(name = "id_item", referencedColumnName = "id_item"))
-		  
-
-			
-		  public Set<Item> getItem() {
-		  return this.items;
-		  }
-
-		   public void addItem(Item item) {
-		  if (this.items == null) {
-		  this.items = new HashSet<Item>();
-		  }
-
-		   this.items.add(item);
-		  }
-
-		   public void setItem(Set<Item> items) {
-		  this.items = items;
-		  }*/
-	
 }

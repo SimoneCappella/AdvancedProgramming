@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import it.univpm.hhc.model.dao.CartItemDao;
 import it.univpm.hhc.model.entities.Cart;
+import it.univpm.hhc.model.entities.Item;
 import it.univpm.hhc.model.entities.Cart_item;
 
 @Transactional
@@ -32,8 +33,8 @@ public class CartItemServiceDeafault implements CartItemService{
 	}
 	
 	@Override
-	public Cart_item create(Cart cart, Long item_code, int quantity) {
-		return this.cartItemDao.create(cart, item_code, quantity);
+	public Cart_item create(Cart cart, Item item, int quantity) {
+		return this.cartItemDao.create(cart, item, quantity);
 	}
 
 	@Override

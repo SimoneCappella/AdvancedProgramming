@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 
 import it.univpm.hhc.model.entities.Cart;
+import it.univpm.hhc.model.entities.Item;
 import it.univpm.hhc.model.entities.Cart_item;
 
 @Repository("cartItemDao")
@@ -29,10 +30,10 @@ public class CartItemDaoDefault extends DefaultDao implements CartItemDao {
 	}
 
 	@Override
-	public Cart_item create(Cart cart, Long item_code, int quantity) {
+	public Cart_item create(Cart cart, Item item, int quantity) {
 		Cart_item c = new Cart_item();
 		c.setCart(cart);
-		c.setItem_code(item_code);
+		c.setItem(item);
 		c.setQuantity(quantity);
 		return c;
 	}

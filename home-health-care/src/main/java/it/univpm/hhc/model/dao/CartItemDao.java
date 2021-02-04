@@ -4,6 +4,7 @@ import org.hibernate.Session;
 
 import java.util.List;
 import it.univpm.hhc.model.entities.Cart;
+import it.univpm.hhc.model.entities.Item;
 import it.univpm.hhc.model.entities.Cart_item;
 
 public interface CartItemDao {
@@ -18,7 +19,7 @@ public interface CartItemDao {
 	
 	List<Cart_item> findAll();
 	
-	Cart_item create(Cart cart, Long item_code, int quantity);
+	Cart_item create(Cart cart, Item item, int quantity);
 	
 	Cart_item update(Cart_item cart_item);
 	
