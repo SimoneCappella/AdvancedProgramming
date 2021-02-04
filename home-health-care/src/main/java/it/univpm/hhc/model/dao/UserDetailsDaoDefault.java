@@ -3,6 +3,7 @@ package it.univpm.hhc.model.dao;
 
 import java.util.List;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
@@ -45,7 +46,8 @@ public class UserDetailsDaoDefault extends DefaultDao implements UserDetailsDao 
 //				(lastName == null || lastName.length() == 0)) {
 //			throw new RuntimeException("A singer must have a first name or a last name");
 //		}
-		u.setPassword(password);
+		setPasswordEncoder(new BCryptPasswordEncoder());
+		u.setPassword(encryptPassword(password));
 		u.setEmail(email);
 		u.setName(name);
 		u.setSurname(surname);

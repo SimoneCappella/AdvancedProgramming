@@ -61,9 +61,9 @@ public class LoadDataTest {
 				// phase 3 : create user
 				session.beginTransaction();
 				
-				User u1 = userDao.create(userDao.encryptPassword("user1"), "user1","cristiano","rossi");				
-				User u2 = userDao.create("user1", "user2@gmail.com","matteo","bianchi");
-				User u3 = userDao.create("user1", "user3@gmail.com","lorenzo","verdi");
+				User u1 = userDao.create("user1", "user1","cristiano","rossi");				
+				User u2 = userDao.create("user2", "user2","matteo","bianchi");
+				User u3 = userDao.create("user3", "user3@gmail.com","lorenzo","verdi");
 				
 				u1.setRole(false);
 				u2.setRole(true);
