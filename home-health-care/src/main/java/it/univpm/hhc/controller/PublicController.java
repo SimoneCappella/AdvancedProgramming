@@ -1,11 +1,14 @@
 package it.univpm.hhc.controller;
 
+import java.security.Principal;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,7 +31,8 @@ public class PublicController {
 	private CartService cartService;
 	private CartItemService cartItemService;
 	private UserService UserService;
-	
+	private static User logged_user;
+
 	@Autowired
 	String appName;
 
@@ -41,15 +45,28 @@ public class PublicController {
 		String formattedDate = dateFormat.format(date);
 		model.addAttribute("serverTime", formattedDate);		
 		model.addAttribute("appName", appName);
-
-		Long cart_id = (long) 1; //potrò ricavare il codice del carrello dell'utente loggato dopo la funzione login
-		List<Cart_item> items = cartItemService.findByCart(cart_id);
-		int item_number = items.size();
-		for (Cart_item i : items){
-			if(i.getQuantity() > 1) {
-				item_number += i.getQuantity()-1;
+		
+		int item_number = 0;
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if(principal instanceof UserDetails) {
+			String username = ((UserDetails)principal).getUsername();
+			logged_user = userService.findByEmail(username);
+			Long cart_id = (cartService.findByUserId(logged_user.getUser_id())).getCart_id();
+			List<Cart_item> items = cartItemService.findByCart(cart_id);
+			item_number = items.size();
+			for (Cart_item i : items){
+				if(i.getQuantity() > 1) {
+					item_number += i.getQuantity()-1;
+				}
 			}
+		}else {
+			String username = principal.toString();
 		}
+		
+		
+		
+		
+		
 		model.addAttribute("item_number", item_number);
 		return "home";
 	}
@@ -105,5 +122,13 @@ public class PublicController {
     @Autowired
 	public void setUserService(UserService userService) {
 		this.userService = userService;
+	}
+    
+    public static User getLogged_user() {
+		return logged_user;
+	}
+
+	public static void setLogged_user(User logged_user) {
+		PublicController.logged_user = logged_user;
 	}
 }

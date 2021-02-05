@@ -29,6 +29,11 @@ public class UserDetailsServiceDefault implements UserService, UserDetailsServic
 	public User findById(Long id) {
 		return this.userDao.findById(id);
 	}
+	
+	@Override
+	public User findByEmail(String email) {
+		return this.userDao.findByEmail(email);
+	}
 
 	@Override
 	public User create(String password,String email,String name,String surname) {

@@ -13,6 +13,8 @@ public interface CartDao {
 	
 	Cart findById(Long id);
 	
+	Cart findByUserId(Long id);
+	
 	List<Cart> findAll();
 	
 	Cart create(int item_num, double total, User user);

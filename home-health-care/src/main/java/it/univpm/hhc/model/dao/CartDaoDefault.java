@@ -31,6 +31,11 @@ public class CartDaoDefault extends DefaultDao implements CartDao {
 		this.getSession().save(c);
 		return c;
 	}
+	@Override
+	public Cart findByUserId(Long id) {
+		return getSession().createQuery("from Cart c where USER_CODE = '" + id + "'" , Cart.class).getSingleResult();
+	}
+
 
 	@Override
 	public Cart update(Cart cart) {

@@ -24,6 +24,12 @@ public class CartServiceDefault implements CartService {
 	public Cart findById(Long id) {
 		return this.cartDao.findById(id);
 	}
+	
+	@Override
+	public Cart findByUserId(Long id) {
+		return this.cartDao.findByUserId(id);
+	}
+
 
 	@Override
 	public Cart create(int item_num, double total, User user) {
