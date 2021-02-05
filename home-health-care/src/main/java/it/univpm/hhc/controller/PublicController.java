@@ -47,6 +47,7 @@ public class PublicController {
 		model.addAttribute("appName", appName);
 		
 		int item_number = 0;
+		double total = 0;
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if(principal instanceof UserDetails) {
 			String username = ((UserDetails)principal).getUsername();
@@ -57,16 +58,14 @@ public class PublicController {
 			for (Cart_item i : items){
 				if(i.getQuantity() > 1) {
 					item_number += i.getQuantity()-1;
+					total += i.getQuantity() * (i.getItem().getItemPrice());
 				}
 			}
 		}else {
 			String username = principal.toString();
 		}
 		
-		
-		
-		
-		
+		model.addAttribute("total", total);
 		model.addAttribute("item_number", item_number);
 		return "home";
 	}
