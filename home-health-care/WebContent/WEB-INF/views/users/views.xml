@@ -3,16 +3,22 @@
    Foundation//DTD Tiles  Configuration 3.0//EN"
    "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
-  <definition extends="default" name="users/list">
-   <put-attribute name="body" value="/WEB-INF/views/users/list.jsp" />
+  <definition extends="default" name="users/userlist">
+   <put-attribute name="body" value="/WEB-INF/views/users/userlist.jsp" />
   </definition>
-  <definition extends="default" name="users/form">
-   <put-attribute name="body" value="/WEB-INF/views/users/form.jsp" />
+  <definition extends="default" name="users/userform">
+   <put-attribute name="body" value="/WEB-INF/views/users/userform.jsp" />
 </definition>
 <definition extends="default" name="users/cartform">
    <put-attribute name="body" value="/WEB-INF/views/users/cartform.jsp" />
 </definition>
 <definition extends="default" name="users/cartlist">
    <put-attribute name="body" value="/WEB-INF/views/users/cartlist.jsp" />
+</definition>
+<definition extends="default" name="users/sublist">
+   <put-attribute name="body" value="/WEB-INF/views/users/sublist.jsp" />
+  </definition>
+  <definition extends="default" name="users/subform">
+   <put-attribute name="body" value="/WEB-INF/views/users/subform.jsp" />
 </definition>
 </tiles-definitions>
