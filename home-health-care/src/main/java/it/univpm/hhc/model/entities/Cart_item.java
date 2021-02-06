@@ -65,7 +65,7 @@ public class Cart_item {
 	
 	//Relazione ManyToOne con Purchase
 	@ManyToOne
-	@JoinColumn(name = "CART_ITEM_CODE")
+	@JoinColumn(name = "cart_item_id")
 	public Purchase getPurchase() {
 		return this.purchase;
 	}

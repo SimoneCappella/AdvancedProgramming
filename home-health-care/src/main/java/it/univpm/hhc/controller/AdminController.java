@@ -14,17 +14,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import it.univpm.hhc.model.entities.Address;
 import it.univpm.hhc.model.entities.Sub;
 import it.univpm.hhc.model.entities.User;
+import it.univpm.hhc.model.entities.Address;
+import it.univpm.hhc.services.AddressService;
 import it.univpm.hhc.services.SubService;
 import it.univpm.hhc.services.UserService;
+import it.univpm.hhc.services.AddressService;
 
 @RequestMapping("/admins")
 @Controller
 public class AdminController {
 
 	private UserService userService;
-
+	private AddressService addressService;
 	
 	@GetMapping(value = "/userlist")
 	public String list(@RequestParam(value = "message", required=false) String message, Model uiModel) {
@@ -125,5 +129,44 @@ public class AdminController {
 	public void setSubService(SubService subService) {
 		this.subService = subService;
 	}
+//////////////////////////ADDRESS////////////////////////////////
+	@GetMapping(value="/{addressId}/edit")//occhio devo gestire la modifica a cascata
+	public String editAddress(@PathVariable("addressId") String addressId, 
+			Model uiModel) {
+		
+		Address a = this.addressService.findById(new Long(addressId));
+		uiModel.addAttribute("address", a);
+		
+		return "addresses/form";
+	}
 	
+	@GetMapping(value="/add")
+	public String addAddress(Model uiModel) {
+		
+		uiModel.addAttribute("address", new Address());
+		
+		return "addresses/form";
+	}
+	
+	@GetMapping(value = "/{addressId}/delete")//occhio devo gestire la rimozione a cascata
+	public String deleteAddress(@PathVariable("addressId") String addressId) {
+		this.addressService.delete(new Long(addressId));//anziché eliminare dovrà disabilitare (DA CAMBIARE)
+		//QUI DA RICHIAMARE IL LOGOUT
+		return "redirect:/";
+	}
+
+	
+	@PostMapping(value = "/save")
+	public String saveAddress(@ModelAttribute("newAddress") Address newAddress, BindingResult br) {
+		
+		this.addressService.update(newAddress);
+		
+		return "redirect:/addresses/list/";
+		
+	}
+	
+	@Autowired
+	public void setAddressService(AddressService addressService) {
+		this.addressService = addressService;
+	}
 }
