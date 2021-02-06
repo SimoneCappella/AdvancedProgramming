@@ -42,7 +42,7 @@ public class User implements Serializable {
 	private Date subexp; //data di scadenza dell'abbonamento
 	private Boolean role; // 0-false=user 1-true=admin
 	private Boolean active; // is_enable del prof
-	private Cart cart = new Cart();
+	private Cart cart ;
 	//private Set<Cart> carts = new HashSet<Cart>();
 	private Set<Purchase> purchase = new HashSet<Purchase>();
 	private Set<Address> address = new HashSet<Address>();

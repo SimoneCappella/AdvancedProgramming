@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import it.univpm.hhc.model.entities.Cart;
 import it.univpm.hhc.model.entities.Cart_item;
 import it.univpm.hhc.model.entities.User;
 import it.univpm.hhc.services.CartItemService;
@@ -31,7 +32,7 @@ public class PublicController {
 	private CartService cartService;
 	private CartItemService cartItemService;
 	private UserService UserService;
-	private static User logged_user;
+	public static User logged_user;
 
 	@Autowired
 	String appName;
@@ -111,9 +112,9 @@ public class PublicController {
     @PostMapping(value = "/save")
 	public String savenew(@ModelAttribute("newUser") User newUser, BindingResult br) {
 		
-		
-		this.userService.create(newUser.getPassword(),newUser.getEmail(),newUser.getName(),newUser.getSurname());
-		
+
+		this.cartService.create(0, 0, this.userService.create(newUser.getPassword(),newUser.getEmail(),newUser.getName(),newUser.getSurname()));
+	
 		return "redirect:/";
 		
 	}

@@ -27,7 +27,7 @@ public class CartDaoDefault extends DefaultDao implements CartDao {
 		Cart c = new Cart();
 		c.setItem_num(item_num);
 		c.setTotal(total);
-		//c.setUser(user); //potrebbe dare errore (come passargli uno user?)
+		c.setUser(user);
 		this.getSession().save(c);
 		return c;
 	}

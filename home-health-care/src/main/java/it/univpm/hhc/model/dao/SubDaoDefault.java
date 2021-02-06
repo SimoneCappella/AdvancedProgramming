@@ -33,7 +33,7 @@ public class SubDaoDefault extends DefaultDao implements SubDao {
 	}
 
 	@Override
-	public Sub create(String name, Long price, int discount) {
+	public Sub create(String name, Double price, int discount) {
 		Sub s=new Sub();
 		s.setName(name);
 		s.setPrice(price);

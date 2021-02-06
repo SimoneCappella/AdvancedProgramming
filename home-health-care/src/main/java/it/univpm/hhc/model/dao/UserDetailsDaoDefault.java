@@ -7,6 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
+import it.univpm.hhc.model.entities.Cart;
 import it.univpm.hhc.model.entities.User;
 
 @Repository("userDetailsDao")
@@ -40,12 +41,14 @@ public class UserDetailsDaoDefault extends DefaultDao implements UserDetailsDao 
 	@Override
 	public User create(String password,String email,String name,String surname) {
 		User u=new User();
+		Cart cart= new Cart();
 		//da vedere bene, devo assegnare un carrello appena creo l'utente||||||||||||||||||||||||||||||||||||||||||||
 //		GESTIRE LE ECCEZIONI
 //		if ((firstName == null || firstName.length() == 0) && 
 //				(lastName == null || lastName.length() == 0)) {
 //			throw new RuntimeException("A singer must have a first name or a last name");
 //		}
+
 		setPasswordEncoder(new BCryptPasswordEncoder());
 		u.setPassword(encryptPassword(password));
 		u.setEmail(email);
