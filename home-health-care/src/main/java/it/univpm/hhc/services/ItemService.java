@@ -10,7 +10,7 @@ public interface ItemService {
 	
 	Item findById(Long id);
 	
-	Item create (Long id_item,
+	Item create (//Long id_item,
 	String title,
 	String description,
 	double price,
@@ -18,6 +18,6 @@ public interface ItemService {
 	
 	Item update(Item item);
 	
-	void delete(Long id_item);
+	void delete(Long itemId);
 
 }

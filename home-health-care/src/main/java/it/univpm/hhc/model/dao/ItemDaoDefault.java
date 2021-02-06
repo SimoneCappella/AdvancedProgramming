@@ -17,8 +17,8 @@ public class ItemDaoDefault extends DefaultDao implements ItemDao {
 
 	@Override
 //	@Transactional(readOnly = true)
-	public Item findById(Long id_item) {
-		return getSession().find(Item.class, id_item);
+	public Item findById(Long id) {
+		return getSession().find(Item.class, id);
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class ItemDaoDefault extends DefaultDao implements ItemDao {
 
 	@Override
 //	@Transactional
-	public Item create(Long id_item,
+	public Item create(//Long id_item,
 			String title,
 			String description,
 			double price,

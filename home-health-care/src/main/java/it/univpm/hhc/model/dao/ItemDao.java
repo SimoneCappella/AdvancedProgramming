@@ -10,13 +10,13 @@ public interface ItemDao {
 	
 	public void setSession(Session session);
 	
-	Item findById(Long id_item);
+	Item findById(Long id);
 	
 	Item findByTitle(String title);
 	
 	List<Item> findAll();
 	
-	Item create(Long id_item,
+	Item create(//Long id_item,	//forse da togliere?
 			String title,
 			String description,
 			double price,

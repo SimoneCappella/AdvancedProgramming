@@ -20,17 +20,17 @@ public class ItemServiceDefault implements ItemService {
 	}
 
 	@Override
-	public Item findById(Long id_item) {
-		return this.itemDao.findById(id_item);
+	public Item findById(Long id) {
+		return this.itemDao.findById(id);
 	}
 
 	@Override
-	public Item create(Long id_item,
+	public Item create(//Long id_item,
 			String title,
 			String description,
 			double price,
 			String image) {
-		return this.itemDao.create(id_item,
+		return this.itemDao.create(//id_item,
 				title,
 				description,
 				price,
@@ -43,8 +43,8 @@ public class ItemServiceDefault implements ItemService {
 	}
 
 	@Override
-	public void delete(Long id_item) {
-		Item item = this.itemDao.findById(id_item);
+	public void delete(Long itemId) {
+		Item item = this.itemDao.findById(itemId);
 		this.itemDao.delete(item);
 	}
 	
