@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -32,8 +34,6 @@ public class PublicController {
 	private CartService cartService;
 	private CartItemService cartItemService;
 	private UserService UserService;
-	public static User logged_user;
-
 	@Autowired
 	String appName;
 
@@ -52,7 +52,7 @@ public class PublicController {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if(principal instanceof UserDetails) {
 			String username = ((UserDetails)principal).getUsername();
-			logged_user = userService.findByEmail(username);
+			User logged_user = userService.findByEmail(username);
 			Long cart_id = (cartService.findByUserId(logged_user.getUser_id())).getCart_id();
 			List<Cart_item> items = cartItemService.findByCart(cart_id);
 			item_number = items.size();
@@ -92,9 +92,13 @@ public class PublicController {
         if(error != null) {
         	errorMessage = "Username o Password errati !!";
         }
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("errorMessage", errorMessage);
         model.addAttribute("appName", appName);
-        return "login";
+        if(authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+            return "login";
+        }
+        return "redirect:/";
     }
     
     @GetMapping(value = "/register")
@@ -123,12 +127,5 @@ public class PublicController {
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
-    
-    public static User getLogged_user() {
-		return logged_user;
-	}
-
-	public static void setLogged_user(User logged_user) {
-		PublicController.logged_user = logged_user;
-	}
+ 
 }
