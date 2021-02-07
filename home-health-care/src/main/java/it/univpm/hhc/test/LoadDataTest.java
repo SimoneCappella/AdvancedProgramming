@@ -10,13 +10,17 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import it.univpm.hhc.model.dao.CartDao;
+import it.univpm.hhc.model.dao.ItemDao;
 import it.univpm.hhc.model.dao.ProvaDao;
+import it.univpm.hhc.model.dao.AddressDao;
 import it.univpm.hhc.model.dao.SubDao;
 import it.univpm.hhc.model.dao.UserDetailsDao;
 import it.univpm.hhc.model.entities.Cart;
 import it.univpm.hhc.model.entities.Prova;
 import it.univpm.hhc.model.entities.Sub;
 import it.univpm.hhc.model.entities.User;
+import it.univpm.hhc.model.entities.Item;
+import it.univpm.hhc.model.entities.Address;
 
 public class LoadDataTest {
 
@@ -30,6 +34,10 @@ public class LoadDataTest {
 			
 			ProvaDao provaDao = ctx.getBean("provaDao", ProvaDao.class);
 			
+			ItemDao itemDao = ctx.getBean("itemDao", ItemDao.class);
+			
+			AddressDao addressDao = ctx.getBean("addressDao", AddressDao.class);
+			
 			UserDetailsDao userDao = ctx.getBean(UserDetailsDao.class);
 
 			CartDao cartDao=ctx.getBean("cartDao", CartDao.class);
@@ -40,6 +48,8 @@ public class LoadDataTest {
 			
 			try (Session session = sf.openSession()) {
 				
+				itemDao.setSession(session);
+				addressDao.setSession(session);
 				provaDao.setSession(session);
 				userDao.setSession(session);
 				cartDao.setSession(session);
@@ -48,11 +58,21 @@ public class LoadDataTest {
 				
 				session.beginTransaction();
 
-				provaDao.create("Provola","ciao questa � desc");
+				itemDao.create("Oggetto1","Description1",5,"");
+				itemDao.create("Oggetto2","Description2",10,"");
+				itemDao.create("Oggetto3","Description3",15,"");
+				
+				List<Item> all= itemDao.findAll();
+				session.getTransaction().commit();
+				
+				
+				session.beginTransaction();
+				
+				provaDao.create("Provola","ciao questa desc");
 				provaDao.create("Nervino","descrizione unica");
 				provaDao.create("Ciccio","balla ccciccio");
 
-				List<Prova> all= provaDao.findAll();
+				List<Prova> allProva= provaDao.findAll();
 								
 								
 				session.getTransaction().commit();
@@ -60,7 +80,7 @@ public class LoadDataTest {
 				session.beginTransaction();
 
 				System.out.println("Numero di prove: " + all.size());
-				for (Prova p : all) 
+				for (Prova p : allProva) 
 				{
 					System.out.println(" - " + p.getProvaId() + "_" + p.getTitle() + " : " + p.getDescription());
 				}
@@ -98,6 +118,12 @@ public class LoadDataTest {
 				cartDao.update(c1);
 				cartDao.update(c2);
 				cartDao.update(c3);
+				
+				addressDao.create(62017,"Citta 1","Via 1",12,u1);
+				addressDao.create(62018,"Citta 2","Via 2",13,u1);
+				addressDao.create(62019,"Citta 2","Via 2",14,u1);
+				
+				List<Address> allAddress= addressDao.findAll();
 				
 				session.getTransaction().commit();
 			}
