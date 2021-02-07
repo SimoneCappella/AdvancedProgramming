@@ -6,6 +6,8 @@ import org.hibernate.mapping.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -36,16 +38,26 @@ public class UserController {
 	private UserService userService;
 	private SubService subService;
 	private AddressService addressService;
-	
+	private Long currentCart;
 
-//	dovrebbe non servire	
-//	@GetMapping(value = "/add") //prima era add
-//	public String add(Model uiModel) {
-//		
-//		uiModel.addAttribute("user", new User());
-//		
-//		return "users/form";
-//	}
+	private CartService cartService;
+	private CartItemService cartItemService;
+
+	public User getCurrentUser()
+	{
+		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if(principal instanceof UserDetails) {
+			String username = ((UserDetails)principal).getUsername();
+			User logged_user = userService.findByEmail(username);
+			return logged_user;
+			
+		}else {
+			String username = principal.toString();
+			return null;
+		}
+			
+	}	
 	
 	//USER///////////////////////////////////////////////////////////////////////////////////////////////////////
 	@GetMapping(value="/{userId}/edit")//occhio devo gestire la modifica a cascata
@@ -75,17 +87,7 @@ public class UserController {
 		
 	}
 	
-	@Autowired
-	public void setUserService(UserService userService) {
-		this.userService = userService;
-	}
-	
-	//CART//////////////////////////////////////////////////////////////////////////////////////
-	
-	private Long currentCart;
-
-	private CartService cartService;
-	private CartItemService cartItemService;
+//CART//////////////////////////////////////////////////////////////////////////////////////
 	
 	//Ritorna correttamente gli  item nel carrello dell'utente "loggato", da implementare il get dell'id carrello associato all'utente in maniera dinamica
 	@GetMapping(value = "/{cart_id}/cartlist")
@@ -133,35 +135,29 @@ public class UserController {
 		this.currentCart = currentCart;
 	}
 	
-	@Autowired
-	public void setCartService(CartService cartService) {
-		this.cartService = cartService;
-	}
-	
-	@Autowired
-	public void setCartItemService(CartItemService cartItemService) {
-		this.cartItemService = cartItemService;
-	}
-	
 	//SUB//////////////////////////////////////////////////////////////////////////////////////////////
-	private Long currentUser;
+
+	@GetMapping(value = "/link_sub")
+    public String link(@RequestParam(value = "error", required = false) String error, Model model) {
+        String errorMessage = null;
+        if(error != null) {
+        	errorMessage = "errore !!";
+        }
+        model.addAttribute("errorMessage", errorMessage);
+        model.addAttribute("subs", this.subService.findAll());
+		model.addAttribute("user", this.getCurrentUser());
+		
+		return "users/reg_sub";	
 	
-	@GetMapping("/link/sub")
-	public String link(Model uiModel)
-	{
-		uiModel.addAttribute("subs", this.subService.findAll());
-		uiModel.addAttribute("users", this.subService.findAll());
-		return "users/addsub";	
-	}
-	
-	
+    }
+		
 	@GetMapping("/link")
 	public String link(
 			@RequestParam(value = "next",required = false)String next,
 			@RequestParam(value="user")Long userId,
 			@RequestParam(value="sub")Long subId)
 	{
-		User user=this.userService.findById(userId);
+		User user=getCurrentUser();
 		Sub sub=this.subService.findById(subId);
 		
 		user.getSub().addUser(user);
@@ -175,20 +171,7 @@ public class UserController {
 	}
 	
 	
-//	User corrente	
-//	public Long getCurrentUser() {
-//		return currentUser;
-//	}
-//	
-//	public void SetCurrentUser(Long currentUser) {
-//		this.currentUser=currentUser;
-//		
-//	}
 	
-	@Autowired
-	public void setSubService(SubService subService) {
-		this.subService = subService;
-	}
 /////////////////////////ADDRESS/////////////////////////////////////
 	@GetMapping(value="/{addressId}/edit")//occhio devo gestire la modifica a cascata
 	public String editAddress(@PathVariable("addressId") String addressId, 
@@ -217,15 +200,27 @@ public class UserController {
 		return "redirect:/";
 	}
 
-	//ci sono problemi all'avvio del server
-	/*@PostMapping(value = "/save")
-	public String saveAddress(@ModelAttribute("newAddress") Address newAddress, BindingResult br) {
-		
-		this.addressService.update(newAddress);
-		
-		return "redirect:/addresses/list/";
-		
-	}*/
+///////////////////////////AUTOWIRED//////////////////////////////////////////
+	
+	@Autowired
+	public void setCartService(CartService cartService) {
+		this.cartService = cartService;
+	}
+	
+	@Autowired
+	public void setCartItemService(CartItemService cartItemService) {
+		this.cartItemService = cartItemService;
+	}
+	
+	@Autowired
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+	
+	@Autowired
+	public void setSubService(SubService subService) {
+		this.subService = subService;
+	}
 	
 	@Autowired
 	public void setAddressService(AddressService addressService) {

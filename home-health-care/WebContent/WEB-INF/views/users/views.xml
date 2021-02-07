@@ -15,10 +15,8 @@
 <definition extends="default" name="users/cartlist">
    <put-attribute name="body" value="/WEB-INF/views/users/cartlist.jsp" />
 </definition>
-<definition extends="default" name="users/sublist">
-   <put-attribute name="body" value="/WEB-INF/views/users/sublist.jsp" />
-  </definition>
-  <definition extends="default" name="users/subform">
-   <put-attribute name="body" value="/WEB-INF/views/users/subform.jsp" />
+ 
+  <definition extends="default" name="users/reg_sub">
+   <put-attribute name="body" value="/WEB-INF/views/users/reg_sub.jsp" />
 </definition>
 </tiles-definitions>
