@@ -21,4 +21,10 @@
   <definition extends="default" name="users/subform">
    <put-attribute name="body" value="/WEB-INF/views/users/subform.jsp" />
 </definition>
+<definition extends="default" name="users/addresslist">
+   <put-attribute name="body" value="/WEB-INF/views/users/addresslist.jsp" />
+  </definition>
+  <definition extends="default" name="users/addressform">
+   <put-attribute name="body" value="/WEB-INF/views/users/addressform.jsp" />
+</definition>
 </tiles-definitions>

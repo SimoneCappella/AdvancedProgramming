@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import it.univpm.hhc.model.entities.Cart;
 import it.univpm.hhc.model.entities.Cart_item;
+import it.univpm.hhc.model.entities.Item;
 import it.univpm.hhc.model.entities.Sub;
 import it.univpm.hhc.model.entities.User;
 import it.univpm.hhc.model.entities.Address;
@@ -190,6 +191,22 @@ public class UserController {
 		this.subService = subService;
 	}
 /////////////////////////ADDRESS/////////////////////////////////////
+	
+	@GetMapping(value = "/addresslist")
+	public String listAddress(@RequestParam(value = "message", required=false) String message, Model uiModel) {
+		//logger.info("Listing items");
+		List<Address> allAddresses = this.addressService.findAll();
+		
+		uiModel.addAttribute("addresses", allAddresses);
+		uiModel.addAttribute("numAddresses", allAddresses.size());
+		
+		// TODO ricevere un parametro via GET (es. per messaggio di esito operazione)
+		uiModel.addAttribute("message", message);
+		
+		return "users/addresslist";
+	}
+	
+	
 	@GetMapping(value="/{addressId}/edit")//occhio devo gestire la modifica a cascata
 	public String editAddress(@PathVariable("addressId") String addressId, 
 			Model uiModel) {
@@ -197,35 +214,34 @@ public class UserController {
 		Address a = this.addressService.findById(new Long(addressId));
 		uiModel.addAttribute("address", a);
 		
-		return "addresses/form";
+		return "users/addressform";
 	}
 	
-	
-	@GetMapping(value="/add")
+	//d� errore 500
+	/*@GetMapping(value="/addressadd")
 	public String addAddress(Model uiModel) {
 		
 		uiModel.addAttribute("address", new Address());
 		
-		return "addresses/form";
-	}
+		return "users/addressform";
+	}*/
 	
 	
-	@GetMapping(value = "/{addressId}/delete")//occhio devo gestire la rimozione a cascata
+	@GetMapping(value = "/{addressId}/delete")
 	public String deleteAddress(@PathVariable("addressId") String addressId) {
-		this.addressService.delete(new Long(addressId));//anziché eliminare dovrà disabilitare (DA CAMBIARE)
-		//QUI DA RICHIAMARE IL LOGOUT
-		return "redirect:/";
+		this.addressService.delete(new Long(addressId));
+		return "redirect:users/addresslist";
 	}
 
-	//ci sono problemi all'avvio del server
-	/*@PostMapping(value = "/save")
+	
+	@PostMapping(value = "addresses/save")
 	public String saveAddress(@ModelAttribute("newAddress") Address newAddress, BindingResult br) {
 		
 		this.addressService.update(newAddress);
 		
-		return "redirect:/addresses/list/";
+		return "redirect:users/addresslist/";
 		
-	}*/
+	}
 	
 	@Autowired
 	public void setAddressService(AddressService addressService) {
