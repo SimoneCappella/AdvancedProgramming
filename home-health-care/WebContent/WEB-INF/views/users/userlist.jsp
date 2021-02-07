@@ -20,14 +20,14 @@
 </thead>
 <c:forEach items="${users}" var="u">
 <tr>
-	<td>[<a href="<c:url value="/users/${u.user_id}/edit/" />">+</a>]</td>
+	<td>[<a href="<c:url value="/users/${u.user_id}/useredit/" />">+</a>]</td>
 	<td>${u.user_id}</td>
 	<td>${u.name} ${u.surname}</td>
 	<td>${u.subexp}</td>
 	<td>${u.role}</td>
 	<td>${u.active}</td>
 	
-	<td>[<a href="<c:url value="/users/${u.user_id}/delete/"/>">X</a>]</td>
+	<td>[<a href="<c:url value="/users/${u.user_id}/userdelete/"/>">X</a>]</td>
 </tr>
 </c:forEach>
 </table>

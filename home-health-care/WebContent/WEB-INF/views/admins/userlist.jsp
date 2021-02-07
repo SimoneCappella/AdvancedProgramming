@@ -26,7 +26,6 @@
 	<td>${u.subexp}</td>
 	<td>${u.role}</td>
 	<td>${u.active}</td>
-	
 	<td>[<a href="<c:url value="/admins/${u.user_id}/userdelete/"/>">X</a>]</td>
 </tr>
 </c:forEach>

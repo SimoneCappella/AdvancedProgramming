@@ -13,6 +13,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,6 +28,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import it.univpm.hhc.utils.LocalDateAttributeConverter;
+
 
 @Entity
 @Table(name = "user")
@@ -39,7 +42,7 @@ public class User implements Serializable {
 	private String email;
 	private String name;
 	private String surname;
-	private Date subexp; //data di scadenza dell'abbonamento
+	private LocalDate subexp; //data di scadenza dell'abbonamento
 	private Boolean role; // 0-false=user 1-true=admin
 	private Boolean active; // is_enable del prof
 	private Cart cart ;
@@ -95,13 +98,13 @@ public class User implements Serializable {
 		this.surname = surname;
 	}
 
-	@Temporal(TemporalType.DATE)
 	@Column(name = "SUBSCRIPTION_EXPIRATION")
-	public Date getSubexp() {
+	@Convert(converter = LocalDateAttributeConverter.class)
+	public LocalDate getSubexp() {
 		return subexp;
 	}
 
-	public void setSubexp(Date subexp) {
+	public void setSubexp(LocalDate subexp) {
 		this.subexp= subexp;
 	}
 
