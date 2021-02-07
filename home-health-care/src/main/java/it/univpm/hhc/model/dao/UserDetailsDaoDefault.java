@@ -54,7 +54,7 @@ public class UserDetailsDaoDefault extends DefaultDao implements UserDetailsDao 
 		u.setEmail(email);
 		u.setName(name);
 		u.setSurname(surname);
-		u.setRole(false); //alla creazione è false, poi gli passo il permesso per essere admin
+		u.setRole(false);
 		u.setActive(true);
 		this.getSession().save(u);
 		return u;

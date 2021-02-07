@@ -17,11 +17,10 @@
 	<td>${s.name}</td>
 	<td>${s.discount}%</td>
 	<td>${s.price}€</td>
-	<td><a href="<c:url value="/users/${s.sub_id}/addsub/" />">Aggiungi abbonamento</a>]</td>	
-	<td><<input type="submit" value="Scegli Abbonamento"/> href="<c:url value="/users/${s.sub_id}/addsub/" />">Aggiungi abbonamento</a>]</td>	
+	<td><a href="<c:url value="/users/${s.sub_id}/addsub/" />">Aggiungi abbonamento</a></td>	
 	
 </tr>
 </c:forEach>
 </table>
 
-<input type="submit" value="Scegli Abbonamento"/>
+

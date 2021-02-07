@@ -1,8 +1,12 @@
 package it.univpm.hhc.controller;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
+import it.univpm.hhc.utils.LocalDateToDateConverter;
 
 import org.hibernate.mapping.Set;
+import org.hibernate.query.criteria.internal.expression.function.CurrentDateFunction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -145,29 +149,40 @@ public class UserController {
         }
         model.addAttribute("errorMessage", errorMessage);
         model.addAttribute("subs", this.subService.findAll());
-		model.addAttribute("user", this.getCurrentUser());
 		
 		return "users/reg_sub";	
 	
     }
 		
-	@GetMapping("/link")
-	public String link(
-			@RequestParam(value = "next",required = false)String next,
-			@RequestParam(value="user")Long userId,
-			@RequestParam(value="sub")Long subId)
+//	@GetMapping(value="/{sub_id}/addsub")
+//	public String addsub(@PathVariable("sub") Long subId)		
+//	{
+//		User user=getCurrentUser();
+//		Sub sub=this.subService.findById(subId);
+//		
+//		user.getSub().addUser(user);
+//		sub.getUsers().add(user);
+//		this.userService.update(user);
+//		
+//		if(next ==null || next.length()==0) {
+//			next="/";// da modificare o
+//		}
+//		return "redirect:" + next;
+//	}
+//		
+	
+	
+	@GetMapping(value="/{sub_id}/addsub")
+	public String registrasub(@PathVariable("sub_id") Long subId)
 	{
 		User user=getCurrentUser();
 		Sub sub=this.subService.findById(subId);
-		
-		user.getSub().addUser(user);
-		sub.getUsers().add(user);
+		user.setSub(sub);
+		LocalDate date=LocalDate.now().plusDays(30);
+		user.setSubexp(date);
 		this.userService.update(user);
 		
-		if(next ==null || next.length()==0) {
-			next="/";// da modificare o
-		}
-		return "redirect:" + next;
+		return "redirect:/";
 	}
 	
 	
