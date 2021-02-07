@@ -1,11 +1,14 @@
 package it.univpm.hhc.controller;
 
+import static org.hamcrest.CoreMatchers.nullValue;
+
 import java.security.Principal;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import org.omg.CORBA.Current;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -49,11 +52,10 @@ public class PublicController {
 		
 		int item_number = 0;
 		double total = 0;
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		if(principal instanceof UserDetails) {
-			String username = ((UserDetails)principal).getUsername();
-			User logged_user = userService.findByEmail(username);
-			Long cart_id = (cartService.findByUserId(logged_user.getUser_id())).getCart_id();
+		User curUser=getCurrentUser();
+		if(curUser!=null)
+		{
+			Long cart_id = (cartService.findByUserId(curUser.getUser_id())).getCart_id();
 			List<Cart_item> items = cartItemService.findByCart(cart_id);
 			item_number = items.size();
 			for (Cart_item i : items){
@@ -62,14 +64,30 @@ public class PublicController {
 					total += i.getQuantity() * (i.getItem().getItemPrice());
 				}
 			}
-		}else {
-			String username = principal.toString();
 		}
 		
 		model.addAttribute("total", total);
 		model.addAttribute("item_number", item_number);
 		return "home";
 	}
+	
+	public User getCurrentUser()
+	{
+		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if(principal instanceof UserDetails) {
+			String username = ((UserDetails)principal).getUsername();
+			User logged_user = userService.findByEmail(username);
+			return logged_user;
+			
+		}else {
+			String username = principal.toString();
+			return null;
+		}
+		
+		
+	}
+	
 	
 	@Autowired
 	public void setCartService(CartService cartService) {
