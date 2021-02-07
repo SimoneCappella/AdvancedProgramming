@@ -57,6 +57,7 @@ public class PublicController {
 		{
 			Long cart_id = (cartService.findByUserId(curUser.getUser_id())).getCart_id();
 			List<Cart_item> items = cartItemService.findByCart(cart_id);
+			model.addAttribute("userid", curUser.getUser_id());
 			item_number = items.size();
 			for (Cart_item i : items){
 				if(i.getQuantity() > 1) {

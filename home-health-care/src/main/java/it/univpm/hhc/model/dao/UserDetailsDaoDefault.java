@@ -3,6 +3,9 @@ package it.univpm.hhc.model.dao;
 
 import java.util.List;
 
+import javax.persistence.Query;
+
+import org.hibernate.Session;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
@@ -28,9 +31,16 @@ public class UserDetailsDaoDefault extends DefaultDao implements UserDetailsDao 
 		return getSession().find(User.class, id);
 	}
 
+	/*@Override
+	public void update(User user) {
+		Query q = this.getSession().createQuery("from USER where 'USER_ID' ='" + user.getUser_id() + "'");
+		User result = (User)q.getResultList();
+		this.getSession().update(result);
+	}*/
+	
 	@Override
-	public User update(User user) {
-		return (User)this.getSession().merge(user);
+	public void update(User user) {
+		this.getSession().update(user);
 	}
 
 	@Override

@@ -41,8 +41,8 @@ public class UserDetailsServiceDefault implements UserService, UserDetailsServic
 	}
 	
 	@Override
-	public User update(User user) {
-		return this.userDao.update(user);
+	public void update(User user) {
+		 this.userDao.update(user);
 	}
 
 	@Override

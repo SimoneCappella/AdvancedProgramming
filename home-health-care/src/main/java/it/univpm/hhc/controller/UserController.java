@@ -65,14 +65,12 @@ public class UserController {
 	}	
 	
 	//USER///////////////////////////////////////////////////////////////////////////////////////////////////////
-	@GetMapping(value="/{userId}/edit")//occhio devo gestire la modifica a cascata
-	public String edit(@PathVariable("userId") String userId, 
-			Model uiModel) {
+	@GetMapping(value="/edit")//occhio devo gestire la modifica a cascata
+	public String edit(Model uiModel) {
+		User logged_user = getCurrentUser();
+		uiModel.addAttribute("user", logged_user);
 		
-		User u = this.userService.findById(new Long(userId));
-		uiModel.addAttribute("user", u);
-		
-		return "users/form";
+		return "users/userform";
 	}
 	
 	@GetMapping(value = "/{userId}/delete")//occhio devo gestire la rimozione a cascata
@@ -88,7 +86,7 @@ public class UserController {
 		
 		this.userService.update(newUser);
 		
-		return "redirect:/users/list/";
+		return "redirect:/users/edit";
 		
 	}
 	
@@ -215,7 +213,7 @@ public class UserController {
 		return "users/addressform";
 	}
 	
-	//dà errore 500
+	//dï¿½ errore 500
 	/*@GetMapping(value="/addressadd")
 	public String addAddress(Model uiModel) {
 		
