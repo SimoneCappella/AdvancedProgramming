@@ -13,4 +13,5 @@
 	<li>Registrati: <a href="<c:url value="/register/" />">user</a>
 	<li>Aggiungi una sub a un utente: <a href="<c:url value="/users/link_sub" />">Add</a>
 	<li>Modifica utente: <a href="<c:url value="/users/edit" />">Modifica</a>  
+	<li>visualizza abbonamento utente: <a href="<c:url value="/users/view_sub" />">view</a>
 </ul>

@@ -25,4 +25,7 @@
   <definition extends="default" name="users/addressform">
    <put-attribute name="body" value="/WEB-INF/views/users/addressform.jsp" />
 </definition>
+  <definition extends="default" name="users/my_sub">
+   <put-attribute name="body" value="/WEB-INF/views/users/my_sub.jsp" />
+</definition>
 </tiles-definitions>

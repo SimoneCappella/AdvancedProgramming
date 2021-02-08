@@ -1,6 +1,9 @@
 package it.univpm.hhc.controller;
 
+import static org.hamcrest.CoreMatchers.nullValue;
+
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import it.univpm.hhc.utils.LocalDateToDateConverter;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import it.univpm.hhc.model.entities.Cart;
@@ -140,6 +144,24 @@ public class UserController {
 	
 	//SUB//////////////////////////////////////////////////////////////////////////////////////////////
 
+	@GetMapping(value = "/view_sub")
+    public String viwesub(@RequestParam(value = "error", required = false) String error, Model model) {
+		
+		String errorMessage = "Non hai ancora un abbonamento, affrettati!";
+      
+        User user=getCurrentUser();
+        if(user.getSub()==null)
+            model.addAttribute("sub", null);
+        else {
+        	model.addAttribute("sub", this.subService.findById(user.getSub().getSub_id()));
+		}
+        model.addAttribute("errorMessage", errorMessage);
+        model.addAttribute("user", this.getCurrentUser());
+       
+		return "users/my_sub";	
+
+    }
+	
 	@GetMapping(value = "/link_sub")
     public String link(@RequestParam(value = "error", required = false) String error, Model model) {
         String errorMessage = null;
@@ -152,24 +174,18 @@ public class UserController {
 		return "users/reg_sub";	
 	
     }
-		
-//	@GetMapping(value="/{sub_id}/addsub")
-//	public String addsub(@PathVariable("sub") Long subId)		
-//	{
-//		User user=getCurrentUser();
-//		Sub sub=this.subService.findById(subId);
-//		
-//		user.getSub().addUser(user);
-//		sub.getUsers().add(user);
-//		this.userService.update(user);
-//		
-//		if(next ==null || next.length()==0) {
-//			next="/";// da modificare o
-//		}
-//		return "redirect:" + next;
-//	}
-//		
 	
+	@GetMapping(value="/{sub_id}/unlinksub/")
+	public String unlinksub(@PathVariable("sub_id") Long subId)
+	{
+		User user=getCurrentUser();
+		Sub sub=this.subService.findById(subId);
+		user.setSub(null);
+		user.setSubexp(null);
+		this.userService.update(user);
+		
+		return "redirect:/";
+	}
 	
 	@GetMapping(value="/{sub_id}/addsub")
 	public String registrasub(@PathVariable("sub_id") Long subId)
