@@ -230,29 +230,30 @@ public class UserController {
 	}
 	
 	//d� errore 500
-	/*@GetMapping(value="/addressadd")
+	@GetMapping(value="/addressadd")
 	public String addAddress(Model uiModel) {
 		
 		uiModel.addAttribute("address", new Address());
 		
 		return "users/addressform";
-	}*/
+	}
 	
 	
-	@GetMapping(value = "/{addressId}/delete")
-	public String deleteAddress(@PathVariable("addressId") String addressId) {
-		this.addressService.delete(new Long(addressId));
-		return "redirect:users/addresslist";
+	@GetMapping(value = "/{addressId}/deleteaddress")
+	public String deleteAddress(@PathVariable("addressId") Long addressId) {
+		//Address address= addressService.findById(address);
+		this.addressService.delete(addressId);
+		return "redirect:/users/addresslist";
 	}
 
 
 	
-	@PostMapping(value = "addresses/save")
+	@PostMapping(value = "/addresses/save")
 	public String saveAddress(@ModelAttribute("newAddress") Address newAddress, BindingResult br) {
 		
 		this.addressService.update(newAddress);
 		
-		return "redirect:users/addresslist/";
+		return "redirect:/users/addresslist";
 	}		
 
 ///////////////////////////AUTOWIRED//////////////////////////////////////////

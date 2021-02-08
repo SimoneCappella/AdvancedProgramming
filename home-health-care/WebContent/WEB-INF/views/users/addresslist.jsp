@@ -24,12 +24,12 @@
 	<td>[<a href="<c:url value="/users/${a.address_id}/edit/" />">Modifica</a>]</td>
 	<td>${a.address_id}</td>
 	<td>${a.cap}</td>
-	<td>${s.city}%</td>
-	<td>${s.street}€</td>
+	<td>${a.city}</td>
+	<td>${a.street}</td>
 	<td>${a.civ_num}</td>
-	<td>[<a href="<c:url value="/users/${a.address_id}/delete/"/>">X</a>]</td>
+	<td>[<a href="<c:url value="/users/${a.address_id}/deleteaddress/"/>">X</a>]</td>
 </tr>
 </c:forEach>
 </table>
 <hr/>
-<a href="<c:url value="/users/addressadd" />">Aggiungi sub</a>
+<a href="<c:url value="/users/addressadd" />">Aggiungi indirizzo</a>
