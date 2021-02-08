@@ -19,7 +19,7 @@ import javax.persistence.Table;
 @Table(name = "item")
 public class Item implements Serializable {
 	
-	private Long id_item;
+	private Long item_id;
 	private String title;
 	private String description;
 	private double price;
@@ -28,46 +28,46 @@ public class Item implements Serializable {
   
   @Id	
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "ID_ITEM")
-  public Long getItemId() {
-	  return this.id_item;
+  @Column(name = "ITEM_ID")
+  public Long getItem_id() {
+	  return item_id;
   }
-  public void setItemId(Long id_item) {
-	  this.id_item = id_item;
+  public void setItem_id(Long item_id) {
+	  this.item_id = item_id;
   }
   
   @Column(name = "TITLE")
-  public String getItemTitle() {
+  public String getTitle() {
 	  return this.title;
   }
   
-  public void setItemTitle(String title) {
+  public void setTitle(String title) {
 	  this.title = title;
   }
   
   @Column(name = "DESCRIPTION")
-  public String getItemDescription() {
+  public String getDescription() {
 	  return this.description;
   }
-  public void setItemDescription(String description) {
+  public void setDescription(String description) {
 	  this.description = description;
   }
 
   @Column(name = "PRICE")
-  public double getItemPrice() {
+  public double getPrice() {
 	  return this.price;
   }
   
-  public void setItemPrice(double price) {
+  public void setPrice(double price) {
 	  this.price = price;
   }
 
   @Column(name = "IMAGE")
-  public String getItemImage() {
+  public String getImage() {
 	  return this.image;
   }
   
-  public void setItemImage(String image) {
+  public void setImage(String image) {
 	  this.image = image;
   }
 

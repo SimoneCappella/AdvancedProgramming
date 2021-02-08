@@ -1,4 +1,4 @@
-package it.univpm.hhc.controller;
+/*package it.univpm.hhc.controller;
 
 import java.util.List;
 
@@ -104,4 +104,4 @@ public class ItemController {
 	public void setItemService(ItemService itemService) {
 		this.itemService = itemService;
 	}
-}
+}*/

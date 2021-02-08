@@ -26,9 +26,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import it.univpm.hhc.model.entities.Cart;
 import it.univpm.hhc.model.entities.Cart_item;
+import it.univpm.hhc.model.entities.Item;
 import it.univpm.hhc.model.entities.User;
 import it.univpm.hhc.services.CartItemService;
 import it.univpm.hhc.services.CartService;
+import it.univpm.hhc.services.ItemService;
 import it.univpm.hhc.services.UserService;
 
 @Controller
@@ -37,6 +39,7 @@ public class PublicController {
 	private CartService cartService;
 	private CartItemService cartItemService;
 	private UserService UserService;
+	private ItemService ItemService;
 	@Autowired
 	String appName;
 
@@ -62,7 +65,7 @@ public class PublicController {
 			for (Cart_item i : items){
 				if(i.getQuantity() > 1) {
 					item_number += i.getQuantity()-1;
-					total += i.getQuantity() * (i.getItem().getItemPrice());
+					total += i.getQuantity() * (i.getItem().getPrice());
 				}
 			}
 		}
@@ -84,11 +87,17 @@ public class PublicController {
 		}else {
 			String username = principal.toString();
 			return null;
-		}
-		
-		
+		}		
 	}
 	
+	@GetMapping(value = "/itemlist")
+	public String itemlist(Model uiModel) {
+		List<Item> allItems = ItemService.findAll();
+		
+		uiModel.addAttribute("items", allItems);
+		
+		return "itemlist";
+	}
 	
 	@Autowired
 	public void setCartService(CartService cartService) {
@@ -98,6 +107,11 @@ public class PublicController {
 	@Autowired
 	public void setCartItemService(CartItemService cartItemService) {
 		this.cartItemService = cartItemService;
+	}
+
+	@Autowired
+	public void setItemService(ItemService ItemService) {
+		this.ItemService = ItemService;
 	}
 	
 	/////////////////////////////////////////////////////////////////////////////////////////
