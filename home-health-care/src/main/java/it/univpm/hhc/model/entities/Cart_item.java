@@ -1,5 +1,7 @@
 package it.univpm.hhc.model.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name ="cart_item")
-public class Cart_item {
+public class Cart_item implements Serializable{
 	private Long cart_item_id;
 	private Cart cart;
 	private Item item;

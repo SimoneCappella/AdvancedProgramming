@@ -5,8 +5,8 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
     
  
-		<c:url value="/addresses/save" var="action_url" />
-        <form:form method="POST" action="${action_url}" modelAttribute="sub">
+		<c:url value="/users/addresses/save" var="action_url" />
+        <form:form method="POST" action="${action_url}" modelAttribute="address">
              <table>
 				<c:if test="${empty address.address_id}">
                

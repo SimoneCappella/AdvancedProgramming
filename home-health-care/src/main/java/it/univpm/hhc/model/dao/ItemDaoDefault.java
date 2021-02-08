@@ -41,10 +41,10 @@ public class ItemDaoDefault extends DefaultDao implements ItemDao {
 			String image) {
 		
 		Item i=new Item();
-		i.setItemTitle(title);
-		i.setItemDescription(description);
-		i.setItemPrice(price);
-		i.setItemImage(image);
+		i.setTitle(title);
+		i.setDescription(description);
+		i.setPrice(price);
+		i.setImage(image);
 		this.getSession().save(i);
 		return i;
 		}

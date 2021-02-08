@@ -12,4 +12,7 @@
   <definition extends="default" name="home">
    <put-attribute name="body" value="/WEB-INF/views/home.jsp" />
   </definition>
+<definition extends="default" name="itemlist">
+   <put-attribute name="body" value="/WEB-INF/views/itemlist.jsp" />
+  </definition>
 </tiles-definitions>
