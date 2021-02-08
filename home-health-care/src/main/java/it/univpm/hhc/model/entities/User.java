@@ -137,12 +137,6 @@ public class User implements Serializable {
 		this.sub = sub;
 	}
 
-/*
-@OneToOne(mappedBy = "user", cascade = CascadeType.ALL,
-orphanRemoval = true)
-public Set<Cart> getCarts(){
-return this.carts;
-}*/
 
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL,
 	orphanRemoval = true)
@@ -150,21 +144,6 @@ return this.carts;
 		return this.cart;
 	}
 
-/*
-public void addCart(Cart cart) {
-cart.setUser(this);
-this.carts.add(cart);
-}*/
-
-	public void addCart(Cart cart) {
-		//cart.setUser(this);
-		this.cart = cart;
-	}
-
-/*
-public void setCarts(Set<Cart> carts) {
-this.carts = carts;
-}*/
 
 	public void setCarts(Cart cart) {
 		this.cart = cart;

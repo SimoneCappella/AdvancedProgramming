@@ -10,10 +10,7 @@
 	<sec:authorize access="isAuthenticated()" var="isAuth" />
 	
 	<a href="<c:url value="/" />">Home</a> 
-	- <a href="<c:url value="/singers/list" />">Cantanti</a> 
-	- <a href="/albums/list">Album</a> 
-	
-	<c:if test="${isAdmin}">- <a href="<c:url value="/instruments/list" />">Strumenti</a></c:if> 
+
 	
 	<c:if test="${isAuth}"> - <a href="<c:url value="/logout" />">Logout</a></c:if> 
 	

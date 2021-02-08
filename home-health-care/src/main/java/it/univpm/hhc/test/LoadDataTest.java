@@ -92,36 +92,29 @@ public class LoadDataTest {
 				// phase 3 : create user
 				session.beginTransaction();
 				
-				User u1 = userDao.create("user1", "user1","cristiano","rossi");				
-				User u2 = userDao.create("user2", "user2","matteo","bianchi");
-				User u3 = userDao.create("user3", "user3@gmail.com","lorenzo","verdi");
 				
-				u1.setRole(false);
-				u2.setRole(true);
-				u3.setRole(false);
-				userDao.update(u1);
-				userDao.update(u2);
-				userDao.update(u3);
+			
+				Cart c1= cartDao.create(0, 0, userDao.create("user1", "user1","cristiano","ronaldo"));
+				Cart c2= cartDao.create(0, 0, userDao.create("user2", "user2","matteo","bianchi"));
+				Cart c3= cartDao.create(0, 0, userDao.create("user3", "user3","franco","rossi"));
 				
-				Cart c1= cartDao.create(0, 0, null);
-				c1.addUser(u1);
-				Cart c2= cartDao.create(0, 0, null);
-				c2.addUser(u2);
-				Cart c3= cartDao.create(0, 0, null);
-				c3.addUser(u3);
+				//Cart c3= cartDao.create(0, 0, null);
+				//c3.addUser(u3);
 				
 				
 				Sub s1=subDao.create("Poveri", 20.20, 2);
 				subDao.update(s1);
+				Sub s2=subDao.create("ricchi", 29.20, 20);
+				subDao.update(s2);
 				
 				assert( c1.getTotal() == 10);
 				cartDao.update(c1);
 				cartDao.update(c2);
 				cartDao.update(c3);
 				
-				addressDao.create(62017,"Citta 1","Via 1",12,u1);
-				addressDao.create(62018,"Citta 2","Via 2",13,u1);
-				addressDao.create(62019,"Citta 2","Via 2",14,u1);
+				addressDao.create(62017,"Citta 1","Via 1",12,c1.getUser());
+				addressDao.create(62018,"Citta 2","Via 2",13,c2.getUser());
+				addressDao.create(62019,"Citta 2","Via 2",14,c3.getUser());
 				
 				List<Address> allAddress= addressDao.findAll();
 				

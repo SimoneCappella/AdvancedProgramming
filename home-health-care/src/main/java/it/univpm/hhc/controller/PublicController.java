@@ -114,10 +114,10 @@ public class PublicController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("errorMessage", errorMessage);
         model.addAttribute("appName", appName);
-        if(authentication == null || authentication instanceof AnonymousAuthenticationToken) {
-            return "login";
-        }
-        return "redirect:/";
+//        if(authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+           return "login";
+//        }
+//        return "redirect:/";
     }
     
     @GetMapping(value = "/register")
