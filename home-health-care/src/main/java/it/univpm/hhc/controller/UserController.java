@@ -77,6 +77,13 @@ public class UserController {
 		return "users/userform";
 	}
 	
+	@GetMapping(value="/myprofile")
+	public String myprofile(Model uiModel) {
+		User logged_user = getCurrentUser();
+		uiModel.addAttribute("user", logged_user);
+		return "users/myprofile";
+	}
+	
 	@GetMapping(value = "/{userId}/delete")//occhio devo gestire la rimozione a cascata
 	public String delete(@PathVariable("userId") String userId) {
 		this.userService.delete(new Long(userId));//anziché eliminare dovrà disabilitare (DA CAMBIARE)
