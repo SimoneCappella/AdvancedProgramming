@@ -43,8 +43,8 @@ public class User implements Serializable {
 	private String name;
 	private String surname;
 	private LocalDate subexp; //data di scadenza dell'abbonamento
-	private Boolean role; // 0-false=user 1-true=admin
-	private Boolean active; // is_enable del prof
+	private boolean role; // 0-false=user 1-true=admin
+	private boolean active; // is_enable del prof
 	private Cart cart ;
 	//private Set<Cart> carts = new HashSet<Cart>();
 	private Set<Purchase> purchase = new HashSet<Purchase>();
@@ -109,20 +109,20 @@ public class User implements Serializable {
 	}
 
 	@Column(name = "ROLE", nullable = false) //nullable
-	public Boolean getRole() {
+	public boolean isRole() {
 		return this.role;
 	}
 
-	public void setRole(Boolean role) {
+	public void setRole(boolean role) {
 		this.role= role;
 	}
 
 	@Column(name = "ACTIVE", nullable = false) //nullable
-	public Boolean getActive() {
+	public boolean isActive() {
 		return this.active;
 	}
 
-	public void setActive(Boolean active) {
+	public void setActive(boolean active) {
 		this.active = active;
 	}
 
