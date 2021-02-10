@@ -28,6 +28,9 @@
   <definition extends="default" name="users/my_sub">
    <put-attribute name="body" value="/WEB-INF/views/users/my_sub.jsp" />
 </definition>
+ <definition extends="default" name="users/viewitem">
+   <put-attribute name="body" value="/WEB-INF/views/users/viewitem.jsp" />
+</definition>
 <definition extends="default" name="users/myprofile">
    <put-attribute name="body" value="/WEB-INF/views/users/myprofile.jsp" />
 </definition>

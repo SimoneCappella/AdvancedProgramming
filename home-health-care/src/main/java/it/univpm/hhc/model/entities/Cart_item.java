@@ -54,20 +54,10 @@ public class Cart_item implements Serializable{
 		this.item = item;
 	}
 	
-	/*@Column(name = "ITEM_CODICE")
-	public Long getItem_code() {
-		return this.item_code;//getItemId();//item_code;
-	}
-		
-	
-	
-	public void setItem_code(Long item_code ) {
-		this.item_code = item_code;
-	}*/
-	
+
 	//Relazione ManyToOne con Purchase
 	@ManyToOne
-	@JoinColumn(name = "cart_item_id")
+	@JoinColumn(name = "PURCHASE_CODE")
 	public Purchase getPurchase() {
 		return this.purchase;
 	}

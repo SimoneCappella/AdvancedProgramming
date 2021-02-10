@@ -6,6 +6,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import javax.enterprise.inject.New;
+
 import it.univpm.hhc.utils.LocalDateToDateConverter;
 
 import org.hibernate.mapping.Set;
@@ -39,6 +42,7 @@ import it.univpm.hhc.model.dao.UserDetailsDaoDefault;
 import it.univpm.hhc.model.entities.Address;
 import it.univpm.hhc.services.CartItemService;
 import it.univpm.hhc.services.CartService;
+import it.univpm.hhc.services.ItemService;
 import it.univpm.hhc.services.SubService;
 import it.univpm.hhc.services.UserService;
 import it.univpm.hhc.services.AddressService;
@@ -52,6 +56,7 @@ public class UserController {
 	private UserService userService;
 	private SubService subService;
 	private AddressService addressService;
+	private ItemService itemService;
 	private Long currentCart;
 
 	private CartService cartService;
@@ -195,6 +200,41 @@ public class UserController {
 		this.currentCart = currentCart;
 	}
 	
+//////////ITEM//////////////////////////////////////////////////////////////////////////////////////
+	
+	@GetMapping(value = "/{itemId}/viewitemdetail")
+	public String viewitemdetail(@PathVariable("itemId") long itemId, Model model)
+		{
+			String errorMessage = "Articolo non trovato";
+	      
+	        model.addAttribute("errorMessage", errorMessage);
+	        model.addAttribute("item", this.itemService.findById(itemId));
+
+			return "users/viewitem";	
+
+	    }
+	
+
+	
+	@PostMapping(value = "/addtocart")
+	public String addtocart(@RequestParam(value="itemId") String itemId,@ModelAttribute("newCartItem") Cart_item newCartItem, @ModelAttribute("newItem") String newItem) {
+		Cart c = cartService.findByUserId(getCurrentUser().getUser_id());
+
+		
+		newCartItem.setCart(c);
+		Item item= itemService.findById(Long.parseLong(itemId));
+		newCartItem.setItem(item);
+		this.cartItemService.update(newCartItem);
+
+		return "redirect:/";
+	}
+	
+
+	
+	
+	
+	
+	
 	//SUB//////////////////////////////////////////////////////////////////////////////////////////////
 
 	@GetMapping(value = "/view_sub")
@@ -319,6 +359,11 @@ public class UserController {
 	@Autowired
 	public void setCartItemService(CartItemService cartItemService) {
 		this.cartItemService = cartItemService;
+	}
+	
+	@Autowired
+	public void setItemService(ItemService itemService) {
+		this.itemService = itemService;
 	}
 	
 	@Autowired

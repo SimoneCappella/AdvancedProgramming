@@ -24,9 +24,8 @@ public class Cart implements Serializable {
 	private User user;
 	private double total;
 	private int item_num;
-	
 	private Set<Cart_item> cart_items = new HashSet<Cart_item>();
-	//private Set<Item> items = new HashSet<Item>();
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "CART_ID")
