@@ -3,6 +3,8 @@ package it.univpm.hhc.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +32,22 @@ public class AdminController {
 	private UserService userService;
 	private AddressService addressService;
 	
+	public User getCurrentUser()
+	{
+		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if(principal instanceof UserDetails) {
+			String username = ((UserDetails)principal).getUsername();
+			User logged_user = userService.findByEmail(username);
+			return logged_user;
+			
+		}else {
+			String username = principal.toString();
+			return null;
+		}
+			
+	}
+	
 	@GetMapping(value = "/userlist")
 	public String list(@RequestParam(value = "message", required=false) String message, Model uiModel) {
 		List<User> allUsers = this.userService.findAll();
@@ -41,6 +59,8 @@ public class AdminController {
 		
 		return "admins/userlist";
 	}
+	
+	
 	
 	//Cambiare la form
 	@GetMapping(value="/{userId}/useredit")//occhio devo gestire la modifica a cascata
@@ -64,9 +84,27 @@ public class AdminController {
 	
 	
 	@GetMapping(value = "/{userId}/userdelete")//occhio devo gestire la rimozione a cascata
-	public String delete(@PathVariable("userId") String userId) {
-		this.userService.delete(new Long(userId));
-		
+	public String delete(@PathVariable("userId") long userId, Model uiModel) {
+		if(userId == getCurrentUser().getUser_id()) {
+			this.userService.delete(userId);	
+			return "redirect:/logout";
+		}else {
+			this.userService.delete(userId);	
+			return "redirect:/admins/userlist";
+		}
+	}
+	
+	@GetMapping(value = "/{userId}/userdisable")//occhio devo gestire la rimozione a cascata
+	public String delete(@PathVariable("userId") long userId) {
+		if(userId == getCurrentUser().getUser_id()) {
+			User user = getCurrentUser();
+			user.setActive(false);
+			userService.update(user);
+			return "redirect:/logout";
+		}
+		User user = this.userService.findById(userId);
+		user.setActive(false);
+		userService.update(user);
 		return "redirect:/admins/userlist";
 	}
 	
