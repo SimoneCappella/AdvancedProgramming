@@ -16,6 +16,7 @@
 	<td>Name</td>
 	<td>Discount</td>
 	<td>Price</td>
+	<td>Quantità</td>
 	<td></td>
 </thead>
 <c:forEach items="${subs}" var="s">
@@ -25,6 +26,7 @@
 	<td>${s.name}</td>
 	<td>${s.discount}%</td>
 	<td>${s.price}€</td>
+	<td><input type='text' name='quanto' ></td>
 	<td>[<a href="<c:url value="/admins/${s.sub_id}/subdelete/"/>">X</a>]</td>
 </tr>
 </c:forEach>

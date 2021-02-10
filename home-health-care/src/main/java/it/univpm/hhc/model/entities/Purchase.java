@@ -27,6 +27,7 @@ public class Purchase implements Serializable {
 	private double total;
 	private Set<Cart_item> cart_items = new HashSet<Cart_item>();
 	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "PURCHASE_ID")
@@ -47,7 +48,7 @@ public class Purchase implements Serializable {
 		this.pay_method= pay_method;
 	}
 	
-	@Column(name = "DATE", nullable = false) 
+	@Column(name = "DATE") 
 	public String getDate() {
 		return date;
 	}
@@ -85,7 +86,7 @@ public class Purchase implements Serializable {
 	}
 
 	
-	@Column(name = "TOTAL", nullable = false) 
+	@Column(name = "TOTAL") 
 	public double getTotal() {
 		return total;
 	}

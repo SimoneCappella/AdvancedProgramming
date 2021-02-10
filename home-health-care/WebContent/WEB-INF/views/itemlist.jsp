@@ -7,21 +7,17 @@
 <h1>Elenco</h1>
 <table>
 <thead>
-	<td></td>
-	<td>id   </td>
 	<td>Titolo   </td>
-	<td>Descrizione   </td>
 	<td>Price   </td>
 	<td>Image   </td>
-	
+	<td></td>
 </thead>
 <c:forEach items="${items}" var="i">
 <tr>
-	<td>${i.item_id}</td>
 	<td>${i.title}</td>
-	<td>${i.description}</td>
 	<td>${i.price}</td>
 	<td>${i.image}</td>
+	<td>[<a href="<c:url value="/users/${i.item_id}/viewitemdetail/" />">Visualizza Articolo</a>]</td>
 </tr>
 </c:forEach>
 </table>
