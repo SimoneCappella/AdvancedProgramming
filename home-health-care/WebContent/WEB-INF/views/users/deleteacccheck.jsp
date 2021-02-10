@@ -2,6 +2,16 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+<script>
+function clicked(e)
+{
+	if(!confirm('Sei sicuro?')){
+		e.preventDefault();
+	}
+}
+</script>
+
 <c:if test="${not empty errorMessage}">
 	<div style="color: red; font-weight: bold; margin: 30px 0px;">${errorMessage}</div>
 </c:if>
@@ -14,6 +24,6 @@
 		</tr>
 		<tr>
 			<td colspan='2'><input name="submit" type="submit"
-				value="Elimina il mio account" /></td>
+				value="Elimina il mio account" onclick="return confirm('Sei sicuro?')" /></td>
 		</tr>
 	</table>
