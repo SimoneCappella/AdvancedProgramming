@@ -15,6 +15,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,6 +34,8 @@ import it.univpm.hhc.model.entities.Cart_item;
 import it.univpm.hhc.model.entities.Item;
 import it.univpm.hhc.model.entities.Sub;
 import it.univpm.hhc.model.entities.User;
+import it.univpm.hhc.model.dao.UserDetailsDao;
+import it.univpm.hhc.model.dao.UserDetailsDaoDefault;
 import it.univpm.hhc.model.entities.Address;
 import it.univpm.hhc.services.CartItemService;
 import it.univpm.hhc.services.CartService;
@@ -51,6 +56,11 @@ public class UserController {
 
 	private CartService cartService;
 	private CartItemService cartItemService;
+	
+	private UserDetailsDao userDao;
+	
+	private PasswordEncoder pe = new BCryptPasswordEncoder();
+	
 
 	public User getCurrentUser()
 	{
@@ -82,6 +92,29 @@ public class UserController {
 		User logged_user = getCurrentUser();
 		uiModel.addAttribute("user", logged_user);
 		return "users/myprofile";
+	}
+	
+	@GetMapping(value="/deletemyaccount")
+	public String deletemyaccount() {
+		return "users/deleteacccheck";
+	}
+	
+	@RequestMapping(value="/checkanddelete", method=RequestMethod.POST)
+	public String checkanddelete(@RequestParam String confirmation, Model uiModel){
+		User logged_user = getCurrentUser();
+		if(!confirmation.equals("CONFERMO")) {
+			String errorMessage = "Non hai inserito correttamente il messaggio!";
+			uiModel.addAttribute("errorMessage", errorMessage);
+			return"users/deleteacccheck";
+		} else if(confirmation.equals("CONFERMO")) {
+			logged_user.setActive(false);
+			userService.update(logged_user);
+			return "redirect:/logout";
+		}else {
+			String errorMessage = "Oops, qualcosa è andato storto, riprova!";
+			uiModel.addAttribute("errorMessage", errorMessage);
+			return"users/deleteacccheck";
+		}
 	}
 	
 	@GetMapping(value = "/{userId}/delete")//occhio devo gestire la rimozione a cascata
