@@ -44,6 +44,11 @@ public class UserDetailsServiceDefault implements UserService, UserDetailsServic
 	public void update(User user) {
 		 this.userDao.update(user);
 	}
+	
+	@Override
+	public void update(User user, String pass) {
+		 this.userDao.update(user,pass);
+	}
 
 	@Override
 	public void delete(Long userId) {
