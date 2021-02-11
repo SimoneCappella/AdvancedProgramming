@@ -16,14 +16,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import it.univpm.hhc.model.entities.Address;
 import it.univpm.hhc.model.entities.Sub;
 import it.univpm.hhc.model.entities.User;
 import it.univpm.hhc.model.entities.Address;
+import it.univpm.hhc.model.entities.Item;
 import it.univpm.hhc.services.AddressService;
 import it.univpm.hhc.services.SubService;
 import it.univpm.hhc.services.UserService;
 import it.univpm.hhc.services.AddressService;
+import it.univpm.hhc.services.ItemService;
 
 @RequestMapping("/admins")
 @Controller
@@ -31,6 +32,7 @@ public class AdminController {
 
 	private UserService userService;
 	private AddressService addressService;
+	private ItemService itemService;
 	
 	public User getCurrentUser()
 	{
@@ -207,4 +209,54 @@ public class AdminController {
 	public void setAddressService(AddressService addressService) {
 		this.addressService = addressService;
 	}
+	
+//////////////////////////ITEM////////////////////////////////
+/*@GetMapping(value = "/itemlist")
+public String itemlist(Model uiModel) {
+List<Item> allItems = ItemService.findAll();
+
+uiModel.addAttribute("items", allItems);
+
+return "users/itemlist";
+}*/
+
+
+@GetMapping(value="/itemadd")
+public String addItem(Model uiModel) {
+
+uiModel.addAttribute("item", new Item());
+
+return "admins/itemform";
+}
+
+@GetMapping(value = "/{item_id}/deleteitem")
+public String deleteItem(@PathVariable("item_id") Long itemId) {
+//Address address= addressService.findById(address);
+this.itemService.delete(itemId);
+return "redirect:/itemlist";
+}
+
+@GetMapping(value="/{item_id}/itemedit")//occhio devo gestire la modifica a cascata
+public String editItem(@PathVariable("item_id") String item_id, Model uiModel) {
+
+Item i = this.itemService.findById(new Long(item_id));
+uiModel.addAttribute("item", i);
+
+return "admins/itemform";
+}
+
+@PostMapping(value = "/itemsave")
+public String saveItem(@ModelAttribute("newItem") Item newItem, BindingResult br) {
+
+this.itemService.update(newItem);
+
+return "redirect:/itemlist";
+}
+
+
+@Autowired
+public void setItemService(ItemService ItemService) {
+this.itemService = ItemService;
+}
+	
 }

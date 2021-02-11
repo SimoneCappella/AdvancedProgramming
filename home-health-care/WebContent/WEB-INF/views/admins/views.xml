@@ -15,4 +15,7 @@
   <definition extends="default" name="admins/subform">
    <put-attribute name="body" value="/WEB-INF/views/admins/subform.jsp" />
 </definition>
+  <definition extends="default" name="admins/itemform">
+   <put-attribute name="body" value="/WEB-INF/views/admins/itemform.jsp" />
+  </definition>
 </tiles-definitions>
