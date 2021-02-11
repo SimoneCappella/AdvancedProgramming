@@ -5,7 +5,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
     
 		<c:url value="/users/cartsave" var="action_url" />
-        <form:form method="POST" action="${action_url}" modelAttribute="item">
+        <form:form method="POST" action="${action_url}" modelAttribute="cart_item">
 			 <h1>Modifica quantità dell'oggetto ${item.item_code}</h1>
              <table>
 				<c:if test="${empty item.cart_item_id}">
@@ -19,7 +19,7 @@
 					<td><form:hidden path="cart_item_id"/></td>
 			   </tr>
 				<tr>
-					<td><form:hidden path="item_code" /></td>
+					<td><form:hidden path="item" /></td>
 				</tr>
 			   <tr>
 					<td><input type="submit" value="Conferma"/></td>

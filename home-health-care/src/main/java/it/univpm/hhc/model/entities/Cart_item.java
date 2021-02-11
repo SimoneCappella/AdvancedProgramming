@@ -17,7 +17,6 @@ public class Cart_item implements Serializable{
 	private Long cart_item_id;
 	private Cart cart;
 	private Item item;
-	//private Long item_code;
 	private int quantity;
 	private Purchase purchase;
 	

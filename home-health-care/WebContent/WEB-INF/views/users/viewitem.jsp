@@ -4,7 +4,6 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-
 <c:choose>
   <c:when test="${item eq null}">
 <p>${errorMessage}</p>
@@ -22,7 +21,20 @@
 	
 	<c:url value="/users/addtocart" var="action_url" />
 	<form:form method="POST" action="${action_url}">
-			<td><input type="number" id="quantity" name="quantity"></td>
+			<td>
+			<select id="quantity" name="quantity">
+  				<option value=1>1</option>
+  				<option value=2>2</option>
+  				<option value=3>3</option>
+  				<option value=4>4</option>
+  				<option value=5>5</option>
+  				<option value=6>6</option>
+  				<option value=7>7</option>
+  				<option value=8>8</option>
+  				<option value=9>9</option>
+  				<option value=10>10</option>
+			</select>
+			</td>
 			<td><input type="hidden" id="itemId" name="itemId" value= "${item.item_id}"></td>
 			
   

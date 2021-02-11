@@ -27,3 +27,4 @@ function clicked(e)
 				value="Elimina il mio account" onclick="return confirm('Sei sicuro?')" /></td>
 		</tr>
 	</table>
+	</form>

@@ -11,6 +11,7 @@ import javax.enterprise.inject.New;
 
 import it.univpm.hhc.utils.LocalDateToDateConverter;
 
+import org.hamcrest.number.IsNaN;
 import org.hibernate.mapping.Set;
 import org.hibernate.query.criteria.internal.expression.function.CurrentDateFunction;
 import org.slf4j.Logger;
@@ -57,7 +58,7 @@ public class UserController {
 	private SubService subService;
 	private AddressService addressService;
 	private ItemService itemService;
-	private Long currentCart;
+
 
 	private CartService cartService;
 	private CartItemService cartItemService;
@@ -142,10 +143,10 @@ public class UserController {
 //CART//////////////////////////////////////////////////////////////////////////////////////
 	
 	//Ritorna correttamente gli  item nel carrello dell'utente "loggato", da implementare il get dell'id carrello associato all'utente in maniera dinamica
-	@GetMapping(value = "/{cart_id}/cartlist")
-	public String list(@PathVariable("cart_id") Long cart_id, Model uiModel) {
-		setCurrentCart(cart_id);
-		List<Cart_item> allItem = this.cartItemService.findByCart(cart_id);
+	@GetMapping(value = "/cartlist")
+	public String list( Model uiModel) {
+		Long cartLong= getCurrentUser().getCarts().getCart_id();
+		List<Cart_item> allItem = this.cartItemService.findByCart(cartLong);
 		uiModel.addAttribute("items", allItem);  //quello che restituisco alla vista
 		return "users/cartlist";
 	}
@@ -157,35 +158,36 @@ public class UserController {
 		this.cartItemService.delete(cart_item_id); 
 		Cart cart = item.getCart();	//ottengo il carrello associato per poi ricavarmi l'id da passare alla vista
 		Long cart_id = cart.getCart_id();
-		return "redirect:/users/"+cart_id+"/cartlist";
+		return "redirect:/users/cartlist";
 	}
 	
 
-	@GetMapping(value="/{cart_item_id}/cartedit")
-	public String edit(@PathVariable("cart_item_id") long cart_item_id, Model uiModel) {
+	@PostMapping(value = "/editcart")
+	public String editcart(@RequestParam("cart_item_id") Long cart_item_id, @RequestParam("quantity") int quantity, Model uiModel) {
+		String errorMessage;
 		
 		Cart_item i = this.cartItemService.findByid(cart_item_id);
-		uiModel.addAttribute("item", i);
-		return "users/cartform";
+		if(i.getQuantity()<=0) 
+			errorMessage="Valore non consentito";
+		else {	
+			Cart_item newCartItem=cartItemService.findByid(cart_item_id);
+			newCartItem.setQuantity(quantity);
+			this.cartItemService.update(newCartItem);
+		}
+		return "redirect:/users/cartlist";
 	}
 
 	
 	@PostMapping(value = "/cartsave")
 	public String save(@ModelAttribute("newCartItem") Cart_item newCartItem,BindingResult br) {
-		Cart c = cartService.findById(getCurrentCart());
+		Long cartLong= getCurrentUser().getCarts().getCart_id();
+		Cart c = cartService.findById(cartLong);
 		newCartItem.setCart(c);
 		this.cartItemService.update(newCartItem);
-		Long cart_id = getCurrentCart();
-		return "redirect:/users/"+cart_id+"/cartlist";
-	}
-	
-	public Long getCurrentCart() {
-		return currentCart;
+		
+		return "redirect:/users/cartlist";
 	}
 
-	public void setCurrentCart(Long currentCart) {
-		this.currentCart = currentCart;
-	}
 	
 //////////ITEM//////////////////////////////////////////////////////////////////////////////////////
 	
@@ -202,7 +204,6 @@ public class UserController {
 	    }
 	
 
-	
 	@PostMapping(value = "/addtocart")
 	public String addtocart(@RequestParam(value="itemId") String itemId,@ModelAttribute("newCartItem") Cart_item newCartItem, @ModelAttribute("newItem") String newItem) {
 		Cart c = cartService.findByUserId(getCurrentUser().getUser_id());
