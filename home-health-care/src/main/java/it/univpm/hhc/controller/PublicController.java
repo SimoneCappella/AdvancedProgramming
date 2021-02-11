@@ -4,10 +4,14 @@ import static org.hamcrest.CoreMatchers.nullValue;
 
 import java.security.Principal;
 import java.text.DateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import org.hibernate.query.criteria.internal.expression.function.CurrentDateFunction;
+import org.mockito.internal.matchers.CompareTo;
+import org.mockito.internal.matchers.Null;
 import org.omg.CORBA.Current;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -27,10 +31,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import it.univpm.hhc.model.entities.Cart;
 import it.univpm.hhc.model.entities.Cart_item;
 import it.univpm.hhc.model.entities.Item;
+import it.univpm.hhc.model.entities.Sub;
 import it.univpm.hhc.model.entities.User;
 import it.univpm.hhc.services.CartItemService;
 import it.univpm.hhc.services.CartService;
 import it.univpm.hhc.services.ItemService;
+import it.univpm.hhc.services.SubService;
 import it.univpm.hhc.services.UserService;
 
 @Controller
@@ -52,15 +58,34 @@ public class PublicController {
 		String formattedDate = dateFormat.format(date);
 		model.addAttribute("serverTime", formattedDate);		
 		model.addAttribute("appName", appName);
-		
 		int item_number = 0;
 		double total = 0;
 		User curUser=getCurrentUser();
+		
 		if(curUser!=null)
 		{
+			Sub sub= curUser.getSub();
 			Long cart_id = (cartService.findByUserId(curUser.getUser_id())).getCart_id();
 			List<Cart_item> items = cartItemService.findByCart(cart_id);
 			model.addAttribute("userid", curUser.getUser_id());
+			if(curUser.getSub()!=null)
+			{	
+				LocalDate date2 =java.time.LocalDate.now();
+				int val= curUser.getSubexp().compareTo(date2);
+				
+				if(val<=0)
+					{
+						curUser.setSub(null);
+						curUser.setSubexp(null);
+						userService.update(curUser);
+						model.addAttribute("messaggio"," Abbonamento Scaduto!");
+					}
+				else 
+				{
+					model.addAttribute("nomeSub",sub.getName());
+					model.addAttribute("scadenza",curUser.getSubexp());
+				}
+			}
 			item_number = items.size();
 			for (Cart_item i : items){
 				if(i.getQuantity() > 1) {

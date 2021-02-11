@@ -158,9 +158,21 @@ public class UserController {
 	//Ritorna correttamente gli  item nel carrello dell'utente "loggato", da implementare il get dell'id carrello associato all'utente in maniera dinamica
 	@GetMapping(value = "/cartlist")
 	public String list( Model uiModel) {
+		double total = 0;
 		Long cartLong= getCurrentUser().getCarts().getCart_id();
 		List<Cart_item> allItem = this.cartItemService.findByCart(cartLong);
 		uiModel.addAttribute("items", allItem);  //quello che restituisco alla vista
+		int item_number = allItem.size();
+		
+		for (Cart_item i : allItem){
+			if(i.getQuantity() > 1) {
+				item_number += i.getQuantity()-1;
+				total += i.getQuantity() * (i.getItem().getPrice());
+			}
+		}
+
+		uiModel.addAttribute("total", total);
+		uiModel.addAttribute("item_number", item_number);
 		return "users/cartlist";
 	}
 	

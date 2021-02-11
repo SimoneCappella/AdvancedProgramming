@@ -28,6 +28,7 @@
 	<td>${i.description}</td>
 	<td>${i.price} €</td>
 	<td>${i.image}</td>
+	<c:if test="${isUser}"> - <td><a href="<c:url value="/users/${i.item_id}/viewitemdetail" />">Dettagli Articolo</a></td></c:if>
 <c:if test="${isAdmin}"> - <td><a href="<c:url value="/admins/${i.item_id}/deleteitem" />">Elimina Oggetto</a></td></c:if>
 <c:if test="${isAdmin}"> - <td><a href="<c:url value="/admins/${i.item_id}/itemedit" />">  - Modifica Oggetto</a></td></c:if>
 </tr>
