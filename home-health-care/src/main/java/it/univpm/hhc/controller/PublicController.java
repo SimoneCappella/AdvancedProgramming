@@ -90,14 +90,15 @@ public class PublicController {
 		}		
 	}
 	
-	@GetMapping(value = "/itemlist")
-	public String itemlist(Model uiModel) {
-		List<Item> allItems = ItemService.findAll();
-		
-		uiModel.addAttribute("items", allItems);
-		
-		return "itemlist";
-	}
+/////////////////////////ITEM/////////////////////////////////////
+@GetMapping(value = "/itemlist")
+public String itemlist(Model uiModel) {
+List<Item> allItems = ItemService.findAll();
+
+uiModel.addAttribute("items", allItems);
+
+return "itemlist";
+}
 	
 	@Autowired
 	public void setCartService(CartService cartService) {

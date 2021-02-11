@@ -23,24 +23,24 @@
                     <td><form:input path="surname"/></td>
                 </tr>
 				<tr>
-                    <td><form:label path="password">Password</form:label></td>
-                    <td><form:input type="password" path="password"/></td>
+                    <td><form:hidden path="password"/></td>
+                </tr>				
+				<tr>
+                    <td><form:hidden path="role"/></td>
                 </tr>
 				<tr>
-                    <td><form:label path="role">Ruolo</form:label></td>
-                    <td><form:checkbox path="role"/></td>
+                    <td><form:hidden path="active"/></td>
                 </tr>
-				<tr>
-                    <td><form:label path="active">Utente Abilitato</form:label></td>
-                    <td><form:checkbox path="active"/></td>
-                </tr>
+
 				<tr>
 					<td><form:hidden path="user_id" /></td>
 				</tr>
                 <tr>
-					<td><input type="submit" value="Submit"/></td>
+					<td><input type="submit" value="Modifica"/></td>
 					<td><input type="reset" value="Reset"></td>
                 </tr>
-
-            </table>
+				<tr>
+			</table>			
 		</form:form>
+		<button style="margin-top: 10px" onclick="window.location.href='http://localhost:8080/home-health-care/users/editpass';">Modifica Password</button>
+		

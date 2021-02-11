@@ -129,6 +129,13 @@ public class UserController {
 		//QUI DA RICHIAMARE IL LOGOUT
 		return "redirect:/";
 	}
+	
+	@GetMapping(value="/editpass")
+	public String editpass(Model uiModel) {
+		User loggedUser = getCurrentUser();
+		uiModel.addAttribute("pass", loggedUser.getPassword());
+		return "users/editpass";
+	}
 
 	
 	@PostMapping(value = "/save")
@@ -138,6 +145,12 @@ public class UserController {
 		
 		return "redirect:/users/edit";
 		
+	}
+	
+	@RequestMapping(value = "/savepass", method=RequestMethod.POST)
+	public String saveUserpass(@RequestParam String password) {
+		this.userService.update(getCurrentUser(), password);
+		return "redirect:/users/edit";		
 	}
 	
 //CART//////////////////////////////////////////////////////////////////////////////////////

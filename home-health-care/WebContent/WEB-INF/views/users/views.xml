@@ -37,4 +37,7 @@
 <definition extends="default" name="users/deleteacccheck">
    <put-attribute name="body" value="/WEB-INF/views/users/deleteacccheck.jsp" />
 </definition>
+<definition extends="default" name="users/editpass">
+   <put-attribute name="body" value="/WEB-INF/views/users/editpass.jsp" />
+</definition>
 </tiles-definitions>

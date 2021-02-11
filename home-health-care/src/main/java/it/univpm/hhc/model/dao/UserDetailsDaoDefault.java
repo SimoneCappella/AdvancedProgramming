@@ -38,9 +38,15 @@ public class UserDetailsDaoDefault extends DefaultDao implements UserDetailsDao 
 		this.getSession().update(result);
 	}*/
 	
-	@Override
+	@Override 
 	public void update(User user) {
 		//user.setPassword(encryptPassword(user.getPassword()));
+		this.getSession().update(user);		
+	}
+	
+	@Override
+	public void update(User user, String pass) {
+		user.setPassword(encryptPassword(pass));
 		this.getSession().update(user);		
 	}
 

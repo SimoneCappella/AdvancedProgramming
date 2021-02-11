@@ -20,6 +20,8 @@ public interface UserDetailsDao {
 	
 	void update(User user);
 	
+	void update(User user, String pass);
+	
 	void delete(User contact);
 
 	User findByEmail(String email);
