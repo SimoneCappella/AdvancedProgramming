@@ -4,8 +4,10 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
     
- 
-		<c:url value="/users/addresses/save" var="action_url" />
+ <c:if test="${not empty errorMessage}">
+	<div style="color: red; font-weight: bold; margin: 30px 0px;">${errorMessage}</div>
+</c:if>
+		<c:url value="/users/addresssave" var="action_url" />
         <form:form method="POST" action="${action_url}" modelAttribute="address">
              <table>
 				<c:if test="${empty address.address_id}">

@@ -19,15 +19,21 @@
 	<td>Civ_num</td>
 	<td></td>
 </thead>
-<c:forEach items="${addresses}" var="a">
+<c:forEach items="${address}" var="a">
 <tr>
-	<td>[<a href="<c:url value="/users/${a.address_id}/edit/" />">Modifica</a>]</td>
+
+<form name='button' action ="<c:url value="/users/editaddress"/>" method='POST'>
+	<td><input type="submit" value="Modifica"/></td>
+	<td><input type="hidden" id="address_id" name="address_id" value= "${a.address_id}"></td>
+	</form>
+	
 	<td>${a.address_id}</td>
 	<td>${a.cap}</td>
 	<td>${a.city}</td>
 	<td>${a.street}</td>
 	<td>${a.civ_num}</td>
-	<td>[<a href="<c:url value="/users/${a.address_id}/deleteaddress/"/>">X</a>]</td>
+	<td>[<a href="<c:url value="/users/deleteaddress/"/>">X</a>]</td>
+	
 </tr>
 </c:forEach>
 </table>
