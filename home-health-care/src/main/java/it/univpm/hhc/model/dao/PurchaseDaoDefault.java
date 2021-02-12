@@ -22,6 +22,11 @@ public class PurchaseDaoDefault extends DefaultDao implements PurchaseDao {
 	public List<Purchase> findAll() { 
 		return getSession().createQuery("from Purchase p", Purchase.class).getResultList();
 	}
+	
+	@Override
+	public List<Purchase> findByUserId(Long id){
+		return getSession().createQuery("from Purchase p where USER_CODE ='" + id + "'", Purchase.class).getResultList();
+	}
 
 	@Override
 	public Purchase create(String pay_method, LocalDate date, double total, User user, Address address) {

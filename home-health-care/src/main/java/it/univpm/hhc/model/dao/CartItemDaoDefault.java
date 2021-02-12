@@ -28,6 +28,12 @@ public class CartItemDaoDefault extends DefaultDao implements CartItemDao {
 	public List<Cart_item> findAll() { 
 		return getSession().createQuery("from Cart_item c", Cart_item.class).getResultList();
 	}
+	
+	@Override
+	public List<Cart_item> findByPurchaseCode(Long id){
+		List<Cart_item> culo = getSession().createQuery("from Cart_item c where PURCHASE_CODE = '" + id + "'", Cart_item.class).getResultList();
+		return culo;
+	}
 
 	@Override
 	public Cart_item create(Cart cart, Item item, int quantity) {

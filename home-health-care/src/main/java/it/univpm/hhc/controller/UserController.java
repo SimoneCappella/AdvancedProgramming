@@ -5,6 +5,7 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.enterprise.inject.New;
@@ -397,6 +398,30 @@ public class UserController {
 			this.cartItemService.update(i);
 		}
 		return "redirect:/";
+	}
+	
+	@GetMapping(value ="/myorders")
+	public String myorders(Model uiModel) {
+		if(purchaseService.findByUserId(getCurrentUser().getUser_id()).size() > 0) {
+			List <Purchase> purchases = purchaseService.findByUserId(getCurrentUser().getUser_id());
+			List<List<Cart_item>> cartitems = new ArrayList<List<Cart_item>>();
+			List<List<Item>> items = new ArrayList<List<Item>>();
+			for (Purchase p : purchases) {
+				cartitems.add(cartItemService.findByPurchaseCode(p.getPurchase_id()));			
+			}
+			for(List<Cart_item> c : cartitems) {
+				List<Item> it = new ArrayList<Item>();
+				for (Cart_item i : c) {
+					it.add(itemService.findById(i.getItem().getItem_id()));
+				}
+				items.add(it);
+			}
+			uiModel.addAttribute("items", items);
+		}else {
+			String message = "Non hai ancora effettuato nessun acquisto.";
+			uiModel.addAttribute("message", message);
+		}
+		return "users/myorders";
 	}
 
 ///////////////////////////AUTOWIRED//////////////////////////////////////////

@@ -20,6 +20,8 @@ public interface PurchaseDao {
 	
 	List<Purchase> findAll();
 	
+	List<Purchase> findByUserId(Long id);
+	
 	Purchase create(String pay_method, LocalDate date, double total, User user, Address address);
 	
 	Purchase update(Purchase purchase);

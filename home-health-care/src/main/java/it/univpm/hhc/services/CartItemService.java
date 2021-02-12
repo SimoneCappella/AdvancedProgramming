@@ -14,6 +14,8 @@ public interface CartItemService {
 		
 	List<Cart_item> findByCart(Long id);
 	
+	List<Cart_item> findByPurchaseCode(Long id);
+	
 	Cart_item create(Cart cart, Item item, int quantity);
 	
 	Cart_item update(Cart_item cart_item);

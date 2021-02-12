@@ -21,6 +21,11 @@ public class PurchaseServiceDefault implements PurchaseService {
 	public List<Purchase> findAll() {
 		return this.purchaseDao.findAll();
 	}
+	
+	@Override
+	public List<Purchase> findByUserId(Long id){
+		return this.purchaseDao.findByUserId(id);
+	}
 
 	@Override
 	public Purchase findById(Long id) {
