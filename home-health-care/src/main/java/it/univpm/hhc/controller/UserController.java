@@ -36,6 +36,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import it.univpm.hhc.model.entities.Cart;
 import it.univpm.hhc.model.entities.Cart_item;
 import it.univpm.hhc.model.entities.Item;
+import it.univpm.hhc.model.entities.Purchase;
 import it.univpm.hhc.model.entities.Sub;
 import it.univpm.hhc.model.entities.User;
 import it.univpm.hhc.model.dao.UserDetailsDao;
@@ -387,7 +388,14 @@ public class UserController {
 	
 	@RequestMapping(value="/savepurchase", method = RequestMethod.POST)
 	public String savepurchase(@RequestParam ("paymeth")String paymeth, @RequestParam ("addr") Long addressId, @RequestParam ("total") double total) {
-		this.purchaseService.create(paymeth, java.time.LocalDate.now(), total, getCurrentUser(), this.addressService.findById(addressId));
+		Long cartId = getCurrentUser().getCarts().getCart_id();
+		List <Cart_item> items = this.cartItemService.findByCart(cartId);
+		Purchase purchase = this.purchaseService.create(paymeth, java.time.LocalDate.now(), total, getCurrentUser(), this.addressService.findById(addressId));
+		for(Cart_item i : items) {
+			i.setPurchase(purchase);
+			i.setCart(null);
+			this.cartItemService.update(i);
+		}
 		return "redirect:/";
 	}
 

@@ -1,6 +1,9 @@
 package it.univpm.hhc.model.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -23,7 +27,7 @@ public class Address implements Serializable {
  	private String street;//via
 	private int civ_num;
 	private User user;
-	private Purchase purchase;
+	private Set<Purchase> purchase = new HashSet<Purchase>();
 
 	
 	@Id
@@ -87,12 +91,12 @@ public class Address implements Serializable {
 	
 	}
 	
-	@OneToOne(mappedBy = "address", cascade = CascadeType.ALL, orphanRemoval = true)
-	public Purchase getPurchases() {
+	@OneToMany(mappedBy = "address", cascade = CascadeType.ALL, orphanRemoval = true)
+	public Set<Purchase> getPurchases() {
 		return this.purchase;
 	}
 	
-	public void setPurchases(Purchase purchase) {
+	public void setPurchases(Set<Purchase> purchase) {
 		this.purchase = purchase;
 	}
 
