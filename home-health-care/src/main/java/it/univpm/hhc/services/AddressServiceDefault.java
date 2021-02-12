@@ -29,6 +29,11 @@ public class AddressServiceDefault implements AddressService {
 	public Address create(int cap, String city, String street, int civ_num, User user) {
 		return this.addressDao.create(cap, city, street, civ_num, user);
 	}
+	
+	@Override
+	public List<Address> findByUserId(Long user_code){
+		return this.addressDao.findByUserId(user_code);
+	}
 
 	@Override
 	public Address update(Address address) {

@@ -15,6 +15,8 @@ public interface AddressDao {
 	Address findById(Long id);
 		
 	List<Address> findAll();
+	
+	List<Address> findByUserId(Long user_code);
 		
 	Address create(int cap, String city, String street, int civ_num, User user);
 		

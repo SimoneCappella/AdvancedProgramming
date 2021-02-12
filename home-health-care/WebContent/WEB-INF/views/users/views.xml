@@ -40,4 +40,7 @@
 <definition extends="default" name="users/editpass">
    <put-attribute name="body" value="/WEB-INF/views/users/editpass.jsp" />
 </definition>
+<definition extends="default" name="users/purchase">
+   <put-attribute name="body" value="/WEB-INF/views/users/purchase.jsp" />
+</definition>
 </tiles-definitions>

@@ -1,7 +1,10 @@
 package it.univpm.hhc.model.dao;
 
+import java.time.LocalDate;
 import java.util.List;
 import org.springframework.stereotype.Repository;
+
+import it.univpm.hhc.model.entities.Address;
 import it.univpm.hhc.model.entities.Purchase;
 import it.univpm.hhc.model.entities.User;
 
@@ -21,12 +24,13 @@ public class PurchaseDaoDefault extends DefaultDao implements PurchaseDao {
 	}
 
 	@Override
-	public Purchase create(String pay_method, String date, double total, User user) {
+	public Purchase create(String pay_method, LocalDate date, double total, User user, Address address) {
 		Purchase p = new Purchase();
 		p.setPay_method(pay_method);
 		p.setDate(date);
 		p.setTotal(total);
-		//p.setUser(user);
+		p.setUser(user);
+		p.setAddress(address);
 		this.getSession().save(p);
 		return p;
 	}

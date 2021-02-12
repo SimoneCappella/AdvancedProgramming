@@ -1,6 +1,8 @@
 package it.univpm.hhc.model.entities;
 
 import java.io.Serializable;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,6 +23,7 @@ public class Address implements Serializable {
  	private String street;//via
 	private int civ_num;
 	private User user;
+	private Purchase purchase;
 
 	
 	@Id
@@ -81,6 +85,15 @@ public class Address implements Serializable {
 	public void setCiv_num(int civ_num) {
 		this.civ_num= civ_num;
 	
+	}
+	
+	@OneToOne(mappedBy = "address", cascade = CascadeType.ALL, orphanRemoval = true)
+	public Purchase getPurchases() {
+		return this.purchase;
+	}
+	
+	public void setPurchases(Purchase purchase) {
+		this.purchase = purchase;
 	}
 
 }

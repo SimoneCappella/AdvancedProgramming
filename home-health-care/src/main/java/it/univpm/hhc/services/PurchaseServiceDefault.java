@@ -1,11 +1,13 @@
 package it.univpm.hhc.services;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import it.univpm.hhc.model.dao.PurchaseDao;
+import it.univpm.hhc.model.entities.Address;
 import it.univpm.hhc.model.entities.Purchase;
 import it.univpm.hhc.model.entities.User;
 
@@ -26,8 +28,8 @@ public class PurchaseServiceDefault implements PurchaseService {
 	}
 
 	@Override
-	public Purchase create(String pay_method, String date, double total, User user) {
-		return this.purchaseDao.create(pay_method, date, total, user);
+	public Purchase create(String pay_method, LocalDate date, double total, User user, Address address) {
+		return this.purchaseDao.create(pay_method, date, total, user, address);
 	}
 
 	@Override

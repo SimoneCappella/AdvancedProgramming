@@ -93,6 +93,8 @@ public class PublicController {
 					total += i.getQuantity() * (i.getItem().getPrice());
 				}
 			}
+			curUser.getCarts().setTotal(total);
+			this.cartService.update(curUser.getCarts());
 		}
 		
 		model.addAttribute("total", total);

@@ -2,11 +2,13 @@
 package it.univpm.hhc.model.entities;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,7 +16,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import it.univpm.hhc.utils.LocalDateAttributeConverter;
 
 @Entity
 @Table(name = "purchase")
@@ -22,8 +27,9 @@ public class Purchase implements Serializable {
 	
 	private Long purchase_id;
 	private String pay_method;
-	private String date;
+	private LocalDate date;
 	private User user;
+	private Address address;
 	private double total;
 	private Set<Cart_item> cart_items = new HashSet<Cart_item>();
 	
@@ -48,12 +54,13 @@ public class Purchase implements Serializable {
 		this.pay_method= pay_method;
 	}
 	
+	@Convert(converter = LocalDateAttributeConverter.class)
 	@Column(name = "DATE") 
-	public String getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 	
-	public void setDate(String date) {
+	public void setDate(LocalDate date) {
 		this.date= date;
 	
 	}
@@ -63,6 +70,16 @@ public class Purchase implements Serializable {
 	@JoinColumn(name = "USER_CODE")
 	public User getUser() {
 		return this.user;
+	}
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "ADDRESS_CODE", referencedColumnName = "address_id")
+	public Address getAddress() {
+		return this.address;
+	}
+	
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 	
 	public void setUser(User user) {

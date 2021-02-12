@@ -44,6 +44,7 @@ import it.univpm.hhc.model.entities.Address;
 import it.univpm.hhc.services.CartItemService;
 import it.univpm.hhc.services.CartService;
 import it.univpm.hhc.services.ItemService;
+import it.univpm.hhc.services.PurchaseService;
 import it.univpm.hhc.services.SubService;
 import it.univpm.hhc.services.UserService;
 import it.univpm.hhc.services.AddressService;
@@ -58,6 +59,8 @@ public class UserController {
 	private SubService subService;
 	private AddressService addressService;
 	private ItemService itemService;
+	private PurchaseService purchaseService;
+
 
 
 	private CartService cartService;
@@ -361,12 +364,43 @@ public class UserController {
 		
 		return "redirect:/users/addresslist";
 	}		
+	
+////////////////////////////PURCHASE////////////////////////////////////////
+	@GetMapping(value = "/purchase")
+	public String purchase(Model uiModel) {
+		User logged_user = getCurrentUser();
+		List <Address> addresses = addressService.findByUserId(logged_user.getUser_id());
+		uiModel.addAttribute("addresses", addresses);
+		uiModel.addAttribute("total", logged_user.getCarts().getTotal());
+		if(logged_user.getSub()!= null) {
+			double total = logged_user.getCarts().getTotal();
+			double discount = logged_user.getSub().getDiscount();
+			double newtotal = total - (total*discount/100);
+			uiModel.addAttribute("newtotal", newtotal);
+			uiModel.addAttribute("discount", logged_user.getSub().getDiscount());
+		}else {
+			uiModel.addAttribute("newtotal", logged_user.getCarts().getTotal());
+			uiModel.addAttribute("discount", 0);
+		}
+		return "users/purchase";
+	}
+	
+	@RequestMapping(value="/savepurchase", method = RequestMethod.POST)
+	public String savepurchase(@RequestParam ("paymeth")String paymeth, @RequestParam ("addr") Long addressId, @RequestParam ("total") double total) {
+		this.purchaseService.create(paymeth, java.time.LocalDate.now(), total, getCurrentUser(), this.addressService.findById(addressId));
+		return "redirect:/";
+	}
 
 ///////////////////////////AUTOWIRED//////////////////////////////////////////
 	
 	@Autowired
 	public void setCartService(CartService cartService) {
 		this.cartService = cartService;
+	}
+	
+	@Autowired
+	public void setPurchaseService(PurchaseService purchaseService) {
+		this.purchaseService = purchaseService;
 	}
 	
 	@Autowired
