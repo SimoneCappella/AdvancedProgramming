@@ -314,59 +314,60 @@ public class UserController {
 	
 	
 /////////////////////////ADDRESS/////////////////////////////////////
-	
+	//Funziona
 	@GetMapping(value = "/addresslist")
-	public String listAddress(@RequestParam(value = "message", required=false) String message, Model uiModel) {
-		//logger.info("Listing items");
-		List<Address> allAddresses = this.addressService.findAll();
+	public String listAddress( Model uiModel) {
 		
-		uiModel.addAttribute("addresses", allAddresses);
-		uiModel.addAttribute("numAddresses", allAddresses.size());
+		User user =getCurrentUser();
+		List<Address> allAddresses = this.addressService.findByUserId(user.getUser_id());
 		
-		// TODO ricevere un parametro via GET (es. per messaggio di esito operazione)
-		uiModel.addAttribute("message", message);
-		
+		uiModel.addAttribute("address", allAddresses); //quello che restituisco alla vista
 		return "users/addresslist";
 	}
-	
-	
-	@GetMapping(value="/{addressId}/edit")//occhio devo gestire la modifica a cascata
-	public String editAddress(@PathVariable("addressId") String addressId, 
-			Model uiModel) {
+
+	/*@PostMapping(value = "/editaddress")
+	public String editAddress(@RequestParam("address_id") Long address_id, Model uiModel) {
 		
-		Address a = this.addressService.findById(new Long(addressId));
+		Address a = this.addressService.findById(address_id);
 		uiModel.addAttribute("address", a);
-		
 		return "users/addressform";
-	}
+	}*/
 	
-	//dï¿½ errore 500
+	//rimanda solo alla addressform per aggiungere un nuovo address
 	@GetMapping(value="/addressadd")
 	public String addAddress(Model uiModel) {
-		
 		uiModel.addAttribute("address", new Address());
 		
 		return "users/addressform";
 	}
 	
+	//mi dà errore con GET premendo sulla X della vista
+	/*@PostMapping(value = "/deleteaddress")
+	public String deleteAddress(@RequestParam("address_id") Long address_id) {
 	
-	@GetMapping(value = "/{addressId}/deleteaddress")
-	public String deleteAddress(@PathVariable("addressId") Long addressId) {
-		//Address address= addressService.findById(address);
-		this.addressService.delete(addressId);
-		return "redirect:/users/addresslist";
-	}
-
-
+		this.addressService.delete(address_id);
+		
+		return "redirect:/users/addressform";
+	}*/
 	
-	@PostMapping(value = "/addresses/save")
-	public String saveAddress(@ModelAttribute("newAddress") Address newAddress, BindingResult br) {
+	@PostMapping(value = "/addresssave")
+	public String saveAddress(@ModelAttribute("newAddress") Address newAddress, BindingResult br, Model uiModel) {
+		User u = getCurrentUser();
+		List <Address> allAddresses = this.addressService.findByUserId(u.getUser_id());
+		if (allAddresses.size()>=3)
+		{
+			String errorMessage = "Hai già 3 indirizzi! Non puoi aggiungerne altri!";
+			uiModel.addAttribute("address", new Address());
+			uiModel.addAttribute("errorMessage", errorMessage);
+			return "users/addressform";
+		}else {
+			this.addressService.create(newAddress.getCap(), newAddress.getCity(), newAddress.getStreet(), newAddress.getCiv_num(), u);
+			//this.addressService.update(newAddress);
+			return "redirect:/users/addresslist";
+		}
 		
-		this.addressService.update(newAddress);
-		
-		return "redirect:/users/addresslist";
 	}		
-	
+
 ////////////////////////////PURCHASE////////////////////////////////////////
 	@GetMapping(value = "/purchase")
 	public String purchase(Model uiModel) {
