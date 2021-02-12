@@ -43,4 +43,7 @@
 <definition extends="default" name="users/purchase">
    <put-attribute name="body" value="/WEB-INF/views/users/purchase.jsp" />
 </definition>
+<definition extends="default" name="users/myorders">
+   <put-attribute name="body" value="/WEB-INF/views/users/myorders.jsp" />
+</definition>
 </tiles-definitions>

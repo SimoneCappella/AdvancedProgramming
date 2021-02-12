@@ -20,6 +20,7 @@
 	<li>Registrati: <a href="<c:url value="/register/" />">user</a>
 	<li>Aggiungi una sub a un utente: <a href="<c:url value="/users/link_sub" />">Add</a>
 	<li>visualizza abbonamento utente: <a href="<c:url value="/users/view_sub" />">view</a>
-	<li>Il mio profilo: <a href="<c:url value="/users/myprofile" />">Vai</a>  
+	<li>Il mio profilo: <a href="<c:url value="/users/myprofile" />">Vai</a>
+	<li>I miei ordini: <a href="<c:url value="/users/myorders" />">Vai</a>  
 	
 </ul>

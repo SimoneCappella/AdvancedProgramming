@@ -11,6 +11,8 @@ public interface PurchaseService {
 	
 	List<Purchase> findAll();
 	
+	List<Purchase> findByUserId(Long id);
+	
 	Purchase findById(Long id);
 	
 	Purchase create (String pay_method, LocalDate date, double total, User user, Address address);

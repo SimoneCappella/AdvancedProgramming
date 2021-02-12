@@ -32,6 +32,10 @@ public class CartItemServiceDeafault implements CartItemService{
 		return this.cartItemDao.findByCart(id);
 	}
 	
+	public List<Cart_item> findByPurchaseCode(Long id){
+		return this.cartItemDao.findByPurchaseCode(id);
+	}
+	
 	@Override
 	public Cart_item create(Cart cart, Item item, int quantity) {
 		return this.cartItemDao.create(cart, item, quantity);
