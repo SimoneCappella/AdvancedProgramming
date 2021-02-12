@@ -169,7 +169,7 @@ public class UserController {
 		int item_number = allItem.size();
 		
 		for (Cart_item i : allItem){
-			if(i.getQuantity() > 1) {
+			if(i.getQuantity() >= 1) {
 				item_number += i.getQuantity()-1;
 				total += i.getQuantity() * (i.getItem().getPrice());
 			}
@@ -243,7 +243,7 @@ public class UserController {
 		newCartItem.setItem(item);
 		this.cartItemService.update(newCartItem);
 
-		return "redirect:/";
+		return "redirect:/itemlist";
 	}
 	
 

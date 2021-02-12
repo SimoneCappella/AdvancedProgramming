@@ -88,7 +88,7 @@ public class PublicController {
 			}
 			item_number = items.size();
 			for (Cart_item i : items){
-				if(i.getQuantity() > 1) {
+				if(i.getQuantity() >= 1) {
 					item_number += i.getQuantity()-1;
 					total += i.getQuantity() * (i.getItem().getPrice());
 				}
