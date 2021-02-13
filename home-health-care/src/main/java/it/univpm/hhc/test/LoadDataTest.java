@@ -58,9 +58,9 @@ public class LoadDataTest {
 				
 				session.beginTransaction();
 
-				itemDao.create("Oggetto1","Description1",5,"");
-				itemDao.create("Oggetto2","Description2",10,"");
-				itemDao.create("Oggetto3","Description3",15,"");
+				itemDao.create("Patate","ti riempiono tanto tanto",5,"");
+				itemDao.create("Libro","utile per fermare le carte",10,"");
+				itemDao.create("Mattone","un bel mattone per la tua casa",15,"");
 				
 				List<Item> all= itemDao.findAll();
 				session.getTransaction().commit();

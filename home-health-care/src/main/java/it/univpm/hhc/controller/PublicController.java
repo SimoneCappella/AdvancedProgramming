@@ -5,10 +5,12 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import java.security.Principal;
 import java.text.DateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import org.hamcrest.text.IsEmptyString;
 import org.hibernate.query.criteria.internal.expression.function.CurrentDateFunction;
 import org.mockito.internal.matchers.CompareTo;
 import org.mockito.internal.matchers.Null;
@@ -18,6 +20,7 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,6 +30,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.jayway.jsonpath.internal.function.text.Concatenate;
 
 import it.univpm.hhc.model.entities.Cart;
 import it.univpm.hhc.model.entities.Cart_item;
@@ -174,14 +179,51 @@ return "itemlist";
         return "registration";
     }
     @PostMapping(value = "/save")
-	public String savenew(@ModelAttribute("newUser") User newUser, BindingResult br) {
+	public String savenew(@ModelAttribute("newUser") User newUser, BindingResult br, Model model){
 		
-
-		this.cartService.create(0, 0, this.userService.create(newUser.getPassword(),newUser.getEmail(),newUser.getName(),newUser.getSurname()));
+    	List <User> user= userService.findByEmail2(newUser.getEmail());
+    	List <String> err=new ArrayList<String>();
+    	boolean flag=true;
+    	String mes;    		
+    	if(newUser.getName().isEmpty()||newUser.getName().length()<3||newUser.getName().length()>15) {
+    		err.add("nome non valido");
+    		flag=false;
+    	}
+    		
+    	if (newUser.getSurname().isEmpty()|| newUser.getSurname().length()<3|| newUser.getSurname().length()>15) {
+    		err.add("cognome non valido");
+    		flag=false;
+    	}
+    		
+    	if (newUser.getEmail().isEmpty()|| newUser.getEmail().length()<3 ) {
+    		err.add("email non valida");
+    		flag=false;
+    	}
+    		
+    	if (user.size()>0){
+    		err.add("Utente già registrato");
+    		flag=false;
+    	}	
+    	if (newUser.getPassword().isEmpty()|| newUser.getPassword().length()<3 ) {
+    		err.add("password non valida");
+    		flag=false;
+    	}
+    		
+    	if(flag==true) {
+    		this.cartService.create(0, 0, this.userService.create(newUser.getPassword(),newUser.getEmail(),newUser.getName(),newUser.getSurname()));
+    		mes = "registrazione avvenuta correttamente";
+    		model.addAttribute("mes", mes);
+    		return "redirect:/";	
+		}
+    	model.addAttribute("errorMessage", err);
+    	return "registration";
+    	
+    		
+    }
+		
+		
+		
 	
-		return "redirect:/";
-		
-	}
 	
     
     @Autowired

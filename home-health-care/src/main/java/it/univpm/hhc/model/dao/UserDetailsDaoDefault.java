@@ -83,6 +83,14 @@ public class UserDetailsDaoDefault extends DefaultDao implements UserDetailsDao 
 		
 		
 	}
+	
+	@Override
+	public List<User> findByEmail2(String email) {
+		return getSession().createQuery("from User u where email = '"+ email+"'", User.class).getResultList();
+		
+		
+	}
+	
 	@Override
 	public String encryptPassword(String password) {
 		return this.passwordEncoder.encode(password);

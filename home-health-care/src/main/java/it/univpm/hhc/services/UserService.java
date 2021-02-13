@@ -10,6 +10,8 @@ public interface UserService {
 	
 	User findById(Long id);
 	
+	List<User> findByEmail2(String email);
+	
 	User findByEmail(String email);
 	
 	User create( String password,String email,String name,String surname);

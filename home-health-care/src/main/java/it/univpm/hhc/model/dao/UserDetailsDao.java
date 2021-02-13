@@ -26,6 +26,8 @@ public interface UserDetailsDao {
 
 	User findByEmail(String email);
 	
+	List<User> findByEmail2(String email);
+	
 	public String encryptPassword(String password);
 	
 	void setPasswordEncoder(PasswordEncoder passwordEncoder);

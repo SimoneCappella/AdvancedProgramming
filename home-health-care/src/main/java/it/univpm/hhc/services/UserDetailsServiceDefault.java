@@ -20,6 +20,12 @@ public class UserDetailsServiceDefault implements UserService, UserDetailsServic
 
 	UserDetailsDao userDao;
 	
+	
+
+
+	
+
+	
 	@Override
 	public List<User> findAll() {
 		return this.userDao.findAll();
@@ -35,6 +41,12 @@ public class UserDetailsServiceDefault implements UserService, UserDetailsServic
 		return this.userDao.findByEmail(email);
 	}
 
+	@Override
+	public List <User> findByEmail2(String email) {
+		return this.userDao.findByEmail2(email);
+	}
+
+	
 	@Override
 	public User create(String password,String email,String name,String surname) {
 		return this.userDao.create( password, email,name,surname);
