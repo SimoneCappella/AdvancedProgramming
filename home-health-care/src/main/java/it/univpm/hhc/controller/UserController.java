@@ -321,8 +321,13 @@ public class UserController {
 		
 		User user =getCurrentUser();
 		List<Address> allAddresses = this.addressService.findByUserId(user.getUser_id());
-		
-		uiModel.addAttribute("address", allAddresses); //quello che restituisco alla vista
+		if(allAddresses.size()<1) {
+			uiModel.addAttribute("address", null);
+		}else {		
+				uiModel.addAttribute("address", allAddresses); //quello che restituisco alla vista
+		}
+		String errorMessage = "Non hai aggiunto nessun indirizzo!";
+		uiModel.addAttribute("errorMessage", errorMessage);
 		return "users/addresslist";
 	}
 
@@ -349,14 +354,14 @@ public class UserController {
 		return "users/addressform";
 	}
 	
-	//mi d� errore con GET premendo sulla X della vista
-	/*@PostMapping(value = "/deleteaddress")
+	
+	@PostMapping(value = "/deleteaddress")
 	public String deleteAddress(@RequestParam("address_id") Long address_id) {
 	
 		this.addressService.delete(address_id);
 		
-		return "redirect:/users/addressform";
-	}*/
+		return "redirect:/users/addresslist";
+	}
 	
 	@PostMapping(value = "/addresssave")
 	public String saveAddress(@ModelAttribute("newAddress") Address newAddress, BindingResult br, Model uiModel) {
