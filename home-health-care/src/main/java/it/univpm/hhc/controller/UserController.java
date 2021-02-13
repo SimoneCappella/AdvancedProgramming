@@ -341,7 +341,7 @@ public class UserController {
 		return "users/addressform";
 	}
 	
-	//mi dà errore con GET premendo sulla X della vista
+	//mi dï¿½ errore con GET premendo sulla X della vista
 	/*@PostMapping(value = "/deleteaddress")
 	public String deleteAddress(@RequestParam("address_id") Long address_id) {
 	
@@ -356,7 +356,7 @@ public class UserController {
 		List <Address> allAddresses = this.addressService.findByUserId(u.getUser_id());
 		if (allAddresses.size()>=3)
 		{
-			String errorMessage = "Hai già 3 indirizzi! Non puoi aggiungerne altri!";
+			String errorMessage = "Hai giï¿½ 3 indirizzi! Non puoi aggiungerne altri!";
 			uiModel.addAttribute("address", new Address());
 			uiModel.addAttribute("errorMessage", errorMessage);
 			return "users/addressform";
@@ -407,13 +407,18 @@ public class UserController {
 			List <Purchase> purchases = purchaseService.findByUserId(getCurrentUser().getUser_id());
 			List<List<Cart_item>> cartitems = new ArrayList<List<Cart_item>>();
 			List<List<Item>> items = new ArrayList<List<Item>>();
+			List<Address> addresses = new ArrayList<Address>();
 			for (Purchase p : purchases) {
-				cartitems.add(cartItemService.findByPurchaseCode(p.getPurchase_id()));			
+				cartitems.add(cartItemService.findByPurchaseCode(p.getPurchase_id()));
+				addresses.add(addressService.findById(p.getAddress().getAddress_id()));
 			}
 			for(List<Cart_item> c : cartitems) {
 				List<Item> it = new ArrayList<Item>();
 				for (Cart_item i : c) {
-					it.add(itemService.findById(i.getItem().getItem_id()));
+					int quantita = i.getQuantity();
+					for (int z=0; z<quantita; z++) {
+						it.add(itemService.findById(i.getItem().getItem_id()));
+					}
 				}
 				items.add(it);
 			}
