@@ -59,7 +59,8 @@
 	<td><h2>Il totale è di ${total}€</h2></td>	
 	<td>Articoli Totali: ${item_number}</td>
 </tr>
-<br><button onclick="window.location.href='http://localhost:8080/home-health-care/users/purchase';">
+<br>
+<button onclick="window.location.href='/home-health-care/users/purchase';">
      Procedi all'acquisto
 </button>
 

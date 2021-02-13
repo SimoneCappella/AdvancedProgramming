@@ -298,11 +298,12 @@ public class UserController {
 		return "redirect:/";
 	}
 	
-	@GetMapping(value="/{sub_id}/addsub")
-	public String registrasub(@PathVariable("sub_id") Long subId)
+	@PostMapping(value="/addsub")
+	public String registrasub(@RequestParam(value="sub") String subId)
 	{
+		
 		User user=getCurrentUser();
-		Sub sub=this.subService.findById(subId);
+		Sub sub=this.subService.findById(Long.parseLong(subId));
 		user.setSub(sub);
 		LocalDate date=LocalDate.now().plusDays(30);
 		user.setSubexp(date);

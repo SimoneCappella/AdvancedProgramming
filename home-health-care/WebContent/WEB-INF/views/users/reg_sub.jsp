@@ -7,20 +7,44 @@
 
 <h1>Acquista Nuovo Abbonamento</h1>
 <table>
+
 <thead>
 	<td>Tipo Abbonamento</td>
 	<td>Sconto</td>
 	<td>Prezzo</td>
+
+			
+				
+ 					
 </thead>
-<c:forEach items="${subs}" var="s">
-<tr>
-	<td>${s.name}</td>
-	<td>${s.discount}%</td>
-	<td>${s.price}€</td>
-	<td><a href="<c:url value="/users/${s.sub_id}/addsub/" />">Aggiungi abbonamento</a></td>	
-	
-</tr>
-</c:forEach>
+				
+		<form action="<c:url value="/users/addsub" />" method='POST'>
+			
+	<c:forEach items="${subs}" var="s">
+		<tr>	
+			<td>${s.name}</td>
+			<td>${s.discount}%</td>
+			<td>${s.price}€</td>
+			<td><input type="radio" checked id="${s.sub_id}" name="sub" value="${s.sub_id}"></td>
+			
+		</tr>
+	</c:forEach>
+		
+			<td>
+			Metodo di Pagamento: <select  name="paymethod">
+					<option value="paypal">PayPal</option>
+ 					<option value="prepagata">Carta Prepagata</option>
+ 					<option value="mastercard">Mastercard</option>
+ 			</select>
+ 			</td>
+ 			
+ 			<tfoot>
+			<td><input type="submit" value="Conferma Acquisto"/></td>
+			</form>
+			</tfoot>
 </table>
+
+	
+			
 
 
