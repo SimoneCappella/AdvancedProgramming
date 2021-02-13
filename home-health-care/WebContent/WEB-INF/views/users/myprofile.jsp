@@ -9,9 +9,9 @@
 	<li>Cognome: ${user.surname}
 	<li>Email: ${user.email}
 </ul>
-<button onclick="window.location.href='http://localhost:8080/home-health-care/users/edit';">
+<button onclick="window.location.href='/home-health-care/users/edit';">
       Modifica profilo
 </button>
-<button onclick="window.location.href='http://localhost:8080/home-health-care/users/deletemyaccount';">
+<button onclick="window.location.href='/home-health-care/users/deletemyaccount';">
       Elimina il mio profilo
 </button>

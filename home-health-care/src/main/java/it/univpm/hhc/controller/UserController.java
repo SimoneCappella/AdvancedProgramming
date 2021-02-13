@@ -326,13 +326,20 @@ public class UserController {
 		return "users/addresslist";
 	}
 
-	/*@PostMapping(value = "/editaddress")
+	@PostMapping(value = "/editaddress")
 	public String editAddress(@RequestParam("address_id") Long address_id, Model uiModel) {
 		
 		Address a = this.addressService.findById(address_id);
 		uiModel.addAttribute("address", a);
-		return "users/addressform";
-	}*/
+		return "users/addressupdate";
+	}
+	
+	@PostMapping(value ="/addressup")
+	public String addressUpdate(@ModelAttribute("newAddress") Address newAddress, BindingResult br, Model uiModel) {
+		newAddress.setUser(getCurrentUser());
+		this.addressService.update(newAddress);
+		return "redirect:/users/addresslist";
+	}
 	
 	//rimanda solo alla addressform per aggiungere un nuovo address
 	@GetMapping(value="/addressadd")
