@@ -12,7 +12,7 @@ public interface AddressService {
 	
 	Address findById(Long id);
 	
-	Address create (int cap, String city, String street, int civ_num, User user);
+	Address create (String cap, String city, String street, String civ_num, User user);
 	
 	List<Address> findByUserId(Long user_code);
 	

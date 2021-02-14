@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.enterprise.inject.New;
 
@@ -349,7 +351,10 @@ public class UserController {
 	//rimanda solo alla addressform per aggiungere un nuovo address
 	@GetMapping(value="/addressadd")
 	public String addAddress(Model uiModel) {
-		uiModel.addAttribute("address", new Address());
+		Address address= new Address();
+		
+		
+		uiModel.addAttribute("address", address);
 		
 		return "users/addressform";
 	}
@@ -364,20 +369,51 @@ public class UserController {
 	}
 	
 	@PostMapping(value = "/addresssave")
-	public String saveAddress(@ModelAttribute("newAddress") Address newAddress, BindingResult br, Model uiModel) {
+	public String saveAddress(@ModelAttribute("newAddress") Address newAddress, Model uiModel) {
 		User u = getCurrentUser();
+		boolean flag=true;
+    	List <String> err=new ArrayList<String>();
 		List <Address> allAddresses = this.addressService.findByUserId(u.getUser_id());
+		String regexcar ="^[A-Za-z\\s]+$";
+		String regexcen ="^[A-Za-z0-9\\s]+$";
+		String regexnum ="^[0-9]+$";
+		Pattern patterncar = Pattern.compile(regexcar);
+		Pattern patterncen = Pattern.compile(regexcen);
+		Pattern patternnum = Pattern.compile(regexnum);
+		Matcher matchercap = patternnum.matcher(newAddress.getCap());
+		Matcher matchercit = patterncar.matcher(newAddress.getCity());
+		Matcher matcherst = patterncar.matcher(newAddress.getStreet());
+		Matcher matcherciv = patterncen.matcher(newAddress.getCiv_num());
+		if(!matchercap.matches()) {
+    		flag=false;
+    		err.add("Cap non valido.");
+    	}
+		if(!matchercit.matches()) {
+    		flag=false;
+    		err.add("Città non valida.");
+    	}
+		if(!matcherst.matches()) {
+    		flag=false;
+    		err.add("Via non valida.");
+    	}
+		if(!matcherciv.matches()) {
+    		flag=false;
+    		err.add("Numero Civico non valido.");
+    	}
 		if (allAddresses.size()>=3)
 		{
-			String errorMessage = "Hai giï¿½ 3 indirizzi! Non puoi aggiungerne altri!";
-			uiModel.addAttribute("address", new Address());
-			uiModel.addAttribute("errorMessage", errorMessage);
-			return "users/addressform";
-		}else {
+			String errorMessage = "Hai già 3 indirizzi! Non puoi aggiungerne altri!";
+			uiModel.addAttribute("address", allAddresses);
+			uiModel.addAttribute("errorMessage1", errorMessage);
+			return "users/addresslist";
+		} 
+		if(flag==true){
 			this.addressService.create(newAddress.getCap(), newAddress.getCity(), newAddress.getStreet(), newAddress.getCiv_num(), u);
-			//this.addressService.update(newAddress);
 			return "redirect:/users/addresslist";
-		}
+		} 
+		uiModel.addAttribute("address", newAddress);
+		uiModel.addAttribute("errorMessage",err);
+		return "users/addressform";
 		
 	}		
 

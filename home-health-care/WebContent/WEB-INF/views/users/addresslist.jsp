@@ -3,12 +3,22 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
+
+ <c:if test="${not empty errorMessage1}">
+	<div style="color: red; font-weight: bold; margin: 30px 0px;">${errorMessage1}</div>
+</c:if>
+
 <c:choose> 
+
+
 	<c:when test="${address eq null}">
 		<div style="color: red; font-weight: bold; margin: 30px 0px;">${errorMessage}</div>
 		<br> <a href="<c:url value="/users/addressadd" />">Aggiungi indirizzo</a>
 		</c:when>
 <c:otherwise>
+
+
+
 <h1>Elenco</h1>
 <table>
 <thead>

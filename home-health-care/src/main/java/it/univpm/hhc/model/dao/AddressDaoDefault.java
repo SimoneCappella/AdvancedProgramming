@@ -26,7 +26,7 @@ public class AddressDaoDefault extends DefaultDao implements AddressDao {
 	}
 
 	@Override
-	public Address create(int cap, String city, String street, int civ_num, User user) {
+	public Address create(String cap, String city, String street, String civ_num, User user) {
 		Address a = new Address();
 		a.setCap(cap);
 		a.setCity(city);

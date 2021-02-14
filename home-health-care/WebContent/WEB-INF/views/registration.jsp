@@ -3,16 +3,21 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<h2>${appName} - Registrazione Form</h2>
+<h2>Registrazione</h2>
 
 <c:if test="${fn:length(errorMessage) > 0}">
 <div style="color: red; padding:20px; font-weight: bold; margin: 30px 0px;">
-<c:forEach items="${errorMessage}" var="item">
-    ${item}<br>
+<c:forEach items="${errorMessage}" var="err">
+    ${err}<br>
 </c:forEach>
 	
 	</div>
 </c:if>
+
+
+
+
+
 <script>
 
 function Validate(el) {
@@ -58,7 +63,7 @@ function Validate(el) {
 	  }
 	  else if (x < min ) {
 		  z=true;
-		  document.getElementById(el+'1').innerHTML =name+' Troppo corto';
+		  document.getElementById(el+'1').innerHTML =name+' troppo corto';
 	  }
 	  else if (x >max) {
 		  z=true;
@@ -82,9 +87,10 @@ function Validation(){
 	
 }
 
-
-
 </script>
+
+
+
 
 <form name='registration' action="<c:url value="/save" />" method='POST' modelAttribute="user">
 	<table>

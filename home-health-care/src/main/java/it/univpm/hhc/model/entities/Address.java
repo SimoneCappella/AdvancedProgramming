@@ -22,10 +22,10 @@ import javax.persistence.Table;
 public class Address implements Serializable {
 	
 	private Long address_id;
-	private int cap;
+	private String cap;
 	private String city;
  	private String street;//via
-	private int civ_num;
+	private String civ_num;
 	private User user;
 	private Set<Purchase> purchase = new HashSet<Purchase>();
 
@@ -53,11 +53,11 @@ public class Address implements Serializable {
 
 
 	@Column(name = "CAP", nullable = false) 
-	public int getCap() {
+	public String getCap() {
 		return cap;
 	}
 	
-	public void setCap(int cap) {
+	public void setCap(String cap) {
 		this.cap = cap;
 	}
 	
@@ -82,11 +82,11 @@ public class Address implements Serializable {
 	
 	
 	@Column(name = "CIV_NUM", nullable = false) 
-	public int getCiv_num() {
+	public String getCiv_num() {
 		return civ_num;
 	}
 	
-	public void setCiv_num(int civ_num) {
+	public void setCiv_num(String civ_num) {
 		this.civ_num= civ_num;
 	
 	}

@@ -113,9 +113,9 @@ public class LoadDataTest {
 				cartDao.update(c2);
 				cartDao.update(c3);
 				
-				addressDao.create(62017,"Citta 1","Via 1",12,c1.getUser());
-				addressDao.create(62018,"Citta 2","Via 2",13,c2.getUser());
-				addressDao.create(62019,"Citta 2","Via 2",14,c3.getUser());
+				addressDao.create("62017","Citta 1","Via 1","12",c1.getUser());
+				addressDao.create("62018","Citta 2","Via 2","13",c2.getUser());
+				addressDao.create("62019","Citta 2","Via 2","14",c3.getUser());
 				
 				List<Address> allAddress= addressDao.findAll();
 				

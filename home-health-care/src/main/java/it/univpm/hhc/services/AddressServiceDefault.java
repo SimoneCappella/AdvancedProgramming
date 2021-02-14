@@ -26,7 +26,7 @@ public class AddressServiceDefault implements AddressService {
 	}
 
 	@Override
-	public Address create(int cap, String city, String street, int civ_num, User user) {
+	public Address create(String cap, String city, String street, String civ_num, User user) {
 		return this.addressDao.create(cap, city, street, civ_num, user);
 	}
 	
