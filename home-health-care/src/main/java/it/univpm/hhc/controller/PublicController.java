@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.hamcrest.text.IsEmptyString;
 import org.hibernate.query.criteria.internal.expression.function.CurrentDateFunction;
@@ -181,38 +183,46 @@ return "itemlist";
     @PostMapping(value = "/save")
 	public String savenew(@ModelAttribute("newUser") User newUser, BindingResult br, Model model){
 		
+    	String regexmail ="^[A-Za-z0-9+_.-]+@(.+)$";
+    	String regexpass ="^[A-Za-z0-9@#$%^&]+$";
+    	String regexname ="^[A-Za-z]+$";
+    	Pattern patternmail = Pattern.compile(regexmail);
+    	Pattern patternpass = Pattern.compile(regexpass);
+    	Pattern patternname = Pattern.compile(regexname);
     	List <User> user= userService.findByEmail2(newUser.getEmail());
     	List <String> err=new ArrayList<String>();
+    	Matcher matchermail = patternmail.matcher(newUser.getEmail());
+    	Matcher matcherpass = patternpass.matcher(newUser.getPassword());
+    	Matcher matchername = patternname.matcher(newUser.getName());
+    	Matcher matchersurname = patternname.matcher(newUser.getSurname());
     	boolean flag=true;
     	String mes;    		
-    	if(newUser.getName().isEmpty()||newUser.getName().length()<3||newUser.getName().length()>20) {
-    		err.add("nome non valido");
+    	if(newUser.getName().isEmpty()||newUser.getName().length()<3||newUser.getName().length()>20 || !matchername.matches()) {
+    		err.add("Nome non valido.");
     		flag=false;
     	}
     		
-    	if (newUser.getSurname().isEmpty()|| newUser.getSurname().length()<3|| newUser.getSurname().length()>20) {
-    		err.add("cognome non valido");
+    	if (newUser.getSurname().isEmpty()|| newUser.getSurname().length()<3|| newUser.getSurname().length()>20 || !matchersurname.matches()) {
+    		err.add("Cognome non valido.");
     		flag=false;
     	}
     		
-    	if (newUser.getEmail().isEmpty()|| newUser.getEmail().length()<4 || newUser.getEmail().length()>20 ) {
-    		err.add("email non valida");
+    	if (newUser.getEmail().isEmpty()|| newUser.getEmail().length()<4 || newUser.getEmail().length()>20 || !matchermail.matches() ) {
+    		err.add("Email non valida.");
     		flag=false;
     	}
     		
     	if (user.size()>0){
-    		err.add("Utente già registrato");
+    		err.add("Utente giï¿½ registrato");
     		flag=false;
     	}	
-    	if (newUser.getPassword().isEmpty()|| newUser.getPassword().length()<7 || newUser.getPassword().length()>20 ) {
-    		err.add("password non valida");
+    	if (newUser.getPassword().isEmpty()|| newUser.getPassword().length()<7 || newUser.getPassword().length()>20 || !matcherpass.matches()) {
+    		err.add("Password non valida.");
     		flag=false;
     	}
     		
     	if(flag==true) {
     		this.cartService.create(0, 0, this.userService.create(newUser.getPassword(),newUser.getEmail(),newUser.getName(),newUser.getSurname()));
-    		mes = "registrazione avvenuta correttamente";
-    		model.addAttribute("mes", mes);
     		return "redirect:/";	
 		}
     	model.addAttribute("errorMessage", err);
