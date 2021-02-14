@@ -25,7 +25,7 @@ public class Item implements Serializable {
 	private double price;
 	private String image;
 	private Set<Cart_item> cart_items = new HashSet<Cart_item>();
-  
+	
   @Id	
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "ITEM_ID")

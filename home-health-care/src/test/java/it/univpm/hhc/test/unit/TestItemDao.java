@@ -199,7 +199,7 @@ public class TestItemDao {
 		updated.setPrice(8.0);
 		updated.setImage("Image1");
 		
-		updated = itemDao.update(updated);
+		//updated = itemDao.update(updated);
 		
 		Item found = itemDao.findById(inserted.getItem_id());
 		

@@ -1,6 +1,9 @@
 package it.univpm.hhc.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -223,8 +226,9 @@ return "users/itemlist";
 
 @GetMapping(value="/itemadd")
 public String addItem(Model uiModel) {
-
-uiModel.addAttribute("item", new Item());
+Item item = new Item();
+item.setPrice(5.0);
+uiModel.addAttribute("item", item);
 
 return "admins/itemform";
 }
@@ -246,11 +250,54 @@ return "admins/itemform";
 }
 
 @PostMapping(value = "/itemsave")
-public String saveItem(@ModelAttribute("newItem") Item newItem, BindingResult br) {
-
-this.itemService.update(newItem);
-
-return "redirect:/itemlist";
+public String saveItem(@ModelAttribute("newItem") Item newItem, BindingResult br, Model uiModel) {
+	String regexname = "^[A-Za-z\\s]+$";
+	String regexdescr = "^[A-Za-z.,:;!?()\\s]+$";
+	String regexprice = "\\d+(.\\d{1,2})?$";
+	Pattern patternname = Pattern.compile(regexname);
+	Pattern patterndescr = Pattern.compile(regexdescr);
+	Pattern patternprice = Pattern.compile(regexprice);
+	Matcher matchername = patternname.matcher(newItem.getTitle());
+	Matcher matcherdescr = patterndescr.matcher(newItem.getDescription());
+	Matcher matcherprice = patternprice.matcher(String.valueOf(newItem.getPrice()));
+	List <String> err = new ArrayList<String>();
+	boolean flag = true;
+	if(!matchername.matches()) {
+		err.add("Hai inserito caratteri proibiti nel nome.");
+		flag = false;
+	}
+	if(!matcherdescr.matches()) {
+		err.add("Hai inserito caratteri proibiti nella descrizione.");
+		flag = false;
+	}
+	if(!matcherprice.matches() || newItem.getPrice() == 0.0) {
+		err.add("Puoi inserire solo numeri e punti nel prezzo e massimo due cifre decimali.");
+		flag = false;
+	}
+	List<Item> item = null;
+	item = itemService.findByTitle(newItem.getTitle());
+	if (flag == true && item.size() > 0) {
+		for (Item i : item) {
+			i.setTitle(newItem.getTitle());
+			i.setDescription(newItem.getDescription());
+			i.setPrice(newItem.getPrice());
+			i.setImage(newItem.getImage());
+			this.itemService.update(i);
+		}	
+		String message = "L'oggetto '" + newItem.getTitle() + "' è stato modificato con successo.";
+		uiModel.addAttribute("errorMessage", message);
+		uiModel.addAttribute("item", newItem);
+		return "admins/itemform";
+	} else if(flag == true && item.size() == 0) {
+		this.itemService.create(newItem.getTitle(), newItem.getDescription(), newItem.getPrice(), newItem.getImage());
+		String message = "L'oggetto '" + newItem.getTitle() + "' è stato aggiunto con successo.";
+		uiModel.addAttribute("errorMessage", message);
+		uiModel.addAttribute("item", newItem);
+		return "admins/itemform";
+	}
+	uiModel.addAttribute("item", newItem);
+	uiModel.addAttribute("errorMessage", err);
+	return "admins/itemform";
 }
 
 

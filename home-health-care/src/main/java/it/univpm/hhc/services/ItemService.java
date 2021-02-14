@@ -10,13 +10,15 @@ public interface ItemService {
 	
 	Item findById(Long id);
 	
+	List<Item> findByTitle(String title);
+	
 	Item create (//Long id_item,
 	String title,
 	String description,
 	double price,
 	String image);
 	
-	Item update(Item item);
+	void update(Item item);
 	
 	void delete(Long itemId);
 

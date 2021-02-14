@@ -8,8 +8,10 @@
 	<sec:authorize access="hasRole('ADMIN')" var="isAdmin" />
 	<sec:authorize access="hasRole('USER')" var="isUser" />
 	<sec:authorize access="isAuthenticated()" var="isAuth" />
-
-	<h1>Elenco</h1>
+<c:if test="${not empty errorMessage}">
+	<div style="color: red; font-weight: bold; margin: 30px 0px;">${errorMessage}</div>
+</c:if>
+	<h3>Elenco</h3>
 	<table>
 	<thead>
 	<tr>

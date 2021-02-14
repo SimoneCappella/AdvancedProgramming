@@ -3,15 +3,14 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<h2>${appName} - Registrazione Form</h2>
+<h3>${appName} - Registrazione Form</h3>
 
 <c:if test="${fn:length(errorMessage) > 0}">
 <div style="color: red; padding:20px; font-weight: bold; margin: 30px 0px;">
 <c:forEach items="${errorMessage}" var="item">
     ${item}<br>
 </c:forEach>
-	
-	</div>
+</div>
 </c:if>
 <script>
 

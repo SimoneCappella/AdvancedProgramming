@@ -3,9 +3,91 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-    
+<c:if test="${fn:length(errorMessage) > 0}">
+<div style="color: red; padding:20px; font-weight: bold; margin: 30px 0px;">
+<c:forEach items="${errorMessage}" var="err">
+    ${err}<br>
+</c:forEach>
+</div>
+</c:if>
+<script>
+function Validate(el){
+	var x = document.getElementById(el).value.length;
+	var z = false;
+	var max = null;
+	var min = null;
+	var name;
+	switch(el){
+	case 'title':
+		max = 20;
+		min = 2;
+		name = "La lunghezza del nome deve essere compresa tra 2 e 20 caratteri.";
+		break;
+	case 'description':
+		max = 300;
+		min = 5;
+		name = "La lunghezza della descrizione deve essere compresa tra 15 e 300 caratteri.";
+		break;
+	default:
+		break;
+	}
+	
+	document.getElementById(el).style.border = "thin solid black";
+	document.getElementById(el+"1").innerHTML= "";
+	
+	switch(true){
+		case (x < min && x != 0):
+			z = true;
+		  	document.getElementById(el+'1').innerHTML = name;
+			break;
+		case (x > max):
+			z = true;
+		  	document.getElementById(el+'1').innerHTML = name;
+			break;
+		default:
+			break;	
+	}
+	if(z == true){
+		document.getElementById(el).value = "";
+		document.getElementById(el).style.border = "medium solid red";
+		return false;
+	}
+}
+
+function Validation(){
+	var z = false;
+	if(document.getElementById("title").value == "" ){
+		z = true;
+		document.getElementById("title").style.border = "medium solid red";
+		document.getElementById("title1").innerHTML = "Compila questo campo!";
+	}
+	if(document.getElementById("description").value == ""){
+		z = true;
+		document.getElementById("description").style.border = "medium solid red";
+		document.getElementById("description1").innerHTML = "Compila questo campo!";
+	}
+	
+	if(document.getElementById("price").value == ""){
+		z = true;
+		document.getElementById("price").style.border = "medium solid red";
+		document.getElementById("price1").innerHTML = "Compila questo campo!";
+	} 
+	
+	if(document.getElementById("image").value == ""){
+		z = true;
+		document.getElementById("image").style.border = "medium solid red";
+		document.getElementById("image1").innerHTML = "Compila questo campo!";
+	}
+	
+	if(z == true){
+		return false;
+	}
+}
+
+</script>
  
 		<c:url value="/admins/itemsave" var="action_url" />
+		<h3>Aggiungi o modifica un prodotto o un servizio</h3>
         <form:form method="POST" action="${action_url}" modelAttribute="item">
              <table>
 			<thead>
@@ -13,26 +95,30 @@
                
 				</c:if>
                <tr>
-                    <td><form:label path="title">Nome </form:label></td>
-                    <td><form:input path="title"/></td>
+                    <td><form:label path="title">Nome: </form:label></td>
+                    <td><input type='text' id='title' name='title' onfocusout='return Validate(this.id);' value="${item.title}" style="border: thin solid black"/></td>
+					<td><label id="title1" style="color: red;font-weight: bold;"></label></td>
                 </tr>
 				<tr>
-                    <td><form:label path="description">Descrizione</form:label></td>
-                    <td><form:input path="description"/></td>
+                    <td><form:label path="description">Descrizione: </form:label></td>
+                    <td><input type='text' id='description' name='description' onfocusout='return Validate(this.id);' value="${item.description}" style="border: thin solid black"/></td>
+					<td><label id="description1" style="color: red;font-weight: bold;"></label></td>
                 </tr>
 				<tr>
-                    <td><form:label path="price">Prezzo</form:label></td>
-                    <td><form:input path="price"/></td>
+                    <td><form:label path="price">Prezzo: </form:label></td>
+                    <td><input type='text' id='price' name='price' value="${item.price}" style="border: thin solid black"/></td>
+					<td><label id="price1" style="color: red;font-weight: bold;"></label></td>
                 </tr>
 				<tr>
-				<td><form:label path="image">Immagine</form:label></td>
-                    <td><form:input path="image"/></td>
+					<td><form:label path="image">Immagine </form:label></td>
+                    <td><input type='text' id='image' name='image' value="${item.image}" style="border: thin solid black"/></td>
+					<td><label id="image1" style="color: red;font-weight: bold;"></label></td>
                 </tr>
 				<tr>
 					<td><form:hidden path="item_id" /></td>
 				</tr>
                 <tr>
-					<td><input type="submit" value="Submit"/></td>
+					<td><input name ="submit" type="submit" value="Conferma" onclick='return Validation();'/></td>
                 </tr>
 			<thead/>
             </table>

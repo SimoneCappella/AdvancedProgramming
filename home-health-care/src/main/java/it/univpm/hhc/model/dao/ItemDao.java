@@ -12,7 +12,8 @@ public interface ItemDao {
 	
 	Item findById(Long id);
 	
-	Item findByTitle(String title);
+	List<Item> findByTitle(String title);
+	
 	
 	List<Item> findAll();
 	
@@ -22,7 +23,7 @@ public interface ItemDao {
 			double price,
 			String image);
 	
-	Item update(Item item);
+	void update(Item item);
 	
 	void delete(Item item);
 	
