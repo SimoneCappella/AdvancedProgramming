@@ -185,17 +185,17 @@ return "itemlist";
     	List <String> err=new ArrayList<String>();
     	boolean flag=true;
     	String mes;    		
-    	if(newUser.getName().isEmpty()||newUser.getName().length()<3||newUser.getName().length()>15) {
+    	if(newUser.getName().isEmpty()||newUser.getName().length()<3||newUser.getName().length()>20) {
     		err.add("nome non valido");
     		flag=false;
     	}
     		
-    	if (newUser.getSurname().isEmpty()|| newUser.getSurname().length()<3|| newUser.getSurname().length()>15) {
+    	if (newUser.getSurname().isEmpty()|| newUser.getSurname().length()<3|| newUser.getSurname().length()>20) {
     		err.add("cognome non valido");
     		flag=false;
     	}
     		
-    	if (newUser.getEmail().isEmpty()|| newUser.getEmail().length()<3 ) {
+    	if (newUser.getEmail().isEmpty()|| newUser.getEmail().length()<4 || newUser.getEmail().length()>20 ) {
     		err.add("email non valida");
     		flag=false;
     	}
@@ -204,7 +204,7 @@ return "itemlist";
     		err.add("Utente già registrato");
     		flag=false;
     	}	
-    	if (newUser.getPassword().isEmpty()|| newUser.getPassword().length()<3 ) {
+    	if (newUser.getPassword().isEmpty()|| newUser.getPassword().length()<7 || newUser.getPassword().length()>20 ) {
     		err.add("password non valida");
     		flag=false;
     	}
@@ -220,9 +220,7 @@ return "itemlist";
     	
     		
     }
-		
-		
-		
+
 	
 	
     
