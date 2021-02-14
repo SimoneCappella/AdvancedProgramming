@@ -27,25 +27,25 @@ function Validate(el) {
 	{	
 		max=8;	
 		min=2;
-		name="Valore del Cap ";
+		name="Il Cap ";
 	}
 	if(el=== "city")
 	{	
 		max=20;	
 		min=2;
-		name="Nome della città ";
+		name="Il nome della città ";
 	}
 	if(el==="street")
 	{	
 		max=20;	
 		min=3;
-		name="Indirizzo ";
+		name="L'indirizzo";
 	}
 	if(el==="civ_num")
 	{	
 		max=5;	
 		min=1;
-		name="Numero civico ";
+		name="Il Numero civico ";
 	}
 
 		
@@ -110,22 +110,22 @@ function Validation(){
 				</c:if>
                <tr>
                     <td><form:label path="cap">Cap: </form:label></td>
-                    <td><form:input id="cap" path="cap" onfocusout='return Validate(this.id);'  placeholder='62018'/></td>
+                    <td><form:input id="cap" path="cap" onfocusout='return Validate(this.id);'  placeholder='62018' style="border: thin solid black" /></td>
 					<td><label id="cap1" style="color: red;  font-weight: bold;"></label></td>
                 </tr>
 				<tr>
                     <td><form:label path="city">Città:</form:label></td>
-                    <td><form:input id="city" path="city" onfocusout='return Validate(this.id);'  placeholder='Roma'/></td>
+                    <td><form:input id="city" path="city" onfocusout='return Validate(this.id);'  placeholder='Roma' style="border: thin solid black"/></td>
 					<td><label id="city1" style="color: red;  font-weight: bold;" ></label></td>
 				</tr>
 				<tr>
                     <td><form:label path="street">Via:</form:label></td>
-                    <td><form:input id="street" path="street" onfocusout='return Validate(this.id);'  placeholder='Via Liccardo Rosario'/></td>
+                    <td><form:input id="street" path="street" onfocusout='return Validate(this.id);'  placeholder='Via Liccardo Rosario' style="border: thin solid black"/></td>
 					<td><label id="street1" style="color: red;  font-weight: bold;" ></label></td>
                 </tr>
 				<tr>
 				<td><form:label path="civ_num">Numero Civico:</form:label></td>
-                    <td><form:input id="civ_num" path="civ_num" onfocusout='return Validate(this.id);'  placeholder='65'/></td>
+                    <td><form:input id="civ_num" path="civ_num" onfocusout='return Validate(this.id);'  placeholder='65' style="border: thin solid black"/></td>
 					<td><label id="civ_num1" style="color: red;  font-weight: bold;" ></label></td>
                 </tr>
 				<tr>

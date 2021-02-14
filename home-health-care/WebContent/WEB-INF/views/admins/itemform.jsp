@@ -21,12 +21,12 @@ function Validate(el){
 	case 'title':
 		max = 20;
 		min = 2;
-		name = "La lunghezza del nome deve essere compresa tra 2 e 20 caratteri.";
+		name = "Il nome dell' articolo ";
 		break;
 	case 'description':
 		max = 300;
 		min = 5;
-		name = "La lunghezza della descrizione deve essere compresa tra 15 e 300 caratteri.";
+		name = "La descrizione.";
 		break;
 	default:
 		break;
@@ -38,11 +38,11 @@ function Validate(el){
 	switch(true){
 		case (x < min && x != 0):
 			z = true;
-		  	document.getElementById(el+'1').innerHTML = name;
+			document.getElementById(el+'1').innerHTML =name+' deve avere almeno '+ min+' caratteri';
 			break;
 		case (x > max):
 			z = true;
-		  	document.getElementById(el+'1').innerHTML = name;
+			document.getElementById(el+'1').innerHTML =name+' deve avere massimo '+ max+' caratteri';
 			break;
 		default:
 			break;	

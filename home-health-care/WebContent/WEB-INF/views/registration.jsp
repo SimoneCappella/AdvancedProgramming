@@ -96,23 +96,23 @@ function Validation(){
 	<table>
 		<tr>
                     <td><form:label path="name">Nome</form:label></td>
-                    <td><input type='text' id='name' name='name' onfocusout='return Validate(this.id);'  placeholder='Mario'></td>
+                    <td><input type='text' id='name' name='name' onfocusout='return Validate(this.id);'  placeholder='Mario' style="border: thin solid black"></td>
                 	<td><label id="name1" ></label></td>
 				</tr>
 				<tr>
                     <td><form:label path="surname">Cognome</form:label></td>
 
-                    <td><input id="surname" type='text' name='surname' onfocusout='return Validate(this.id);' placeholder='Rossi'></td>
+                    <td><input id="surname" type='text' name='surname' onfocusout='return Validate(this.id);' placeholder='Rossi' style="border: thin solid black"></td>
 					<td><label id="surname1" ></label></td>
                 </tr>
 				<tr>
                     <td><form:label path="email">email</form:label></td>
-                    <td><input id="email"  type='text' name='email' onfocusout='return Validate(this.id);' placeholder='mariorossi@esempio.it'></td>
+                    <td><input id="email"  type='text' name='email' onfocusout='return Validate(this.id);' placeholder='mariorossi@esempio.it' style="border: thin solid black"></td>
 					<td><label id="email1" ></label></td>
                 </tr>
 				<tr>
                     <td><form:label path="password">Password</form:label></td>
-                    <td><input id="pass" type='password' name='password' onfocusout='return Validate(this.id);'></td>
+                    <td><input id="pass" type='password' name='password' onfocusout='return Validate(this.id);' style="border: thin solid black"></td>
 					<td><label id="pass1" ></label></td>
                 </tr>
 		<tr>
