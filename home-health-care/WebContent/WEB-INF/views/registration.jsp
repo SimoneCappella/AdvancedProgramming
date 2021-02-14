@@ -3,7 +3,7 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<h2>Registrazione</h2>
+<h3>Registrazione Form</h3>
 
 <c:if test="${fn:length(errorMessage) > 0}">
 <div style="color: red; padding:20px; font-weight: bold; margin: 30px 0px;">

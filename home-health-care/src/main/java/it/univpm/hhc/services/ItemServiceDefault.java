@@ -25,6 +25,11 @@ public class ItemServiceDefault implements ItemService {
 	}
 
 	@Override
+	public List<Item> findByTitle(String title) {
+		return this.itemDao.findByTitle(title);
+	}
+	
+	@Override
 	public Item create(//Long id_item,
 			String title,
 			String description,
@@ -38,8 +43,8 @@ public class ItemServiceDefault implements ItemService {
 	}
 
 	@Override
-	public Item update(Item item) {
-		return this.itemDao.update(item);
+	public void update(Item item) {
+		this.itemDao.update(item);
 	}
 
 	@Override

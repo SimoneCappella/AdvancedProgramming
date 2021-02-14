@@ -22,8 +22,8 @@ public class ItemDaoDefault extends DefaultDao implements ItemDao {
 	}
 
 	@Override
-	public Item update(Item item) {
-		return (Item)this.getSession().merge(item);
+	public void update(Item item) {
+		this.getSession().merge(item);
 	}
 
 	@Override
@@ -51,8 +51,8 @@ public class ItemDaoDefault extends DefaultDao implements ItemDao {
 
 	@Override
 //	@Transactional
-	public Item findByTitle(String title) {
-		return this.getSession().createQuery("FROM Item i WHERE i.title = :title", Item.class).setParameter("title", title).getSingleResult();
+	public List<Item> findByTitle(String title) {
+		return this.getSession().createQuery("FROM Item i WHERE i.title = :title", Item.class).setParameter("title", title).getResultList();
 	}
 
 
