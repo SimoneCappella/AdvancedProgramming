@@ -22,7 +22,7 @@ public class Item implements Serializable {
 	private Long item_id;
 	private String title;
 	private String description;
-	private double price;
+	private Double price;
 	private String image;
 	private Set<Cart_item> cart_items = new HashSet<Cart_item>();
 	
@@ -53,8 +53,8 @@ public class Item implements Serializable {
 	  this.description = description;
   }
 
-  @Column(name = "PRICE")
-  public double getPrice() {
+  @Column(name = "PRICE", nullable = false)
+  public Double getPrice() {
 	  return this.price;
   }
   

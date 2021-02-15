@@ -2,6 +2,7 @@ package it.univpm.hhc.controller;
 
 import static org.hamcrest.CoreMatchers.nullValue;
 
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -51,6 +52,7 @@ import it.univpm.hhc.services.ItemService;
 import it.univpm.hhc.services.PurchaseService;
 import it.univpm.hhc.services.SubService;
 import it.univpm.hhc.services.UserService;
+import it.univpm.hhc.support.Myorder;
 import it.univpm.hhc.services.AddressService;
 import net.bytebuddy.asm.Advice.This;
 
@@ -390,7 +392,7 @@ public class UserController {
     	}
 		if(!matchercit.matches()) {
     		flag=false;
-    		err.add("Città non valida.");
+    		err.add("Cittï¿½ non valida.");
     	}
 		if(!matcherst.matches()) {
     		flag=false;
@@ -402,7 +404,7 @@ public class UserController {
     	}
 		if (allAddresses.size()>=3)
 		{
-			String errorMessage = "Hai già 3 indirizzi! Non puoi aggiungerne altri!";
+			String errorMessage = "Hai giï¿½ 3 indirizzi! Non puoi aggiungerne altri!";
 			uiModel.addAttribute("address", allAddresses);
 			uiModel.addAttribute("errorMessage1", errorMessage);
 			return "users/addresslist";
@@ -454,24 +456,33 @@ public class UserController {
 	public String myorders(Model uiModel) {
 		if(purchaseService.findByUserId(getCurrentUser().getUser_id()).size() > 0) {
 			List <Purchase> purchases = purchaseService.findByUserId(getCurrentUser().getUser_id());
+			List <Myorder> myorders = new ArrayList<Myorder>();
 			List<List<Cart_item>> cartitems = new ArrayList<List<Cart_item>>();
-			List<List<Item>> items = new ArrayList<List<Item>>();
-			List<Address> addresses = new ArrayList<Address>();
+			//List<List<Item>> items = new ArrayList<List<Item>>();
+			//List<Address> addresses = new ArrayList<Address>();
+			Myorder order = new Myorder();
 			for (Purchase p : purchases) {
+				order = new Myorder(p.getAddress(), p.getTotal(), p.getDate(), p.getPay_method());
 				cartitems.add(cartItemService.findByPurchaseCode(p.getPurchase_id()));
-				addresses.add(addressService.findById(p.getAddress().getAddress_id()));
-			}
-			for(List<Cart_item> c : cartitems) {
-				List<Item> it = new ArrayList<Item>();
-				for (Cart_item i : c) {
-					int quantita = i.getQuantity();
-					for (int z=0; z<quantita; z++) {
-						it.add(itemService.findById(i.getItem().getItem_id()));
+				//addresses.add(addressService.findById(p.getAddress().getAddress_id()));
+			
+				for(List<Cart_item> c : cartitems) {
+					List<Item> it = new ArrayList<Item>();
+					for (Cart_item i : c) {
+						int quantita = i.getQuantity();
+						for (int z=0; z<quantita; z++) {
+							it.add(itemService.findById(i.getItem().getItem_id()));
+							//order.getItems().add(i.getItem());
+						}
 					}
-				}
-				items.add(it);
+					order.setItems(it);
+					
+					//items.add(it);
+			}		
+				myorders.add(order);
+				order = null;
 			}
-			uiModel.addAttribute("items", items);
+			uiModel.addAttribute("orders", myorders);
 		}else {
 			String message = "Non hai ancora effettuato nessun acquisto.";
 			uiModel.addAttribute("message", message);

@@ -227,7 +227,6 @@ return "users/itemlist";
 @GetMapping(value="/itemadd")
 public String addItem(Model uiModel) {
 Item item = new Item();
-item.setPrice(5.0);
 uiModel.addAttribute("item", item);
 
 return "admins/itemform";

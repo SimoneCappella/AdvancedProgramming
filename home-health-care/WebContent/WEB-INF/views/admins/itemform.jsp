@@ -3,13 +3,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<c:if test="${fn:length(errorMessage) > 0}">
-<div style="color: red; padding:20px; font-weight: bold; margin: 30px 0px;">
-<c:forEach items="${errorMessage}" var="err">
-    ${err}<br>
-</c:forEach>
-</div>
-</c:if>
 <script>
 function Validate(el){
 	var x = document.getElementById(el).value.length;
@@ -85,9 +78,15 @@ function Validation(){
 }
 
 </script>
- 
-		<c:url value="/admins/itemsave" var="action_url" />
-		<h3>Aggiungi o modifica un prodotto o un servizio</h3>
+<c:url value="/admins/itemsave" var="action_url" />
+<h3>Aggiungi o modifica un prodotto o un servizio</h3>
+<c:if test="${fn:length(errorMessage) > 0}">
+<div style="color: red; padding:20px; font-weight: bold; margin: 30px 0px;">
+<c:forEach items="${errorMessage}" var="err">
+    ${err}<br>
+</c:forEach>
+</div>
+</c:if>
         <form:form method="POST" action="${action_url}" modelAttribute="item">
              <table>
 			<thead>
@@ -110,7 +109,7 @@ function Validation(){
 					<td><label id="price1" style="color: red;font-weight: bold;"></label></td>
                 </tr>
 				<tr>
-					<td><form:label path="image">Immagine </form:label></td>
+					<td><form:label path="image">Immagine: </form:label></td>
                     <td><input type='text' id='image' name='image' value="${item.image}" style="border: thin solid black"/></td>
 					<td><label id="image1" style="color: red;font-weight: bold;"></label></td>
                 </tr>
