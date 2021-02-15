@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import it.univpm.hhc.model.entities.Cart;
+import it.univpm.hhc.model.entities.Item;
 import it.univpm.hhc.model.entities.User;
 
 @Repository("userDetailsDao")
@@ -86,9 +87,7 @@ public class UserDetailsDaoDefault extends DefaultDao implements UserDetailsDao 
 	
 	@Override
 	public List<User> findByEmail2(String email) {
-		return getSession().createQuery("from User u where email = '"+ email+"'", User.class).getResultList();
-		
-		
+		return this.getSession().createQuery("FROM User u WHERE u.email = :email", User.class).setParameter("email", email).getResultList();
 	}
 	
 	@Override

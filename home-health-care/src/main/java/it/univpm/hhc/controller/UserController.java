@@ -324,7 +324,7 @@ public class UserController {
 	public String listAddress( Model uiModel) {
 		
 		User user =getCurrentUser();
-		List<Address> allAddresses = this.addressService.findByUserId(user.getUser_id());
+		 List<Address> allAddresses = this.addressService.findByUserId(user.getUser_id());
 		if(allAddresses.size()<1) {
 			uiModel.addAttribute("address", null);
 		}else {		
@@ -346,9 +346,46 @@ public class UserController {
 	@PostMapping(value ="/addressup")
 	public String addressUpdate(@ModelAttribute("newAddress") Address newAddress, BindingResult br, Model uiModel) {
 		newAddress.setUser(getCurrentUser());
-		this.addressService.update(newAddress);
-		return "redirect:/users/addresslist";
-	}
+		
+		boolean flag=true;
+    	List <String> err=new ArrayList<String>();
+		String regexcar ="^[A-Za-z\\s]+$";
+		String regexcen ="^[A-Za-z0-9\\s]+$";
+		String regexnum ="^[0-9]+$";
+		Pattern patterncar = Pattern.compile(regexcar);
+		Pattern patterncen = Pattern.compile(regexcen);
+		Pattern patternnum = Pattern.compile(regexnum);
+		Matcher matchercap = patternnum.matcher(newAddress.getCap());
+		Matcher matchercit = patterncar.matcher(newAddress.getCity());
+		Matcher matcherst = patterncar.matcher(newAddress.getStreet());
+		Matcher matcherciv = patterncen.matcher(newAddress.getCiv_num());
+		if(!matchercap.matches()) {
+    		flag=false;
+    		err.add("Cap non valido.");
+    	}
+		if(!matchercit.matches()) {
+    		flag=false;
+    		err.add("Citt� non valida.");
+    	}
+		if(!matcherst.matches()) {
+    		flag=false;
+    		err.add("Via non valida.");
+    	}
+		if(!matcherciv.matches()) {
+    		flag=false;
+    		err.add("Numero Civico non valido.");
+    	}
+		
+		if(flag==true){
+			this.addressService.update(newAddress);
+			return "redirect:/users/addresslist";
+		} 
+		uiModel.addAttribute("address", newAddress);
+		uiModel.addAttribute("errorMessage",err);
+		return "users/addressupdate";
+		
+	}	
+
 	
 	//rimanda solo alla addressform per aggiungere un nuovo address
 	@GetMapping(value="/addressadd")

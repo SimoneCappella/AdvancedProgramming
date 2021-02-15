@@ -32,42 +32,38 @@ function Validate(el) {
 	{	
 		max=20;	
 		min=3;
-		name="Valore del cognome ";
+		name="Il cognome ";
 	}
 	if(el=== "name")
 	{	
 		max=20;	
 		min=3;
-		name="Valore del nome ";
+		name="Il nome ";
 	}
 	if(el==="pass")
 	{	
 		max=20;	
 		min=7;
-		name="Valore della password ";
+		name="La password ";
 	}
 	if(el==="email")
 	{	
 		max=20;	
 		min=4;
-		name="Valore della mail ";
+		name="La mail ";
 	}
 
 		
     document.getElementById(el).style.border = "thin solid black";
     document.getElementById(el+'1').innerHTML= "";
 	 
-	  if (x == '') {
+    if (x < min && x!=0 ) {
 		  z=true;
-		  document.getElementById(el+'1').innerHTML =' Compila questo campo';
-	  }
-	  else if (x < min ) {
-		  z=true;
-		  document.getElementById(el+'1').innerHTML =name+' troppo corto';
+		  document.getElementById(el+'1').innerHTML =name+' deve avere almeno '+ min+' caratteri';
 	  }
 	  else if (x >max) {
 		  z=true;
-		  document.getElementById(el+'1').innerHTML =name+' troppo lungo';
+		  document.getElementById(el+'1').innerHTML =name+' deve avere massimo '+ max+' caratteri';
 	  }
 	  if(z==true){
 		  document.getElementById(el).value ="";
@@ -79,9 +75,29 @@ function Validate(el) {
 
 function Validation(){
 	
-	if( document.getElementById("name").value ==""||document.getElementById("surname").value ==""||document.getElementById("email").value ==""||document.getElementById("pass").value =="")
+	var z=false;
+	if (document.getElementById("name").value =="") {
+		  z=true;
+		  document.getElementById("name").style.border = "medium solid red"; 
+		  document.getElementById("name1").innerHTML =' Compila questo campo';
+	  }
+	if (document.getElementById("surname").value =="") {
+		  z=true;
+		  document.getElementById("surname").style.border = "medium solid red"; 
+		  document.getElementById("surname1").innerHTML =' Compila questo campo';
+	  }
+	if (document.getElementById("email").value =="") {
+		  z=true;
+		  document.getElementById("email").style.border = "medium solid red"; 
+		  document.getElementById("email1").innerHTML =' Compila questo campo';
+	  }
+	if (document.getElementById("pass").value =="") {
+		  z=true;
+		  document.getElementById("pass").style.border = "medium solid red"; 
+		  document.getElementById("pass1").innerHTML =' Compila questo campo';
+	  }
+	if(z==true)
 	{
-		alert("completa tutti i campi!");
 		return false;
 	}
 	
