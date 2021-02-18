@@ -10,6 +10,8 @@ public interface SubService {
 	
 	Sub findById(Long id);
 	
+	List<Sub> findByName(String name);
+	
 	Sub create( String name, Double price, int discount);
 	
 	Sub update(Sub sub);

@@ -25,6 +25,11 @@ public class SubServiceDefault implements SubService {
 	public Sub findById(Long id) {
 		return this.subDao.findById(id);
 	}
+	
+	@Override
+	public List<Sub> findByName(String name){
+		return this.subDao.findByName(name);
+	}
 
 	@Override
 	public Sub create(String name, Double price, int discount) {

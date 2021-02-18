@@ -26,6 +26,11 @@ public class SubDaoDefault extends DefaultDao implements SubDao {
 	public Sub update(Sub sub) {
 		return (Sub)this.getSession().merge(sub);
 	}
+	
+	@Override
+	public List<Sub> findByName(String name){
+		return this.getSession().createQuery("FROM Sub s WHERE s.name = :name", Sub.class).setParameter("name", name).getResultList();
+	}
 
 	@Override
 	public void delete(Sub sub) {
