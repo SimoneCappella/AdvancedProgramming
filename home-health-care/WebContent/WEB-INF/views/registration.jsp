@@ -48,7 +48,7 @@ function Validate(el) {
 	}
 	if(el==="email")
 	{	
-		max=20;	
+		max=35;	
 		min=4;
 		name="La mail ";
 	}

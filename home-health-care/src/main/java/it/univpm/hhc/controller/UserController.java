@@ -158,7 +158,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/savepass", method=RequestMethod.POST)
 	public String saveUserpass(@RequestParam String password) {
-		this.userService.update(getCurrentUser(), password);
+		this.userService.updatewithpass(getCurrentUser());
 		return "redirect:/users/edit";		
 	}
 	

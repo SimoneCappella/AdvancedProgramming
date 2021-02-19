@@ -80,11 +80,38 @@ public class AdminController {
 
 	
 	@PostMapping(value = "/usersave")
-	public String saveUser(@ModelAttribute("newUser") User newUser, BindingResult br) {
-		
-		this.userService.update(newUser);
-		
-		return "redirect:/admins/userlist/";
+	public String saveUser(@ModelAttribute("newUser") User newUser, BindingResult br, Model uiModel) {
+		String regexname ="^[A-Za-z]+$";
+		String regexmail ="^[A-Za-z0-9+_.-]+@(.+)$";
+    	Pattern patternmail = Pattern.compile(regexmail);
+    	Pattern patternname = Pattern.compile(regexname);
+    	Matcher matchermail = patternmail.matcher(newUser.getEmail());
+    	Matcher matchername = patternname.matcher(newUser.getName());
+    	Matcher matchersurname = patternname.matcher(newUser.getSurname());
+    	List<String> err = new ArrayList<String>();
+    	boolean flag = true;
+    	if(!matchermail.matches()) {
+    		err.add("Email non valida.");
+    		flag = false;
+    	}
+    	if(!matchername.matches()) {
+    		err.add("Nome non valido.");
+    		flag = false;
+    	}
+    	if(!matchersurname.matches()) {
+    		err.add("Cognome non valido.");
+    		flag = false;
+    	}
+    	if(flag == true) {
+    		this.userService.update(newUser);
+    		String errorMessage = "Profilo modificato con successo.";
+        	uiModel.addAttribute("user", newUser);
+    		uiModel.addAttribute("errorMessage", errorMessage);
+    		return "admins/userform";
+    	}
+    	uiModel.addAttribute("user", newUser);
+    	uiModel.addAttribute("errorMessage", err);
+		return "admins/userform";
 	}
 	
 	
