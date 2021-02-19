@@ -56,89 +56,82 @@ public class PublicController {
 	@Autowired
 	String appName;
 
-	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {       //DA METTERE NELLO USER CONTROLLER
+	public String home(Locale locale, Model model) { // DA METTERE NELLO USER CONTROLLER
 		System.out.println("Home Page Requested,  locale = " + locale);
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		String formattedDate = dateFormat.format(date);
-		model.addAttribute("serverTime", formattedDate);		
+		model.addAttribute("serverTime", formattedDate);
 		model.addAttribute("appName", appName);
 		int item_number = 0;
 		double total = 0;
-		User curUser=getCurrentUser();
-		
-		if(curUser!=null)
-		{
-			Sub sub= curUser.getSub();
+		User curUser = getCurrentUser();
+
+		if (curUser != null) {
+			Sub sub = curUser.getSub();
 			Long cart_id = (cartService.findByUserId(curUser.getUser_id())).getCart_id();
 			List<Cart_item> items = cartItemService.findByCart(cart_id);
 			model.addAttribute("userid", curUser.getUser_id());
-			if(curUser.getSub()!=null)
-			{	
-				LocalDate date2 =java.time.LocalDate.now();
-				int val= curUser.getSubexp().compareTo(date2);
-				
-				if(val<=0)
-					{
-						curUser.setSub(null);
-						curUser.setSubexp(null);
-						userService.update(curUser);
-						model.addAttribute("messaggio"," Abbonamento Scaduto!");
-					}
-				else 
-				{
-					model.addAttribute("nomeSub",sub.getName());
-					model.addAttribute("scadenza",curUser.getSubexp());
+			if (curUser.getSub() != null) {
+				LocalDate date2 = java.time.LocalDate.now();
+				int val = curUser.getSubexp().compareTo(date2);
+
+				if (val <= 0) {
+					curUser.setSub(null);
+					curUser.setSubexp(null);
+					userService.update(curUser);
+					model.addAttribute("messaggio", " Abbonamento Scaduto!");
+				} else {
+					model.addAttribute("nomeSub", sub.getName());
+					model.addAttribute("scadenza", curUser.getSubexp());
 				}
 			}
 			item_number = items.size();
-			for (Cart_item i : items){
-				if(i.getQuantity() >= 1) {
-					item_number += i.getQuantity()-1;
+			for (Cart_item i : items) {
+				if (i.getQuantity() >= 1) {
+					item_number += i.getQuantity() - 1;
 					total += i.getQuantity() * (i.getItem().getPrice());
 				}
 			}
 			curUser.getCarts().setTotal(total);
 			this.cartService.update(curUser.getCarts());
 		}
-		
+
 		model.addAttribute("total", total);
 		model.addAttribute("item_number", item_number);
 		return "home";
 	}
-	
-	public User getCurrentUser()
-	{
-		
+
+	public User getCurrentUser() {
+
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		if(principal instanceof UserDetails) {
-			String username = ((UserDetails)principal).getUsername();
+		if (principal instanceof UserDetails) {
+			String username = ((UserDetails) principal).getUsername();
 			User logged_user = userService.findByEmail(username);
 			return logged_user;
-			
-		}else {
+
+		} else {
 			String username = principal.toString();
 			return null;
-		}		
+		}
 	}
-	
+
 /////////////////////////ITEM/////////////////////////////////////
-@GetMapping(value = "/itemlist")
-public String itemlist(Model uiModel) {
-List<Item> allItems = ItemService.findAll();
+	@GetMapping(value = "/itemlist")
+	public String itemlist(Model uiModel) {
+		List<Item> allItems = ItemService.findAll();
 
-uiModel.addAttribute("items", allItems);
+		uiModel.addAttribute("items", allItems);
 
-return "itemlist";
-}
-	
+		return "itemlist";
+	}
+
 	@Autowired
 	public void setCartService(CartService cartService) {
 		this.cartService = cartService;
 	}
-	
+
 	@Autowired
 	public void setCartItemService(CartItemService cartItemService) {
 		this.cartItemService = cartItemService;
@@ -148,96 +141,98 @@ return "itemlist";
 	public void setItemService(ItemService ItemService) {
 		this.ItemService = ItemService;
 	}
-	
+
 	/////////////////////////////////////////////////////////////////////////////////////////
 	private UserService userService;
-	
-    @GetMapping(value = "/login")
-    public String loginPage(@RequestParam(value = "error", required = false) String error, 
+
+	@GetMapping(value = "/login")
+	public String loginPage(@RequestParam(value = "error", required = false) String error,
 //                            @RequestParam(value = "+", required = false) String logout,
-                            Model model) {
-        String errorMessage = null;
-        if(error != null) {
-        	errorMessage = "Username o Password errati !!";
-        }
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        model.addAttribute("errorMessage", errorMessage);
-        model.addAttribute("appName", appName);
+			Model model) {
+		String errorMessage = null;
+		if (error != null) {
+			errorMessage = "Username o Password errati !!";
+		}
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		model.addAttribute("errorMessage", errorMessage);
+		model.addAttribute("appName", appName);
 //        if(authentication == null || authentication instanceof AnonymousAuthenticationToken) {
-           return "login";
+		return "login";
 //        }
 //        return "redirect:/";
-    }
-    
-    @GetMapping(value = "/register")
-    public String registerPage(@RequestParam(value = "error", required = false) String error, Model model) {
-        String errorMessage = null;
-        if(error != null) {
-        	errorMessage = "Username o Password errati !!";
-        }
-        model.addAttribute("errorMessage", errorMessage);
-		model.addAttribute("user", new User());
-		
-        return "registration";
-    }
-    @PostMapping(value = "/save")
-	public String savenew(@ModelAttribute("newUser") User newUser, BindingResult br, Model model){
-		
-    	String regexmail ="^[A-Za-z0-9+_.-]+@(.+)$";
-    	String regexpass ="^[A-Za-z0-9@#$%^&]+$";
-    	String regexname ="^[A-Za-z]+$";
-    	Pattern patternmail = Pattern.compile(regexmail);
-    	Pattern patternpass = Pattern.compile(regexpass);
-    	Pattern patternname = Pattern.compile(regexname);
-    	List <User> user= null;
-    	user= userService.findByEmail2(newUser.getEmail());
-    	List <String> err=new ArrayList<String>();
-    	Matcher matchermail = patternmail.matcher(newUser.getEmail());
-    	Matcher matcherpass = patternpass.matcher(newUser.getPassword());
-    	Matcher matchername = patternname.matcher(newUser.getName());
-    	Matcher matchersurname = patternname.matcher(newUser.getSurname());
-    	boolean flag=true;
-    	String mes;    		
-    	if(newUser.getName().isEmpty()||newUser.getName().length()<3||newUser.getName().length()>20 || !matchername.matches()) {
-    		err.add("Nome non valido.");
-    		flag=false;
-    	}
-    		
-    	if (newUser.getSurname().isEmpty()|| newUser.getSurname().length()<3|| newUser.getSurname().length()>20 || !matchersurname.matches()) {
-    		err.add("Cognome non valido.");
-    		flag=false;
-    	}
-    		
-    	if (newUser.getEmail().isEmpty()|| newUser.getEmail().length()<4 || newUser.getEmail().length()>20 || !matchermail.matches() ) {
-    		err.add("Email non valida.");
-    		flag=false;
-    	}
-    		
-    	if (user.size()>0){
-    		err.add("Utente gi� registrato");
-    		flag=false;
-    	}	
-    	if (newUser.getPassword().isEmpty()|| newUser.getPassword().length()<7 || newUser.getPassword().length()>20 || !matcherpass.matches()) {
-    		err.add("Password non valida.");
-    		flag=false;
-    	}
-    		
-    	if(flag==true) {
-    		this.cartService.create(0, 0, this.userService.create(newUser.getPassword(),newUser.getEmail(),newUser.getName(),newUser.getSurname()));
-    		return "redirect:/";	
-		}
-    	model.addAttribute("errorMessage", err);
-    	return "registration";
-    	
-    		
-    }
+	}
 
-	
-	
-    
-    @Autowired
+	@GetMapping(value = "/register")
+	public String registerPage(@RequestParam(value = "error", required = false) String error, Model model) {
+		String errorMessage = null;
+		if (error != null) {
+			errorMessage = "Username o Password errati !!";
+		}
+		model.addAttribute("errorMessage", errorMessage);
+		model.addAttribute("user", new User());
+
+		return "registration";
+	}
+
+	@PostMapping(value = "/save")
+	public String savenew(@ModelAttribute("newUser") User newUser, BindingResult br, Model model) {
+
+		String regexmail = "^[A-Za-z0-9+_.-]+@(.+)$";
+		String regexpass = "^[A-Za-z0-9@#$%^&]+$";
+		String regexname = "^[A-Za-z]+$";
+		Pattern patternmail = Pattern.compile(regexmail);
+		Pattern patternpass = Pattern.compile(regexpass);
+		Pattern patternname = Pattern.compile(regexname);
+		List<User> user = null;
+		user = userService.findByEmail2(newUser.getEmail());
+		List<String> err = new ArrayList<String>();
+		Matcher matchermail = patternmail.matcher(newUser.getEmail());
+		Matcher matcherpass = patternpass.matcher(newUser.getPassword());
+		Matcher matchername = patternname.matcher(newUser.getName());
+		Matcher matchersurname = patternname.matcher(newUser.getSurname());
+		boolean flag = true;
+		String mes;
+		if (newUser.getName().isEmpty() || newUser.getName().length() < 3 || newUser.getName().length() > 20
+				|| !matchername.matches()) {
+			err.add("Nome non valido.");
+			flag = false;
+		}
+
+		if (newUser.getSurname().isEmpty() || newUser.getSurname().length() < 3 || newUser.getSurname().length() > 20
+				|| !matchersurname.matches()) {
+			err.add("Cognome non valido.");
+			flag = false;
+		}
+
+		if (newUser.getEmail().isEmpty() || newUser.getEmail().length() < 4 || newUser.getEmail().length() > 20
+				|| !matchermail.matches()) {
+			err.add("Email non valida.");
+			flag = false;
+		}
+
+		if (user.size() > 0) {
+			err.add("Utente gi� registrato");
+			flag = false;
+		}
+		if (newUser.getPassword().isEmpty() || newUser.getPassword().length() < 7 || newUser.getPassword().length() > 20
+				|| !matcherpass.matches()) {
+			err.add("Password non valida.");
+			flag = false;
+		}
+
+		if (flag == true) {
+			this.cartService.create(0, 0, this.userService.create(newUser.getPassword(), newUser.getEmail(),
+					newUser.getName(), newUser.getSurname()));
+			return "redirect:/";
+		}
+		model.addAttribute("errorMessage", err);
+		return "registration";
+
+	}
+
+	@Autowired
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
- 
+
 }

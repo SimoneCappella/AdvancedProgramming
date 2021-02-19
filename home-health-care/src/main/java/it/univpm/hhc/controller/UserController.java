@@ -148,18 +148,70 @@ public class UserController {
 
 	
 	@PostMapping(value = "/save")
-	public String saveUser(@ModelAttribute("newUser") User newUser, BindingResult br) {
+	public String saveUser(@ModelAttribute("newUser") User newUser, Model uiModel) {
 		
-		this.userService.update(newUser);
-		
-		return "redirect:/users/edit";
-		
+		String regexmail ="^[A-Za-z0-9+_.-]+@(.+)$";
+    	String regexname ="^[A-Za-z]+$";
+    	Pattern patternmail = Pattern.compile(regexmail);
+    	Pattern patternname = Pattern.compile(regexname);
+    	List <User> user= null;
+    	String oldemail= getCurrentUser().getEmail();
+    	user= userService.findByEmail2(newUser.getEmail());
+    	List <String> err=new ArrayList<String>();
+    	Matcher matchermail = patternmail.matcher(newUser.getEmail());
+    	Matcher matchername = patternname.matcher(newUser.getName());
+    	Matcher matchersurname = patternname.matcher(newUser.getSurname());
+    	boolean flag=true; 		
+    	if(!matchername.matches()) {
+    		err.add("Nome non valido.");
+    		flag=false;
+    	}
+    		
+    	if (!matchersurname.matches()) {
+    		err.add("Cognome non valido.");
+    		flag=false;
+    	}
+    		
+    	if (!matchermail.matches() ) {
+    		err.add("Email non valida.");
+    		flag=false;
+    	}
+    		
+    	if (!newUser.getEmail().equals(oldemail)){
+    		{
+    			if(user.size()>0)
+    			{
+    				err.add("Utente già registrato");
+    				flag=false;
+    			}
+    		}
+    	}	
+    		
+    	if(flag==true) {    		
+    		this.userService.update(newUser);
+    		return "redirect:/users/myprofile";	
+		}
+    	uiModel.addAttribute("errorMessage", err);
+    	uiModel.addAttribute("user",newUser);
+    	return "users/userform";		
 	}
 	
 	@RequestMapping(value = "/savepass", method=RequestMethod.POST)
 	public String saveUserpass(@RequestParam String password) {
-		this.userService.update(getCurrentUser(), password);
-		return "redirect:/users/edit";		
+		String regexpass = "^[A-Za-z0-9@#$%^&]+$";
+    	Pattern patternpass = Pattern.compile(regexpass);
+    	Matcher matcherpass = patternpass.matcher(password);
+    	boolean flag=true; 		
+    	
+    	if (!matcherpass.matches() ) {
+    		flag=false;
+    	}
+    		    		
+    	if(flag==true) {    		
+    		this.userService.update(getCurrentUser(), password);
+    		return "redirect:/users/edit";	
+		}
+    	return "users/editpass";					
 	}
 	
 //CART//////////////////////////////////////////////////////////////////////////////////////
@@ -250,11 +302,7 @@ public class UserController {
 
 		return "redirect:/itemlist";
 	}
-	
 
-	
-	
-	
 	
 	
 	//SUB//////////////////////////////////////////////////////////////////////////////////////////////

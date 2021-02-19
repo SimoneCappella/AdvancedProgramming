@@ -14,12 +14,12 @@ function Validate(el){
 	case 'title':
 		max = 20;
 		min = 2;
-		name = "Il nome dell' articolo ";
+		name = "Il nome dell' articolo";
 		break;
 	case 'description':
 		max = 300;
 		min = 5;
-		name = "La descrizione.";
+		name = "La descrizione";
 		break;
 	default:
 		break;

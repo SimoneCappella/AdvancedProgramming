@@ -32,25 +32,25 @@ function Validate(el) {
 	{	
 		max=20;	
 		min=3;
-		name="Il cognome ";
+		name="Il cognome";
 	}
 	if(el=== "name")
 	{	
 		max=20;	
 		min=3;
-		name="Il nome ";
+		name="Il nome";
 	}
 	if(el==="pass")
 	{	
 		max=20;	
 		min=7;
-		name="La password ";
+		name="La password";
 	}
 	if(el==="email")
 	{	
 		max=20;	
 		min=4;
-		name="La mail ";
+		name="La email";
 	}
 
 		
