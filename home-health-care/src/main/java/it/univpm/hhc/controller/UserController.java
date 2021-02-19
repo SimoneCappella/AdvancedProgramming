@@ -181,7 +181,7 @@ public class UserController {
     		{
     			if(user.size()>0)
     			{
-    				err.add("Utente già registrato");
+    				err.add("Utente giï¿½ registrato");
     				flag=false;
     			}
     		}
@@ -207,8 +207,10 @@ public class UserController {
     		flag=false;
     	}
     		    		
-    	if(flag==true) {    		
-    		this.userService.updatewithpass(getCurrentUser());
+    	if(flag==true) {   
+    		User u = getCurrentUser();
+    		u.setPassword(password);
+    		this.userService.updatewithpass(u);
     		return "redirect:/users/edit";	
 		}
     	return "users/editpass";					

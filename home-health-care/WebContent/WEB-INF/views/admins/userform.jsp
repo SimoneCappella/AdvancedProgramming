@@ -116,7 +116,9 @@ function Validation(){
                 	<td><label id="surname1" style="color: red;font-weight:bold;"></label></td>
                 </tr>
 				<tr>
-                    <td><form:hidden path="password"/></td>
+                    <td><form:label path="password">Password</form:label></td>
+                    <td><input type ="password" id="password" name="password" onfocusout="return Validate(this.id);" value="${user.password}" style="border: thin solid black"/></td>
+                	<td><label id="password1" style="color: red;font-weight:bold;"></label></td>
                 </tr>
 				<tr>
                     <td><form:label path="role">Ruolo</form:label></td>

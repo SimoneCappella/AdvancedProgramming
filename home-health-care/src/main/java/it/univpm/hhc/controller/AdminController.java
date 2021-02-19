@@ -88,6 +88,7 @@ public class AdminController {
     	Matcher matchermail = patternmail.matcher(newUser.getEmail());
     	Matcher matchername = patternname.matcher(newUser.getName());
     	Matcher matchersurname = patternname.matcher(newUser.getSurname());
+    	User u = userService.findById(newUser.getUser_id());
     	List<String> err = new ArrayList<String>();
     	boolean flag = true;
     	if(!matchermail.matches()) {
@@ -104,6 +105,12 @@ public class AdminController {
     	}
     	if(flag == true) {
     		this.userService.update(newUser);
+    		String errorMessage = "Profilo modificato con successo.";
+        	uiModel.addAttribute("user", newUser);
+    		uiModel.addAttribute("errorMessage", errorMessage);
+    		return "admins/userform";
+    	}else if(flag == true && !(u.getPassword()).equals(newUser.getPassword())) {
+    		this.userService.updatewithpass(newUser);
     		String errorMessage = "Profilo modificato con successo.";
         	uiModel.addAttribute("user", newUser);
     		uiModel.addAttribute("errorMessage", errorMessage);

@@ -44,7 +44,7 @@ public class LoadDataTest {
 
 			SubDao subDao=ctx.getBean("subDao", SubDao.class);
 			
-			userDao.setPasswordEncoder(new BCryptPasswordEncoder());
+			//userDao.setPasswordEncoder(new BCryptPasswordEncoder());
 			
 			try (Session session = sf.openSession()) {
 				
