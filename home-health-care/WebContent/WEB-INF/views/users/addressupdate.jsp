@@ -27,13 +27,13 @@ function Validate(el) {
 	{	
 		max=8;	
 		min=2;
-		name="Il Cap ";
+		name="Il Cap";
 	}
 	if(el=== "city")
 	{	
 		max=20;	
 		min=2;
-		name="Il nome della città ";
+		name="Il nome della città";
 	}
 	if(el==="street")
 	{	
@@ -45,7 +45,7 @@ function Validate(el) {
 	{	
 		max=5;	
 		min=1;
-		name="Il Numero civico ";
+		name="Il Numero civico";
 	}
 
 		
