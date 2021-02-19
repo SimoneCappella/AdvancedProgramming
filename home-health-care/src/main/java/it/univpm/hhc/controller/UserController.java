@@ -208,7 +208,7 @@ public class UserController {
     	}
     		    		
     	if(flag==true) {    		
-    		this.userService.update(getCurrentUser(), password);
+    		this.userService.updatewithpass(getCurrentUser());
     		return "redirect:/users/edit";	
 		}
     	return "users/editpass";					

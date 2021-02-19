@@ -58,8 +58,8 @@ public class UserDetailsServiceDefault implements UserService, UserDetailsServic
 	}
 	
 	@Override
-	public void update(User user, String pass) {
-		 this.userDao.update(user,pass);
+	public void updatewithpass(User user) {
+		 this.userDao.updatewithpass(user);
 	}
 
 	@Override

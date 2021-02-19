@@ -14,7 +14,7 @@ function Validate(el){
 	case 'name':
 		max = 30;
 		min = 2;
-		name = "Il nome ";
+		name = "Il nome dell'abbonamento ";
 		break;
 	default:
 		break;
@@ -88,12 +88,12 @@ function Validation(){
                 </tr>
 				<tr>
                     <td><form:label path="discount">Sconto (%):</form:label></td>
-                    <td><input type='text' id='discount' name='discount' onfocusout='return Validate(this.id);' value="${sub.discount}" style="border: thin solid black"/></td>
+                    <td><input type='text' id='discount' name='discount' value="${sub.discount}" style="border: thin solid black"/></td>
 					<td><label id="discount1" style="color: red;font-weight: bold;"></label></td>
                 </tr>
 				<tr>
                     <td><form:label path="price">Prezzo mensile:</form:label></td>
-                    <td><input type='text' id='price' name='price' onfocusout='return Validate(this.id);' value="${sub.price}" style="border: thin solid black"/></td>
+                    <td><input type='text' id='price' name='price' value="${sub.price}" style="border: thin solid black"/></td>
 					<td><label id="price1" style="color: red;font-weight: bold;"></label></td>
                 </tr>
 				<tr>

@@ -20,7 +20,7 @@ public interface UserDetailsDao {
 	
 	void update(User user);
 	
-	void update(User user, String pass);
+	void updatewithpass(User user);
 	
 	void delete(User contact);
 

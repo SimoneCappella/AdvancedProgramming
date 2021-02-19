@@ -80,11 +80,38 @@ public class AdminController {
 
 	
 	@PostMapping(value = "/usersave")
-	public String saveUser(@ModelAttribute("newUser") User newUser, BindingResult br) {
-		
-		this.userService.update(newUser);
-		
-		return "redirect:/admins/userlist/";
+	public String saveUser(@ModelAttribute("newUser") User newUser, BindingResult br, Model uiModel) {
+		String regexname ="^[A-Za-z]+$";
+		String regexmail ="^[A-Za-z0-9+_.-]+@(.+)$";
+    	Pattern patternmail = Pattern.compile(regexmail);
+    	Pattern patternname = Pattern.compile(regexname);
+    	Matcher matchermail = patternmail.matcher(newUser.getEmail());
+    	Matcher matchername = patternname.matcher(newUser.getName());
+    	Matcher matchersurname = patternname.matcher(newUser.getSurname());
+    	List<String> err = new ArrayList<String>();
+    	boolean flag = true;
+    	if(!matchermail.matches()) {
+    		err.add("Email non valida.");
+    		flag = false;
+    	}
+    	if(!matchername.matches()) {
+    		err.add("Nome non valido.");
+    		flag = false;
+    	}
+    	if(!matchersurname.matches()) {
+    		err.add("Cognome non valido.");
+    		flag = false;
+    	}
+    	if(flag == true) {
+    		this.userService.update(newUser);
+    		String errorMessage = "Profilo modificato con successo.";
+        	uiModel.addAttribute("user", newUser);
+    		uiModel.addAttribute("errorMessage", errorMessage);
+    		return "admins/userform";
+    	}
+    	uiModel.addAttribute("user", newUser);
+    	uiModel.addAttribute("errorMessage", err);
+		return "admins/userform";
 	}
 	
 	
@@ -159,10 +186,55 @@ public class AdminController {
 
 	
 	@PostMapping(value = "/subsave")
-	public String save(@ModelAttribute("newSub") Sub newSub, BindingResult br) {
-		this.subService.update(newSub);
+	public String save(@ModelAttribute("newSub") Sub newSub, BindingResult br, Model uiModel) {
+		String regexname = "^[A-Za-z0-9.,:;!?()\\s]+$";
+		String regexprice = "\\d+(.\\d{1,2})?$";
+		String regexdiscount = "^[0-9]+$";
+		Pattern patternname = Pattern.compile(regexname);
+		Pattern patterndiscount = Pattern.compile(regexdiscount);
+		Pattern patternprice = Pattern.compile(regexprice);
+		Matcher matchername = patternname.matcher(newSub.getName());
+		Matcher matcherdiscount = patterndiscount.matcher(String.valueOf(newSub.getDiscount()));
+		Matcher matcherprice = patternprice.matcher(String.valueOf(newSub.getPrice()));
+		List<String> err = new ArrayList<String>();
+		boolean flag = true;
+		if(!matchername.matches()) {
+			err.add("Hai inserito caratteri proibiti nel nome dell'abbonamento.");
+			flag = false;
+		}
+		if(!matcherdiscount.matches() || newSub.getDiscount() == 0.0 || newSub.getDiscount() < 1 || newSub.getDiscount() > 100) {
+			err.add("Puoi inserire solo un numero intero compreso tra 1 e 100.");
+			flag = false;
+		}
+		if(!matcherprice.matches() || newSub.getPrice() == 0.0) {
+			err.add("Puoi inserire solo numeri e punti e massimo due cifre decimali.");
+			flag = false;
+		}
+		List<Sub> subs = new ArrayList<Sub>();
+		subs = subService.findByName(newSub.getName());
+		if(flag == true && subs.size() > 0) {
+			for(Sub s: subs) {
+				s.setName(newSub.getName());
+				s.setDiscount(newSub.getDiscount());
+				s.setPrice(newSub.getPrice());
+				subService.update(s);
+			}
+			String message = "L'abbonamento '" + newSub.getName() + "' è stato modificato con successo.";
+			uiModel.addAttribute("errorMessage", message);
+			uiModel.addAttribute("sub", newSub);
+			return "admins/subform";
+		} else if(flag == true && subs.size() == 0) {
+			this.subService.create(newSub.getName(), newSub.getPrice(), newSub.getDiscount());
+			String message = "L'abbonamento '" + newSub.getName() + "' è stato aggiunto con successo.";
+			uiModel.addAttribute("errorMessage", message);
+			uiModel.addAttribute("sub", newSub);
+			return "admins/subform";
+		}
+		uiModel.addAttribute("sub", newSub);
+		uiModel.addAttribute("errorMessage", err);
+		return "admins/subform";
+
 		
-		return "redirect:/admins/sublist/";
 		
 		// return "redirect:singers/list"; // NB questo non funzionerebbe!
 		
@@ -251,7 +323,7 @@ return "admins/itemform";
 @PostMapping(value = "/itemsave")
 public String saveItem(@ModelAttribute("newItem") Item newItem, BindingResult br, Model uiModel) {
 	String regexname = "^[A-Za-z\\s]+$";
-	String regexdescr = "^[A-Za-z.,:;!?()\\s]+$";
+	String regexdescr = "^[A-Za-z0-9.,:;!?()\\s]+$";
 	String regexprice = "\\d+(.\\d{1,2})?$";
 	Pattern patternname = Pattern.compile(regexname);
 	Pattern patterndescr = Pattern.compile(regexdescr);
