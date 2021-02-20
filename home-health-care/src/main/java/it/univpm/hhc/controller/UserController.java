@@ -527,10 +527,25 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/savepurchase", method = RequestMethod.POST)
-	public String savepurchase(@RequestParam ("paymeth")String paymeth, @RequestParam ("addr") Long addressId, @RequestParam ("total") double total) {
+	public String savepurchase(@RequestParam ("paymeth")String paymeth, @RequestParam ("addr") Long addressId, @RequestParam ("total") double newtotal,@RequestParam("tot") double tot,@RequestParam("discount") double discount, Model uiModel) {
 		Long cartId = getCurrentUser().getCarts().getCart_id();
 		List <Cart_item> items = this.cartItemService.findByCart(cartId);
-		Purchase purchase = this.purchaseService.create(paymeth, java.time.LocalDate.now(), total, getCurrentUser(), this.addressService.findById(addressId));
+		List <Address> addresses = addressService.findByUserId(getCurrentUser().getUser_id());
+		if(addresses.size() < 1) {
+			uiModel.addAttribute("errorMessage", "Devi inserire almeno un indirizzo prima di effettuare acquisti");
+			uiModel.addAttribute("address", new Address());
+			return "users/addressform";
+		}
+		if(addressId == 0) {
+			uiModel.addAttribute("errorMessage", "Per favore, scegli un indirizzo di spedizione.");
+			uiModel.addAttribute("paymeth", paymeth);
+			uiModel.addAttribute("total", tot);
+			uiModel.addAttribute("newtotal", newtotal);
+			uiModel.addAttribute("discount", discount);
+			uiModel.addAttribute("addresses", addresses);
+			return "users/purchase";
+		}
+		Purchase purchase = this.purchaseService.create(paymeth, java.time.LocalDate.now(), newtotal, getCurrentUser(), this.addressService.findById(addressId));
 		for(Cart_item i : items) {
 			i.setPurchase(purchase);
 			i.setCart(null);

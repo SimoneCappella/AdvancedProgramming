@@ -3,7 +3,12 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<h1>Conferma acquisto</h1>
+<h3>Conferma acquisto</h3>
+<c:if test="${fn:length(errorMessage) > 0}">
+<div style="color: red; padding:20px; font-weight: bold; margin: 30px 0px;">
+${errorMessage}
+</div>
+</c:if>
 <c:url value="/users/savepurchase" var="action_url" />
 <form method='POST' action="${action_url}">
 Metodo di pagamento: <select name="paymeth" id="paymeth">
@@ -12,7 +17,8 @@ Metodo di pagamento: <select name="paymeth" id="paymeth">
 	<option value="master">MasterCard</option>	
 </select>
 <br><br>
-Indirizzo di spedizione:<select name="addr" id="addr">
+Indirizzo di spedizione:<select name="addr" id="addr" value">
+<option value="0"> ---Scegli un indirizzo---</option>
 <c:forEach items="${addresses}" var="a">
 			<option value="${a.address_id}">${a.street} ${a.civ_num}</option> 
 </c:forEach>
@@ -24,6 +30,8 @@ Sconto applicato: ${discount}%
 <br>
 Totale scontato: ${newtotal}€
 <input type="hidden" name="total" value="${newtotal}">
+<input type="hidden" name="tot" value="${total}">
+<input type="hidden" name="discount" value="${discount}">
 
 <input type="submit" value="Acqusita!"/>
 </form>
