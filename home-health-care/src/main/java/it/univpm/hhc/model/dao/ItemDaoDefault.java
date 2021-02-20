@@ -2,6 +2,8 @@ package it.univpm.hhc.model.dao;
 
 import java.util.List;
 import org.springframework.stereotype.Repository;
+
+import it.univpm.hhc.model.entities.Address;
 import it.univpm.hhc.model.entities.Item;
 
 @Repository("itemDao")
@@ -22,8 +24,8 @@ public class ItemDaoDefault extends DefaultDao implements ItemDao {
 	}
 
 	@Override
-	public void update(Item item) {
-		this.getSession().merge(item);
+	public Item update(Item item) {
+		return (Item) this.getSession().merge(item);
 	}
 
 	@Override

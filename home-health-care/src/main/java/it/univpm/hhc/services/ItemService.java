@@ -18,7 +18,7 @@ public interface ItemService {
 	double price,
 	String image);
 	
-	void update(Item item);
+	Item update(Item item);
 	
 	void delete(Long itemId);
 
