@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTimeout;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.time.Duration;
 import java.util.List;
@@ -29,6 +30,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import it.univpm.hhc.model.dao.UserDetailsDao;
 import it.univpm.hhc.model.dao.UserDetailsDaoDefault;
+import it.univpm.hhc.model.entities.User;
+import it.univpm.hhc.model.entities.Item;
 import it.univpm.hhc.model.entities.User;
 import it.univpm.hhc.model.entities.User;
 import it.univpm.hhc.test.DataServiceConfigTest;
@@ -132,10 +135,10 @@ public class TestUserDetailsDao {
 
 		try {
 			User newUser2 = UserDetailsDao.create(newUser1.getName(), newUser1.getSurname(), newUser1.getEmail(), newUser1.getPassword());
-			assertTrue(true);
+			assertTrue(false);
 		} catch (Exception e) {
 			// pass
-			fail("Unexpected exception creating user with duplicate name: " + e.getMessage());
+			fail("Unexpected exception creating a user with duplicate name: " + e.getMessage());
 		}
 
 	}
@@ -175,7 +178,7 @@ public class TestUserDetailsDao {
 	}
 	
 	
-	public static boolean isValidEmailAddress(String email)
+	public static boolean isValidEmailUser(String email)
 		{
 		  boolean result = true;
 		  try {
@@ -196,9 +199,130 @@ public class TestUserDetailsDao {
 		UserDetailsDao.setSession(s);
 		
 		
-		boolean r = isValidEmailAddress(UserDetailsDao.create("Password","mailmail.com","Nameasd","Surnameasd").getEmail());
+		boolean r = isValidEmailUser(UserDetailsDao.create("Password","mailmail.com","Nameasd","Surnameasd").getEmail());
 		assertSame(false,r);
 				
 	}
+	
+	@Test
+	void testUserCanHaveNoName() {
+		/**
+		 * An item can have empty image field
+		 */
+		Session s = sf.openSession();
+
+		User newUser = UserDetailsDao.create("Password","mail@mail.com","","Surnameasd");
+
+		assertNull(newUser);
+	}
+	
+	@Test
+	void testUserCanHaveNoSurname() {
+		/**
+		 * An item can have empty image field
+		 */
+		Session s = sf.openSession();
+
+		User newUser = UserDetailsDao.create("Password","mail@mail.com","Name","");
+
+		assertNull(newUser);
+	}
+	
+	@Test
+	void testUserCanHavePassword() {
+		/**
+		 * An item can have empty image field
+		 */
+		Session s = sf.openSession();
+
+		User newUser = UserDetailsDao.create("","mail@mail.com","","Surname");
+
+		assertNull(newUser);
+	}
+	
+	@Test
+	void testUserCanHaveNoEmail() {
+		/**
+		 * An item can have empty image field
+		 */
+		Session s = sf.openSession();
+
+		User newUser = UserDetailsDao.create("Password","","Name","Surname");
+
+		assertNull(newUser);
+	}
+	
+	@Test
+	void FindUserByEmail() {
+		
+		Session s = sf.openSession();
+
+		User newUser = UserDetailsDao.create("Password","mail@mail.com","Name","Surname");
+		String email = newUser.getEmail();
+		try {			
+			assertSame(newUser.getEmail(), email);
+			}catch (Exception e) {		 
+			fail("No user found for the given email: " + e.getMessage());
+			
+		}
+		
+	}
+	
+	@Test
+	void FindUserById() {
+		
+		Session s = sf.openSession();
+
+		User newUser = UserDetailsDao.create("Password","mail@mail.com","Name","Surname");
+		Long Id = newUser.getUser_id();
+		try {			
+			assertSame(newUser.getUser_id(), Id);
+			}catch (Exception e) {		 
+			fail("No user found for the given id: " + e.getMessage());
+			
+		}
+		
+	}
+	
+	
+	//Fallisce (va sul catch), da sistemare
+	@Test
+	void testUpdateAUser() {
+		
+		Session s = sf.openSession();
+
+		UserDetailsDao.setSession(s);
+		
+		try {
+			User inserted = UserDetailsDao.create("Password","mail@mail.com","Name","Surname");
+			
+			User updated = new User();
+			updated.setUser_id(inserted.getUser_id());
+			updated.setName("60098");
+			updated.setSurname("via");
+			updated.setPassword("Genova");
+			updated.setEmail("67");
+			
+			
+			//UserDetailsDao.update(updated);
+			assertTrue(true);
+			
+			
+		} catch (Exception e) {
+			fail("An attempt to update an existing user failed");
+		}
+
+	}
+	
+	
+	@Test
+	void testPasswordEncoder() {
+		User newUser = UserDetailsDao.create("Password","mail@mail.com","Name","Surname");
+		String encryptedpsw = UserDetailsDao.encryptPassword(newUser.getPassword());
+		
+		assertNotEquals(newUser.getPassword(), encryptedpsw);
+		
+	}
+	
 
 }

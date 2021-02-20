@@ -28,6 +28,7 @@ import it.univpm.hhc.services.AddressServiceDefault;
 import it.univpm.hhc.model.dao.UserDetailsDao;
 import it.univpm.hhc.model.dao.UserDetailsDaoDefault;
 import it.univpm.hhc.model.entities.Address;
+import it.univpm.hhc.model.entities.Address;
 import it.univpm.hhc.model.entities.User;
 import it.univpm.hhc.test.DataServiceConfigTest;
 
@@ -132,10 +133,10 @@ public class TestAddressDao {
 
 		try {
 			Address newaddress2 = addressDao.create(newaddress1.getCap(), newaddress1.getCity(), newaddress1.getStreet(), newaddress1.getCiv_num(),u);
-			assertTrue(true);
+			assertTrue(false);
 		} catch (Exception e) {
 			// pass
-			fail("Unexpected exception creating address with duplicate name: " + e.getMessage());
+			fail("Unexpected exception creating an address with duplicate name: " + e.getMessage());
 		}
 
 	}
@@ -175,15 +176,31 @@ public class TestAddressDao {
 	}
 	
 	@Test
-	void testaddressCanHaveNoUser() {
-		/**
-		 * An address can have empty user field
-		 */
+	void testUpdateAnAddress() {
+		
 		Session s = sf.openSession();
 
-		Address newaddress = addressDao.create("60098", "Genova", "rovereto", "67",null);
+		addressDao.setSession(s);
+		
+		try {
+			Address inserted = addressDao.create("60098", "Genova", "rovereto", "67",u);
+			
+			Address updated = new Address();
+			updated.setAddress_id(inserted.getAddress_id());
+			updated.setCap("60098");
+			updated.setStreet("via");
+			updated.setCity("Genova");
+			updated.setCiv_num("67");
+			updated.setUser(u);
+			
+			updated = addressDao.update(updated);
+			assertTrue(true);
+			
+			
+		} catch (Exception e) {
+			fail("An attempt to update an existing address failed");
+		}
 
-		assertNotNull(newaddress);
 	}
 	
 	
@@ -212,20 +229,112 @@ public class TestAddressDao {
 		assertSame(found, inserted);
 	}
 	
-	/*@Test
-	void testaddressCanHaveNoCivNum() {
+	@Test
+	void testaddressCanHaveNoCAP() {
 		/**
-		 * An address can have empty civ_num field
+		 * An address can have empty civ_num field*/
 		 
 		Session s = sf.openSession();
 
-		Address newaddress = addressDao.create("60098", "Genova", "rovereto", null , u);
+		Address newaddress = addressDao.create("", "Genova", "rovereto", "13" , u);
 
 		assertNotNull(newaddress);
-	}*/
+	}
+	
+	@Test
+	void testaddressCanHaveNoStreet() {
+		/**
+		 * An address can have empty civ_num field*/
+		 
+		Session s = sf.openSession();
+
+		Address newaddress = addressDao.create("60098", "Genova", "", "13" , u);
+
+		assertNotNull(newaddress);
+	}
+	
+	@Test
+	void testaddressCanHaveNoUser() {
+		/**
+		 * An address can have empty user field
+		 */
+		Session s = sf.openSession();
+
+		Address newaddress = addressDao.create("60098", "Genova", "rovereto", "67",null);
+
+		assertNotNull(newaddress);
+	}
+	
+	@Test
+	void testaddressCanHaveNoCity() {
+		/**
+		 * An address can have empty civ_num field*/
+		 
+		Session s = sf.openSession();
+
+		Address newaddress = addressDao.create("60098", "", "rovereto", "67" , u);
+
+		assertNotNull(newaddress);
+	}
+	
+	
+	@Test
+	void testaddressCanHaveNoCivNum() {
+		/**
+		 * An address can have empty civ_num field*/
+		 
+		Session s = sf.openSession();
+
+		Address newaddress = addressDao.create("60098", "Genova", "rovereto", "" , u);
+
+		assertNotNull(newaddress);
+	}
+	
+	@Test
+	void testDeleteAnAddress() {
+		
+		Session s = sf.openSession();
+
+		addressDao.setSession(s);
+		
+		Address address = addressDao.create("60098", "Genova", "rovereto", "" , u);
+		
+		try {
+			addressDao.delete(address);
+			assertTrue(true);
+		} catch (Exception e) {
+			fail("An attempt to delete an existing address failed");
+		}
+
+	}
+	
+	
+	@Test
+	void testDeleteNonExistingAddressDoesNotCauseError() {
+		/**
+		 * An address that does not exist can be deleted without notice to the callee
+		 * */
+		 
+		Session s = sf.openSession();
+
+		addressDao.setSession(s);
+				
+		Address fake = new Address();
+		fake.setAddress_id(53L);
+		
+		assertNull(addressDao.findById(fake.getAddress_id()));
+		
+		try {
+			addressDao.delete(fake);
+			assertTrue(true);
+		} catch (Exception e) {
+			fail("An attempt to delete a non-existing address was blocked");
+		}
+		
+	}
 	
 	/*@Test
-	void testUserCanHaveNoMoreThreeAddress() {
+	void testUserCanHaveNoMoreThanThreeAddresses() {
 		
 		Session s1 = addressDao.getSession();
 		Session s2 = userDetailsDao.getSession();
@@ -234,14 +343,14 @@ public class TestAddressDao {
 		addressDao.setSession(s1);
 		userDetailsDao.setSession(s2);
 		
-		//User user = this.userDetailsDao.create("ciao", "mail@mail.com", "Manuel", "Rodriguez");
-		//Address a1 = addressDao.create("60098", "Pavia", "rovereto", "45" , user);
-		//Address a2 = addressDao.create("60098", "Genova", "rovereto", "45" , user);
-		//Address a3 = addressDao.create("60098", "Milano", "rovereto", "45" , user);
-		//Address a4 = addressDao.create("60098", "Siracusa", "rovereto", "45" , user);
+		User user = this.userDetailsDao.create("ciao", "mail@mail.com", "Manuel", "Rodriguez");
+		Address a1 = addressDao.create("60098", "Pavia", "rovereto", "45" , user);
+		Address a2 = addressDao.create("60098", "Genova", "rovereto", "45" , user);
+		Address a3 = addressDao.create("60098", "Milano", "rovereto", "45" , user);
+		Address a4 = addressDao.create("60098", "Siracusa", "rovereto", "45" , user);
 		
-		//List<Address> allAddresses = this.addressService.findByUserId(user.getUser_id());
-		//assertSame(allAddresses.size(), 3);
+		List<Address> allAddresses = this.addressService.findByUserId(user.getUser_id());
+		assertSame(allAddresses.size(), 3);
 		
 	}*/
 

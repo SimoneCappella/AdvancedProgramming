@@ -28,6 +28,7 @@ import it.univpm.hhc.model.dao.ItemDaoDefault;
 import it.univpm.hhc.model.dao.UserDetailsDao;
 import it.univpm.hhc.model.dao.UserDetailsDaoDefault;
 import it.univpm.hhc.model.entities.Item;
+import it.univpm.hhc.model.entities.Item;
 import it.univpm.hhc.model.entities.User;
 import it.univpm.hhc.test.DataServiceConfigTest;
 
@@ -117,7 +118,7 @@ public class TestItemDao {
 
 
 	@Test
-	void testCreateItemDuplicateNames() {
+	void testCreateNoDuplicateItems() {
 		/**
 		 * We test that it is possible to create two items with same name and surname
 		 */
@@ -130,10 +131,10 @@ public class TestItemDao {
 
 		try {
 			Item newItem2 = itemDao.create(newItem1.getTitle(), newItem1.getDescription(), newItem1.getPrice(), newItem1.getImage());
-			assertTrue(true);
+			assertTrue(false);
 		} catch (Exception e) {
 			// pass
-			fail("Unexpected exception creating item with duplicate name: " + e.getMessage());
+			fail("An attempt to create an item with the same parameters as an already existing one failed: " + e.getMessage());
 		}
 
 	}
@@ -185,6 +186,71 @@ public class TestItemDao {
 	}
 	
 	@Test
+	void testItemCanHaveNoTitle() {
+		/**
+		 * An item can have empty image field
+		 */
+		Session s = sf.openSession();
+
+		Item newItem = itemDao.create(null, "Description", 5.2, "");
+
+		assertNull(newItem);
+	}
+	
+	@Test
+	void testItemCanHaveNoDescription() {
+		/**
+		 * An item can have empty image field
+		 */
+		Session s = sf.openSession();
+
+		Item newItem = itemDao.create("Titolo", null, 5.2, "abc");
+
+		assertNotNull(newItem);
+	}
+	
+	@Test
+	void testItemCanHaveAPriceSetToZero() {
+		/**
+		 * An item can have empty image field
+		 */
+		Session s = sf.openSession();
+
+		Item newItem = itemDao.create("Titolo", "Description", 0, "sfd");
+
+		assertNull(newItem);
+	}
+	
+	@Test
+	void testUpdateAnItem() {
+		
+		Session s = sf.openSession();
+
+		itemDao.setSession(s);
+		
+		try {
+			Item inserted = itemDao.create("Titolo", "Description", 1, "sfd");
+			
+			Item updated = new Item();
+			updated.setItem_id(inserted.getItem_id());
+			updated.setTitle("Title2");
+			updated.setDescription("cipolla");
+			updated.setPrice(8);
+			updated.setImage("path");
+			
+			/*updated = */itemDao.update(updated);
+			assertTrue(true);
+			
+			
+		} catch (Exception e) {
+			fail("An attempt to update an existing item failed");
+		}
+
+	}
+	
+	
+	//Rivedere metodo Update per gli Item
+	@Test
 	void testItemIsUpdatedCorrectlyWithMerging() {
 		Session s = sf.openSession();
 
@@ -199,7 +265,7 @@ public class TestItemDao {
 		updated.setPrice(8.0);
 		updated.setImage("Image1");
 		
-		//updated = itemDao.update(updated);
+		itemDao.update(updated);
 		
 		Item found = itemDao.findById(inserted.getItem_id());
 		
@@ -208,11 +274,30 @@ public class TestItemDao {
 		assertSame(found, inserted);
 	}
 	
-	/*@Test
+	@Test
+	void testDeleteAnItem() {
+		
+		Session s = sf.openSession();
+
+		itemDao.setSession(s);
+		
+		Item item = itemDao.create("Titolo", "Description", 5.2, "Image");
+		
+		try {
+			itemDao.delete(item);
+			assertTrue(true);
+		} catch (Exception e) {
+			fail("An attempt to delete an existing item failed");
+		}
+
+	}
+	
+	
+	@Test
 	void testDeleteNonExistingItemDoesNotCauseError() {
 		/**
 		 * An item that does not exist can be deleted without notice to the callee
-		 * 
+		 * */
 		 
 		Session s = sf.openSession();
 
@@ -227,36 +312,8 @@ public class TestItemDao {
 			itemDao.delete(fake);
 			assertTrue(true);
 		} catch (Exception e) {
-			fail("Unexpected exception when deleting fake item");
+			fail("An attempt to delete a non existing item was blocked");
 		}
 		
 	}
-	
-	@Test
-	void testNormalUserCanNeitherCreateNorEditAnExistingItem() {
-		Session s = sf.openSession();
-		
-		//User creation
-		UserDetailsDao userDao = ctx.getBean("userDao", UserDetailsDao.class);
-		userDao.setSession(s);
-		User user = userDao.create("password", "email", "name", "surname"); //when created, a user is not an admin by design
-		
-		//Item creation
-		itemDao.setSession(s);
-		
-		Item item = new Item();
-		item.setTitle("titolo");
-		item.setDescription("desc");
-		item.setPrice(5.1);
-		item.setImage("path");
-		
-		//User login
-		//....
-		
-		//User attempt to Add a new Item to the Catalogue
-		//...
-		
-		//User attempt to Edit an existing Item of the Catalogue
-		//...
-	}*/
 }
