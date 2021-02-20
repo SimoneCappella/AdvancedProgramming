@@ -175,6 +175,38 @@ public class TestPurchaseDao {
 	}
 	
 	@Test
+	void FindPurchaseById() {
+		
+		Session s = sf.openSession();
+
+		Purchase newPurchase = purchaseDao.create("visa", java.time.LocalDate.now(), 21.4, u, a);
+		Long Id = newPurchase.getPurchase_id();
+		try {			
+			assertSame(newPurchase.getPurchase_id(), Id);
+			}catch (Exception e) {		 
+			fail("No purchase found for the given id: " + e.getMessage());
+			
+		}
+		
+	}
+	
+	@Test
+	void FindPurchaseByUserId() {
+		
+		Session s = sf.openSession();
+
+		Purchase newPurchase = purchaseDao.create("visa", java.time.LocalDate.now(), 21.4, u, a);
+		Long Id = newPurchase.getUser().getUser_id();
+		try {			
+			assertSame(newPurchase.getUser().getUser_id(), Id);
+			}catch (Exception e) {		 
+			fail("No purchase found for the given id: " + e.getMessage());
+			
+		}
+		
+	}
+	
+	@Test
 	void testpurchaseCanHaveNoAddress() {
 		/**
 		 * An purchase can have empty user field
@@ -183,7 +215,57 @@ public class TestPurchaseDao {
 
 		Purchase newpurchase = purchaseDao.create("visa", java.time.LocalDate.now(), 21.4, u, null);
 
-		assertNotNull(newpurchase);
+		assertNull(newpurchase);
+	}
+	
+	//Da Rivedere
+	@Test
+	void testUpdateAnAddress() {
+		
+		Session s = sf.openSession();
+
+		purchaseDao.setSession(s);
+
+		try {
+			Purchase inserted = purchaseDao.create("visa", java.time.LocalDate.now(), 21.4, u, a);
+			
+			User u1 = new User();
+			Address a1 = new Address();
+			
+			Purchase updated = new Purchase();
+			updated.setPurchase_id(inserted.getPurchase_id());
+			updated.setPay_method("Paypal");
+			updated.setDate(java.time.LocalDate.now());
+			updated.setTotal(30.1);
+			updated.setAddress(a1);
+			updated.setUser(u1);
+			
+			updated = purchaseDao.update(updated);
+			assertTrue(true);
+			
+			
+		} catch (Exception e) {
+			fail("An attempt to update an existing purchase failed");
+		}
+
+	}
+
+	@Test
+	void testDeleteAPurchase() {
+		
+		Session s = sf.openSession();
+
+		purchaseDao.setSession(s);
+		
+		Purchase purchase = purchaseDao.create("visa", java.time.LocalDate.now(), 21.4, u, a);
+		
+		try {
+			purchaseDao.delete(purchase);
+			assertTrue(true);
+		} catch (Exception e) {
+			fail("An attempt to delete an existing purchase failed");
+		}
+
 	}
 	
 	
@@ -210,6 +292,57 @@ public class TestPurchaseDao {
 		assertSame(inserted, updated);
 		assertSame(updated, found);
 		assertSame(found, inserted);
+	}
+	
+	@Test
+	void testpurchaseCanHaveNoPayMethod() {
+		/**
+		 * An purchase can have empty civ_num field*/
+		 
+		Session s = sf.openSession();
+
+		Purchase newpurchase = purchaseDao.create("", java.time.LocalDate.now(), 21.4, u, a);
+
+		assertNull(newpurchase);
+	}
+	
+	@Test
+	void testpurchaseCanHaveNoDate() {
+		/**
+		 * An purchase can have empty civ_num field*/
+		 
+		Session s = sf.openSession();
+
+		Purchase newpurchase = purchaseDao.create("visa", null, 21.4, u, a);
+
+		assertNull(newpurchase);
+	}
+	
+	@Test
+	void testpurchaseCanHaveNoTotalSetToZero() {
+		/**
+		 * An purchase can have empty user field
+		 */
+		Session s = sf.openSession();
+
+		Purchase newpurchase = purchaseDao.create("visa", java.time.LocalDate.now(), 0, u, a);
+
+		assertNull(newpurchase);
+	}
+	
+
+	
+	
+	@Test
+	void testpurchaseCanHaveNoUser() {
+		/**
+		 * An purchase can have empty civ_num field*/
+		 
+		Session s = sf.openSession();
+
+		Purchase newpurchase = purchaseDao.create("visa", java.time.LocalDate.now(), 21.4, null, a);
+
+		assertNull(newpurchase);
 	}
 	
 
