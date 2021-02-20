@@ -43,9 +43,8 @@ public class ItemServiceDefault implements ItemService {
 	}
 
 	@Override
-	public Item update(Item item) {
+	public void update(Item item) {
 		this.itemDao.update(item);
-		return item;
 	}
 
 	@Override

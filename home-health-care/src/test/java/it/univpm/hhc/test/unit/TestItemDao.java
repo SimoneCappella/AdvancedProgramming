@@ -117,7 +117,7 @@ public class TestItemDao {
 
 
 	@Test
-	void testCreateItemDuplicateNames() {
+	void testCreateNoDuplicateItems() {
 		/**
 		 * We test that it is possible to create two items with same name and surname
 		 */
@@ -130,10 +130,10 @@ public class TestItemDao {
 
 		try {
 			Item newItem2 = itemDao.create(newItem1.getTitle(), newItem1.getDescription(), newItem1.getPrice(), newItem1.getImage());
-			assertTrue(true);
+			assertTrue(false);
 		} catch (Exception e) {
 			// pass
-			fail("Unexpected exception creating item with duplicate name: " + e.getMessage());
+			fail("An attempt to create an item with the same parameters as an already existing one failed: " + e.getMessage());
 		}
 
 	}
@@ -199,7 +199,7 @@ public class TestItemDao {
 		updated.setPrice(8.0);
 		updated.setImage("Image1");
 		
-		updated = itemDao.update(updated);
+		itemDao.update(updated);
 		
 		Item found = itemDao.findById(inserted.getItem_id());
 		

@@ -23,7 +23,7 @@ public interface ItemDao {
 			double price,
 			String image);
 	
-	Item update(Item item);
+	void update(Item item);
 	
 	void delete(Item item);
 	
