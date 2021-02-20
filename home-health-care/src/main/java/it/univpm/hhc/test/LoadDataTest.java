@@ -44,7 +44,7 @@ public class LoadDataTest {
 
 			SubDao subDao=ctx.getBean("subDao", SubDao.class);
 			
-			//userDao.setPasswordEncoder(new BCryptPasswordEncoder());
+			userDao.setPasswordEncoder(new BCryptPasswordEncoder());
 			
 			try (Session session = sf.openSession()) {
 				
@@ -92,10 +92,10 @@ public class LoadDataTest {
 				// phase 3 : create user
 				session.beginTransaction();
 				
-				User u1 = userDao.create("user1", "user1","cristiano","ronaldo");
-				u1.setRole(true);
+				//User u1 = userDao.create("user1", "user1","cristiano","ronaldo");
+				//u1.setRole(true);
 			
-				Cart c1= cartDao.create(0, 0, u1/*userDao.create("user1", "user1","cristiano","ronaldo")*/);
+				Cart c1= cartDao.create(0, 0, userDao.createbytest(userDao.encryptPassword("user1"), "user1","cristiano","ronaldo"));
 				Cart c2= cartDao.create(0, 0, userDao.create("user2", "user2","matteo","bianchi"));
 				Cart c3= cartDao.create(0, 0, userDao.create("user3", "user3","franco","rossi"));
 				

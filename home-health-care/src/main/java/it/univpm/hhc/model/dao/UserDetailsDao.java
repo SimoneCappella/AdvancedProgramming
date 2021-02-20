@@ -18,6 +18,8 @@ public interface UserDetailsDao {
 
 	User create(String password,String email,String name,String surname);
 	
+	User createbytest(String password,String email,String name,String surname);
+	
 	void update(User user);
 	
 	void updatewithpass(User user);
