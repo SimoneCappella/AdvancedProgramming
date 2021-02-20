@@ -11,12 +11,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import it.univpm.hhc.model.dao.CartDao;
 import it.univpm.hhc.model.dao.ItemDao;
-import it.univpm.hhc.model.dao.ProvaDao;
 import it.univpm.hhc.model.dao.AddressDao;
 import it.univpm.hhc.model.dao.SubDao;
 import it.univpm.hhc.model.dao.UserDetailsDao;
 import it.univpm.hhc.model.entities.Cart;
-import it.univpm.hhc.model.entities.Prova;
 import it.univpm.hhc.model.entities.Sub;
 import it.univpm.hhc.model.entities.User;
 import it.univpm.hhc.model.entities.Item;
@@ -32,7 +30,6 @@ public class LoadDataTest {
 
 			SessionFactory sf = ctx.getBean("sessionFactory", SessionFactory.class);
 			
-			ProvaDao provaDao = ctx.getBean("provaDao", ProvaDao.class);
 			
 			ItemDao itemDao = ctx.getBean("itemDao", ItemDao.class);
 			
@@ -50,7 +47,6 @@ public class LoadDataTest {
 				
 				itemDao.setSession(session);
 				addressDao.setSession(session);
-				provaDao.setSession(session);
 				userDao.setSession(session);
 				cartDao.setSession(session);
 				subDao.setSession(session);
@@ -65,29 +61,6 @@ public class LoadDataTest {
 				List<Item> all= itemDao.findAll();
 				session.getTransaction().commit();
 				
-				
-				session.beginTransaction();
-				
-				provaDao.create("Provola","ciao questa desc");
-				provaDao.create("Nervino","descrizione unica");
-				provaDao.create("Ciccio","balla ccciccio");
-
-				List<Prova> allProva= provaDao.findAll();
-								
-								
-				session.getTransaction().commit();
-				
-				session.beginTransaction();
-
-				System.out.println("Numero di prove: " + all.size());
-				for (Prova p : allProva) 
-				{
-					System.out.println(" - " + p.getProvaId() + "_" + p.getTitle() + " : " + p.getDescription());
-				}
-				
-				
-				
-				session.getTransaction().commit();
 				
 				// phase 3 : create user
 				session.beginTransaction();

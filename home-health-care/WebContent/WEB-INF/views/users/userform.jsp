@@ -64,14 +64,18 @@
 		if (document.getElementById("email").value.length <4 || document.getElementById("email").value.length >20) {
 			c = true;
 			document.getElementById("email").style.border = "medium solid red";
+			document.getElementById("email1").innerHTML = ' Compila questo campo con almeno 4 caratteri';
 		}
 		if (document.getElementById("name").value.length <3 || document.getElementById("name").value.length >20) {
 			c = true;
 			document.getElementById("name").style.border = "medium solid red";
+			document.getElementById("name1").innerHTML = ' Compila questo campo con almeno 3 caratteri';
 		}
 		if (document.getElementById("surname").value.length <3 || document.getElementById("surname").value.length >20) {
 			c = true;
 			document.getElementById("surname").style.border = "medium solid red";
+			document.getElementById("surname1").innerHTML = ' Compila questo campo con almeno 3 caratteri';
+
 		}
 
 		if (c == true) {
