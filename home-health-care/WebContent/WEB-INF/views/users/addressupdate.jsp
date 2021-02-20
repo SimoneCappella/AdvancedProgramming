@@ -53,7 +53,7 @@ function Validate(el) {
     document.getElementById(el+'1').innerHTML= "";
 	 
 	  
-	  if (x < min && x!=0 ) {
+	  if (x < min) {
 		  z=true;
 		  document.getElementById(el+'1').innerHTML =name+' deve avere almeno '+ min+' caratteri';
 	  }
@@ -62,7 +62,6 @@ function Validate(el) {
 		  document.getElementById(el+'1').innerHTML =name+' deve avere massimo '+ max+' caratteri';
 	  }
 	  if(z==true){
-		  document.getElementById(el).value ="";
 		  document.getElementById(el).style.border = "medium solid red"; 
 		  return false;		  
 	  }
@@ -72,25 +71,24 @@ function Validate(el) {
 function Validation(){
 	
 	var z=false;
-	if (document.getElementById("cap").value =="") {
+	if (document.getElementById("cap").value.length <2 || document.getElementById("cap").value.length >8)
+	{
 		  z=true;
 		  document.getElementById("cap").style.border = "medium solid red"; 
-		  document.getElementById("cap1").innerHTML =' Compila questo campo';
 	  }
-	if (document.getElementById("city").value =="") {
+	if (document.getElementById("city").value.length <2 || document.getElementById("city").value.length >20)
 		  z=true;
 		  document.getElementById("city").style.border = "medium solid red"; 
-		  document.getElementById("city1").innerHTML =' Compila questo campo';
 	  }
-	if (document.getElementById("street").value =="") {
-		  z=true;
+	
+	if (document.getElementById("street").value.length <3 || document.getElementById("street").value.length >20){  
+			z=true;
 		  document.getElementById("street").style.border = "medium solid red"; 
-		  document.getElementById("street1").innerHTML =' Compila questo campo';
 	  }
-	if (document.getElementById("civ_num").value =="") {
-		  z=true;
+	if (document.getElementById("civ_num").value.length <1 || document.getElementById("civ_num").value.length >5){  
+			  
+			z=true;
 		  document.getElementById("civ_num").style.border = "medium solid red"; 
-		  document.getElementById("civ_num1").innerHTML =' Compila questo campo';
 	  }
 	if(z==true)
 	{

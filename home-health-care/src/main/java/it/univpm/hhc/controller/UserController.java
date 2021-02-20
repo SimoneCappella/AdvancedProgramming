@@ -187,9 +187,13 @@ public class UserController {
     		}
     	}	
     		
-    	if(flag==true) {    		
+    	if(flag==true) { 
     		this.userService.update(newUser);
-    		return "redirect:/users/myprofile";	
+    		if (newUser.getEmail().equals(oldemail))
+    			return "redirect:/users/myprofile";	
+    		else {
+				return "redirect:/logout";
+			}
 		}
     	uiModel.addAttribute("errorMessage", err);
     	uiModel.addAttribute("user",newUser);
@@ -197,14 +201,17 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/savepass", method=RequestMethod.POST)
-	public String saveUserpass(@RequestParam String password) {
+	public String saveUserpass(@RequestParam String password, Model uiModel) {
 		String regexpass = "^[A-Za-z0-9@#$%^&]+$";
     	Pattern patternpass = Pattern.compile(regexpass);
     	Matcher matcherpass = patternpass.matcher(password);
+    	String err=null;
     	boolean flag=true; 		
     	
     	if (!matcherpass.matches() ) {
     		flag=false;
+    		err="Password non valida.";
+    		uiModel.addAttribute("errorMessage",err);
     	}
     		    		
     	if(flag==true) {   
@@ -213,7 +220,8 @@ public class UserController {
     		this.userService.updatewithpass(u);
     		return "redirect:/users/edit";	
 		}
-    	return "users/editpass";					
+    	return "users/editpass";
+    						
 	}
 	
 //CART//////////////////////////////////////////////////////////////////////////////////////

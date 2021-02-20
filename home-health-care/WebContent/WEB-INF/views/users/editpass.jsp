@@ -5,17 +5,12 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 
-<c:if test="${not fn:endsWith(pageContext.request.requestURI, '=PassErr')}">
-    
-
-	<div
-		style="color: red; padding: 20px; font-weight: bold; margin: 30px 0px;">
-		Password non valida.
-
+<c:if test="${fn:length(errorMessage) > 0}">
+<div style="color: red; padding:20px; font-weight: bold; margin: 30px 0px;">
+    ${errorMessage}<br>
 	</div>
 </c:if>
 <script>
-	s
 	function Validate(el) {
 
 		var x = document.getElementById(el).value.length;
@@ -33,7 +28,7 @@
 		document.getElementById(el).style.border = "thin solid black";
 		document.getElementById(el + '1').innerHTML = "";
 
-		if (x < min && x != 0) {
+		if (x < min) {
 			z = true;
 			document.getElementById(el + '1').innerHTML = name
 					+ ' deve avere almeno ' + min + ' caratteri';
@@ -43,7 +38,6 @@
 					+ ' deve avere massimo ' + max + ' caratteri';
 		}
 		if (z == true) {
-			document.getElementById(el).value = "";
 			document.getElementById(el).style.border = "medium solid red";
 			return false;
 		}
@@ -53,10 +47,10 @@
 	function Validation() {
 
 		var z = false;
-		if (document.getElementById("pass").value == "") {
+		if (document.getElementById("pass").value.length <7 || document.getElementById("pass").value.length >20) {
 			z = true;
 			document.getElementById("pass").style.border = "medium solid red";
-			document.getElementById("pass1").innerHTML = ' Compila questo campo';
+			document.getElementById("pass1").innerHTML = ' Compila questo campo con almeno 7 caratteri';
 		}
 		if (z == true) {
 			return false;
