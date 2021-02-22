@@ -5,6 +5,7 @@ import static org.hamcrest.CoreMatchers.nullValue;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -595,6 +596,7 @@ public class UserController {
 				myorders.add(order);
 				order = null;
 			}
+			Collections.reverse(myorders);
 			uiModel.addAttribute("orders", myorders);
 		}else {
 			String message = "Non hai ancora effettuato nessun acquisto.";
