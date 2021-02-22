@@ -31,11 +31,15 @@ public class CartItemServiceDeafault implements CartItemService{
 	public List<Cart_item> findByCart(Long id) {
 		return this.cartItemDao.findByCart(id);
 	}
-	
+	@Override
 	public List<Cart_item> findByPurchaseCode(Long id){
 		return this.cartItemDao.findByPurchaseCode(id);
 	}
-	
+	@Override
+	public List<Cart_item> findByCart_item(Long id, Long itemcod)
+	{
+		return this.cartItemDao.findByCart_item(id, itemcod);
+	}
 	@Override
 	public Cart_item create(Cart cart, Item item, int quantity) {
 		return this.cartItemDao.create(cart, item, quantity);

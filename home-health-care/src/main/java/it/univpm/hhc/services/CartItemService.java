@@ -22,4 +22,6 @@ public interface CartItemService {
 	
 	void delete(Long cart_item_id);
 	
+	List<Cart_item> findByCart_item(Long id, Long itemcod);
+	
 }

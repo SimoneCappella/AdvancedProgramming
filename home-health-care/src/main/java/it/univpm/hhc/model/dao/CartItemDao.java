@@ -27,5 +27,6 @@ public interface CartItemDao {
 	
 	void delete(Cart_item cart_item);
 	
+	List<Cart_item> findByCart_item(Long id, Long itemcod);
 }
 

@@ -1,7 +1,7 @@
 package it.univpm.hhc.controller;
 
 import static org.hamcrest.CoreMatchers.nullValue;
-
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -38,6 +38,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.jayway.jsonpath.internal.function.text.Length;
 
 import it.univpm.hhc.model.entities.Cart;
 import it.univpm.hhc.model.entities.Cart_item;
@@ -305,13 +307,28 @@ public class UserController {
 	@PostMapping(value = "/addtocart")
 	public String addtocart(@RequestParam(value="itemId") String itemId,@ModelAttribute("newCartItem") Cart_item newCartItem, @ModelAttribute("newItem") String newItem) {
 		Cart c = cartService.findByUserId(getCurrentUser().getUser_id());
-
-		
+		List <Cart_item> list = null;
+		Long idcarit=null;
+		int tot=0;
 		newCartItem.setCart(c);
 		Item item= itemService.findById(Long.parseLong(itemId));
+		list= cartItemService.findByCart_item(newCartItem.getCart().getCart_id(), item.getItem_id());
 		newCartItem.setItem(item);
+		if(list.size()==0)
+		{
+			this.cartItemService.update(newCartItem);
+		}
+		else
+		{
+			for(int i =0; i<list.size();i++)
+			{
+				tot+=list.get(i).getQuantity();
+				idcarit=list.get(i).getCart_item_id();
+				}
+			newCartItem.setQuantity(tot+newCartItem.getQuantity());
+			newCartItem.setCart_item_id(idcarit);
 		this.cartItemService.update(newCartItem);
-
+		}
 		return "redirect:/itemlist";
 	}
 

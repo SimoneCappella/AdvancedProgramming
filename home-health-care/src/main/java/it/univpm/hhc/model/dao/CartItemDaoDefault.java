@@ -23,6 +23,12 @@ public class CartItemDaoDefault extends DefaultDao implements CartItemDao {
 	public List<Cart_item> findByCart(Long id) {
 		return getSession().createQuery("from Cart_item c where cart_code = '"+id+"'", Cart_item.class).getResultList();
 	}
+	
+	@Override
+	public List<Cart_item> findByCart_item(Long id, Long itemcod) {
+		List<Cart_item> list =getSession().createQuery("from Cart_item c where cart_code = '"+id+"' AND item_code = '"+itemcod+"'", Cart_item.class).getResultList();
+		return list;
+	}
 
 	@Override
 	public List<Cart_item> findAll() { 
