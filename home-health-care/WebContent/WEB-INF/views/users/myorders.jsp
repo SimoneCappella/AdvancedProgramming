@@ -17,7 +17,7 @@ Metodo di pagamento: ${e.paymeth}
 Totale: ${e.total}
 <br>
 <c:forEach items="${e.items}" var="i">
-Nome: ${i.title} | Descrizione: ${i.description} | Prezzo: ${i.price}€ 
+Nome: ${i.key.title} | Descrizione: ${i.key.description} | Prezzo: ${i.key.price}€ | Quantità: ${i.value}
 <br>
 </c:forEach> 
 </div>

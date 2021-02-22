@@ -6,6 +6,7 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -577,13 +578,15 @@ public class UserController {
 				//addresses.add(addressService.findById(p.getAddress().getAddress_id()));
 			
 				for(List<Cart_item> c : cartitems) {
-					List<Item> it = new ArrayList<Item>();
+					HashMap<Item, Integer> it = new HashMap<Item, Integer>();
+					//List<Item> it = new ArrayList<Item>();
 					for (Cart_item i : c) {
-						int quantita = i.getQuantity();
-						for (int z=0; z<quantita; z++) {
+						//int quantita = i.getQuantity();
+						it.put(i.getItem(), i.getQuantity());
+						/*for (int z=0; z<quantita; z++) {
 							it.add(itemService.findById(i.getItem().getItem_id()));
 							//order.getItems().add(i.getItem());
-						}
+						}*/
 					}
 					order.setItems(it);
 					

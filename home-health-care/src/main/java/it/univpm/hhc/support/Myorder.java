@@ -2,7 +2,11 @@ package it.univpm.hhc.support;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import it.univpm.hhc.model.entities.Address;
 import it.univpm.hhc.model.entities.Item;
@@ -13,6 +17,13 @@ public class Myorder {
 	private LocalDate date;
 	private String paymeth;
 	private Integer quantity;
+	private HashMap<Item, Integer> items = new HashMap<Item, Integer>();
+	
+	public Myorder() {
+		
+	}
+	
+	
 	public Integer getQuantity() {
 		return quantity;
 	}
@@ -22,15 +33,6 @@ public class Myorder {
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
-
-
-
-	private List<Item> items = new ArrayList<Item>();
-	
-	public Myorder() {
-		
-	}
-	
 	
 	public Myorder(Address address, Double total, LocalDate date, String paymeth) {
 		this.address = address;
@@ -91,13 +93,13 @@ public class Myorder {
 
 
 
-	public List<Item> getItems() {
+	public HashMap<Item, Integer> getItems() {
 		return items;
 	}
 
 
 
-	public void setItems(List<Item> items) {
+	public void setItems(HashMap<Item, Integer> items) {
 		this.items = items;
 	}
 	
