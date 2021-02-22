@@ -22,11 +22,11 @@ function clicked(e)
 <table>
 <thead>
 	<td></td>
-	<td>id</td>
-	<td>Name and Surname</td>
-	<td>Subscription Expiration</td>
-	<td>Is Admin</td>
-	<td>Is Active</td>
+	<td>ID</td>
+	<td>Nome e Cognome</td>
+	<td>Scadenza Abbonamento</td>
+	<td>Admin</td>
+	<td>Attivo</td>
 </thead>
 <c:forEach items="${users}" var="u">
 <tr>
@@ -37,7 +37,7 @@ function clicked(e)
 	<td>${u.role}</td>
 	<td>${u.active}</td>
 	<td><a onclick="return confirm('Sei sicuro?')" href="<c:url value="/admins/${u.user_id}/userdelete"/>">Rimuovi</a></td>
-	<td style="padding:20px"><a href="<c:url value="/admins/${u.user_id}/userdisable"/>">Disabilita</a></td>
+	<td style="padding:20px"><a href="<c:url value="/admins/${u.user_id}/userdisable"/>">Abilita/Disabilita</a></td>
 	
 </tr>
 </c:forEach>

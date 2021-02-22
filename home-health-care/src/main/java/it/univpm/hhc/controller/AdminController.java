@@ -142,7 +142,7 @@ public class AdminController {
 			return "redirect:/logout";
 		}
 		User user = this.userService.findById(userId);
-		user.setActive(false);
+		user.setActive(!user.isActive());
 		userService.update(user);
 		return "redirect:/admins/userlist";
 	}

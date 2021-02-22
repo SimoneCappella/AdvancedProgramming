@@ -125,8 +125,7 @@ function Validation(){
                     <td><form:checkbox path="role"/></td>
                 </tr>
 				<tr>
-                    <td><form:label path="active">Utente Abilitato</form:label></td>
-                    <td><form:checkbox path="active"/></td>
+                    <td><form:hidden path="active" /></td>
                 </tr>
 				<tr>
 					<td><form:hidden path="user_id" /></td>
