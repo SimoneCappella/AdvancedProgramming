@@ -15,7 +15,6 @@
 	<li>Oggetti nel carrello: ${item_number} Totale: ${total}<a href="<c:url value="/users/cartlist/" />">Vai a Carrello</a> 
 	<li>Subs: <a href="<c:url value="/admins/sublist/" />">sub</a>
 	<li>Users: <a href="<c:url value="/admins/userlist/" />">user</a> 
-	<li>Registrati: <a href="<c:url value="/register/" />">user</a>
 	<li>Aggiungi una sub a un utente: <a href="<c:url value="/users/link_sub" />">Add</a>
 	<li>visualizza abbonamento utente: <a href="<c:url value="/users/view_sub" />">view</a>
 	<li>Il mio profilo: <a href="<c:url value="/users/myprofile" />">Vai</a>

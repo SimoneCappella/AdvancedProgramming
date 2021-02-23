@@ -38,7 +38,7 @@ function Validate(el){
 	document.getElementById(el+"1").innerHTML= "";
 	
 	switch(true){
-		case (x < min && x != 0):
+		case (x < min ):
 			z = true;
 			document.getElementById(el+'1').innerHTML =name+' deve avere almeno '+ min+' caratteri';
 			break;
@@ -56,31 +56,29 @@ function Validate(el){
 }
 
 function Validation(){
-	var z = false;
-	if(document.getElementById("name").value == "" ){
-		z = true;
-		document.getElementById("name").style.border = "medium solid red";
-		document.getElementById("name1").innerHTML = "Compila questo campo!";
+	var c = false;
+	if (document.getElementById("name").value.length <3 || document.getElementById("name").value.length >20) {
+		  c=true;
+		  document.getElementById("name").style.border = "medium solid red";
+		  document.getElementById("name1").innerHTML = ' Compila questo campo con almeno 3 caratteri';
+	  }
+	if (document.getElementById("surname").value.length <3 || document.getElementById("surname").value.length >20) {
+		  c=true;
+		  document.getElementById("surname").style.border = "medium solid red"; 	  
+		  document.getElementById("surname1").innerHTML = ' Compila questo campo con almeno 3 caratteri';
 	}
-	if(document.getElementById("surname").value == ""){
-		z = true;
-		document.getElementById("surname").style.border = "medium solid red";
-		document.getElementById("surname1").innerHTML = "Compila questo campo!";
+	if (document.getElementById("email").value.length <4 || document.getElementById("email").value.length >35) {
+		  c=true;
+		  document.getElementById("email").style.border = "medium solid red";
+		  document.getElementById("email1").innerHTML = ' Compila questo campo con almeno 4 caratteri';
 	}
+	if (document.getElementById("pass").value.length <7 || document.getElementById("pass").value.length >20) {
+		  c=true;
+		  document.getElementById("pass").style.border = "medium solid red";
+		  document.getElementById("pass1").innerHTML = ' Compila questo campo con almeno 7 caratteri';
+	  }
 	
-	if(document.getElementById("email").value == ""){
-		z = true;
-		document.getElementById("email").style.border = "medium solid red";
-		document.getElementById("email1").innerHTML = "Compila questo campo!";
-	} 
-	
-	if(document.getElementById("password").value == ""){
-		z = true;
-		document.getElementById("password").style.border = "medium solid red";
-		document.getElementById("password1").innerHTML = "Compila questo campo!";
-	}
-	
-	if(z == true){
+	if(c == true){
 		return false;
 	}
 }

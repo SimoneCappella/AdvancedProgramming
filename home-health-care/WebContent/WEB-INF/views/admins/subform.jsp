@@ -24,7 +24,7 @@ function Validate(el){
 	document.getElementById(el+"1").innerHTML= "";
 	
 	switch(true){
-		case (x < min && x != 0):
+		case (x < min ):
 			z = true;
 		  	document.getElementById(el+'1').innerHTML = name + 'deve avere almeno ' + min + ' caratteri';
 			break;
@@ -36,32 +36,20 @@ function Validate(el){
 			break;	
 	}
 	if(z == true){
-		document.getElementById(el).value = "";
 		document.getElementById(el).style.border = "medium solid red";
 		return false;
 	}
 }
 
 function Validation(){
-	var z = false;
-	if(document.getElementById("name").value == "" ){
-		z = true;
-		document.getElementById("name").style.border = "medium solid red";
-		document.getElementById("name1").innerHTML = "Compila questo campo!";
-	}
-	if(document.getElementById("discount").value == ""){
-		z = true;
-		document.getElementById("discount").style.border = "medium solid red";
-		document.getElementById("discount1").innerHTML = "Compila questo campo!";
-	}
+	var c = false;
+	if (document.getElementById("name").value.length <2 || document.getElementById("name").value.length >20) {
+		  c=true;
+		  document.getElementById("name").style.border = "medium solid red";
+		  document.getElementById("name1").innerHTML = ' Compila questo campo con almeno 3 caratteri';
+	  }
 	
-	if(document.getElementById("price").value == ""){
-		z = true;
-		document.getElementById("price").style.border = "medium solid red";
-		document.getElementById("price1").innerHTML = "Compila questo campo!";
-	} 
-	
-	if(z == true){
+	if(c == true){
 		return false;
 	}
 }

@@ -29,7 +29,7 @@ function Validate(el){
 	document.getElementById(el+"1").innerHTML= "";
 	
 	switch(true){
-		case (x < min && x != 0):
+		case (x < min):
 			z = true;
 			document.getElementById(el+'1').innerHTML =name+' deve avere almeno '+ min+' caratteri';
 			break;
@@ -41,38 +41,26 @@ function Validate(el){
 			break;	
 	}
 	if(z == true){
-		document.getElementById(el).value = "";
 		document.getElementById(el).style.border = "medium solid red";
 		return false;
 	}
 }
 
 function Validation(){
-	var z = false;
-	if(document.getElementById("title").value == "" ){
-		z = true;
-		document.getElementById("title").style.border = "medium solid red";
-		document.getElementById("title1").innerHTML = "Compila questo campo!";
-	}
-	if(document.getElementById("description").value == ""){
-		z = true;
-		document.getElementById("description").style.border = "medium solid red";
-		document.getElementById("description1").innerHTML = "Compila questo campo!";
-	}
+	var c = false;
+	if (document.getElementById("title").value.length <2 || document.getElementById("title").value.length >20) {
+		  c=true;
+		  document.getElementById("title").style.border = "medium solid red";
+		  document.getElementById("title1").innerHTML = ' Compila questo campo con almeno 3 caratteri';
+	  }
 	
-	if(document.getElementById("price").value == ""){
-		z = true;
-		document.getElementById("price").style.border = "medium solid red";
-		document.getElementById("price1").innerHTML = "Compila questo campo!";
-	} 
+	if (document.getElementById("description").value.length <2 || document.getElementById("description").value.length >20) {
+		  c=true;
+		  document.getElementById("description").style.border = "medium solid red";
+		  document.getElementById("description1").innerHTML = ' Compila questo campo con almeno 3 caratteri';
+	  }
 	
-	if(document.getElementById("image").value == ""){
-		z = true;
-		document.getElementById("image").style.border = "medium solid red";
-		document.getElementById("image1").innerHTML = "Compila questo campo!";
-	}
-	
-	if(z == true){
+	if(c == true){
 		return false;
 	}
 }
