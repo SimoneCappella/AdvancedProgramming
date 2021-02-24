@@ -51,14 +51,16 @@ function Validation(){
 	if (document.getElementById("title").value.length <2 || document.getElementById("title").value.length >20) {
 		  c=true;
 		  document.getElementById("title").style.border = "medium solid red";
-		  document.getElementById("title1").innerHTML = ' Compila questo campo con almeno 3 caratteri';
+		  document.getElementById("title1").innerHTML = ' Compila questo campo con almeno 2 caratteri';
 	  }
 	
 	if (document.getElementById("description").value.length <2 || document.getElementById("description").value.length >20) {
 		  c=true;
 		  document.getElementById("description").style.border = "medium solid red";
-		  document.getElementById("description1").innerHTML = ' Compila questo campo con almeno 3 caratteri';
+		  document.getElementById("description1").innerHTML = ' Compila questo campo con almeno 2 caratteri';
 	  }
+	
+	
 	
 	if(c == true){
 		return false;
