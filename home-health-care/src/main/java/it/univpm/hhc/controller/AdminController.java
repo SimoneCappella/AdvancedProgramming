@@ -83,11 +83,14 @@ public class AdminController {
 	public String saveUser(@ModelAttribute("newUser") User newUser, BindingResult br, Model uiModel) {
 		String regexname ="^[A-Za-z]+$";
 		String regexmail ="^[A-Za-z0-9+_.-]+@(.+)$";
+		String regexpass = "^[A-Za-z0-9@#$%^&]*$";
     	Pattern patternmail = Pattern.compile(regexmail);
     	Pattern patternname = Pattern.compile(regexname);
+    	Pattern patternpass = Pattern.compile(regexpass);
     	Matcher matchermail = patternmail.matcher(newUser.getEmail());
     	Matcher matchername = patternname.matcher(newUser.getName());
     	Matcher matchersurname = patternname.matcher(newUser.getSurname());
+    	Matcher matcherpass = patternpass.matcher(newUser.getPassword());
     	User u = userService.findById(newUser.getUser_id());
     	List<String> err = new ArrayList<String>();
     	boolean flag = true;
@@ -103,7 +106,12 @@ public class AdminController {
     		err.add("Cognome non valido.");
     		flag = false;
     	}
-    	if(flag == true) {
+    	if(!matcherpass.matches()) {
+    		err.add("Password non valida.");
+    		flag = false;
+    	}
+    	if(flag == true && newUser.getPassword().length() == 0) {
+    		newUser.setPassword(u.getPassword());
     		this.userService.update(newUser);
     		String errorMessage = "Profilo modificato con successo.";
         	uiModel.addAttribute("user", newUser);
