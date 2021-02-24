@@ -78,23 +78,7 @@ function Validation(){
 		  document.getElementById("pass1").innerHTML = ' Compila questo campo con almeno 7 caratteri';
 	  }
 	
-<<<<<<< HEAD
-	if(document.getElementById("email").value == ""){
-		z = true;
-		document.getElementById("email").style.border = "medium solid red";
-		document.getElementById("email1").innerHTML = "Compila questo campo!";
-	} 
-	
-	/*if(document.getElementById("password").value == ""){
-		z = true;
-		document.getElementById("password").style.border = "medium solid red";
-		document.getElementById("password1").innerHTML = "Compila questo campo!";
-	}*/
-	
-	if(z == true){
-=======
 	if(c == true){
->>>>>>> branch 'main' of https://github.com/SimoKappa/AdvancedProgramming
 		return false;
 	}
 }
