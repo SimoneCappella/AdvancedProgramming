@@ -74,11 +74,11 @@ function Validation(){
 		document.getElementById("email1").innerHTML = "Compila questo campo!";
 	} 
 	
-	if(document.getElementById("password").value == ""){
+	/*if(document.getElementById("password").value == ""){
 		z = true;
 		document.getElementById("password").style.border = "medium solid red";
 		document.getElementById("password1").innerHTML = "Compila questo campo!";
-	}
+	}*/
 	
 	if(z == true){
 		return false;
@@ -117,7 +117,7 @@ function Validation(){
                 </tr>
 				<tr>
                     <td><form:label path="password">Password</form:label></td>
-                    <td><input type ="password" id="password" name="password" onfocusout="return Validate(this.id);" value="${user.password}" style="border: thin solid black"/></td>
+                    <td><input type ="password" id="password" name="password" onfocusout="return Validate(this.id);" style="border: thin solid black"/></td>
                 	<td><label id="password1" style="color: red;font-weight:bold;"></label></td>
                 </tr>
 				<tr>
