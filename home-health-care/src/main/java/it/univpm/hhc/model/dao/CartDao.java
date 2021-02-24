@@ -13,7 +13,7 @@ public interface CartDao {
 	
 	Cart findById(Long id);
 	
-	Cart findByUserId(Long id);
+	Cart findByUserId(User user);
 	
 	List<Cart> findAll();
 	

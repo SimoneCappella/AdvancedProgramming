@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import it.univpm.hhc.model.entities.Cart;
 import it.univpm.hhc.model.entities.Item;
+import it.univpm.hhc.model.entities.Purchase;
 import it.univpm.hhc.model.entities.Cart_item;
 
 @Repository("cartItemDao")
@@ -20,13 +21,13 @@ public class CartItemDaoDefault extends DefaultDao implements CartItemDao {
 	}
 	
 	@Override
-	public List<Cart_item> findByCart(Long id) {
-		return getSession().createQuery("from Cart_item c where cart_code = '"+id+"'", Cart_item.class).getResultList();
+	public List<Cart_item> findByCart(Cart cart) {
+		return getSession().createQuery("from Cart_item c where c.cart = :cart", Cart_item.class).setParameter("cart", cart).getResultList();
 	}
 	
 	@Override
-	public List<Cart_item> findByCart_item(Long id, Long itemcod) {
-		List<Cart_item> list =getSession().createQuery("from Cart_item c where cart_code = '"+id+"' AND item_code = '"+itemcod+"'", Cart_item.class).getResultList();
+	public List<Cart_item> findByCart_item(Cart cart, Item item) {
+		List<Cart_item> list =getSession().createQuery("from Cart_item c where c.cart = :cart AND c.item = :item", Cart_item.class).setParameter("cart", cart).setParameter("item", item).getResultList();
 		return list;
 	}
 
@@ -36,8 +37,8 @@ public class CartItemDaoDefault extends DefaultDao implements CartItemDao {
 	}
 	
 	@Override
-	public List<Cart_item> findByPurchaseCode(Long id){
-		List<Cart_item> culo = getSession().createQuery("from Cart_item c where PURCHASE_CODE = '" + id + "'", Cart_item.class).getResultList();
+	public List<Cart_item> findByPurchase(Purchase purchase){
+		List<Cart_item> culo = getSession().createQuery("from Cart_item c where c.purchase = :purchase", Cart_item.class).setParameter("purchase", purchase).getResultList();
 		return culo;
 	}
 

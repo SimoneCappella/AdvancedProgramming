@@ -234,8 +234,8 @@ public class UserController {
 	@GetMapping(value = "/cartlist")
 	public String list( Model uiModel) {
 		double total = 0;
-		Long cartLong= getCurrentUser().getCarts().getCart_id();
-		List<Cart_item> allItem = this.cartItemService.findByCart(cartLong);
+		Cart cart= getCurrentUser().getCarts();
+		List<Cart_item> allItem = this.cartItemService.findByCart(cart);
 		uiModel.addAttribute("items", allItem);  //quello che restituisco alla vista
 		int item_number = allItem.size();
 		
@@ -306,13 +306,13 @@ public class UserController {
 
 	@PostMapping(value = "/addtocart")
 	public String addtocart(@RequestParam(value="itemId") String itemId,@ModelAttribute("newCartItem") Cart_item newCartItem, @ModelAttribute("newItem") String newItem) {
-		Cart c = cartService.findByUserId(getCurrentUser().getUser_id());
+		Cart c = cartService.findByUserId(getCurrentUser());
 		List <Cart_item> list = null;
 		Long idcarit=null;
 		int tot=0;
 		newCartItem.setCart(c);
 		Item item= itemService.findById(Long.parseLong(itemId));
-		list= cartItemService.findByCart_item(newCartItem.getCart().getCart_id(), item.getItem_id());
+		list= cartItemService.findByCart_item(newCartItem.getCart(), item);
 		newCartItem.setItem(item);
 		if(list.size()==0)
 		{
@@ -400,8 +400,8 @@ public class UserController {
 	@GetMapping(value = "/addresslist")
 	public String listAddress( Model uiModel) {
 		
-		User user =getCurrentUser();
-		 List<Address> allAddresses = this.addressService.findByUserId(user.getUser_id());
+		//User user =getCurrentUser();
+		 List<Address> allAddresses = this.addressService.findByUserId(getCurrentUser());
 		if(allAddresses.size()<1) {
 			uiModel.addAttribute("address", null);
 		}else {		
@@ -489,7 +489,7 @@ public class UserController {
 		User u = getCurrentUser();
 		boolean flag=true;
     	List <String> err=new ArrayList<String>();
-		List <Address> allAddresses = this.addressService.findByUserId(u.getUser_id());
+		List <Address> allAddresses = this.addressService.findByUserId(getCurrentUser());
 		String regexcar ="^[A-Za-z\\s]+$";
 		String regexcen ="^[A-Za-z0-9\\s]+$";
 		String regexnum ="^[0-9]+$";
@@ -537,7 +537,7 @@ public class UserController {
 	@GetMapping(value = "/purchase")
 	public String purchase(Model uiModel) {
 		User logged_user = getCurrentUser();
-		List <Address> addresses = addressService.findByUserId(logged_user.getUser_id());
+		List <Address> addresses = addressService.findByUserId(getCurrentUser());
 		uiModel.addAttribute("addresses", addresses);
 		uiModel.addAttribute("total", logged_user.getCarts().getTotal());
 		if(logged_user.getSub()!= null) {
@@ -555,9 +555,9 @@ public class UserController {
 	
 	@RequestMapping(value="/savepurchase", method = RequestMethod.POST)
 	public String savepurchase(@RequestParam ("paymeth")String paymeth, @RequestParam ("addr") Long addressId, @RequestParam ("total") double newtotal,@RequestParam("tot") double tot,@RequestParam("discount") double discount, Model uiModel) {
-		Long cartId = getCurrentUser().getCarts().getCart_id();
-		List <Cart_item> items = this.cartItemService.findByCart(cartId);
-		List <Address> addresses = addressService.findByUserId(getCurrentUser().getUser_id());
+		Cart cart = getCurrentUser().getCarts();
+		List <Cart_item> items = this.cartItemService.findByCart(cart);
+		List <Address> addresses = addressService.findByUserId(getCurrentUser());
 		if(addresses.size() < 1) {
 			uiModel.addAttribute("errorMessage", "Devi inserire almeno un indirizzo prima di effettuare acquisti");
 			uiModel.addAttribute("address", new Address());
@@ -583,8 +583,8 @@ public class UserController {
 	
 	@GetMapping(value ="/myorders")
 	public String myorders(Model uiModel) {
-		if(purchaseService.findByUserId(getCurrentUser().getUser_id()).size() > 0) {
-			List <Purchase> purchases = purchaseService.findByUserId(getCurrentUser().getUser_id());
+		if(purchaseService.findByUser(getCurrentUser()).size() > 0) {
+			List <Purchase> purchases = purchaseService.findByUser(getCurrentUser());
 			List <Myorder> myorders = new ArrayList<Myorder>();
 			List<List<Cart_item>> cartitems = new ArrayList<List<Cart_item>>();
 			//List<List<Item>> items = new ArrayList<List<Item>>();
@@ -592,7 +592,7 @@ public class UserController {
 			Myorder order = new Myorder();
 			for (Purchase p : purchases) {
 				order = new Myorder(p.getAddress(), p.getTotal(), p.getDate(), p.getPay_method());
-				cartitems.add(cartItemService.findByPurchaseCode(p.getPurchase_id()));
+				cartitems.add(cartItemService.findByPurchase(p));
 				//addresses.add(addressService.findById(p.getAddress().getAddress_id()));
 			
 				for(List<Cart_item> c : cartitems) {

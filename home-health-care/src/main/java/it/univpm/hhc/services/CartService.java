@@ -11,7 +11,7 @@ public interface CartService {
 	
 	Cart findById(Long id);
 	
-	Cart findByUserId(Long id);
+	Cart findByUserId(User user);
 	
 	Cart create (int item_num, double total, User user);
 	

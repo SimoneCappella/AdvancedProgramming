@@ -18,7 +18,7 @@ public interface SubDao {
 	
 	List<Sub> findByName(String name);
 	
-	List <Sub> findbySub(Long id);
+	//List <Sub> findbySub(Long id);
 
 	Sub create(String name, Double price, int discount);
 	

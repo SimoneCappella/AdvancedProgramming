@@ -52,9 +52,9 @@ public class SubDaoDefault extends DefaultDao implements SubDao {
 //		return this.getSession().createQuery("FROM Sub s WHERE s.title = :title", Sub.class).setParameter("title", title).getSingleResult();
 //	}
 
-	@Override
+	/*@Override
 	public List<Sub> findbySub(Long id) {
 		return getSession().createQuery("from Sub s where sub_id= '"+id+"'", Sub.class).getResultList();
-	}
+	}*/
 	
 }

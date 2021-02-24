@@ -39,7 +39,7 @@ public class Cart implements Serializable {
 	
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_code", referencedColumnName = "user_id")
+	@JoinColumn(name = "USER", referencedColumnName = "user_id")
 	public User getUser() {
 		return this.user;
 	}

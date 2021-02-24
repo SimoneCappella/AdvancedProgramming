@@ -24,8 +24,8 @@ public class PurchaseDaoDefault extends DefaultDao implements PurchaseDao {
 	}
 	
 	@Override
-	public List<Purchase> findByUserId(Long id){
-		return getSession().createQuery("from Purchase p where USER_CODE ='" + id + "'", Purchase.class).getResultList();
+	public List<Purchase> findByUser(User user){
+		return getSession().createQuery("from Purchase p where p.user = :user", Purchase.class).setParameter("user", user).getResultList();
 	}
 
 	@Override

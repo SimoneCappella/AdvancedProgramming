@@ -67,13 +67,13 @@ public class Purchase implements Serializable {
 	
 	//relazione ManyToOne con user
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "USER_CODE")
+	@JoinColumn(name = "USER")
 	public User getUser() {
 		return this.user;
 	}
 	
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "ADDRESS_CODE", referencedColumnName = "address_id")
+	@JoinColumn(name = "ADDRESS", referencedColumnName = "address_id")
 	public Address getAddress() {
 		return this.address;
 	}

@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import java.util.List;
 import it.univpm.hhc.model.entities.Cart;
 import it.univpm.hhc.model.entities.Item;
+import it.univpm.hhc.model.entities.Purchase;
 import it.univpm.hhc.model.entities.Cart_item;
 
 public interface CartItemDao {
@@ -15,11 +16,11 @@ public interface CartItemDao {
 	
 	Cart_item findById(Long id);
 	
-	List<Cart_item> findByCart (Long id);
+	List<Cart_item> findByCart (Cart cart);
 	
 	List<Cart_item> findAll();
 	
-	List<Cart_item> findByPurchaseCode(Long id);
+	List<Cart_item> findByPurchase(Purchase purchase);
 	
 	Cart_item create(Cart cart, Item item, int quantity);
 	
@@ -27,6 +28,6 @@ public interface CartItemDao {
 	
 	void delete(Cart_item cart_item);
 	
-	List<Cart_item> findByCart_item(Long id, Long itemcod);
+	List<Cart_item> findByCart_item(Cart cart, Item item);
 }
 

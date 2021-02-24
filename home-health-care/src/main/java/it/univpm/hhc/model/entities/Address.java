@@ -42,7 +42,7 @@ public class Address implements Serializable {
 	
 	//relazione ManyToOne con user
 	@ManyToOne
-	@JoinColumn(name = "USER_CODE")
+	@JoinColumn(name = "USER")
 		public User getUser() {
 			return this.user;
 		}

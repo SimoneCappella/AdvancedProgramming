@@ -20,9 +20,8 @@ public class AddressDaoDefault extends DefaultDao implements AddressDao {
 	}
 	
 	@Override
-	public List<Address> findByUserId(Long user_code){
-		List<Address> ciao =  getSession().createQuery("from Address a where USER_CODE='" + user_code +"'", Address.class).getResultList();
-		return ciao;
+	public List<Address> findByUserId(User user){
+		return this.getSession().createQuery("from Address a where a.user = :user", Address.class).setParameter("user", user).getResultList();
 	}
 
 	@Override
