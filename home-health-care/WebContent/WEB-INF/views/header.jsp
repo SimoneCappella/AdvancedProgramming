@@ -39,11 +39,24 @@ window.onclick = function(event) {
 	    }
 		}
 	}
+if (!event.target.matches('.dropbtn3')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content3");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+	}
+}
 
 function myFunction2() {
 	  document.getElementById("myDropdown2").classList.toggle("show");
 	}
-
+function myFunction3() {
+	  document.getElementById("myDropdown3").classList.toggle("show");
+	}
 	
 	 
 	
@@ -84,11 +97,11 @@ function myFunction2() {
   <c:if test="${! isAuth}"><a href="<c:url value="/register/" />"><i class="fa fa-plus-square"></i> Registati</a></c:if>
 
 <c:if test="${isAuth}">   
-  <div class="dropdown">
-  <a onclick="myFunction()" class="dropbtn">
-  <i class="fa fa-cog" ></i> Opzioni</a>
-  <div id="myDropdown" class="dropdown-content">
-    <a href="<c:url value="/users/myorders" />"><i class="fa fa-shopping-bag" ></i> Storico Ordini</a>
+  <div class="dropdown3">
+  <a onclick="myFunction3()" class="dropbtn3">
+  <i class="fa fa-cog" ></i> Opzioni Utente</a>
+  <div id="myDropdown3" class="dropdown-content3">
+        <a href="<c:url value="/users/myorders" />"><i class="fa fa-shopping-bag" ></i> Storico Ordini</a>
     <a href="<c:url value="/users/view_sub" />">
     	<c:if test="${a eq 0}">
     		<i class="fa fa-address-card" style="color:green;"></i>
@@ -100,11 +113,14 @@ function myFunction2() {
 			<i class="fa fa-address-card" style="color:red;"></i>
 			</c:if>
     		Abbonamento</a>
-    <a href="<c:url value="/users/sublist/" />"><i class="fa fa-building" ></i> I Miei Indirizzi</a>
+    <a href="<c:url value="/users/addresslist/" />"><i class="fa fa-building" ></i> I Miei Indirizzi</a>
 
   </div>
 </div>
 </c:if>
+
+
+
 <c:if test="${isAdmin}">   
   <div class="dropdown2">
   <a onclick="myFunction2()" class="dropbtn2">
@@ -117,7 +133,7 @@ function myFunction2() {
   </div>
 </div>
 </c:if>
-  
+
 
   <c:if test="${! isAuth}"><a href="<c:url value="/login" />"><i class="fa fa-fw fa-user"></i> Login</a></c:if>
   <c:if test="${isAuth}"><a href="<c:url value="/logout" />"><i class="fa fa-sign-out"></i> Logout</a></c:if>
