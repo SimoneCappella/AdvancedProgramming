@@ -11,7 +11,7 @@ public interface PurchaseService {
 	
 	List<Purchase> findAll();
 	
-	List<Purchase> findByUserId(Long id);
+	List<Purchase> findByUser(User user);
 	
 	Purchase findById(Long id);
 	

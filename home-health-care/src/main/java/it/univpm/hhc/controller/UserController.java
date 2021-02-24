@@ -583,8 +583,8 @@ public class UserController {
 	
 	@GetMapping(value ="/myorders")
 	public String myorders(Model uiModel) {
-		if(purchaseService.findByUserId(getCurrentUser().getUser_id()).size() > 0) {
-			List <Purchase> purchases = purchaseService.findByUserId(getCurrentUser().getUser_id());
+		if(purchaseService.findByUser(getCurrentUser()).size() > 0) {
+			List <Purchase> purchases = purchaseService.findByUser(getCurrentUser());
 			List <Myorder> myorders = new ArrayList<Myorder>();
 			List<List<Cart_item>> cartitems = new ArrayList<List<Cart_item>>();
 			//List<List<Item>> items = new ArrayList<List<Item>>();
