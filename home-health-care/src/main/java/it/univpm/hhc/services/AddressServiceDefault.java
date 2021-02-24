@@ -31,8 +31,8 @@ public class AddressServiceDefault implements AddressService {
 	}
 	
 	@Override
-	public List<Address> findByUserId(Long user_code){
-		return this.addressDao.findByUserId(user_code);
+	public List<Address> findByUserId(User user){
+		return this.addressDao.findByUserId(user);
 	}
 
 	@Override

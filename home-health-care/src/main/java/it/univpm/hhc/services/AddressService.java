@@ -14,7 +14,7 @@ public interface AddressService {
 	
 	Address create (String cap, String city, String street, String civ_num, User user);
 	
-	List<Address> findByUserId(Long user_code);
+	List<Address> findByUserId(User user);
 	
 	Address update(Address address);
 	
