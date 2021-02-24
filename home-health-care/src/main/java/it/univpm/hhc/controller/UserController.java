@@ -234,8 +234,8 @@ public class UserController {
 	@GetMapping(value = "/cartlist")
 	public String list( Model uiModel) {
 		double total = 0;
-		Long cartLong= getCurrentUser().getCarts().getCart_id();
-		List<Cart_item> allItem = this.cartItemService.findByCart(cartLong);
+		Cart cart= getCurrentUser().getCarts();
+		List<Cart_item> allItem = this.cartItemService.findByCart(cart);
 		uiModel.addAttribute("items", allItem);  //quello che restituisco alla vista
 		int item_number = allItem.size();
 		
@@ -312,7 +312,7 @@ public class UserController {
 		int tot=0;
 		newCartItem.setCart(c);
 		Item item= itemService.findById(Long.parseLong(itemId));
-		list= cartItemService.findByCart_item(newCartItem.getCart().getCart_id(), item.getItem_id());
+		list= cartItemService.findByCart_item(newCartItem.getCart(), item);
 		newCartItem.setItem(item);
 		if(list.size()==0)
 		{
@@ -555,8 +555,8 @@ public class UserController {
 	
 	@RequestMapping(value="/savepurchase", method = RequestMethod.POST)
 	public String savepurchase(@RequestParam ("paymeth")String paymeth, @RequestParam ("addr") Long addressId, @RequestParam ("total") double newtotal,@RequestParam("tot") double tot,@RequestParam("discount") double discount, Model uiModel) {
-		Long cartId = getCurrentUser().getCarts().getCart_id();
-		List <Cart_item> items = this.cartItemService.findByCart(cartId);
+		Cart cart = getCurrentUser().getCarts();
+		List <Cart_item> items = this.cartItemService.findByCart(cart);
 		List <Address> addresses = addressService.findByUserId(getCurrentUser());
 		if(addresses.size() < 1) {
 			uiModel.addAttribute("errorMessage", "Devi inserire almeno un indirizzo prima di effettuare acquisti");
@@ -592,7 +592,7 @@ public class UserController {
 			Myorder order = new Myorder();
 			for (Purchase p : purchases) {
 				order = new Myorder(p.getAddress(), p.getTotal(), p.getDate(), p.getPay_method());
-				cartitems.add(cartItemService.findByPurchaseCode(p.getPurchase_id()));
+				cartitems.add(cartItemService.findByPurchase(p));
 				//addresses.add(addressService.findById(p.getAddress().getAddress_id()));
 			
 				for(List<Cart_item> c : cartitems) {

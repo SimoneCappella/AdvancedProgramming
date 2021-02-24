@@ -32,7 +32,7 @@ public class Cart_item implements Serializable{
 	}
 	
 	@ManyToOne
-	@JoinColumn(name = "CART_CODE")
+	@JoinColumn(name = "CART")
 	public Cart getCart() {
 		return this.cart;
 	}
@@ -43,7 +43,7 @@ public class Cart_item implements Serializable{
 	}
 	
 	@ManyToOne
-	@JoinColumn(name = "ITEM_CODE")
+	@JoinColumn(name = "ITEM")
 	public Item getItem() {
 		return this.item;
 	}
@@ -56,7 +56,7 @@ public class Cart_item implements Serializable{
 
 	//Relazione ManyToOne con Purchase
 	@ManyToOne
-	@JoinColumn(name = "PURCHASE_CODE")
+	@JoinColumn(name = "PURCHASE")
 	public Purchase getPurchase() {
 		return this.purchase;
 	}

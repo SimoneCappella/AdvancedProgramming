@@ -70,8 +70,8 @@ public class PublicController {
 
 		if (curUser != null) {
 			Sub sub = curUser.getSub();
-			Long cart_id = (cartService.findByUserId(curUser)).getCart_id();
-			List<Cart_item> items = cartItemService.findByCart(cart_id);
+			Cart cart = (cartService.findByUserId(curUser));
+			List<Cart_item> items = cartItemService.findByCart(cart);
 			model.addAttribute("userid", curUser.getUser_id());
 			if (curUser.getSub() != null) {
 				LocalDate date2 = java.time.LocalDate.now();

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import it.univpm.hhc.model.dao.CartItemDao;
 import it.univpm.hhc.model.entities.Cart;
 import it.univpm.hhc.model.entities.Item;
+import it.univpm.hhc.model.entities.Purchase;
 import it.univpm.hhc.model.entities.Cart_item;
 
 @Transactional
@@ -28,17 +29,17 @@ public class CartItemServiceDeafault implements CartItemService{
 	}
 	
 	@Override
-	public List<Cart_item> findByCart(Long id) {
-		return this.cartItemDao.findByCart(id);
+	public List<Cart_item> findByCart(Cart cart) {
+		return this.cartItemDao.findByCart(cart);
 	}
 	@Override
-	public List<Cart_item> findByPurchaseCode(Long id){
-		return this.cartItemDao.findByPurchaseCode(id);
+	public List<Cart_item> findByPurchase(Purchase purchase){
+		return this.cartItemDao.findByPurchase(purchase);
 	}
 	@Override
-	public List<Cart_item> findByCart_item(Long id, Long itemcod)
+	public List<Cart_item> findByCart_item(Cart cart, Item item)
 	{
-		return this.cartItemDao.findByCart_item(id, itemcod);
+		return this.cartItemDao.findByCart_item(cart, item);
 	}
 	@Override
 	public Cart_item create(Cart cart, Item item, int quantity) {
