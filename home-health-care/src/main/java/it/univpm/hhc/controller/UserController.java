@@ -306,7 +306,7 @@ public class UserController {
 
 	@PostMapping(value = "/addtocart")
 	public String addtocart(@RequestParam(value="itemId") String itemId,@ModelAttribute("newCartItem") Cart_item newCartItem, @ModelAttribute("newItem") String newItem) {
-		Cart c = cartService.findByUserId(getCurrentUser().getUser_id());
+		Cart c = cartService.findByUserId(getCurrentUser());
 		List <Cart_item> list = null;
 		Long idcarit=null;
 		int tot=0;

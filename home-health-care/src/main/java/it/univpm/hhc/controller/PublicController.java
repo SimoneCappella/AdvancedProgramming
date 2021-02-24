@@ -70,7 +70,7 @@ public class PublicController {
 
 		if (curUser != null) {
 			Sub sub = curUser.getSub();
-			Long cart_id = (cartService.findByUserId(curUser.getUser_id())).getCart_id();
+			Long cart_id = (cartService.findByUserId(curUser)).getCart_id();
 			List<Cart_item> items = cartItemService.findByCart(cart_id);
 			model.addAttribute("userid", curUser.getUser_id());
 			if (curUser.getSub() != null) {
