@@ -72,13 +72,13 @@ function Validation(){
 		  document.getElementById("email").style.border = "medium solid red";
 		  document.getElementById("email1").innerHTML = ' Compila questo campo con almeno 4 caratteri';
 	}
-	if (document.getElementById("pass").value.length <7 || document.getElementById("pass").value.length >20) {
+	/*if (document.getElementById("password").value.length <7 || document.getElementById("password").value.length >20) {
 		  c=true;
-		  document.getElementById("pass").style.border = "medium solid red";
-		  document.getElementById("pass1").innerHTML = ' Compila questo campo con almeno 7 caratteri';
-	  }
-	
-	if(c == true){
+		  alert(c);
+		  document.getElementById("password").style.border = "medium solid red";
+		  document.getElementById("password1").innerHTML = ' Compila questo campo con almeno 7 caratteri';
+	  }*/
+	if(c){
 		return false;
 	}
 }
@@ -129,7 +129,7 @@ function Validation(){
 					<td><form:hidden path="user_id" /></td>
 				</tr>
                 <tr>
-					<td><input type="submit" value="Submit" onclick="return Validation(this.id);"/></td>
+					<td><input type="submit" value="Submit" onclick="return Validation();"/></td>
 					<td><input type="reset" value="Reset"></td>
                 </tr>
 
