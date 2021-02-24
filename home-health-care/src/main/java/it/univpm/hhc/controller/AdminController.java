@@ -111,6 +111,13 @@ public class AdminController {
     		flag = false;
     	}
     	if(flag == true && newUser.getPassword().length() == 0) {
+    		
+    		if(getCurrentUser().getUser_id() == newUser.getUser_id() && (getCurrentUser().isRole() != newUser.isRole() ||
+    				getCurrentUser().getEmail() != newUser.getEmail())){
+    			newUser.setPassword(u.getPassword());
+        		this.userService.update(newUser);
+    			return "redirect:/logout";
+    		}
     		newUser.setPassword(u.getPassword());
     		this.userService.update(newUser);
     		String errorMessage = "Profilo modificato con successo.";
@@ -118,10 +125,15 @@ public class AdminController {
     		uiModel.addAttribute("errorMessage", errorMessage);
     		return "admins/userform";
     	}else if(flag == true && !(u.getPassword()).equals(newUser.getPassword())) {
-    		this.userService.updatewithpass(newUser);
+    		if(getCurrentUser().getUser_id() == newUser.getUser_id() && (getCurrentUser().isRole() != newUser.isRole() ||
+    				getCurrentUser().getEmail() != newUser.getEmail())){
+    			this.userService.updatewithpass(newUser);
+    			return "redirect:/logout";
+    		}
     		String errorMessage = "Profilo modificato con successo.";
         	uiModel.addAttribute("user", newUser);
     		uiModel.addAttribute("errorMessage", errorMessage);
+    		this.userService.updatewithpass(newUser);
     		return "admins/userform";
     	}
     	uiModel.addAttribute("user", newUser);
