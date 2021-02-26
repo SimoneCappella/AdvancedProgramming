@@ -100,7 +100,7 @@ function Validation(){
                 </tr>
 				<tr>
 					<td><form:label path="image">Immagine: </form:label></td>
-                    <td><input type='text' id='image' name='image' value="${item.image}" style="border: thin solid black"/></td>
+                    <td><input type='file' id='image' name='image' value="${item.image}" style="border: thin solid black"/></td>
 					<td><label id="image1" style="color: red;font-weight: bold;"></label></td>
                 </tr>
 				<tr>
