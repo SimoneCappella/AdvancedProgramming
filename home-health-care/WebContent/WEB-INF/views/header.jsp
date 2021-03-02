@@ -8,7 +8,6 @@
 	<sec:authorize access="hasRole('ADMIN')" var="isAdmin" />
 	<sec:authorize access="hasRole('USER')" var="isUser" />
 	<sec:authorize access="isAuthenticated()" var="isAuth" />
-<<<<<<< HEAD
 	<style>
     ul {     
         padding:0;     
@@ -77,7 +76,6 @@
          </ul>    
        </li>    
     </ul> 
-=======
 	
 	
 <style>
@@ -205,4 +203,3 @@
 
 </div>
 </div>
->>>>>>> branch 'main' of https://github.com/SimoKappa/AdvancedProgramming
