@@ -173,6 +173,24 @@ public class PublicController {
 
 		return "registration";
 	}
+	
+	@GetMapping(value = "/chisiamo")
+	public String chisiamoPage() {
+		
+		return "chisiamo";
+	}
+	
+	@GetMapping(value = "/lavoraconnoi")
+	public String lavoraPage() {
+		
+		return "lavoraconnoi";
+	}
+	
+	@GetMapping(value = "/obiettivoprogetto")
+	public String obiettivoprogettoPage() {
+		
+		return "obiettivoprogetto";
+	}
 
 	@PostMapping(value = "/save")
 	public String savenew(@ModelAttribute("newUser") User newUser, BindingResult br, Model model) {

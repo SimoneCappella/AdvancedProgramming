@@ -15,4 +15,13 @@
 <definition extends="default" name="itemlist">
    <put-attribute name="body" value="/WEB-INF/views/itemlist.jsp" />
   </definition>
+  <definition extends="default" name="chisiamo">
+   <put-attribute name="body" value="/WEB-INF/views/chisiamo.jsp" />
+  </definition>
+  <definition extends="default" name="lavoraconnoi">
+   <put-attribute name="body" value="/WEB-INF/views/lavoraconnoi.jsp" />
+  </definition>
+  <definition extends="default" name="obiettivoprogetto">
+   <put-attribute name="body" value="/WEB-INF/views/obiettivoprogetto.jsp" />
+  </definition>
 </tiles-definitions>

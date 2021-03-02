@@ -54,10 +54,10 @@
 #menu li:hover {    
    
 } 
+a{
+padding:0 16px 0 0;}
 </style>
 
-
-<c:if test="${isAdmin}"> - Sei un Admin</c:if>
 	
 
 
