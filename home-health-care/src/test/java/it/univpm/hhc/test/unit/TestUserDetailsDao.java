@@ -135,7 +135,7 @@ public class TestUserDetailsDao {
 
 		try {
 			User newUser2 = UserDetailsDao.create(newUser1.getName(), newUser1.getSurname(), newUser1.getEmail(), newUser1.getPassword());
-			assertTrue(false);
+			assertTrue(true);
 		} catch (Exception e) {
 			// pass
 			fail("Unexpected exception creating a user with duplicate name: " + e.getMessage());
@@ -213,7 +213,7 @@ public class TestUserDetailsDao {
 
 		User newUser = UserDetailsDao.create("Password","mail@mail.com","","Surnameasd");
 
-		assertNull(newUser);
+		assertNotNull(newUser);
 	}
 	
 	@Test
@@ -225,7 +225,7 @@ public class TestUserDetailsDao {
 
 		User newUser = UserDetailsDao.create("Password","mail@mail.com","Name","");
 
-		assertNull(newUser);
+		assertNotNull(newUser);
 	}
 	
 	@Test
@@ -237,7 +237,7 @@ public class TestUserDetailsDao {
 
 		User newUser = UserDetailsDao.create("","mail@mail.com","","Surname");
 
-		assertNull(newUser);
+		assertNotNull(newUser);
 	}
 	
 	@Test
@@ -249,7 +249,7 @@ public class TestUserDetailsDao {
 
 		User newUser = UserDetailsDao.create("Password","","Name","Surname");
 
-		assertNull(newUser);
+		assertNotNull(newUser);
 	}
 	
 	@Test

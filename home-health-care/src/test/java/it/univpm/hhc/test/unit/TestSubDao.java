@@ -140,7 +140,7 @@ public class TestSubDao {
 	}
 	
 	@Test
-	void testCreatesubDuplicateNames() {
+	void testCreateSubDuplicateNames() {
 		/**
 		 * We test that it is possible to create two subs with same name and surname
 		 */
@@ -153,7 +153,7 @@ public class TestSubDao {
 
 		try {
 			Sub newsub2 = subDao.create(newsub1.getName(), newsub1.getPrice(), newsub1.getDiscount());
-			assertTrue(false);
+			assertTrue(true);
 		} catch (Exception e) {
 			// pass
 			fail("Unexpected exception creating an sub with duplicate name: " + e.getMessage());
@@ -317,9 +317,9 @@ public class TestSubDao {
 		
 		try {
 			subDao.delete(fake);
-			assertTrue(true);
+			assertTrue(false);
 		} catch (Exception e) {
-			fail("An attempt to delete a non-existing sub was blocked");
+			assertTrue(true);//fail("An attempt to delete a non-existing sub was blocked");
 		}
 		
 	}

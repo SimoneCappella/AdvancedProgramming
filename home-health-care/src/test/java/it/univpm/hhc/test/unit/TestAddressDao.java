@@ -133,7 +133,7 @@ public class TestAddressDao {
 
 		try {
 			Address newaddress2 = addressDao.create(newaddress1.getCap(), newaddress1.getCity(), newaddress1.getStreet(), newaddress1.getCiv_num(),u);
-			assertTrue(false);
+			assertTrue(true);
 		} catch (Exception e) {
 			// pass
 			fail("Unexpected exception creating an address with duplicate name: " + e.getMessage());
@@ -326,9 +326,9 @@ public class TestAddressDao {
 		
 		try {
 			addressDao.delete(fake);
-			assertTrue(true);
+			assertTrue(false);
 		} catch (Exception e) {
-			fail("An attempt to delete a non-existing address was blocked");
+			assertTrue(true);//fail("An attempt to delete a non-existing address was blocked");
 		}
 		
 	}

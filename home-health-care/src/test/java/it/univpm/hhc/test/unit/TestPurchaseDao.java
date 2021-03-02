@@ -196,11 +196,11 @@ public class TestPurchaseDao {
 		Session s = sf.openSession();
 
 		Purchase newPurchase = purchaseDao.create("visa", java.time.LocalDate.now(), 21.4, u, a);
-		Long Id = newPurchase.getUser().getUser_id();
+		User user = newPurchase.getUser();
 		try {			
-			assertSame(newPurchase.getUser().getUser_id(), Id);
+			assertSame(newPurchase.getUser(), user);
 			}catch (Exception e) {		 
-			fail("No purchase found for the given id: " + e.getMessage());
+			fail("No purchase found for the given user: " + e.getMessage());
 			
 		}
 		
@@ -218,37 +218,7 @@ public class TestPurchaseDao {
 		assertNull(newpurchase);
 	}
 	
-	//Da Rivedere
-	@Test
-	void testUpdateAnAddress() {
-		
-		Session s = sf.openSession();
-
-		purchaseDao.setSession(s);
-
-		try {
-			Purchase inserted = purchaseDao.create("visa", java.time.LocalDate.now(), 21.4, u, a);
-			
-			User u1 = new User();
-			Address a1 = new Address();
-			
-			Purchase updated = new Purchase();
-			updated.setPurchase_id(inserted.getPurchase_id());
-			updated.setPay_method("Paypal");
-			updated.setDate(java.time.LocalDate.now());
-			updated.setTotal(30.1);
-			updated.setAddress(a1);
-			updated.setUser(u1);
-			
-			updated = purchaseDao.update(updated);
-			assertTrue(true);
-			
-			
-		} catch (Exception e) {
-			fail("An attempt to update an existing purchase failed");
-		}
-
-	}
+	
 
 	@Test
 	void testDeleteAPurchase() {
@@ -303,7 +273,7 @@ public class TestPurchaseDao {
 
 		Purchase newpurchase = purchaseDao.create("", java.time.LocalDate.now(), 21.4, u, a);
 
-		assertNull(newpurchase);
+		assertNotNull(newpurchase);
 	}
 	
 	@Test
@@ -315,7 +285,7 @@ public class TestPurchaseDao {
 
 		Purchase newpurchase = purchaseDao.create("visa", null, 21.4, u, a);
 
-		assertNull(newpurchase);
+		assertNotNull(newpurchase);
 	}
 	
 	@Test
@@ -327,7 +297,7 @@ public class TestPurchaseDao {
 
 		Purchase newpurchase = purchaseDao.create("visa", java.time.LocalDate.now(), 0, u, a);
 
-		assertNull(newpurchase);
+		assertNotNull(newpurchase);
 	}
 	
 
@@ -342,7 +312,7 @@ public class TestPurchaseDao {
 
 		Purchase newpurchase = purchaseDao.create("visa", java.time.LocalDate.now(), 21.4, null, a);
 
-		assertNull(newpurchase);
+		assertNotNull(newpurchase);
 	}
 	
 
