@@ -2,6 +2,10 @@ package it.univpm.hhc.controller;
 
 import static org.hamcrest.CoreMatchers.nullValue;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.Principal;
 import java.text.DateFormat;
 import java.time.LocalDate;
@@ -9,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,6 +30,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -32,6 +38,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.jayway.jsonpath.internal.function.text.Concatenate;
 
@@ -49,6 +58,7 @@ import it.univpm.hhc.services.UserService;
 @Controller
 public class PublicController {
 
+	public static String uploadDirectory = System.getProperty("user.dir");
 	private CartService cartService;
 	private CartItemService cartItemService;
 	private UserService UserService;
@@ -229,6 +239,25 @@ public class PublicController {
 		return "registration";
 
 	}
+	
+	@GetMapping(value = "/up")
+	public String up() {
+		return "upload";
+	}
+	
+	@RequestMapping(value ="/upload", method = RequestMethod.POST)
+	public String submit(@RequestParam("file") MultipartFile file, Model uiModel) {
+		StringBuilder fileNames = new StringBuilder();	  
+			  Path fileNameAndPath = Paths.get(uploadDirectory, file.getOriginalFilename());
+			  fileNames.append(file.getOriginalFilename()+" ");
+			  try {
+				Files.write(fileNameAndPath, file.getBytes());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		  return "redirect:/";
+	}
+
 
 	@Autowired
 	public void setUserService(UserService userService) {

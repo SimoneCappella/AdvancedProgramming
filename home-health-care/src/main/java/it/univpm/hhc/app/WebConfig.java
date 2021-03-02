@@ -8,9 +8,11 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.format.datetime.DateFormatter;
 import org.springframework.ui.context.support.ResourceBundleThemeSource;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 //import org.springframework.validation.Validator;
 //import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
@@ -54,11 +56,20 @@ public class WebConfig implements WebMvcConfigurer {
 		registry.addResourceHandler("/js/**").addResourceLocations("/WEB-INF/js/")
 		.setCachePeriod(31556926);
 	}
-
+	
+	@Bean(name = "multipartResolver")
+	public CommonsMultipartResolver multipartResolver() throws Exception {
+	    CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+	    multipartResolver.setMaxUploadSize(500000);
+	    multipartResolver.setUploadTempDir(new ClassPathResource("/"));
+	    return multipartResolver;
+	}
+	
+	/*
 	@Bean 
 	StandardServletMultipartResolver multipartResolver() {
 		return new StandardServletMultipartResolver();
-	}
+	}*/
 	
 	/*
 	 * Esempio di funzionamento:

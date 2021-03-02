@@ -15,4 +15,7 @@
 <definition extends="default" name="itemlist">
    <put-attribute name="body" value="/WEB-INF/views/itemlist.jsp" />
   </definition>
+<definition extends="default" name="upload">
+   <put-attribute name="body" value="/WEB-INF/views/upload.jsp" />
+  </definition>
 </tiles-definitions>
