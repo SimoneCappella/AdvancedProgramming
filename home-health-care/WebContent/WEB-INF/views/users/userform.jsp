@@ -123,22 +123,6 @@
 			<td><label id="surname1" style="color: red; font-weight: bold;"></label></td>
 			                
 		</tr>
-		<tr>
-			                    
-			<td><form:hidden path="password" /></td>                 
-		</tr>
-		<tr>
-			                    
-			<td><form:hidden path="role" /></td>                 
-		</tr>
-		<tr>
-			                    
-			<td><form:hidden path="active" /></td>                 
-		</tr>
-
-		<tr>
-			<td><form:hidden path="user_id" /></td>
-		</tr>
 		                
 		<tr>
 			<td><input type="submit" value="Modifica"

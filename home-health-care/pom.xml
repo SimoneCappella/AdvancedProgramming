@@ -19,6 +19,12 @@
       <version>5.2.0.RELEASE</version>
     </dependency>
     <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-devtools</artifactId>
+        <optional>true</optional>
+        <version>2.4.3</version>
+        </dependency>
+    <dependency>
                 <groupId>com.sun.mail</groupId>
                 <artifactId>javax.mail</artifactId>
                 <version>1.6.2</version>
@@ -106,7 +112,11 @@
       <version>1.9</version>
       <type>pom</type>
     </dependency>
-	
+	<dependency>
+    <groupId>commons-fileupload</groupId>
+    <artifactId>commons-fileupload</artifactId>
+    <version>1.4</version>
+</dependency>
 	<dependency>  
 	    <groupId>org.apache.tiles</groupId>  
 	    <artifactId>tiles-jsp</artifactId>  

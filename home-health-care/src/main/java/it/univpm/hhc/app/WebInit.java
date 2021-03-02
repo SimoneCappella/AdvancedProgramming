@@ -2,9 +2,16 @@ package it.univpm.hhc.app;
 
 
 import javax.servlet.Filter;
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRegistration;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.web.context.support.GenericWebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
+import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import it.univpm.hhc.security.WebSecurityConfig;
@@ -23,6 +30,16 @@ public class WebInit extends AbstractAnnotationConfigDispatcherServletInitialize
 		};
 	}
 
+	
+	/*@Override
+	public void onStartup(ServletContext sc) throws ServletException {
+		ServletRegistration.Dynamic appServlet = sc.addServlet("mvc", new DispatcherServlet(
+		          new GenericWebApplicationContext()));
+        appServlet.setLoadOnStartup(1);
+        MultipartConfigElement multipartConfigElement = new MultipartConfigElement("/WEB-INF/media", (5000000), 5000000, 5000000/2);
+		appServlet.setMultipartConfig(multipartConfigElement);
+		super.onStartup(sc);
+	}*/
 	
 	@Override
 	protected Class<?>[] getServletConfigClasses() {

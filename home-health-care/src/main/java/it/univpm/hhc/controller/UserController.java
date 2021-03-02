@@ -153,7 +153,12 @@ public class UserController {
 	
 	@PostMapping(value = "/save")
 	public String saveUser(@ModelAttribute("newUser") User newUser, Model uiModel) {
-		
+		User u = getCurrentUser();
+		newUser.setRole(u.isRole());
+		newUser.setPassword(u.getPassword());
+		newUser.setActive(u.isActive());
+		newUser.setUser_id(u.getUser_id());
+		//elimino parametri dalla form e tramite currentuser mi prendo quelli che mi servono
 		String regexmail ="^[A-Za-z0-9+_.-]+@(.+)$";
     	String regexname ="^[A-Za-z]+$";
     	Pattern patternmail = Pattern.compile(regexmail);
