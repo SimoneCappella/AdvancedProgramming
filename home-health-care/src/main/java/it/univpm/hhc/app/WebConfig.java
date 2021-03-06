@@ -60,8 +60,8 @@ public class WebConfig implements WebMvcConfigurer {
 	@Bean(name = "multipartResolver")
 	public CommonsMultipartResolver multipartResolver() throws Exception {
 	    CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-	    multipartResolver.setMaxUploadSize(500000);
-	    multipartResolver.setUploadTempDir(new ClassPathResource("/"));
+	    multipartResolver.setMaxUploadSize(5000000);
+	    //multipartResolver.setUploadTempDir(new ClassPathResource("/"));
 	    return multipartResolver;
 	}
 	

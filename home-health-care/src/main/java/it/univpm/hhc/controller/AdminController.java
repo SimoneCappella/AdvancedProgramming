@@ -1,9 +1,15 @@
 package it.univpm.hhc.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,6 +24,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.multipart.MultipartFile;
 
 import it.univpm.hhc.model.entities.Sub;
@@ -38,6 +45,9 @@ public class AdminController {
 	private AddressService addressService;
 	private ItemService itemService;
 	
+	@Autowired
+	ServletContext context;
+	
 	public User getCurrentUser()
 	{
 		
@@ -52,6 +62,23 @@ public class AdminController {
 			return null;
 		}
 			
+	}
+	
+	public String upimage(MultipartFile file) throws MaxUploadSizeExceededException{
+		if( !(file.getContentType().toString()).equals("image/png") && !(file.getContentType().toString()).equals("image/jpg") && !(file.getContentType().toString()).equals("image/jpeg")) {
+			
+			return "0";
+		}
+		String p = context.getRealPath(".");
+		StringBuilder fileNames = new StringBuilder();	  
+			  Path fileNameAndPath = Paths.get(p, "WEB-INF", "media", file.getOriginalFilename());
+			  fileNames.append(file.getOriginalFilename()+" ");
+			  try {
+				Files.write(fileNameAndPath, file.getBytes());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		  return fileNameAndPath.toString();
 	}
 	
 	@GetMapping(value = "/userlist")
@@ -349,7 +376,12 @@ return "admins/itemform";
 }
 
 @PostMapping(value = "/itemsave")
-public String saveItem(@ModelAttribute("newItem") Item newItem, BindingResult br, Model uiModel) {
+public String saveItem(@RequestParam("image") MultipartFile file, @RequestParam("title") String title, 
+		@RequestParam("description") String description , @RequestParam("price") Double price, Model uiModel) {
+	Item newItem = new Item();
+	newItem.setTitle(title);
+	newItem.setDescription(description);
+	newItem.setPrice(price);
 	String regexname = "^[A-Za-z\\s]+$";
 	String regexdescr = "^[A-Za-z0-9.,:;!?()\\s]+$";
 	String regexprice = "\\d+(.\\d{1,2})?$";
@@ -373,22 +405,35 @@ public String saveItem(@ModelAttribute("newItem") Item newItem, BindingResult br
 		err.add("Puoi inserire solo numeri e punti nel prezzo e massimo due cifre decimali.");
 		flag = false;
 	}
+	String path;
 	List<Item> item = null;
 	item = itemService.findByTitle(newItem.getTitle());
 	if (flag == true && item.size() > 0) {
 		for (Item i : item) {
+			path = upimage(file);
+			if (path.equals("0")) {
+				uiModel.addAttribute("errorMessage", "Il formato dell'immagine non è supportato!");
+				uiModel.addAttribute("item", newItem);
+				return "admins/itemform";
+			}
 			i.setTitle(newItem.getTitle());
 			i.setDescription(newItem.getDescription());
 			i.setPrice(newItem.getPrice());
-			i.setImage(newItem.getImage());
-			this.itemService.update(i);
+			i.setImage(path);
+			this.itemService.update(i);	
 		}	
 		String message = "L'oggetto '" + newItem.getTitle() + "' è stato modificato con successo.";
 		uiModel.addAttribute("errorMessage", message);
 		uiModel.addAttribute("item", newItem);
 		return "admins/itemform";
 	} else if(flag == true && item.size() == 0) {
-		this.itemService.create(newItem.getTitle(), newItem.getDescription(), newItem.getPrice(), newItem.getImage());
+		path = upimage(file);
+		if (path.equals("0")) {
+			uiModel.addAttribute("errorMessage", "Il formato dell'immagine non è supportato!");
+			uiModel.addAttribute("item", newItem);
+			return "admins/itemform";
+		}
+		this.itemService.create(newItem.getTitle(), newItem.getDescription(), newItem.getPrice(), path);
 		String message = "L'oggetto '" + newItem.getTitle() + "' è stato aggiunto con successo.";
 		uiModel.addAttribute("errorMessage", message);
 		uiModel.addAttribute("item", newItem);

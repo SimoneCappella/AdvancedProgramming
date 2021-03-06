@@ -77,35 +77,32 @@ function Validation(){
 </c:forEach>
 </div>
 </c:if>
-        <form:form method="POST" action="${action_url}" modelAttribute="item">
+        <form:form method="POST" action="${action_url}"  enctype="multipart/form-data">
              <table>
 			<thead>
 				<c:if test="${empty item.item_id}">
                
 				</c:if>
                <tr>
-                    <td><form:label path="title">Nome: </form:label></td>
+                    <td><label>Nome: </label></td>
                     <td><input type='text' id='title' name='title' onfocusout='return Validate(this.id);' value="${item.title}" style="border: thin solid black"/></td>
 					<td><label id="title1" style="color: red;font-weight: bold;"></label></td>
                 </tr>
 				<tr>
-                    <td><form:label path="description">Descrizione: </form:label></td>
+                    <td><label>Descrizione: <label></td>
                     <td><input type='text' id='description' name='description' onfocusout='return Validate(this.id);' value="${item.description}" style="border: thin solid black"/></td>
 					<td><label id="description1" style="color: red;font-weight: bold;"></label></td>
                 </tr>
 				<tr>
-                    <td><form:label path="price">Prezzo: </form:label></td>
+                    <td><label>Prezzo: </label></td>
                     <td><input type='text' id='price' name='price' value="${item.price}" style="border: thin solid black"/></td>
 					<td><label id="price1" style="color: red;font-weight: bold;"></label></td>
                 </tr>
 				<tr>
-					<td><form:label path="image">Immagine: </form:label></td>
+					<td><label>Immagine: </label></td>
                     <td><input type='file' id='image' name='image' value="${item.image}" style="border: thin solid black"/></td>
 					<td><label id="image1" style="color: red;font-weight: bold;"></label></td>
                 </tr>
-				<tr>
-					<td><form:hidden path="item_id" /></td>
-				</tr>
                 <tr>
 					<td><input name ="submit" type="submit" value="Conferma" onclick='return Validation();'/></td>
                 </tr>

@@ -3,6 +3,9 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page session="false"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<c:if test="${not empty errorMessage}">
+	<div style="color: red; font-weight: bold; "><h1>${errorMessage}</h1></div>
+</c:if>
 <form method="POST" action="upload" enctype="multipart/form-data">
     <table>
         <tr>

@@ -17,6 +17,10 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.hamcrest.text.IsEmptyString;
 import org.hibernate.query.criteria.internal.expression.function.CurrentDateFunction;
 import org.mockito.internal.matchers.CompareTo;
@@ -38,9 +42,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.jayway.jsonpath.internal.function.text.Concatenate;
 
@@ -63,9 +69,13 @@ public class PublicController {
 	private CartItemService cartItemService;
 	private UserService UserService;
 	private ItemService ItemService;
+	//private ServletContext context;
 	@Autowired
 	String appName;
-
+	
+	@Autowired
+	ServletContext context;
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) { // DA METTERE NELLO USER CONTROLLER
 		System.out.println("Home Page Requested,  locale = " + locale);
@@ -264,9 +274,14 @@ public class PublicController {
 	}
 	
 	@RequestMapping(value ="/upload", method = RequestMethod.POST)
-	public String submit(@RequestParam("file") MultipartFile file, Model uiModel) {
+	public String submit(@RequestParam("file") MultipartFile file, Model uiModel) throws MaxUploadSizeExceededException{
+		if( !(file.getContentType().toString()).equals("image/png") && !(file.getContentType().toString()).equals("image/jpg") && !(file.getContentType().toString()).equals("image/jpeg")) {
+			uiModel.addAttribute("errorMessage", "Il formato dell'immagine non è supportato!");
+			return "upload";
+		}
+		String p = context.getRealPath(".");
 		StringBuilder fileNames = new StringBuilder();	  
-			  Path fileNameAndPath = Paths.get(uploadDirectory, file.getOriginalFilename());
+			  Path fileNameAndPath = Paths.get(p, "WEB-INF", "media", file.getOriginalFilename());
 			  fileNames.append(file.getOriginalFilename()+" ");
 			  try {
 				Files.write(fileNameAndPath, file.getBytes());
