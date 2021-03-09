@@ -12,6 +12,7 @@
 	
 	
 <style>
+
 .custom-ul {     
     padding:0;     
     margin:0    
@@ -83,8 +84,8 @@ padding:0 16px 0 0;}
     request.setAttribute("a", a=2);
 	%>
 </c:if>
-<div class="navbar" style="color:#007bff;"> 
-<span style="  display: flex; align-items: center;"><i class="fa fa-fw fa-home fa-3x"></i><span> Home Healt Care</span></span>
+<div class="navbar" style="color:#007bff; background-color:white"> 
+<span style="  display: flex; align-items: center;"><i class="fa fa-fw fa-home fa-3x"></i><span> Home Health Care</span></span>
 
 
 <div class="navbar" style="float: right;">

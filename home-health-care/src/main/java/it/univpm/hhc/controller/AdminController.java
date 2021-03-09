@@ -78,7 +78,7 @@ public class AdminController {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		  return fileNameAndPath.toString();
+		  return file.getOriginalFilename();
 	}
 	
 	@GetMapping(value = "/userlist")
@@ -376,7 +376,7 @@ return "admins/itemform";
 }
 
 @PostMapping(value = "/itemsave")
-public String saveItem(@RequestParam("image") MultipartFile file, @RequestParam("title") String title, 
+public String saveItem(@RequestParam("image") MultipartFile file, @RequestParam("title") String title, //bisogna passare l'id e metterlo in hidden nel form
 		@RequestParam("description") String description , @RequestParam("price") Double price, Model uiModel) {
 	Item newItem = new Item();
 	newItem.setTitle(title);
@@ -412,14 +412,15 @@ public String saveItem(@RequestParam("image") MultipartFile file, @RequestParam(
 		for (Item i : item) {
 			path = upimage(file);
 			if (path.equals("0")) {
-				uiModel.addAttribute("errorMessage", "Il formato dell'immagine non è supportato!");
+				uiModel.addAttribute("errorMessage", "Il formato dell'immagine non è supportato o non è stata selezionata alcun immagine!");
 				uiModel.addAttribute("item", newItem);
 				return "admins/itemform";
 			}
+			String s="media/"+path;
 			i.setTitle(newItem.getTitle());
 			i.setDescription(newItem.getDescription());
 			i.setPrice(newItem.getPrice());
-			i.setImage(path);
+			i.setImage(s);
 			this.itemService.update(i);	
 		}	
 		String message = "L'oggetto '" + newItem.getTitle() + "' è stato modificato con successo.";
@@ -429,11 +430,11 @@ public String saveItem(@RequestParam("image") MultipartFile file, @RequestParam(
 	} else if(flag == true && item.size() == 0) {
 		path = upimage(file);
 		if (path.equals("0")) {
-			uiModel.addAttribute("errorMessage", "Il formato dell'immagine non è supportato!");
+			uiModel.addAttribute("errorMessage", "Il formato dell'immagine non è supportato o non è stata selezionata alcun immagine!");
 			uiModel.addAttribute("item", newItem);
 			return "admins/itemform";
 		}
-		this.itemService.create(newItem.getTitle(), newItem.getDescription(), newItem.getPrice(), path);
+		this.itemService.create(newItem.getTitle(), newItem.getDescription(), newItem.getPrice(), "media/"+path);
 		String message = "L'oggetto '" + newItem.getTitle() + "' è stato aggiunto con successo.";
 		uiModel.addAttribute("errorMessage", message);
 		uiModel.addAttribute("item", newItem);

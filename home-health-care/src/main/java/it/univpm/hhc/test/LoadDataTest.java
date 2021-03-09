@@ -54,9 +54,9 @@ public class LoadDataTest {
 				
 				session.beginTransaction();
 
-				itemDao.create("Patate","ti riempiono tanto tanto",5,"");
-				itemDao.create("Libro","utile per fermare le carte",10,"");
-				itemDao.create("Mattone","un bel mattone per la tua casa",15,"");
+				itemDao.create("Patate","ti riempiono tanto tanto",5,"media/patate.jpg");
+				itemDao.create("Libro","utile per fermare le carte",10,"media/libro.jpg");
+				itemDao.create("Mattone","un bel mattone per la tua casa",15,"media/logo_transparent.png");
 				
 				List<Item> all= itemDao.findAll();
 				session.getTransaction().commit();

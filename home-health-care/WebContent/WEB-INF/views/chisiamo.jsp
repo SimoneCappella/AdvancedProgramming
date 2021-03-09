@@ -45,6 +45,11 @@ html {
   clear: both;
   display: table;
 }
+.container img{
+ width: 100%;
+    height: auto;
+
+}
 
 .title {
   color: grey;

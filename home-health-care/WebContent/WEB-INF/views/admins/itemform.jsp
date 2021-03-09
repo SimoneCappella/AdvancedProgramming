@@ -18,7 +18,7 @@ function Validate(el){
 		break;
 	case 'description':
 		max = 300;
-		min = 5;
+		min = 2;
 		name = "La descrizione";
 		break;
 	default:
@@ -51,13 +51,13 @@ function Validation(){
 	if (document.getElementById("title").value.length <2 || document.getElementById("title").value.length >20) {
 		  c=true;
 		  document.getElementById("title").style.border = "medium solid red";
-		  document.getElementById("title1").innerHTML = ' Compila questo campo con almeno 2 caratteri';
+		  document.getElementById("title1").innerHTML = ' Compila questo campo con almeno 2 caratteri e massimo 20';
 	  }
 	
-	if (document.getElementById("description").value.length <2 || document.getElementById("description").value.length >20) {
+	if (document.getElementById("description").value.length <2 || document.getElementById("description").value.length >300) {
 		  c=true;
 		  document.getElementById("description").style.border = "medium solid red";
-		  document.getElementById("description1").innerHTML = ' Compila questo campo con almeno 2 caratteri';
+		  document.getElementById("description1").innerHTML = ' Compila questo campo con almeno 2 caratteri e massimo 300';
 	  }
 	
 	
