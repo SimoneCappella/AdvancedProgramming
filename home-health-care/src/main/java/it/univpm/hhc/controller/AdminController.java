@@ -376,13 +376,13 @@ return "admins/itemform";
 }
 
 @PostMapping(value = "/itemsave")
-public String saveItem(@RequestParam("image") MultipartFile file, @RequestParam("title") String title, //bisogna passare l'id e metterlo in hidden nel form
-		@RequestParam("description") String description , @RequestParam("price") Double price, Model uiModel) {
+public String saveItem(@RequestParam("item_id") String item_id, @RequestParam("image") MultipartFile file, @RequestParam("title") String title, //bisogna passare l'id e metterlo in hidden nel form
+		@RequestParam("description") String description , @RequestParam("price") String price, Model uiModel) {
 	Item newItem = new Item();
 	newItem.setTitle(title);
 	newItem.setDescription(description);
-	newItem.setPrice(price);
-	String regexname = "^[A-Za-z\\s]+$";
+	//newItem.setPrice(price);
+	String regexname = "^[0-9A-Za-z\\s]+$";
 	String regexdescr = "^[A-Za-z0-9.,:;!?()\\s]+$";
 	String regexprice = "\\d+(.\\d{1,2})?$";
 	Pattern patternname = Pattern.compile(regexname);
@@ -390,7 +390,7 @@ public String saveItem(@RequestParam("image") MultipartFile file, @RequestParam(
 	Pattern patternprice = Pattern.compile(regexprice);
 	Matcher matchername = patternname.matcher(newItem.getTitle());
 	Matcher matcherdescr = patterndescr.matcher(newItem.getDescription());
-	Matcher matcherprice = patternprice.matcher(String.valueOf(newItem.getPrice()));
+	Matcher matcherprice = patternprice.matcher(price);
 	List <String> err = new ArrayList<String>();
 	boolean flag = true;
 	if(!matchername.matches()) {
@@ -401,17 +401,27 @@ public String saveItem(@RequestParam("image") MultipartFile file, @RequestParam(
 		err.add("Hai inserito caratteri proibiti nella descrizione.");
 		flag = false;
 	}
-	if(!matcherprice.matches() || newItem.getPrice() == 0.0) {
+	if(!matcherprice.matches()) {
 		err.add("Puoi inserire solo numeri e punti nel prezzo e massimo due cifre decimali.");
+		uiModel.addAttribute("item", newItem);
+		uiModel.addAttribute("errorMessage", err);
+		return "admins/itemform";
+	}
+	newItem.setPrice(Double.valueOf(price));
+	if(newItem.getPrice() <= 0) {
+		err.add("Devi inserire un prezzo maggiore di 0.");
 		flag = false;
 	}
 	String path;
-	List<Item> item = null;
-	item = itemService.findByTitle(newItem.getTitle());
+	List<Item> item = new ArrayList<Item>();
+	if (!item_id.equals("")) {
+		item = itemService.findByIdList(Long.parseLong(item_id));
+	}
 	if (flag == true && item.size() > 0) {
 		for (Item i : item) {
 			path = upimage(file);
 			if (path.equals("0")) {
+				newItem.setItem_id(Long.parseLong(item_id));
 				uiModel.addAttribute("errorMessage", "Il formato dell'immagine non è supportato o non è stata selezionata alcun immagine!");
 				uiModel.addAttribute("item", newItem);
 				return "admins/itemform";
@@ -424,6 +434,7 @@ public String saveItem(@RequestParam("image") MultipartFile file, @RequestParam(
 			this.itemService.update(i);	
 		}	
 		String message = "L'oggetto '" + newItem.getTitle() + "' è stato modificato con successo.";
+		newItem.setItem_id(Long.parseLong(item_id));
 		uiModel.addAttribute("errorMessage", message);
 		uiModel.addAttribute("item", newItem);
 		return "admins/itemform";
@@ -434,11 +445,20 @@ public String saveItem(@RequestParam("image") MultipartFile file, @RequestParam(
 			uiModel.addAttribute("item", newItem);
 			return "admins/itemform";
 		}
+		List <Item> i = itemService.findByTitle(title);
+		if(i.size() > 0) {
+			uiModel.addAttribute("errorMessage", "Esiste già un articolo con questo nome!");
+			uiModel.addAttribute("item", newItem);
+			return "admins/itemform";
+		}
 		this.itemService.create(newItem.getTitle(), newItem.getDescription(), newItem.getPrice(), "media/"+path);
 		String message = "L'oggetto '" + newItem.getTitle() + "' è stato aggiunto con successo.";
 		uiModel.addAttribute("errorMessage", message);
 		uiModel.addAttribute("item", newItem);
 		return "admins/itemform";
+	}
+	if(!item_id.equals("")) {
+	newItem.setItem_id(Long.parseLong(item_id));
 	}
 	uiModel.addAttribute("item", newItem);
 	uiModel.addAttribute("errorMessage", err);

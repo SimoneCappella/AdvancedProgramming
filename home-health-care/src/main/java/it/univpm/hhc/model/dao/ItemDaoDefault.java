@@ -1,5 +1,6 @@
 package it.univpm.hhc.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 import it.univpm.hhc.model.entities.Item;
@@ -17,6 +18,13 @@ public class ItemDaoDefault extends DefaultDao implements ItemDao {
 
 	@Override
 //	@Transactional(readOnly = true)
+	public List<Item> findByIdList(Long id) {
+		List<Item> itemlist = new ArrayList<Item>();
+		itemlist.add(getSession().find(Item.class, id));
+		return itemlist;
+	}
+	
+	@Override
 	public Item findById(Long id) {
 		return getSession().find(Item.class, id);
 	}

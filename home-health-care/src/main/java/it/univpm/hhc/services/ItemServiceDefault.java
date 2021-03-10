@@ -1,5 +1,6 @@
 package it.univpm.hhc.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,11 @@ public class ItemServiceDefault implements ItemService {
 	@Override
 	public Item findById(Long id) {
 		return this.itemDao.findById(id);
+	}
+	
+	@Override
+	public List<Item> findByIdList(Long id) {
+		return this.itemDao.findByIdList(id);
 	}
 
 	@Override

@@ -60,6 +60,12 @@ function Validation(){
 		  document.getElementById("description1").innerHTML = ' Compila questo campo con almeno 2 caratteri e massimo 300';
 	  }
 	
+	if (document.getElementById("price").value.length <= 0) {
+		  c=true;
+		  document.getElementById("price").style.border = "medium solid red";
+		  document.getElementById("price1").innerHTML = ' Compila questo campo.';
+	  }
+	
 	
 	
 	if(c == true){
@@ -103,6 +109,9 @@ function Validation(){
                     <td><input type='file' id='image' name='image' value="${item.image}" style="border: thin solid black"/></td>
 					<td><label id="image1" style="color: red;font-weight: bold;"></label></td>
                 </tr>
+				<tr>
+					<td><input type="hidden" id='item_id' name="item_id" value="${item.item_id}" /></td>
+				</tr>
                 <tr>
 					<td><input name ="submit" type="submit" value="Conferma" onclick='return Validation();'/></td>
                 </tr>
