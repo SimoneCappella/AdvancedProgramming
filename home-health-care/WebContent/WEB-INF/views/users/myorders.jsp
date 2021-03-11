@@ -10,14 +10,37 @@
 <div style="border:1px solid black">
 Data ordine: ${e.date}
 <br>
-Indirizzo di spedizione: ${e.address.street} ${e.address.civ_num}, ${e.address.city}, CAP: ${e.address.cap}
+Indirizzo di spedizione: <c:if test="${empty e.address.street}">
+	l'indirizzo non è più disponibile
+</c:if>
+
+<c:if test="${not empty e.address.street}">
+	${e.address.street} ${e.address.civ_num}, ${e.address.city}, CAP: ${e.address.cap}
+</c:if>
+
+
+
+
+
+
+
 <br>
 Metodo di pagamento: ${e.paymeth}
 <br>
 Totale: ${e.total}
 <br>
+<c:if test="${empty e.items}">
+		Articolo non più disponibile
+</c:if>
 <c:forEach items="${e.items}" var="i">
-Nome: ${i.key.title} | Descrizione: ${i.key.description} | Prezzo: ${i.key.price}€ | Quantità: ${i.value}
+
+<c:if test="${not empty i.key}">
+		Nome: ${i.key.title} | Descrizione: ${i.key.description} | Prezzo: ${i.key.price}€ | Quantità: ${i.value}
+</c:if>
+<c:if test="${empty i.key}">
+		Articolo non più disponibile
+</c:if>
+
 <br>
 </c:forEach> 
 </div>

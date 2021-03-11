@@ -23,6 +23,12 @@ public class PurchaseServiceDefault implements PurchaseService {
 	}
 	
 	@Override
+	public List<Purchase> findByAddress(Address address){
+		return this.purchaseDao.findByAddress(address);
+	}
+	
+	
+	@Override
 	public List<Purchase> findByUser(User user){
 		return this.purchaseDao.findByUser(user);
 	}

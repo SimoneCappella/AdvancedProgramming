@@ -483,8 +483,24 @@ public class UserController {
 	
 	@PostMapping(value = "/deleteaddress")
 	public String deleteAddress(@RequestParam("address_id") Long address_id) {
-	
+		User user= getCurrentUser();
+		Address a=addressService.findById(address_id);
+		
+		List<Purchase> purchases=purchaseService.findByAddress(a);
+		user.setAddress(null);
+		for(Purchase p: purchases)
+		{
+			p.setAddress(null);
+			purchaseService.update(p);		
+		}
+		
+		
+		userService.update(user);
+		
 		this.addressService.delete(address_id);
+		
+		
+		
 		
 		return "redirect:/users/addresslist";
 	}

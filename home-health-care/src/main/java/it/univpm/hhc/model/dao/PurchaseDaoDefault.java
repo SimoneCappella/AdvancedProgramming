@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 
+import com.mysql.cj.x.protobuf.MysqlxCrud.Find;
+
 import it.univpm.hhc.model.entities.Address;
 import it.univpm.hhc.model.entities.Purchase;
 import it.univpm.hhc.model.entities.User;
@@ -27,6 +29,12 @@ public class PurchaseDaoDefault extends DefaultDao implements PurchaseDao {
 	public List<Purchase> findByUser(User user){
 		return getSession().createQuery("from Purchase p where p.user = :user", Purchase.class).setParameter("user", user).getResultList();
 	}
+	
+	@Override
+	public List<Purchase> findByAddress(Address address){
+		return getSession().createQuery("from Purchase p where p.address = :address", Purchase.class).setParameter("address", address).getResultList();
+				
+	}
 
 	@Override
 	public Purchase create(String pay_method, LocalDate date, double total, User user, Address address) {
@@ -40,6 +48,7 @@ public class PurchaseDaoDefault extends DefaultDao implements PurchaseDao {
 		return p;
 	}
 
+	
 	@Override
 	public Purchase update(Purchase purchase) {
 		return (Purchase) this.getSession().merge(purchase);

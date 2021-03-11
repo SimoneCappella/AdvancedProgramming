@@ -20,5 +20,8 @@ public interface PurchaseService {
 	Purchase update(Purchase purchase);
 	
 	void delete(Long purchaseId);
+	
+	List<Purchase> findByAddress(Address address);
+	
 
 }
