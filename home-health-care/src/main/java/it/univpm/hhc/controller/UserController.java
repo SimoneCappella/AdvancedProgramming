@@ -539,7 +539,7 @@ public class UserController {
     	}
 		if (allAddresses.size()>=3)
 		{
-			String errorMessage = "Hai gi� 3 indirizzi! Non puoi aggiungerne altri!";
+			String errorMessage = "Hai già 3 indirizzi! Non puoi aggiungerne altri!";
 			uiModel.addAttribute("address", allAddresses);
 			uiModel.addAttribute("errorMessage1", errorMessage);
 			return "users/addresslist";
