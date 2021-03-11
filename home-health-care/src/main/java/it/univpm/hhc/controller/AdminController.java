@@ -216,6 +216,12 @@ public class AdminController {
 	}
 	@GetMapping(value = "/{subId}/subdelete")//occhio devo gestire la rimozione a cascata
 	public String subdelete(@PathVariable("subId") String subId) {
+		Sub sub = subService.findById(Long.parseLong(subId));
+		List<User> users = userService.findBySub(sub);
+		for(User u : users) {
+			u.setSub(null);
+			userService.update(u);
+		}
 		this.subService.delete(new Long(subId));
 		
 		return "redirect:/admins/sublist";
@@ -376,7 +382,7 @@ return "admins/itemform";
 }
 
 @PostMapping(value = "/itemsave")
-public String saveItem(@RequestParam("item_id") String item_id, @RequestParam("image") MultipartFile file, @RequestParam("title") String title, //bisogna passare l'id e metterlo in hidden nel form
+public String saveItem(@RequestParam("item_id") String item_id, @RequestParam("image") MultipartFile file, @RequestParam("title") String title,
 		@RequestParam("description") String description , @RequestParam("price") String price, Model uiModel) {
 	Item newItem = new Item();
 	newItem.setTitle(title);

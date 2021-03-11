@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import it.univpm.hhc.model.entities.Cart;
 import it.univpm.hhc.model.entities.Item;
+import it.univpm.hhc.model.entities.Sub;
 import it.univpm.hhc.model.entities.User;
 
 @Repository("userDetailsDao")
@@ -85,6 +86,11 @@ public class UserDetailsDaoDefault extends DefaultDao implements UserDetailsDao 
 		return getSession().createQuery("from User u where email = '"+ email+"'", User.class).getSingleResult();
 		
 		
+	}
+	
+	@Override
+	public List<User> findBySub(Sub sub){
+		return this.getSession().createQuery("FROM User u WHERE u.sub = :sub", User.class).setParameter("sub", sub).getResultList();
 	}
 	
 	@Override

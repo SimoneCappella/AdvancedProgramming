@@ -43,6 +43,7 @@
         <p><button class="button">Contact</button></p>
       	
 	<c:if test="${isUser}"> - <td><a href="<c:url value="/users/${i.item_id}/viewitemdetail" />">Dettagli Articolo</a></td></c:if>
+<c:if test="${isAdmin}"> - <td><a href="<c:url value="/users/${i.item_id}/viewitemdetail" />">Dettagli Articolo</a></td></c:if>	
 <c:if test="${isAdmin}"> - <td><a href="<c:url value="/admins/${i.item_id}/deleteitem" />">Elimina Oggetto</a></td></c:if>
 <c:if test="${isAdmin}"> - <td><a href="<c:url value="/admins/${i.item_id}/itemedit" />">  - Modifica Oggetto</a></td></c:if>
       </div>

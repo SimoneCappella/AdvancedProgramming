@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import it.univpm.hhc.model.entities.Sub;
 import it.univpm.hhc.model.entities.User;
 
 public interface UserDetailsDao {
@@ -29,6 +30,8 @@ public interface UserDetailsDao {
 	User findByEmail(String email);
 	
 	List<User> findByEmail2(String email);
+	
+	List<User> findBySub(Sub sub);
 	
 	public String encryptPassword(String password);
 	

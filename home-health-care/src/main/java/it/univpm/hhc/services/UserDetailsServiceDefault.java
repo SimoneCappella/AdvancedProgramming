@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import it.univpm.hhc.model.dao.UserDetailsDao;
+import it.univpm.hhc.model.entities.Sub;
 import it.univpm.hhc.model.entities.User;
 //con transactional abbiamo la gestione automatica delle transazioni, con service indichiamo che stiamo facendo un servizio
 @Transactional
@@ -29,6 +30,11 @@ public class UserDetailsServiceDefault implements UserService, UserDetailsServic
 	@Override
 	public List<User> findAll() {
 		return this.userDao.findAll();
+	}
+	
+	@Override
+	public List<User> findBySub(Sub sub){
+		return this.userDao.findBySub(sub); 
 	}
 
 	@Override

@@ -128,7 +128,7 @@ public class User implements Serializable {
 
 
 	@ManyToOne
-	@JoinColumn(name = "SUB_CODE")
+	@JoinColumn(name = "SUB")
 	public Sub getSub() {
 		return this.sub;
 	}
