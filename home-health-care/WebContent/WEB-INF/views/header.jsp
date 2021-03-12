@@ -85,7 +85,7 @@ padding:0 16px 0 0;}
 	%>
 </c:if>
 <div class="navbar" style="color:#007bff; background-color:white"> 
-<span style="  display: flex; align-items: center;"><i class="fa fa-fw fa-home fa-3x"></i><span> Home Health Care</span></span>
+<span style="  display: flex; align-items: center; cursor:pointer" onclick="window.location.href='/home-health-care/';"><i class="fa fa-fw fa-home fa-3x"></i><span> Home Health Care</span></span>
 
 
 <div class="navbar" style="float: right;">
