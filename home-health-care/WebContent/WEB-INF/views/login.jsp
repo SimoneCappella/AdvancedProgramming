@@ -59,7 +59,7 @@ input[type=text]:focus, input[type=password]:focus {
 
 <form name='login' class="container" action="<c:url value="/login" />" method='POST'>
 		 <c:if test="${not empty errorMessage}">
-	<div style="color: red; font-weight: bold; "><h1>${errorMessage}</h1></div>
+	<div style="color: red; font-weight: bold; "><h3>${errorMessage}</h3></div>
 </c:if>
 		<h1>Login</h1>
 			<label for="email"><b>Email</b></label>
