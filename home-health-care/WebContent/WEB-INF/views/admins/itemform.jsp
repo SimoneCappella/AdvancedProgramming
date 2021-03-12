@@ -3,6 +3,23 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<style>
+
+.btn {
+  background-color: #007bff;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.btn:hover {
+  opacity: 1;
+}
+</style>
+
 <script>
 function Validate(el){
 	var x = document.getElementById(el).value.length;
@@ -75,7 +92,7 @@ function Validation(){
 
 </script>
 <c:url value="/admins/itemsave" var="action_url" />
-<h3>Aggiungi o modifica un prodotto o un servizio</h3>
+<h3 style="margin-left:2%">Prodotto</h3>
 <c:if test="${fn:length(errorMessage) > 0}">
 <div style="color: red; padding:20px; font-weight: bold; margin: 30px 0px;">
 <c:forEach items="${errorMessage}" var="err">
@@ -84,7 +101,7 @@ function Validation(){
 </div>
 </c:if>
         <form:form method="POST" action="${action_url}"  enctype="multipart/form-data">
-             <table>
+             <table style="border:none; margin-left:2%">
 			<thead>
 				<c:if test="${empty item.item_id}">
                
@@ -113,7 +130,7 @@ function Validation(){
 					<td><input type="hidden" id='item_id' name="item_id" value="${item.item_id}" /></td>
 				</tr>
                 <tr>
-					<td><input name ="submit" type="submit" value="Conferma" onclick='return Validation();'/></td>
+					<td colspan="2"><input name ="submit" class="btn"  type="submit" value="Conferma" onclick='return Validation();'/></td>
                 </tr>
 			<thead/>
             </table>
