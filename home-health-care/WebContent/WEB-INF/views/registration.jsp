@@ -143,41 +143,34 @@ function Validation(){
 }
 
 </script>
-
-
-
-
 <form name='registration' action="<c:url value="/save" />" method='POST' modelAttribute="user">
 	<table style="border:none">
 		<tr>
-                    <td><form:label path="name">Nome:</form:label></td>
-                    <td><input type='text' id='name' name='name' onfocusout='return Validate(this.id);'  placeholder='Mario' style="border: thin solid black"></td>
-                	<td><label id="name1" ></label></td>
-				</tr>
-				<tr>
-                    <td><form:label path="surname">Cognome:</form:label></td>
-
-                    <td><input id="surname" type='text' name='surname' onfocusout='return Validate(this.id);' placeholder='Rossi' style="border: thin solid black"></td>
+			<td><form:label path="name">Nome:</form:label></td>
+			<td><input type='text' id='name' name='name' onfocusout='return Validate(this.id);'  placeholder='Mario' style="border: thin solid black"></td>
+			<td><label id="name1" ></label></td>
+		</tr>
+		<tr>
+			<td><form:label path="surname">Cognome:</form:label></td>
+				<td><input id="surname" type='text' name='surname' onfocusout='return Validate(this.id);' placeholder='Rossi' style="border: thin solid black"></td>
 					<td><label id="surname1" ></label></td>
-                </tr>
-				<tr>
-                    <td><form:label path="email">Email:</form:label></td>
-                    <td><input id="email"  type='text' name='email' onfocusout='return Validate(this.id);' placeholder='mariorossi@esempio.it' style="border: thin solid black"></td>
-					<td><label id="email1" ></label></td>
-                </tr>
-				<tr>
-                    <td><form:label path="password">Password:</form:label></td>
-                    <td><input id="pass" type='password' name='password' onfocusout='return Validate(this.id);' style="border: thin solid black"></td>
-					<td><label id="pass1" ></label></td>
-                </tr>
-				<tr>
-				<td colspan='2'>Creando un account accetti i nostri <a href="">Termini & Privacy.</a>
-				</td>
-				</tr>
-				<tr>
-				<td colspan='2'><input class="btn" name="submit" type="submit" onclick='return Validation();'
-				value="Registrati" /></td>
-				</tr>
+		</tr>
+		<tr>
+			<td><form:label path="email">Email:</form:label></td>
+			<td><input id="email"  type='text' name='email' onfocusout='return Validate(this.id);' placeholder='mariorossi@esempio.it' style="border: thin solid black"></td>
+			<td><label id="email1" ></label></td>
+		</tr>
+		<tr>
+			<td><form:label path="password">Password:</form:label></td>
+			<td><input id="pass" type='password' name='password' onfocusout='return Validate(this.id);' style="border: thin solid black"></td>
+			<td><label id="pass1" ></label></td>
+		</tr>
+		<tr>
+			<td colspan='2'>Creando un account accetti i nostri <a href="https://www.youtube.com/watch?v=G1IbRujko-A" target="popup" onclick="window.open('https://www.youtube.com/watch?v=G1IbRujko-A','name','width=600,height=400')">Termini & Privacy.</a></td>
+		</tr>
+		<tr>
+			<td colspan='2'><input class="btn" name="submit" type="submit" onclick='return Validation();' value="Registrati" /></td>
+		</tr>
 	</table>
 
 </form>

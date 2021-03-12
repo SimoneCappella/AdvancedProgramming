@@ -4,9 +4,38 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
+<style>
+h3, table {
+    margin-left: 2%;
+}
+
+#block_container
+{
+    text-align:center;
+}
+#bloc1, #bloc2
+{
+    display:inline;
+}
+
+.btn {
+  background-color: #007bff;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.btn:hover{
+  opacity: 1;
+}
+</style>
+<h3>Modifica Utente</h3>
 <c:if test="${fn:length(errorMessage) > 0}">
 	<div
-		style="color: red; padding: 20px; font-weight: bold; margin: 30px 0px;">
+		style="color: red;  font-weight: bold; margin: 2%">
 		<c:forEach items="${errorMessage}" var="error">
     ${error}<br>
 		</c:forEach>
@@ -83,56 +112,41 @@
 		}
 	}
 </script>
-
 <c:url value="/users/save" var="action_url" />
-        
+  <table style="border:none">
 <form:form method="POST" action="${action_url}" modelAttribute="user">
-             <table>
-		<c:if test="${empty user.user_id}">
-               
-				</c:if>
-		               
+       	
 		<tr>
-			                    
-			<td><form:label path="email">Email</form:label></td>
-			                    
+			<td><form:label path="email">Email:</form:label></td>
 			<td><form:input id="email" path="email"
 					onfocusout='return Validate(this.id);'
 					placeholder='simone.panetti@gmail.com '
 					style="border: thin solid black" /></td>
 			<td><label id="email1" style="color: red; font-weight: bold;"></label></td>
-			                
-		</tr>
+			</tr>
 		<tr>
-			                    
-			<td><form:label path="name">Nome</form:label></td>
-			                    
-			<td><form:input id="name" path="name"
+		<td><form:label path="name">Nome:</form:label></td>
+		<td><form:input id="name" path="name"
 					onfocusout='return Validate(this.id);' placeholder='Simone'
 					style="border: thin solid black" /></td>
 			<td><label id="name1" style="color: red; font-weight: bold;"></label></td>
-			                
 		</tr>
 		<tr>
-			                    
-			<td><form:label path="surname">cognome</form:label></td>
-			                    
-			<td><form:input id="surname" path="surname"
+		<td><form:label path="surname">Cognome:</form:label></td>
+		<td><form:input id="surname" path="surname"
 					onfocusout='return Validate(this.id);' placeholder='Panetti'
 					style="border: thin solid black" /></td>
 			<td><label id="surname1" style="color: red; font-weight: bold;"></label></td>
-			                
 		</tr>
-		                
 		<tr>
-			<td><input type="submit" value="Modifica"
+			<td colspan="2"><input type="submit" class="btn" value="Modifica"
 				onclick='return Validation();' /></td>
-			<td><input type="reset" value="Reset"></td>                 
-		</tr>
-		<tr>
-	</table>
+			<td colspan="2"><input type="reset" class="btn" value="Reset"></td>
+			
+		
+		
 </form:form>
-<button style="margin-top: 10px"
-	onclick="window.location.href='/home-health-care/users/editpass';">Modifica
-	Password</button>
-
+			<td><button style="  " class="btn" onclick="window.location.href='/home-health-care/users/editpass';">Modifica
+	Password</button></td>
+	</tr>
+</table>	

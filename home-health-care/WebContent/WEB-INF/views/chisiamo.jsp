@@ -96,8 +96,8 @@ Nel 1960, il gruppo, con il nome di Beatles, va ad Amburgo dove viene creato il 
         <p class="title">Java Developer</p>
         <p>Tante belle cose.</p>
         <p>cristian@hhc.com</p>
-        <p><button class="button">Contact</button></p>
-      </div>
+        <p><button class="button" onclick="window.open('https://www.youtube.com/watch?v=G1IbRujko-A','name','width=600,height=400')">Contact</button></p>
+        </div>
     </div>
   </div>
 
@@ -110,7 +110,7 @@ Nel 1960, il gruppo, con il nome di Beatles, va ad Amburgo dove viene creato il 
         <p class="title">Java Developer</p>
         <p>Tante belle cose.</p>
         <p>simone@hhc.com</p>
-        <p><button class="button">Contact</button></p>
+		<p><button class="button" onclick="window.open('https://www.youtube.com/watch?v=3aNMGWadgWA','name','width=600,height=400')">Contact</button></p>
       </div>
     </div>
   </div>
@@ -123,8 +123,8 @@ Nel 1960, il gruppo, con il nome di Beatles, va ad Amburgo dove viene creato il 
         <p class="title">Java Developer</p>
         <p>Tante belle cose.</p>
         <p>manila@hhc.com</p>
-        <p><button class="button">Contact</button></p>
-      </div>
+		<p><button class="button" onclick="window.open('https://www.youtube.com/watch?v=X_sVrg1pGX0','name','width=600,height=400')">Contact</button></p>
+        </div>
     </div>
   </div>
   
@@ -136,7 +136,7 @@ Nel 1960, il gruppo, con il nome di Beatles, va ad Amburgo dove viene creato il 
         <p class="title">Java Developer</p>
         <p>Tante belle cose.</p>
         <p>gabriele@hhc.com</p>
-        <p><button class="button">Contact</button></p>
+		<p><button class="button" onclick="window.open('https://www.youtube.com/watch?v=DKP16d_WdZM','name','width=600,height=400')">Contact</button></p>
       </div>
     </div>
   </div>

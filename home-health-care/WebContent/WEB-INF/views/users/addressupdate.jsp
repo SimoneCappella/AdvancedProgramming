@@ -3,7 +3,26 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-    
+<style>	
+
+h3 {
+    margin-left: 2%;
+}
+
+.btn {
+  background-color: #007bff;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+.btn:hover {
+  opacity: 1;
+}
+
+</style>   
 
 <c:if test="${fn:length(errorMessage) > 0}">
 <div style="color: red; padding:20px; font-weight: bold; margin: 30px 0px;">
@@ -105,7 +124,7 @@ function Validation(){
 
 		<c:url value="/users/addressup" var="action_url" />
         <form:form method="POST" action="${action_url}" modelAttribute="address">
-             <table>
+             <table style="margin-left:2%; border:none">
 				<c:if test="${empty address.address_id}">
                
 				</c:if>
@@ -133,7 +152,7 @@ function Validation(){
 					<td><form:hidden path="address_id" /></td>
 				</tr>
                 <tr>
-					<td><input type="submit" value="Submit" onclick='return Validation();' /></td>
+					<td colspan="2"><input type="submit" class="btn" value="Conferma" onclick='return Validation();' /></td>
                 </tr>
 
             </table>

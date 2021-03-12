@@ -3,10 +3,39 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<style>
+h3, table {
+    margin-left: 2%;
+}
 
+#block_container
+{
+    text-align:center;
+}
+#bloc1, #bloc2
+{
+    display:inline;
+}
+
+.btn {
+  background-color: #007bff;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.btn:hover{
+  opacity: 1;
+}
+</style>
+
+<h3>Modifica Password</h3>
 
 <c:if test="${fn:length(errorMessage) > 0}">
-<div style="color: red; padding:20px; font-weight: bold; margin: 30px 0px;">
+<div style="color: red; font-weight: bold; margin: 2%">
     ${errorMessage}<br>
 	</div>
 </c:if>
@@ -60,27 +89,22 @@
 
 
 <c:url value="/users/savepass" var="action_url" />
-<h1>Modifica Password</h1>
+
         
 <form:form method="POST" action="${action_url}">
-             <table>
+             <table style="border:none">
 		<c:if test="${empty user.user_id}">
                
 				</c:if>
-
 		<tr>
 			<td>Password
-			<td />                     
-			<td><input type='password' id="pass" name="password"
-				onfocusout='return Validate(this.id);'
+			<td /><td><input type='password' id="pass" name="password" onfocusout='return Validate(this.id);'
 				style="border: thin solid black" /></td>
 			<td><label id="pass1" style="color: red; font-weight: bold;"></label></td>
-			                                 
 		</tr>
-		                
 		<tr>
-			<td><input type="submit" value="Salva Modifiche"
-				onclick='return Validation();' /></td>                 
+			<td colspan="3"><input type="submit" class="btn" value="Salva Modifiche"
+				onclick='return Validation();' /></td>
 		</tr>
 	</table>
 </form:form>

@@ -447,7 +447,7 @@ public class UserController {
     	}
 		if(!matchercit.matches()) {
     		flag=false;
-    		err.add("Citt� non valida.");
+    		err.add("Città non valida.");
     	}
 		if(!matcherst.matches()) {
     		flag=false;
