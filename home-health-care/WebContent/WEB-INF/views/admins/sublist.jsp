@@ -71,7 +71,7 @@ h3 {
 </c:if>
 <h3>Elenco degli abbonamenti</h3>
 <a href="<c:url value="/admins/subadd" />"><i class="fa fa-plus" style="color:#007bff; margin-left:2%" ></i>Aggiungi Nuovo Abbonamento</a>
-<table class="styled-table">
+<table class="styled-table" >
 <thead>
 	<td>id</td>
 	<td>Name</td>

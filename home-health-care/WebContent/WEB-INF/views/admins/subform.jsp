@@ -3,6 +3,27 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<style>	
+
+h3 {
+    margin-left: 2%;
+}
+
+.btn {
+  background-color: #007bff;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+.btn:hover {
+  opacity: 1;
+}
+
+</style>
+
 <script>
 function Validate(el){
 	var x = document.getElementById(el).value.length;
@@ -65,7 +86,7 @@ function Validation(){
 </c:if>
 		<c:url value="/admins/subsave" var="action_url" />
         <form:form method="POST" action="${action_url}" modelAttribute="sub">
-             <table>
+             <table style="margin-left:2%; border:none">
 				<c:if test="${empty sub.sub_id}">
                
 				</c:if>
@@ -80,7 +101,7 @@ function Validation(){
 					<td><label id="discount1" style="color: red;font-weight: bold;"></label></td>
                 </tr>
 				<tr>
-                    <td><form:label path="price">Prezzo mensile:</form:label></td>
+                    <td><form:label path="price">Prezzo mensile (€):</form:label></td>
                     <td><input type='text' id='price' name='price' value="${sub.price}" style="border: thin solid black"/></td>
 					<td><label id="price1" style="color: red;font-weight: bold;"></label></td>
                 </tr>
@@ -88,7 +109,7 @@ function Validation(){
 					<td><form:hidden path="sub_id" /></td>
 				</tr>
                 <tr>
-					<td><input type="submit" value="Conferma" onclick='return Validation();'/></td>
+					<td colspan="2"><input type="submit" value="Conferma" class="btn" onclick='return Validation();'/></td>
                 </tr>
 
             </table>

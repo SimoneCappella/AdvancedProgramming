@@ -3,6 +3,27 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<style>	
+
+h3 {
+    margin-left: 2%;
+}
+
+.btn {
+  background-color: #007bff;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+.btn:hover {
+  opacity: 1;
+}
+
+</style>
+
 <script>
 function Validate(el){
 	var x = document.getElementById(el).value.length;
@@ -72,12 +93,13 @@ function Validation(){
 		  document.getElementById("email").style.border = "medium solid red";
 		  document.getElementById("email1").innerHTML = ' Compila questo campo con almeno 4 caratteri';
 	}
-	/*if (document.getElementById("password").value.length <7 || document.getElementById("password").value.length >20) {
-		  c=true;
-		  alert(c);
-		  document.getElementById("password").style.border = "medium solid red";
-		  document.getElementById("password1").innerHTML = ' Compila questo campo con almeno 7 caratteri';
-	  }*/
+	if(document.getElementById("password").value.length !=0 )
+		if (document.getElementById("password").value.length <7 || document.getElementById("password").value.length >20) {{
+			  c=true;
+			  document.getElementById("password").style.border = "medium solid red";
+			  document.getElementById("password1").innerHTML = ' Compila questo campo con almeno 7 caratteri';
+		  }
+	}
 	if(c){
 		return false;
 	}
@@ -94,7 +116,7 @@ function Validation(){
 </div>
 </c:if>
         <form:form method="POST" action="${action_url}" modelAttribute="user">
-             <table>
+             <table style="margin-left:2%; border:none">
 				<c:if test="${empty user.user_id}">
                
 				</c:if>
@@ -129,8 +151,8 @@ function Validation(){
 					<td><form:hidden path="user_id" /></td>
 				</tr>
                 <tr>
-					<td><input type="submit" value="Submit" onclick="return Validation();"/></td>
-					<td><input type="reset" value="Reset"></td>
+					<td><input type="submit" class="btn" value="Conferma" onclick="return Validation();"/></td>
+					<td><input type="reset" class="btn" value="Resetta Valori"></td>
                 </tr>
 
             </table>

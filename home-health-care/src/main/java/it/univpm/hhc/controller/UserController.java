@@ -344,7 +344,7 @@ public class UserController {
 	@GetMapping(value = "/view_sub")
     public String viwesub(@RequestParam(value = "error", required = false) String error, Model model) {
 		
-		String errorMessage = "Non hai ancora un abbonamento, affrettati!";
+		String errorMessage = "Non hai ancora un abbonamento, affrettati per non perdere i nuovi sconti!";
       
         User user=getCurrentUser();
         if(user.getSub()==null)
