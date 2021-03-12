@@ -24,7 +24,4 @@
   <definition extends="default" name="obiettivoprogetto">
    <put-attribute name="body" value="/WEB-INF/views/obiettivoprogetto.jsp" />
   </definition>
-  <definition extends="default" name="upload">
-   <put-attribute name="body" value="/WEB-INF/views/upload.jsp" />
-  </definition>
 </tiles-definitions>

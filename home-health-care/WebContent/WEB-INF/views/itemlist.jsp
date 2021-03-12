@@ -21,12 +21,12 @@
 	<sec:authorize access="hasRole('ADMIN')" var="isAdmin" />
 	<sec:authorize access="hasRole('USER')" var="isUser" />
 	<sec:authorize access="isAuthenticated()" var="isAuth" />
-<c:if test="${not empty errorMessage}">
-	<div style="color: red; font-weight: bold; margin: 30px 0px;">${errorMessage}</div>
+<c:if test="${empty items}">
+	<div style="color: red; font-weight: bold; margin: 30px 2%;">Non ci sono articoli</div>
 </c:if>
 
 
-<c:if test="${isAdmin}"> <a href="<c:url value="/admins/itemadd" />"><i class="fa fa-plus" style="color:#007bff; margin:20px 0 20px 20px" ></i>Aggiungi Nuovo Articolo</a></c:if>
+<c:if test="${isAdmin}"> <a href="<c:url value="/admins/itemadd" />"><i class="fa fa-plus" style="color:#007bff; margin-left:2%" ></i>Aggiungi Nuovo Articolo</a></c:if>
 	
 <c:forEach items="${items}" var="i">
 

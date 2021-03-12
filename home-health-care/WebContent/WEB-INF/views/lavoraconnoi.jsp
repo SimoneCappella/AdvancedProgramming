@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<h1>Lavora Con Noi</h1>
+<h3 style="margin-left:2%">Lavora Con Noi</h3>
 
 
 
@@ -31,7 +31,7 @@
 </style>
 
 <div class="container">
- <img src="https://images.justwatch.com/backdrop/8628877/s1440/silicon-valley" alt="Nature" style="width:100%;">
+ <img src="https://www.cinematographe.it/wp-content/uploads/2019/05/Silicon-Valley-2.jpg" alt="Nature" style="width:100%;">
   <div class="content">
      <b>I valori</b>
  

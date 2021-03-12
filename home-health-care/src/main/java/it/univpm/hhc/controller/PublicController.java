@@ -141,7 +141,7 @@ public class PublicController {
 	@GetMapping(value = "/itemlist")
 	public String itemlist(Model uiModel) {
 		List<Item> allItems = ItemService.findAll();
-
+		
 		uiModel.addAttribute("items", allItems);
 
 		return "itemlist";
@@ -268,29 +268,6 @@ public class PublicController {
 
 	}
 	
-	@GetMapping(value = "/up")
-	public String up() {
-		return "upload";
-	}
-	
-	@RequestMapping(value ="/upload", method = RequestMethod.POST)
-	public String submit(@RequestParam("file") MultipartFile file, Model uiModel) throws MaxUploadSizeExceededException{
-		if( !(file.getContentType().toString()).equals("image/png") && !(file.getContentType().toString()).equals("image/jpg") && !(file.getContentType().toString()).equals("image/jpeg")) {
-			uiModel.addAttribute("errorMessage", "Il formato dell'immagine non è supportato!");
-			return "upload";
-		}
-		String p = context.getRealPath(".");
-		StringBuilder fileNames = new StringBuilder();	  
-			  Path fileNameAndPath = Paths.get(p, "WEB-INF", "media", file.getOriginalFilename());
-			  fileNames.append(file.getOriginalFilename()+" ");
-			  try {
-				Files.write(fileNameAndPath, file.getBytes());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		  return "redirect:/";
-	}
-
 
 	@Autowired
 	public void setUserService(UserService userService) {
