@@ -92,7 +92,7 @@ padding:0 16px 0 0;}
   <a class="active" href="<c:url value="/" />"><i class="fa fa-fw fa-home" ></i> Home</a>
   <a href="<c:url value="/itemlist" />"><i class="fa fa-shopping-bag"></i> Catalogo Articoli</a>
     
-  <c:if test="${isAuth}"><a href="<c:url value="/users/cartlist/" />"><i class="fa fa-shopping-cart"></i> ${item_number} Carrello</a></c:if>
+  <c:if test="${isAuth}"><a href="<c:url value="/users/cartlist/" />"><i class="fa fa-shopping-cart"></i> Carrello</a></c:if>
   <c:if test="${! isAuth}"><a href="<c:url value="/register/" />"><i class="fa fa-plus-square"></i> Registati</a></c:if>
 
 <ul id='menu' class="custom-ul">    

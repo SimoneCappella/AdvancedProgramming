@@ -21,4 +21,3 @@
 	
 	<a href="<c:url value="/lavoraconnoi" />"><i class="fa fa-briefcase" ></i>Lavora con noi</a>
 	
-	<c:if test="${isAdmin}"> - Sei un Admin</c:if>
