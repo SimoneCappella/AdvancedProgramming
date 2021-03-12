@@ -3,7 +3,7 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<h3>Registrazione Form</h3>
+<h3>Registrazione</h3>
 
 <c:if test="${fn:length(errorMessage) > 0}">
 <div style="color: red; padding:20px; font-weight: bold; margin: 30px 0px;">
@@ -13,13 +13,53 @@
 	
 	</div>
 </c:if>
+<style>
 
+/* Add padding to containers */
+.container {
+  padding: 16px;
+  background-color: white;
+}
 
+/* Full-width input fields */
+table {
+	border: 1px none white;	
+}
 
+lable{
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+td{padding:3px}]
+/* Overwrite default styles of hr */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* Set a style for the submit button */
+.btn {
+  background-color: #007bff;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+.btn:hover {
+  opacity: 1;
+}
+
+</style>
 
 
 <script>
-
 function Validate(el) {
 	 
 	var x = document.getElementById(el).value.length;
@@ -108,32 +148,36 @@ function Validation(){
 
 
 <form name='registration' action="<c:url value="/save" />" method='POST' modelAttribute="user">
-	<table>
+	<table style="border:none">
 		<tr>
-                    <td><form:label path="name">Nome</form:label></td>
+                    <td><form:label path="name">Nome:</form:label></td>
                     <td><input type='text' id='name' name='name' onfocusout='return Validate(this.id);'  placeholder='Mario' style="border: thin solid black"></td>
                 	<td><label id="name1" ></label></td>
 				</tr>
 				<tr>
-                    <td><form:label path="surname">Cognome</form:label></td>
+                    <td><form:label path="surname">Cognome:</form:label></td>
 
                     <td><input id="surname" type='text' name='surname' onfocusout='return Validate(this.id);' placeholder='Rossi' style="border: thin solid black"></td>
 					<td><label id="surname1" ></label></td>
                 </tr>
 				<tr>
-                    <td><form:label path="email">email</form:label></td>
+                    <td><form:label path="email">Email:</form:label></td>
                     <td><input id="email"  type='text' name='email' onfocusout='return Validate(this.id);' placeholder='mariorossi@esempio.it' style="border: thin solid black"></td>
 					<td><label id="email1" ></label></td>
                 </tr>
 				<tr>
-                    <td><form:label path="password">Password</form:label></td>
+                    <td><form:label path="password">Password:</form:label></td>
                     <td><input id="pass" type='password' name='password' onfocusout='return Validate(this.id);' style="border: thin solid black"></td>
 					<td><label id="pass1" ></label></td>
                 </tr>
-		<tr>
-			<td colspan='2'><input name="submit" type="submit" onclick='return Validation();'
-				value="submit" /></td>
-		</tr>
+				<tr>
+				<td colspan='2'>Creando un account accetti i nostri <a href="">Termini & Privacy.</a>
+				</td>
+				</tr>
+				<tr>
+				<td colspan='2'><input class="btn" name="submit" type="submit" onclick='return Validation();'
+				value="Registrati" /></td>
+				</tr>
 	</table>
 
 </form>
