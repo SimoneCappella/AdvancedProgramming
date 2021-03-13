@@ -381,7 +381,7 @@ public class UserController {
 		user.setSubexp(null);
 		this.userService.update(user);
 		
-		return "redirect:/";
+		return "redirect:/users/view_sub";
 	}
 	
 	@PostMapping(value="/addsub")
@@ -395,7 +395,7 @@ public class UserController {
 		user.setSubexp(date);
 		this.userService.update(user);
 		
-		return "redirect:/";
+		return "redirect:/users/view_sub";
 	}
 	
 	
@@ -527,7 +527,7 @@ public class UserController {
     	}
 		if(!matchercit.matches()) {
     		flag=false;
-    		err.add("Citt� non valida.");
+    		err.add("Città non valida.");
     	}
 		if(!matcherst.matches()) {
     		flag=false;
@@ -599,7 +599,7 @@ public class UserController {
 			i.setCart(null);
 			this.cartItemService.update(i);
 		}
-		return "redirect:/";
+		return "redirect:/users/myorders";
 	}
 	
 	@GetMapping(value ="/myorders")

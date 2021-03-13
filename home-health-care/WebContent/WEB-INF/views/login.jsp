@@ -3,7 +3,7 @@
 <style>
 .bg-img {
   /* The image used */
-  background-image: url("https://www.promozionecultura.it/wp-content/uploads/2020/01/copertina-3-scaled.jpg");
+  background-image: url("/home-health-care/media/banner1.jpg");
 
   min-height: 380px;
 
@@ -57,12 +57,13 @@ input[type=text]:focus, input[type=password]:focus {
 
 <div class="bg-img">
 
+
 <form name='login' class="container" action="<c:url value="/login" />" method='POST'> 
-		<h1>Login</h1>
+		<div  style="display:inline-block"><h3 style="border-bottom:2px solid #007bff">Login</h3></div>
 				 <c:if test="${not empty errorMessage}">
-	<div style="color: red; font-weight: bold; margin-bottom:1%"><lable>${errorMessage}</lable></div>
+	<div style="color: red ;font-weight: bold; margin-bottom:1%"><lable>${errorMessage}</lable></div>
 </c:if>
-			<label for="email"><b>Email</b></label>
+			<label for="email" style="display:block"><b>Email</b></label>
 			<input type='text' placeholder="Inserisci Email" name='username' required/>
 		
 			<label for="psw"><b>Password</b></label>

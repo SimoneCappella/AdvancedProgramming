@@ -4,31 +4,48 @@
 
 <style>
 
-/* Add padding to containers */
+
+.bg-img {
+  /* The image used */
+  background-image: url("/home-health-care/media/banner2.png");
+
+  min-height: 380px;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+/* Add styles to the form container */
 .container {
+  margin: 20px;
+  max-width: 600px;
   padding: 16px;
+}
+
+.containerino {
+  margin: 20px;
+  max-width: 600px;
+  padding: 16px;
+  position:absolute;
   background-color: white;
+  right:0;
 }
 
 /* Full-width input fields */
-table {
-	border: 1px none white;	
-}
-
-lable{
+input[type=text], input[type=password] {
   width: 100%;
-  padding: 8px;
+  padding: 15px;
   margin: 5px 0 22px 0;
-  display: inline-block;
   border: none;
   background: #f1f1f1;
 }
 
-td{padding:3px}]
-/* Overwrite default styles of hr */
-hr {
-  border: 1px solid #f1f1f1;
-  margin-bottom: 25px;
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
 }
 
 /* Set a style for the submit button */
@@ -41,6 +58,7 @@ hr {
   width: 100%;
   opacity: 0.9;
 }
+
 .btn:hover {
   opacity: 1;
 }
@@ -131,37 +149,51 @@ function Validation(){
 }
 
 </script>
-<div style="margin-left:2%">
-<div style="display:inline-block"><h3 style="border-bottom:2px solid #007bff">Registrazione</h3></div>
+
+<div class="bg-img">
+
+<div  class="container" style="padding:0; margin:0">
+<div class="containerino">
+<div  style="display:inline-block"><h3 style="border-bottom:2px solid #007bff">Registrazione</h3></div>
 <c:if test="${fn:length(errorMessage) > 0}">
-<div style="color: red; padding:20px; font-weight: bold; margin: 30px 0px;">
+<div style="color: red ;font-weight: bold; margin-bottom:1%">
 <c:forEach items="${errorMessage}" var="err">
-    ${err}<br>
+    <br><lable>${err}</lable>
 </c:forEach>
 	
 	</div>
 </c:if>
 
-<form name='registration' action="<c:url value="/save" />" method='POST' modelAttribute="user">
+<form name='registration'  action="<c:url value="/save" />" method='POST' modelAttribute="user">
 	<table style="border:none">
 		<tr>
-			<td><form:label path="name">Nome:</form:label></td>
-			<td><input type='text' id='name' name='name' onfocusout='return Validate(this.id);'  placeholder='Mario' style="border: thin solid black"></td>
+		<tr>
+			<td><form:label path="name"><b>Nome</b></form:label></td>
+			<tr>
+			<td><input type='text' id='name' name='name' onfocusout='return Validate(this.id);'  placeholder='Mario'></td>
 			<td><label id="name1" ></label></td>
 		</tr>
 		<tr>
-			<td><form:label path="surname">Cognome:</form:label></td>
-				<td><input id="surname" type='text' name='surname' onfocusout='return Validate(this.id);' placeholder='Rossi' style="border: thin solid black"></td>
+		<tr>	<td><form:label path="surname"><b>Cognome</b></form:label></td>
+		</tr>
+		<tr>
+				<td><input id="surname" type='text' name='surname' onfocusout='return Validate(this.id);' placeholder='Rossi'></td>
 					<td><label id="surname1" ></label></td>
 		</tr>
 		<tr>
-			<td><form:label path="email">Email:</form:label></td>
-			<td><input id="email"  type='text' name='email' onfocusout='return Validate(this.id);' placeholder='mariorossi@esempio.it' style="border: thin solid black"></td>
+		<tr>	
+		<td><form:label path="email"><b>Email</b></form:label></td>
+		</tr>
+		<tr>
+			<td><input id="email"  type='text' name='email' onfocusout='return Validate(this.id);' placeholder='mariorossi@esempio.it'></td>
 			<td><label id="email1" ></label></td>
 		</tr>
 		<tr>
-			<td><form:label path="password">Password:</form:label></td>
-			<td><input id="pass" type='password' name='password' onfocusout='return Validate(this.id);' style="border: thin solid black"></td>
+		<tr>
+			<td><form:label path="password"><b>Password</b></form:label></td>
+			</tr>
+			<tr>
+			<td><input id="pass" type='password' name='password' onfocusout='return Validate(this.id);'></td>
 			<td><label id="pass1" ></label></td>
 		</tr>
 		<tr>
@@ -173,4 +205,8 @@ function Validation(){
 	</table>
 
 </form>
-</div>     
+</div>  
+</div>
+
+
+ 
