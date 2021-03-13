@@ -31,6 +31,7 @@ import it.univpm.hhc.model.entities.Sub;
 import it.univpm.hhc.model.entities.User;
 import it.univpm.hhc.model.entities.Address;
 import it.univpm.hhc.model.entities.Item;
+import it.univpm.hhc.model.entities.Purchase;
 import it.univpm.hhc.services.AddressService;
 import it.univpm.hhc.services.SubService;
 import it.univpm.hhc.services.UserService;
@@ -214,13 +215,26 @@ public class AdminController {
 		
 		return "admins/sublist";
 	}
+
 	@GetMapping(value = "/{subId}/subdelete")//occhio devo gestire la rimozione a cascata
 	public String subdelete(@PathVariable("subId") String subId) {
+		User user= getCurrentUser();
+		Sub sub=subService.findById(Long.parseLong(subId));
+		Long a = sub.getSub_id();
+		if(user.getSub()!=null)
+		{
+			if(a == user.getSub().getSub_id())
+			{
+				user.setSub(null);
+				user.setSubexp(null);
+				userService.update(user);
+			}
+		}
 		this.subService.delete(new Long(subId));
 		
 		return "redirect:/admins/sublist";
 	}
-	
+		
 	@GetMapping(value = "/subadd")
 	public String add(Model uiModel) {
 		

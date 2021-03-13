@@ -14,7 +14,7 @@
 <b>Indirizzo di spedizione:</b> <c:if test="${empty e.address.street}">
 	l'indirizzo non è più disponibile
 </c:if>
-<%! int count =0; %>
+ <c:set var="cont" value="${0}" scope="page" />
 <c:if test="${not empty e.address.street}">
 	${e.address.street} ${e.address.civ_num}, ${e.address.city}, CAP: ${e.address.cap}
 </c:if>
@@ -28,10 +28,14 @@
 
 <c:if test="${not empty i.key}">
 		<b>Nome:</b> ${i.key.title} | <b>Descrizione:</b> ${i.key.description} | <b>Prezzo:</b> ${i.key.price}€ | Quantità: ${i.value}
-		<div style="visibility: hidden">		${count=count+i.key.price}</div>	
+		<c:set var="cont" value="${cont=cont+((i.key.price)*i.value)}"/>
 </c:if>
+<br>
 </c:forEach> 
-<c:if test="${(count+1)<=e.total}">
+
+
+<c:if test="${(count)<=e.total}">
+
 		Articolo non più disponibile
 		<div style="visibility: hidden">		${count=0}</div>
 </c:if>
