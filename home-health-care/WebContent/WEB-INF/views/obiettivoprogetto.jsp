@@ -1,13 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-
-<h3 style="margin-left:2%">Obiettivi</h3>
-
-
-
-
-
 <style>
 * {
   box-sizing: border-box;
@@ -30,7 +22,8 @@
   padding: 20px;
 }
 </style>
-
+<div style="margin-left:2%">
+<div style="display:inline-block"><h3 style="border-bottom:2px solid #007bff">Obiettivi</h3></div>
 <div class="container">
  <img src="https://images.justwatch.com/backdrop/8628877/s1440/silicon-valley" alt="Nature" style="width:100%;">
   <div class="content">
@@ -47,4 +40,4 @@
 	
 	</div>
 </div>
-
+</div>

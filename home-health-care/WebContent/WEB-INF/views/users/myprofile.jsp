@@ -4,10 +4,6 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <style>
-h3, table {
-    margin-left: 2%;
-}
-
 .btn {
   background-color: #007bff;
   color: white;
@@ -21,10 +17,8 @@ h3, table {
   opacity: 1;
 }
 </style>
-
-
-
-<h3>Panoramica Profilo</h3>
+<div style="margin-left:2%">
+<div style="display:inline-block"><h3 style="border-bottom:2px solid #007bff">Il Mio Profilo</h3></div>
 <table style="border:none">
 
 <tr><td colspan="2"><lable>Nome: ${user.name}</lable></td></tr>
@@ -35,4 +29,4 @@ h3, table {
 	<td><button style="margin-top:2%" class="btn" onclick="window.location.href='/home-health-care/users/deletemyaccount';">Elimina il mio profilo</button></td>
 </tr>
 </table>
-
+</div>

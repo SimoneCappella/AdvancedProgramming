@@ -4,11 +4,6 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <style>	
-
-h3 {
-    margin-left: 2%;
-}
-
 .btn {
   background-color: #007bff;
   color: white;
@@ -106,8 +101,9 @@ function Validation(){
 }
 
 </script>
+<div style="margin-left:2%">
 		<c:url value="/admins/usersave" var="action_url" />
-<h3>Modifica i dati di un utente</h3>
+<div style="display:inline-block"><h3 style="border-bottom:2px solid #007bff">Modifica i Dati di un Utente</h3></div>
 <c:if test="${fn:length(errorMessage) > 0}">
 <div style="color: red; padding:20px; font-weight: bold; margin: 30px 0px;">
 <c:forEach items="${errorMessage}" var="err">
@@ -116,7 +112,7 @@ function Validation(){
 </div>
 </c:if>
         <form:form method="POST" action="${action_url}" modelAttribute="user">
-             <table style="margin-left:2%; border:none">
+             <table style="border:none">
 				<c:if test="${empty user.user_id}">
                
 				</c:if>
@@ -157,3 +153,4 @@ function Validation(){
 
             </table>
 		</form:form>
+		</div>

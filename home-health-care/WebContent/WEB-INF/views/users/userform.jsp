@@ -5,9 +5,6 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <style>
-h3, table {
-    margin-left: 2%;
-}
 
 #block_container
 {
@@ -32,16 +29,6 @@ h3, table {
   opacity: 1;
 }
 </style>
-<h3>Modifica Utente</h3>
-<c:if test="${fn:length(errorMessage) > 0}">
-	<div
-		style="color: red;  font-weight: bold; margin: 2%">
-		<c:forEach items="${errorMessage}" var="error">
-    ${error}<br>
-		</c:forEach>
-
-	</div>
-</c:if>
 <script>
 	function Validate(el) {
 
@@ -112,6 +99,17 @@ h3, table {
 		}
 	}
 </script>
+<div style="margin-left:2%">
+<div style="display:inline-block"><h3 style="border-bottom:2px solid #007bff">Modifica Utente</h3></div>
+<c:if test="${fn:length(errorMessage) > 0}">
+	<div
+		style="color: red;  font-weight: bold; margin: 2%">
+		<c:forEach items="${errorMessage}" var="error">
+    ${error}<br>
+		</c:forEach>
+
+	</div>
+</c:if>
 <c:url value="/users/save" var="action_url" />
   <table style="border:none">
 <form:form method="POST" action="${action_url}" modelAttribute="user">
@@ -149,4 +147,5 @@ h3, table {
 			<td><button style="  " class="btn" onclick="window.location.href='/home-health-care/users/editpass';">Modifica
 	Password</button></td>
 	</tr>
-</table>	
+</table>
+</div>

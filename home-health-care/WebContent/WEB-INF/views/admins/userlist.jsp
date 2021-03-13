@@ -21,7 +21,6 @@
     font-family: sans-serif;
     min-width: 400px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    margin-left: 2%;
 }
 
 .styled-table thead tr {
@@ -60,10 +59,6 @@ hr {
   margin-bottom: 25px;
 }
 
-h3 {
-    margin-left: 2%;
-}
-
 </style>
 <script>
 function clicked(e)
@@ -73,12 +68,12 @@ function clicked(e)
 	}
 }
 </script>
-
+<div style="margin-left:2%">
 <c:if test="${fn:length(message) > 0}">
 <p>${message}</p>
 </c:if>
 
-<h3>Elenco degli utenti</h3>
+<div style="display:inline-block;"><h3 style="border-bottom:2px solid #007bff">Elenco Degli Utenti</h3></div>
 <c:if test="${not empty errorMessage}">
 	<div style="color: red; font-weight: bold; margin: 30px 0px;">${errorMessage}</div>
 </c:if>
@@ -108,3 +103,4 @@ function clicked(e)
 </c:forEach>
 </table>
 <hr/>
+</div>

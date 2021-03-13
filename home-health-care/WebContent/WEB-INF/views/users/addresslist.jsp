@@ -33,7 +33,6 @@
     font-family: sans-serif;
     min-width: 400px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    margin-left: 2%;
 }
 
 .styled-table thead tr {
@@ -71,14 +70,8 @@ hr {
   border: 1px solid #f1f1f1;
   margin-bottom: 25px;
 }
-
-h3, table {
-    margin-left: 2%;
-}
-
 </style>
-
-
+<div style="margin-left:2%">
  <c:if test="${not empty errorMessage1}">
 	<div style="color: red; font-weight: bold; margin: 2% ">${errorMessage1}</div>
 </c:if>
@@ -87,16 +80,17 @@ h3, table {
 
 
 	<c:when test="${address eq null}">
-		<div style="color: red; font-weight: bold; margin: 2% ;">${errorMessage}</div>
-		<br><a href="<c:url value="/users/addressadd" />"><i class="fa fa-plus" style="color:#007bff; margin-left:2%" ></i>Aggiungi Nuovo Indirizzo</a>
+	<div style="display:inline-block"><h3 style="border-bottom:2px solid #007bff">I Miei Indirizzi</h3></div>
+		<div>${errorMessage}</div>
+		<br><a href="<c:url value="/users/addressadd" />"><i class="fa fa-plus" style="color:#007bff" ></i>Aggiungi Nuovo Indirizzo</a>
 		</c:when>
 <c:otherwise>
 
 
 
-<h3>Elenco</h3>
+<div style="display:inline-block"><h3 style="border-bottom:2px solid #007bff">I Miei Indirizzi</h3></div>
 
-<a href="<c:url value="/users/addressadd" />"><i class="fa fa-plus" style="color:#007bff; margin-left:2%" ></i>Aggiungi Nuovo Indirizzo</a>
+<a style="display:block; margin-top:1%" href="<c:url value="/users/addressadd" />"><i class="fa fa-plus" style="color:#007bff" ></i>Aggiungi Nuovo Indirizzo</a>
 <table  class="styled-table">
 <thead>
 	<td></td>
@@ -130,3 +124,4 @@ h3, table {
 
 </c:otherwise>
 </c:choose>
+</div>

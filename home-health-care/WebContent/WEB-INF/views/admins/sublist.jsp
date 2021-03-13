@@ -21,7 +21,6 @@
     font-family: sans-serif;
     min-width: 400px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    margin-left: 2%;
 }
 
 .styled-table thead tr {
@@ -59,18 +58,13 @@ hr {
   border: 1px solid #f1f1f1;
   margin-bottom: 25px;
 }
-
-h3 {
-    margin-left: 2%;
-}
-
 </style>
-
+<div style="margin-left:2%;">
 <c:if test="${fn:length(message) > 0}">
 <p>${message}</p>
 </c:if>
-<h3>Elenco degli abbonamenti</h3>
-<a href="<c:url value="/admins/subadd" />"><i class="fa fa-plus" style="color:#007bff; margin-left:2%" ></i>Aggiungi Nuovo Abbonamento</a>
+<div style="display:inline-block"><h3 style="border-bottom:2px solid #007bff">Elenco Degli Abbonamenti</h3></div>
+<a style="display:block" href="<c:url value="/admins/subadd" />"><i class="fa fa-plus" style="color:#007bff" ></i>Aggiungi Nuovo Abbonamento</a>
 <table class="styled-table" >
 <thead>
 	<td>id</td>
@@ -92,7 +86,7 @@ h3 {
 </c:forEach>
 </table>
 <hr/>
-
+</div>
 
 
 

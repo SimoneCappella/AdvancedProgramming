@@ -5,11 +5,6 @@
 
 
 <style>	
-
-h3 {
-    margin-left: 2%;
-}
-
 .btn {
   background-color: #007bff;
   color: white;
@@ -25,9 +20,9 @@ h3 {
 }
 
 </style>    
-
-<h3>Acquista Nuovo Abbonamento</h3>
-<table style="margin-left:2%; border:none">
+<div style="margin-left:2%">
+<div style="display:inline-block"><h3 style="border-bottom:2px solid #007bff">Acquisto Nuovo Abbonamento</h3></div>
+<table style="border:none">
 
 <thead>
 	<td>Tipo Abbonamento</td>
@@ -62,6 +57,7 @@ h3 {
 			</form>
 		</tr>
 </table>
+</div>
 
 	
 			

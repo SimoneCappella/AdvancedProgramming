@@ -1,18 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<h3>Registrazione</h3>
-
-<c:if test="${fn:length(errorMessage) > 0}">
-<div style="color: red; padding:20px; font-weight: bold; margin: 30px 0px;">
-<c:forEach items="${errorMessage}" var="err">
-    ${err}<br>
-</c:forEach>
-	
-	</div>
-</c:if>
 <style>
 
 /* Add padding to containers */
@@ -57,7 +46,6 @@ hr {
 }
 
 </style>
-
 
 <script>
 function Validate(el) {
@@ -143,6 +131,17 @@ function Validation(){
 }
 
 </script>
+<div style="margin-left:2%">
+<div style="display:inline-block"><h3 style="border-bottom:2px solid #007bff">Registrazione</h3></div>
+<c:if test="${fn:length(errorMessage) > 0}">
+<div style="color: red; padding:20px; font-weight: bold; margin: 30px 0px;">
+<c:forEach items="${errorMessage}" var="err">
+    ${err}<br>
+</c:forEach>
+	
+	</div>
+</c:if>
+
 <form name='registration' action="<c:url value="/save" />" method='POST' modelAttribute="user">
 	<table style="border:none">
 		<tr>
@@ -174,4 +173,4 @@ function Validation(){
 	</table>
 
 </form>
-               
+</div>     

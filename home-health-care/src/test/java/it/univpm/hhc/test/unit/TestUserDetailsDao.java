@@ -229,7 +229,7 @@ public class TestUserDetailsDao {
 	}
 	
 	@Test
-	void testUserCanHavePassword() {
+	void testUserCanHaveNoPassword() {
 		/**
 		 * An item can have empty image field
 		 */

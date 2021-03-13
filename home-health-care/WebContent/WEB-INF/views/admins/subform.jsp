@@ -4,11 +4,6 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <style>	
-
-h3 {
-    margin-left: 2%;
-}
-
 .btn {
   background-color: #007bff;
   color: white;
@@ -76,7 +71,8 @@ function Validation(){
 }
 
 </script>
-<h3>Aggiungi o modifica un abbonamento</h3>
+<div style="margin-left:2%">
+<div style="display:inline-block"><h3 style="border-bottom:2px solid #007bff">Aggiungi o Modifica un Abbonamento</h3></div>
 <c:if test="${fn:length(errorMessage) > 0}">
 <div style="color: red; padding:20px; font-weight: bold; margin: 30px 0px;">
 <c:forEach items="${errorMessage}" var="err">
@@ -86,7 +82,7 @@ function Validation(){
 </c:if>
 		<c:url value="/admins/subsave" var="action_url" />
         <form:form method="POST" action="${action_url}" modelAttribute="sub">
-             <table style="margin-left:2%; border:none">
+             <table style="border:none">
 				<c:if test="${empty sub.sub_id}">
                
 				</c:if>
@@ -114,3 +110,4 @@ function Validation(){
 
             </table>
 		</form:form>
+</div>

@@ -4,10 +4,6 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <style>
-h3, table {
-    margin-left: 2%;
-}
-
 #block_container
 {
     text-align:center;
@@ -32,13 +28,6 @@ h3, table {
 }
 </style>
 
-<h3>Modifica Password</h3>
-
-<c:if test="${fn:length(errorMessage) > 0}">
-<div style="color: red; font-weight: bold; margin: 2%">
-    ${errorMessage}<br>
-	</div>
-</c:if>
 <script>
 	function Validate(el) {
 
@@ -87,7 +76,14 @@ h3, table {
 	}
 </script>
 
+<div style="margin-left:2%">
+<div style="display:inline-block"><h3 style="border-bottom:2px solid #007bff">Modifica Password</h3></div>
 
+<c:if test="${fn:length(errorMessage) > 0}">
+<div style="color: red; font-weight: bold; margin: 2%">
+    ${errorMessage}<br>
+	</div>
+</c:if>
 <c:url value="/users/savepass" var="action_url" />
 
         
@@ -97,14 +93,15 @@ h3, table {
                
 				</c:if>
 		<tr>
-			<td>Password
+			<td>Password: 
 			<td /><td><input type='password' id="pass" name="password" onfocusout='return Validate(this.id);'
 				style="border: thin solid black" /></td>
 			<td><label id="pass1" style="color: red; font-weight: bold;"></label></td>
 		</tr>
-		<tr>
+		<tr style="line-height:100px">
 			<td colspan="3"><input type="submit" class="btn" value="Salva Modifiche"
 				onclick='return Validation();' /></td>
 		</tr>
 	</table>
 </form:form>
+</div>

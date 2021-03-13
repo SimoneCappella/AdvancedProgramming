@@ -57,11 +57,11 @@ input[type=text]:focus, input[type=password]:focus {
 
 <div class="bg-img">
 
-<form name='login' class="container" action="<c:url value="/login" />" method='POST'>
-		 <c:if test="${not empty errorMessage}">
-	<div style="color: red; font-weight: bold; "><h3>${errorMessage}</h3></div>
-</c:if>
+<form name='login' class="container" action="<c:url value="/login" />" method='POST'> 
 		<h1>Login</h1>
+				 <c:if test="${not empty errorMessage}">
+	<div style="color: red; font-weight: bold; margin-bottom:1%"><lable>${errorMessage}</lable></div>
+</c:if>
 			<label for="email"><b>Email</b></label>
 			<input type='text' placeholder="Inserisci Email" name='username' required/>
 		

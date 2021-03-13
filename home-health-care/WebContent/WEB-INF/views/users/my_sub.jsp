@@ -21,7 +21,6 @@
     font-family: sans-serif;
     min-width: 400px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    margin-left: 2%;
 }
 
 .styled-table thead tr {
@@ -59,23 +58,18 @@ hr {
   border: 1px solid #f1f1f1;
   margin-bottom: 25px;
 }
-
-h3 {
-    margin-left: 2%;
-}
-
 </style>
-
+<div style="margin-left:2%">
+<div style="display:inline-block"><h3 style="border-bottom:2px solid #007bff">Il Mio Abbonamento</h3></div>
 <c:choose>
   <c:when test="${sub eq null}">
-<p style="margin: 2% 0 0 2%">${errorMessage}</p>
-<div style="margin-left:2%"><a href="<c:url value="/users/link_sub" />"><i class="fa fa-hand-o-right" ></i>Clicca qui per acquistare un nuovo abbonamento. </a></div>
+<p style="margin: 2% 0 0 0">${errorMessage}</p>
+<div><a href="<c:url value="/users/link_sub" />"><i class="fa fa-hand-o-right" ></i>Clicca qui per acquistare un nuovo abbonamento. </a></div>
   </c:when>
 
   <c:otherwise>
-<h3>Vedi Abbonamento</h3>
-<div style="margin-left:2%"><a onclick="return confirm('Sei sicuro? Nel caso acquistassi un nuovo abbonamento non sarai rimborsato.')" href="<c:url value="/users/link_sub" />"><i class="fa fa-plus" ></i>Cambia Abbonamento: </a></div>
-<table style="margin-left: 2%" class="styled-table" >
+<div><a onclick="return confirm('Sei sicuro? Nel caso acquistassi un nuovo abbonamento non sarai rimborsato.')" href="<c:url value="/users/link_sub" />"><i class="fa fa-plus" ></i>Cambia Abbonamento: </a></div>
+<table class="styled-table" >
 <thead>
 	<td>Name</td>
 	<td>Discount</td>
@@ -94,4 +88,5 @@ h3 {
 </table>
   </c:otherwise>
 </c:choose>
+</div>
 

@@ -72,8 +72,8 @@ html {
 }
 
 </style>
-
-<h1>Chi Siamo</h1>
+<div style="margin-left:2%; margin-right:2%">
+<div style="display:inline-block"><h3 style="border-bottom:2px solid #007bff">Chi Siamo</h3></div>
 	<p style="padding:10px">
 	
 	Uno dei maggiori fenomeni della musica rock e di quella pop contemporanea, ha inizio a Liverpool il 6 luglio 1957, quando i giovanissimi John Lennon e Paul McCartney incrociano i loro destini sul palcoscenico della Woolton Parish Church, nel corso di un concerto rock in cui sono chitarristi in due diversi gruppi musicali. Dalla loro collaborazione nasceranno, tra il 1962 e il 1970, una serie memorabile di successi musicali.
@@ -85,7 +85,7 @@ Nel 1960, il gruppo, con il nome di Beatles, va ad Amburgo dove viene creato il 
 
 <img loading="lazy" class="center" title="Beatles: The Abbey Road cover"  src="https://www.vistanet.it/wp-content/uploads/2019/08/Abbey-Road.jpg" alt="The Beatles: The Abbey Road cover" ">
 <br>
-<h2>Chi siamo veramente</h2>
+<div style="display:inline-block"><h3 style="border-bottom:2px solid #007bff; margin-bottom:15%">Chi Siamo Veramente</h3></div>
 <br>
 <div class="row" style="padding: 0 13% 0 13%">
  <div class="column">
@@ -140,4 +140,5 @@ Nel 1960, il gruppo, con il nome di Beatles, va ad Amburgo dove viene creato il 
       </div>
     </div>
   </div>
+</div>
 </div>

@@ -18,9 +18,8 @@
 }
 </style>
 
-
 <div style="margin-left:2%; display:block">
-<h3 style="margin-bottom:2%">Conferma acquisto</h3>
+<div style="display:inline-block; margin-bottom:1%"><h3 style="border-bottom:2px solid #007bff">Conferma Acquisto</h3></div>
 <c:if test="${fn:length(errorMessage) > 0}">
 <div style="color: red; padding:20px; font-weight: bold; margin: 30px 0px;">
 ${errorMessage}

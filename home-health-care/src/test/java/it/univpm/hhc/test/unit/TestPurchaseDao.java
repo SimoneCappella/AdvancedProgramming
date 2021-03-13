@@ -215,7 +215,7 @@ public class TestPurchaseDao {
 
 		Purchase newpurchase = purchaseDao.create("visa", java.time.LocalDate.now(), 21.4, u, null);
 
-		assertNull(newpurchase);
+		assertNotNull(newpurchase);
 	}
 	
 	

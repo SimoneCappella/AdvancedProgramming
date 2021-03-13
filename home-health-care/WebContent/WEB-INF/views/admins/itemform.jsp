@@ -91,8 +91,9 @@ function Validation(){
 }
 
 </script>
+<div style="margin-left:2%">
 <c:url value="/admins/itemsave" var="action_url" />
-<h3 style="margin-left:2%">Prodotto</h3>
+<div style="display:inline-block"><h3 style="border-bottom:2px solid #007bff">Prodotto</h3></div>
 <c:if test="${fn:length(errorMessage) > 0}">
 <div style="color: red; padding:20px; font-weight: bold; margin: 30px 0px;">
 <c:forEach items="${errorMessage}" var="err">
@@ -101,7 +102,7 @@ function Validation(){
 </div>
 </c:if>
         <form:form method="POST" action="${action_url}"  enctype="multipart/form-data">
-             <table style="border:none; margin-left:2%">
+             <table style="border:none">
 			<thead>
 				<c:if test="${empty item.item_id}">
                
@@ -135,3 +136,4 @@ function Validation(){
 			<thead/>
             </table>
 		</form:form>
+		</div>

@@ -1,12 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-<h3 style="margin-left:2%">Lavora Con Noi</h3>
-
-
-
-
-
 <style>
 * {
   box-sizing: border-box;
@@ -29,6 +22,8 @@
   padding: 20px;
 }
 </style>
+<div style="margin-left:2%">
+<div style="display:inline-block"><h3 style="border-bottom:2px solid #007bff">Lavora Con Noi</h3></div>
 
 <div class="container">
  <img src="https://www.cinematographe.it/wp-content/uploads/2019/05/Silicon-Valley-2.jpg" alt="Nature" style="width:100%;">
@@ -41,4 +36,5 @@ Chi lavora nel Gruppo EuroSpin vive un ambiente dinamico, organizzato ed in cost
 <b>Per noi il Cliente è la nostra missione.</b>
      
      </div>
+</div>
 </div>
