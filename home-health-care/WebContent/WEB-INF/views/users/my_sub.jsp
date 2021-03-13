@@ -73,8 +73,9 @@ h3 {
   </c:when>
 
   <c:otherwise>
-    <h3>Vedi Abbonamento</h3>
-<table style="margin: 2%" class="styled-table" >
+<h3>Vedi Abbonamento</h3>
+<div style="margin-left:2%"><a onclick="return confirm('Sei sicuro? Nel caso acquistassi un nuovo abbonamento non sarai rimborsato.')" href="<c:url value="/users/link_sub" />"><i class="fa fa-plus" ></i>Cambia Abbonamento: </a></div>
+<table style="margin-left: 2%" class="styled-table" >
 <thead>
 	<td>Name</td>
 	<td>Discount</td>
