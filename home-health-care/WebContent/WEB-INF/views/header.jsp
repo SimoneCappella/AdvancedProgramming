@@ -109,8 +109,10 @@ padding:0 16px 0 0;}
   	</li> 
 	</c:if>   
 	<c:if test="${isAuth}">       
-   		<li class="custom-li"><a class="custom-a1" href="<c:url value="/users/myprofile" />">    <i class="fa fa-cog" ></i> Opzioni Utente</a>    
-    	 <ul class="custom-ul">    
+   		<li class="custom-li"><a class="custom-a1"/>    <i class="fa fa-cog" ></i> Opzioni Utente</a>    
+    	 <ul class="custom-ul">
+    	 	 <li class="custom-li"><a class="custom-a" href="<c:url value="/users/myprofile" />">
+         		<i class="fa fa-user" ></i> Il Mio Profilo</a></li>     
         	 <li class="custom-li"><a class="custom-a" href="<c:url value="/users/myorders" />">
          		<i class="fa fa-shopping-bag" ></i> Storico Ordini</a></li>    
         	 <li class="custom-li"><a class="custom-a" href="<c:url value="/users/view_sub" />">

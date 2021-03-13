@@ -69,7 +69,7 @@ h3 {
 <c:choose>
   <c:when test="${sub eq null}">
 <p style="margin: 2% 0 0 2%">${errorMessage}</p>
-<div style="margin-left:2%"><a href="<c:url value="/users/link_sub" />"><i class="fa fa-hand-o-right" ></i>Clicca qui per acquistare un nuovo abbonamento: </a></div>
+<div style="margin-left:2%"><a href="<c:url value="/users/link_sub" />"><i class="fa fa-hand-o-right" ></i>Clicca qui per acquistare un nuovo abbonamento. </a></div>
   </c:when>
 
   <c:otherwise>

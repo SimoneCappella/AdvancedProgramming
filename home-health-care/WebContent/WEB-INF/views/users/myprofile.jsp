@@ -7,7 +7,7 @@
 h3, table {
     margin-left: 2%;
 }
-h4{ font-weight: normal;}
+
 .btn {
   background-color: #007bff;
   color: white;
@@ -27,12 +27,12 @@ h4{ font-weight: normal;}
 <h3>Panoramica Profilo</h3>
 <table style="border:none">
 
-<tr><td colspan="2"><h4>Nome: ${user.name}</h4></td></tr>
-<tr><td colspan="2"><h4>Cognome: ${user.surname}</h4></td></tr>
-<tr><td colspan="2"><h4>Email: ${user.email}</h4></td></tr>
-<tr>
-	<td><button class="btn" onclick="window.location.href='/home-health-care/users/edit';">Modifica profilo</button></td>
-	<td><button class="btn" onclick="window.location.href='/home-health-care/users/deletemyaccount';">Elimina il mio profilo</button></td>
+<tr><td colspan="2"><lable>Nome: ${user.name}</lable></td></tr>
+<tr><td colspan="2"><lable>Cognome: ${user.surname}</lable></td></tr>
+<tr><td colspan="2"><lable>Email: ${user.email}</lable></td></tr>
+<tr style="line-height:100px">
+	<td ><button style="margin-top:2%" class="btn" onclick="window.location.href='/home-health-care/users/edit';">Modifica profilo</button></td>
+	<td><button style="margin-top:2%" class="btn" onclick="window.location.href='/home-health-care/users/deletemyaccount';">Elimina il mio profilo</button></td>
 </tr>
 </table>
 
