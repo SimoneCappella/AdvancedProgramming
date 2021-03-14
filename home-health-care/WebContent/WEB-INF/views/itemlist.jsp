@@ -30,7 +30,7 @@
 	
 <c:forEach items="${items}" var="i">
 
-    <div>
+    <div style="border-bottom:2px solid #007bff; margin-bottom:1%">
     <div class="container"	 style="float: left;margin-right: 25px;">
     <img src=' <c:url value= "${i.image}"/> ' alt="nonValida" >
     </div>
