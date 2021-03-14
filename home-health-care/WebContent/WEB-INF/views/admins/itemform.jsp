@@ -29,7 +29,7 @@ function Validate(el){
 	var name;
 	switch(el){
 	case 'title':
-		max = 20;
+		max = 40;
 		min = 2;
 		name = "Il nome dell' articolo";
 		break;
@@ -65,7 +65,7 @@ function Validate(el){
 
 function Validation(){
 	var c = false;
-	if (document.getElementById("title").value.length <2 || document.getElementById("title").value.length >20) {
+	if (document.getElementById("title").value.length <2 || document.getElementById("title").value.length >40) {
 		  c=true;
 		  document.getElementById("title").style.border = "medium solid red";
 		  document.getElementById("title1").innerHTML = ' Compila questo campo con almeno 2 caratteri e massimo 20';
