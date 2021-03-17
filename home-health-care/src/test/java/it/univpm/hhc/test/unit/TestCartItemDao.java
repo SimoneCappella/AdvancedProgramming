@@ -87,18 +87,14 @@ public class TestCartItemDao {
 	
 	///TESTS
 	
-	// funziona ma senza costruttori!!!
+	
 	@Test
 	void createCartItem(){
 		
 		Session s = sf.openSession();
 
 		cartItemDao.setSession(s);
-		//Item i= new Item();
-		//Cart c = new Cart();
-		//User u = new User();
-		//User user = userDetailsDao.create("password", "mail@mail.com", "Giacomo", "Bruni");
-		
+
 		try {
 		Cart_item cartItem = cartItemDao.create(c, item, 8);
 		
@@ -108,7 +104,7 @@ public class TestCartItemDao {
 		}
 	}
 	
-	//funziona
+	
 	@Test
 	void testBeginCommitTransaction() {
 		/**
@@ -124,8 +120,8 @@ public class TestCartItemDao {
 
 		cartItemDao.setSession(s);
 
-		assertEquals(s, cartItemDao.getSession()); // s.equals(cartitemDao.getSession());
-		assertSame(s, cartItemDao.getSession()); // s == cartitemDao.getSession();
+		assertEquals(s, cartItemDao.getSession()); 
+		assertSame(s, cartItemDao.getSession()); 
 		assertTrue(cartItemDao.getSession().getTransaction().isActive());
 
 		s.getTransaction().commit();
@@ -134,7 +130,7 @@ public class TestCartItemDao {
 
 	}
 	
-	//funziona
+	
 	@Test
 	void testAutoCreationOfSession() {
 		/**
@@ -148,7 +144,7 @@ public class TestCartItemDao {
 		assertFalse(s.getTransaction().isActive());
 	}
 	
-	//funziona
+	
 		@Test
 		void testNocartitemsAtBeginning() {
 			/**
@@ -165,7 +161,7 @@ public class TestCartItemDao {
 		}
 
 		
-		//funziona
+		
 		@Test
 		void testUpdateACart() {
 			
@@ -193,7 +189,7 @@ public class TestCartItemDao {
 		}
 		
 		
-		//funziona
+		
 		@Test
 		void testDeleteACartItem() {
 			
@@ -212,7 +208,7 @@ public class TestCartItemDao {
 
 		}
 		
-		//funziona
+		
 		@Test
 		void FindCartById() {
 			
@@ -229,7 +225,7 @@ public class TestCartItemDao {
 			
 		}
 		
-		//funziona
+		
 		@Test
 		void FindCartByPurchase() {
 			

@@ -92,8 +92,8 @@ public class TestItemDao {
 
 		itemDao.setSession(s);
 
-		assertEquals(s, itemDao.getSession()); // s.equals(itemDao.getSession());
-		assertSame(s, itemDao.getSession()); // s == itemDao.getSession();
+		assertEquals(s, itemDao.getSession()); 
+		assertSame(s, itemDao.getSession()); 
 		assertTrue(itemDao.getSession().getTransaction().isActive());
 
 		s.getTransaction().commit();
@@ -111,7 +111,7 @@ public class TestItemDao {
 		 */
 		
 		Session s = itemDao.getSession();
-		assertNotNull(s); // s.equals(itemDao.getSession());
+		assertNotNull(s); 
 		assertFalse(s.getTransaction().isActive());
 	}
 
@@ -188,7 +188,7 @@ public class TestItemDao {
 	@Test
 	void testItemCanHaveNoTitle() {
 		/**
-		 * An item can have empty image field
+		 * An item can have empty title field
 		 */
 		Session s = sf.openSession();
 
@@ -200,7 +200,7 @@ public class TestItemDao {
 	@Test
 	void testItemCanHaveNoDescription() {
 		/**
-		 * An item can have empty image field
+		 * An item can have empty description field
 		 */
 		Session s = sf.openSession();
 
@@ -212,7 +212,7 @@ public class TestItemDao {
 	@Test
 	void testItemCanHaveAPriceSetToZero() {
 		/**
-		 * An item can have empty image field
+		 * An item can have the price set to zero
 		 */
 		Session s = sf.openSession();
 
@@ -247,9 +247,7 @@ public class TestItemDao {
 		}
 
 	}
-	
-	
-	
+		
 	
 	@Test
 	void testDeleteAnItem() {
@@ -289,7 +287,7 @@ public class TestItemDao {
 			itemDao.delete(fake);
 			assertTrue(false);
 		} catch (Exception e) {
-			assertTrue(true);//fail("An attempt to delete a non existing item was blocked");
+			assertTrue(true);
 		}
 		
 	}

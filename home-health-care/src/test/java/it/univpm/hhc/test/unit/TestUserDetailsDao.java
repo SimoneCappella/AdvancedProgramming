@@ -96,8 +96,8 @@ public class TestUserDetailsDao {
 
 		UserDetailsDao.setSession(s);
 
-		assertEquals(s, UserDetailsDao.getSession()); // s.equals(UserDetailsDao.getSession());
-		assertSame(s, UserDetailsDao.getSession()); // s == UserDetailsDao.getSession();
+		assertEquals(s, UserDetailsDao.getSession()); 
+		assertSame(s, UserDetailsDao.getSession()); 
 		assertTrue(UserDetailsDao.getSession().getTransaction().isActive());
 
 		s.getTransaction().commit();
@@ -206,9 +206,9 @@ public class TestUserDetailsDao {
 	
 	@Test
 	void testUserCanHaveNoName() {
-		/**
-		 * An item can have empty image field
-		 */
+		
+		 //A user can have empty name, provided that it has non empty surname
+		 
 		Session s = sf.openSession();
 
 		User newUser = UserDetailsDao.create("Password","mail@mail.com","","Surnameasd");
@@ -218,9 +218,9 @@ public class TestUserDetailsDao {
 	
 	@Test
 	void testUserCanHaveNoSurname() {
-		/**
-		 * An item can have empty image field
-		 */
+		
+		 //A user can have empty surname, provided that it has non empty name
+		
 		Session s = sf.openSession();
 
 		User newUser = UserDetailsDao.create("Password","mail@mail.com","Name","");
@@ -230,21 +230,19 @@ public class TestUserDetailsDao {
 	
 	@Test
 	void testUserCanHaveNoPassword() {
-		/**
-		 * An item can have empty image field
-		 */
+		
+		 
 		Session s = sf.openSession();
 
-		User newUser = UserDetailsDao.create("","mail@mail.com","","Surname");
+		User newUser = UserDetailsDao.create("","mail@mail.com","Name","Surname");
 
 		assertNotNull(newUser);
 	}
 	
 	@Test
 	void testUserCanHaveNoEmail() {
-		/**
-		 * An item can have empty image field
-		 */
+		
+		 
 		Session s = sf.openSession();
 
 		User newUser = UserDetailsDao.create("Password","","Name","Surname");
@@ -285,7 +283,6 @@ public class TestUserDetailsDao {
 	}
 	
 	
-	//Fallisce (va sul catch), da sistemare
 	@Test
 	void testUpdateAUser() {
 		

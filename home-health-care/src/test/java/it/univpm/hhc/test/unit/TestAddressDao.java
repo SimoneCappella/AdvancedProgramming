@@ -96,8 +96,8 @@ public class TestAddressDao {
 
 		addressDao.setSession(s);
 
-		assertEquals(s, addressDao.getSession()); // s.equals(addressDao.getSession());
-		assertSame(s, addressDao.getSession()); // s == addressDao.getSession();
+		assertEquals(s, addressDao.getSession()); 
+		assertSame(s, addressDao.getSession()); 
 		assertTrue(addressDao.getSession().getTransaction().isActive());
 
 		s.getTransaction().commit();
@@ -115,14 +115,14 @@ public class TestAddressDao {
 		 */
 		
 		Session s = addressDao.getSession();
-		assertNotNull(s); // s.equals(addressDao.getSession());
+		assertNotNull(s); 
 		assertFalse(s.getTransaction().isActive());
 	}
 	
 	@Test
 	void testCreateaddressDuplicateNames() {
 		/**
-		 * We test that it is possible to create two addresss with same name and surname
+		 * We test that it is possible to create two address with same name and surname
 		 */
 		
 		Session s = sf.openSession();
@@ -232,7 +232,8 @@ public class TestAddressDao {
 	@Test
 	void testaddressCanHaveNoCAP() {
 		/**
-		 * An address can have empty civ_num field*/
+		 * An address can have empty cap field
+		 * */
 		 
 		Session s = sf.openSession();
 
@@ -244,7 +245,8 @@ public class TestAddressDao {
 	@Test
 	void testaddressCanHaveNoStreet() {
 		/**
-		 * An address can have empty civ_num field*/
+		 * An address can have empty street field
+		 * */
 		 
 		Session s = sf.openSession();
 
@@ -257,7 +259,8 @@ public class TestAddressDao {
 	void testaddressCanHaveNoUser() {
 		/**
 		 * An address can have empty user field
-		 */
+		 **/
+		 
 		Session s = sf.openSession();
 
 		Address newaddress = addressDao.create("60098", "Genova", "rovereto", "67",null);
@@ -268,7 +271,8 @@ public class TestAddressDao {
 	@Test
 	void testaddressCanHaveNoCity() {
 		/**
-		 * An address can have empty civ_num field*/
+		 * An address can have empty city field
+		 * */
 		 
 		Session s = sf.openSession();
 
@@ -281,7 +285,8 @@ public class TestAddressDao {
 	@Test
 	void testaddressCanHaveNoCivNum() {
 		/**
-		 * An address can have empty civ_num field*/
+		 * An address can have empty civ_num field
+		 */
 		 
 		Session s = sf.openSession();
 
@@ -328,30 +333,10 @@ public class TestAddressDao {
 			addressDao.delete(fake);
 			assertTrue(false);
 		} catch (Exception e) {
-			assertTrue(true);//fail("An attempt to delete a non-existing address was blocked");
+			assertTrue(true);
 		}
 		
 	}
 	
-	/*@Test
-	void testUserCanHaveNoMoreThanThreeAddresses() {
-		
-		Session s1 = addressDao.getSession();
-		Session s2 = userDetailsDao.getSession();
-		Session s1 = sf.openSession();
-		Session s2 = sf.openSession();
-		addressDao.setSession(s1);
-		userDetailsDao.setSession(s2);
-		
-		User user = this.userDetailsDao.create("ciao", "mail@mail.com", "Manuel", "Rodriguez");
-		Address a1 = addressDao.create("60098", "Pavia", "rovereto", "45" , user);
-		Address a2 = addressDao.create("60098", "Genova", "rovereto", "45" , user);
-		Address a3 = addressDao.create("60098", "Milano", "rovereto", "45" , user);
-		Address a4 = addressDao.create("60098", "Siracusa", "rovereto", "45" , user);
-		
-		List<Address> allAddresses = this.addressService.findByUserId(user.getUser_id());
-		assertSame(allAddresses.size(), 3);
-		
-	}*/
 
 }

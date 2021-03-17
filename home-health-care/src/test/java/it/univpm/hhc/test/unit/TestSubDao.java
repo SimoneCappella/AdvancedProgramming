@@ -246,8 +246,7 @@ public class TestSubDao {
 	
 	@Test
 	void testsubCanHaveNoName() {
-		/**
-		 * An sub can have empty civ_num field*/
+		//An sub can have empty name field
 		 
 		Session s = sf.openSession();
 
@@ -259,7 +258,7 @@ public class TestSubDao {
 	@Test
 	void testsubCanHaveNoPrice() {
 		/**
-		 * An sub can have empty civ_num field*/
+		 * An sub can have empty price field*/
 		 
 		Session s = sf.openSession();
 
@@ -271,7 +270,7 @@ public class TestSubDao {
 	@Test
 	void testsubCanHaveNoDiscount() {
 		/**
-		 * An sub can have empty user field
+		 * An sub can have empty discount field
 		 */
 		Session s = sf.openSession();
 
@@ -319,7 +318,7 @@ public class TestSubDao {
 			subDao.delete(fake);
 			assertTrue(false);
 		} catch (Exception e) {
-			assertTrue(true);//fail("An attempt to delete a non-existing sub was blocked");
+			assertTrue(true);
 		}
 		
 	}

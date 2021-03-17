@@ -94,8 +94,8 @@ public class TestPurchaseDao {
 
 		purchaseDao.setSession(s);
 
-		assertEquals(s, purchaseDao.getSession()); // s.equals(purchaseDao.getSession());
-		assertSame(s, purchaseDao.getSession()); // s == purchaseDao.getSession();
+		assertEquals(s, purchaseDao.getSession()); 
+		assertSame(s, purchaseDao.getSession()); 
 		assertTrue(purchaseDao.getSession().getTransaction().isActive());
 
 		s.getTransaction().commit();
@@ -113,32 +113,10 @@ public class TestPurchaseDao {
 		 */
 		
 		Session s = purchaseDao.getSession();
-		assertNotNull(s); // s.equals(purchaseDao.getSession());
+		assertNotNull(s); 
 		assertFalse(s.getTransaction().isActive());
 	}
 	
-	/*@Test
-	void testCreatepurchaseDuplicateId() {
-		/**
-		 * We test that it is possible to create two purchases with same id
-		 
-		
-		Session s = sf.openSession();
-
-		purchaseDao.setSession(s);
-
-		Purchase newpurchase1 = purchaseDao.create("visa", java.time.LocalDate.now(), 21.4, u, a);
-
-		try {
-			Purchase newpurchase2 = purchaseDao.create(newpurchase1.getPay_method(), newpurchase1.getDate(), newpurchase1.getTotal(), u, a);
-			newpurchase2.setPurchase_id(newpurchase1.getPurchase_id());
-			assertTrue(false); //non dovrebbe poter essere possibile
-		} catch (Exception e) {
-			// pass
-			fail("Unexpected exception creating purchase with duplicate name: " + e.getMessage());
-		}
-
-	}*/
 
 	@Test
 	void testNopurchasesAtBeginning() {
@@ -267,7 +245,7 @@ public class TestPurchaseDao {
 	@Test
 	void testpurchaseCanHaveNoPayMethod() {
 		/**
-		 * An purchase can have empty civ_num field*/
+		 * A purchase can have empty pay_method field*/
 		 
 		Session s = sf.openSession();
 
@@ -279,7 +257,7 @@ public class TestPurchaseDao {
 	@Test
 	void testpurchaseCanHaveNoDate() {
 		/**
-		 * An purchase can have empty civ_num field*/
+		 * A purchase can have empty date field*/
 		 
 		Session s = sf.openSession();
 
@@ -291,7 +269,7 @@ public class TestPurchaseDao {
 	@Test
 	void testpurchaseCanHaveNoTotalSetToZero() {
 		/**
-		 * An purchase can have empty user field
+		 * A  purchase can have total set to zero
 		 */
 		Session s = sf.openSession();
 
@@ -306,7 +284,7 @@ public class TestPurchaseDao {
 	@Test
 	void testpurchaseCanHaveNoUser() {
 		/**
-		 * An purchase can have empty civ_num field*/
+		 * A purchase can have empty user field*/
 		 
 		Session s = sf.openSession();
 

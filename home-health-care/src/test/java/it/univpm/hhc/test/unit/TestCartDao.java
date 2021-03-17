@@ -80,15 +80,12 @@ public class TestCartDao {
 	
 	///TESTS
 	
-	// funziona ma senza costrutture di user
 	@Test
 	void createCart(){
 		
 		Session s = sf.openSession();
 
 		cartDao.setSession(s);
-		//User u = new User();
-		//User user = userDetailsDao.create("password", "mail@mail.com", "Giacomo", "Bruni");
 		
 		try {
 		Cart cart = cartDao.create(4, 20.2, u);
@@ -99,7 +96,7 @@ public class TestCartDao {
 		}
 	}
 	
-	//funziona
+	
 	@Test
 	void testBeginCommitTransaction() {
 		/**
@@ -125,7 +122,7 @@ public class TestCartDao {
 
 	}
 	
-	//funziona
+	
 	@Test
 	void testAutoCreationOfSession() {
 		/**
@@ -139,7 +136,7 @@ public class TestCartDao {
 		assertFalse(s.getTransaction().isActive());
 	}
 
-	//funziona
+	
 	@Test
 	void testNocartsAtBeginning() {
 		/**
@@ -155,7 +152,7 @@ public class TestCartDao {
 		assertEquals(allcarts.size(), 0);
 	}
 
-	//funziona
+	
 	@Test
 	void testAllCreatedAreFound() {
 		/**
@@ -175,7 +172,7 @@ public class TestCartDao {
 		}
 	}
 	
-	//funziona
+	
 	@Test
 	void testUpdateACart() {
 		
@@ -202,7 +199,7 @@ public class TestCartDao {
 
 	}
 	
-	//funziona
+	
 	@Test
 	void testsubIsUpdatedCorrectlyWithMerging() {
 		Session s = sf.openSession();
@@ -226,7 +223,7 @@ public class TestCartDao {
 		assertSame(found, inserted);
 	}
 	
-	//funziona
+	
 	@Test
 	void testDeleteACart() {
 		
@@ -245,7 +242,7 @@ public class TestCartDao {
 
 	}
 	
-	//funziona
+	
 	@Test
 	void FindCartById() {
 		
@@ -262,7 +259,7 @@ public class TestCartDao {
 		
 	}
 	
-	//funziona
+	
 	@Test
 	void FindCartByUserId() {
 		
