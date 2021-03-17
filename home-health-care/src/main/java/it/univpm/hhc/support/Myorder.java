@@ -16,8 +16,10 @@ public class Myorder {
 	private Double total;
 	private LocalDate date;
 	private String paymeth;
+	private Double notdiscountedtotal;
 	private Integer quantity;
 	private HashMap<Item, Integer> items = new HashMap<Item, Integer>();
+
 	
 	public Myorder() {
 		
@@ -27,20 +29,29 @@ public class Myorder {
 	public Integer getQuantity() {
 		return quantity;
 	}
+	
+	public Double getNotdiscountedtotal() {
+		return notdiscountedtotal;
+	}
 
+
+	public void setNotdiscountedtotal(Double notdiscountedtotal) {
+		this.notdiscountedtotal = notdiscountedtotal;
+	}
 
 
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
 	
-	public Myorder(Address address, Double total, LocalDate date, String paymeth) {
+	public Myorder(Address address, Double notdiscountedtotal, Double total, LocalDate date, String paymeth) {
 		this.address = address;
 		this.total = total;
 		this.date = date;
 		this.paymeth = paymeth;
 		this.quantity = null;
 		this.items = null;
+		this.notdiscountedtotal = notdiscountedtotal;
 	}
 
 

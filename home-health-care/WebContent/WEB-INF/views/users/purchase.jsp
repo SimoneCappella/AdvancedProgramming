@@ -28,9 +28,9 @@ ${errorMessage}
 <c:url value="/users/savepurchase" var="action_url" />
 <form method='POST' action="${action_url}">
 Metodo di pagamento: <select name="paymeth" id="paymeth">
-	<option value="paypal">PayPal</option>
-	<option value="visa">Carta Prepagata</option>
-	<option value="master">MasterCard</option>	
+	<option value="Paypal">PayPal</option>
+	<option value="Visa">Carta Prepagata</option>
+	<option value="MasterCard">MasterCard</option>	
 </select>
 <br><br>
 Indirizzo di spedizione:<select name="addr" id="addr" value">
@@ -49,6 +49,6 @@ Totale scontato: ${newtotal}€
 <input type="hidden" name="tot" value="${total}">
 <input type="hidden" name="discount" value="${discount}">
 
-<input class = "btn" style="display:block" type="submit" value="Acqusita!"/>
+<input class = "btn" style="display:block" type="submit" value="Acquista!"/>
 </form>
 </div>

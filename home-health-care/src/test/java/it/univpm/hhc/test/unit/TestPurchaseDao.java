@@ -167,7 +167,7 @@ public class TestPurchaseDao {
 		purchaseDao.setSession(s);
 
 		for (int i = 0; i < N; i++) {
-			purchaseDao.create("visa", java.time.LocalDate.now(), 21.4, u, a);
+			purchaseDao.create("visa", java.time.LocalDate.now(),21.4, 21.4, u, a);
 
 			List<Purchase> allpurchases = purchaseDao.findAll();
 			assertEquals(allpurchases.size(), i + 1);
@@ -179,7 +179,7 @@ public class TestPurchaseDao {
 		
 		Session s = sf.openSession();
 
-		Purchase newPurchase = purchaseDao.create("visa", java.time.LocalDate.now(), 21.4, u, a);
+		Purchase newPurchase = purchaseDao.create("visa", java.time.LocalDate.now(), 21.4, 21.4, u, a);
 		Long Id = newPurchase.getPurchase_id();
 		try {			
 			assertSame(newPurchase.getPurchase_id(), Id);
@@ -195,7 +195,7 @@ public class TestPurchaseDao {
 		
 		Session s = sf.openSession();
 
-		Purchase newPurchase = purchaseDao.create("visa", java.time.LocalDate.now(), 21.4, u, a);
+		Purchase newPurchase = purchaseDao.create("visa", java.time.LocalDate.now(), 21.4, 21.4, u, a);
 		User user = newPurchase.getUser();
 		try {			
 			assertSame(newPurchase.getUser(), user);
@@ -213,7 +213,7 @@ public class TestPurchaseDao {
 		 */
 		Session s = sf.openSession();
 
-		Purchase newpurchase = purchaseDao.create("visa", java.time.LocalDate.now(), 21.4, u, null);
+		Purchase newpurchase = purchaseDao.create("visa", java.time.LocalDate.now(), 21.4, 21.4, u, null);
 
 		assertNotNull(newpurchase);
 	}
@@ -227,7 +227,7 @@ public class TestPurchaseDao {
 
 		purchaseDao.setSession(s);
 		
-		Purchase purchase = purchaseDao.create("visa", java.time.LocalDate.now(), 21.4, u, a);
+		Purchase purchase = purchaseDao.create("visa", java.time.LocalDate.now(), 21.4, 21.4, u, a);
 		
 		try {
 			purchaseDao.delete(purchase);
@@ -245,7 +245,7 @@ public class TestPurchaseDao {
 
 		purchaseDao.setSession(s);
 
-		Purchase inserted = purchaseDao.create("visa", java.time.LocalDate.now(), 21.4, u, a);
+		Purchase inserted = purchaseDao.create("visa", java.time.LocalDate.now(), 21.4, 21.4, u, a);
 		
 		Purchase updated = new Purchase();
 		updated.setPurchase_id(inserted.getPurchase_id());
@@ -271,7 +271,7 @@ public class TestPurchaseDao {
 		 
 		Session s = sf.openSession();
 
-		Purchase newpurchase = purchaseDao.create("", java.time.LocalDate.now(), 21.4, u, a);
+		Purchase newpurchase = purchaseDao.create("", java.time.LocalDate.now(), 21.4, 21.4, u, a);
 
 		assertNotNull(newpurchase);
 	}
@@ -283,7 +283,7 @@ public class TestPurchaseDao {
 		 
 		Session s = sf.openSession();
 
-		Purchase newpurchase = purchaseDao.create("visa", null, 21.4, u, a);
+		Purchase newpurchase = purchaseDao.create("visa", null, 21.4, 21.4, u, a);
 
 		assertNotNull(newpurchase);
 	}
@@ -295,7 +295,7 @@ public class TestPurchaseDao {
 		 */
 		Session s = sf.openSession();
 
-		Purchase newpurchase = purchaseDao.create("visa", java.time.LocalDate.now(), 0, u, a);
+		Purchase newpurchase = purchaseDao.create("visa", java.time.LocalDate.now(), 0, 0, u, a);
 
 		assertNotNull(newpurchase);
 	}
@@ -310,7 +310,7 @@ public class TestPurchaseDao {
 		 
 		Session s = sf.openSession();
 
-		Purchase newpurchase = purchaseDao.create("visa", java.time.LocalDate.now(), 21.4, null, a);
+		Purchase newpurchase = purchaseDao.create("visa", java.time.LocalDate.now(), 21.4, 21.4, null, a);
 
 		assertNotNull(newpurchase);
 	}

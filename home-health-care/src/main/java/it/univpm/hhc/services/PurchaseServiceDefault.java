@@ -39,8 +39,8 @@ public class PurchaseServiceDefault implements PurchaseService {
 	}
 
 	@Override
-	public Purchase create(String pay_method, LocalDate date, double total, User user, Address address) {
-		return this.purchaseDao.create(pay_method, date, total, user, address);
+	public Purchase create(String pay_method, LocalDate date, double notdiscountedtotal, double total, User user, Address address) {
+		return this.purchaseDao.create(pay_method, date, notdiscountedtotal, total, user, address);
 	}
 
 	@Override

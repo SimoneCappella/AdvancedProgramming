@@ -593,7 +593,7 @@ public class UserController {
 			uiModel.addAttribute("addresses", addresses);
 			return "users/purchase";
 		}
-		Purchase purchase = this.purchaseService.create(paymeth, java.time.LocalDate.now(), newtotal, getCurrentUser(), this.addressService.findById(addressId));
+		Purchase purchase = this.purchaseService.create(paymeth, java.time.LocalDate.now(),tot, newtotal, getCurrentUser(), this.addressService.findById(addressId));
 		for(Cart_item i : items) {
 			i.setPurchase(purchase);
 			i.setCart(null);
@@ -612,7 +612,7 @@ public class UserController {
 			//List<Address> addresses = new ArrayList<Address>();
 			Myorder order = new Myorder();
 			for (Purchase p : purchases) {
-				order = new Myorder(p.getAddress(), p.getTotal(), p.getDate(), p.getPay_method());
+				order = new Myorder(p.getAddress(),p.getNotdiscountedtotal(), p.getTotal(), p.getDate(), p.getPay_method());
 				cartitems.add(cartItemService.findByPurchase(p));
 				//addresses.add(addressService.findById(p.getAddress().getAddress_id()));
 			

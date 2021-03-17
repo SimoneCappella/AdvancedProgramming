@@ -31,6 +31,7 @@ public class Purchase implements Serializable {
 	private User user;
 	private Address address;
 	private double total;
+	private double notdiscountedtotal;
 	private Set<Cart_item> cart_items = new HashSet<Cart_item>();
 	
 	
@@ -44,7 +45,13 @@ public class Purchase implements Serializable {
 		this.purchase_id = purchase_id;
 	}
 	
-	
+	@Column(name="NOTDISCOUNTEDTOTAL", nullable = false)
+	public double getNotdiscountedtotal() {
+		return notdiscountedtotal;
+	}
+	public void setNotdiscountedtotal(double notdiscountedtotal) {
+		this.notdiscountedtotal = notdiscountedtotal;
+	}
 	@Column(name = "PAY_METHOD", nullable = false) 
 	public String getPay_method() {
 		return pay_method;

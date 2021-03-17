@@ -14,29 +14,29 @@
 <b>Indirizzo di spedizione:</b> <c:if test="${empty e.address.street}">
 	l'indirizzo non è più disponibile
 </c:if>
- <c:set var="cont" value="${0}" scope="page" />
+ <c:set var="count" value="${0}" scope="page" />
 <c:if test="${not empty e.address.street}">
 	${e.address.street} ${e.address.civ_num}, ${e.address.city}, CAP: ${e.address.cap}
 </c:if>
 <br>
 <b>Metodo di pagamento:</b> ${e.paymeth}
 <br>
-<b>Totale:</b> ${e.total}
+<b>Totale:</b> ${e.total} €
 <br>
 
 <c:forEach items="${e.items}" var="i">
 
 <c:if test="${not empty i.key}">
 		<b>Nome:</b> ${i.key.title} | <b>Descrizione:</b> ${i.key.description} | <b>Prezzo:</b> ${i.key.price}€ | Quantità: ${i.value}
-		<c:set var="cont" value="${cont=cont+((i.key.price)*i.value)}"/>
+		<c:set var="count" value="${count=count+((i.key.price)*i.value)}"/>
 </c:if>
 <br>
 </c:forEach> 
 
 
-<c:if test="${(count)<=e.total}">
+<c:if test="${(count)<e.notdiscountedtotal}">
 
-		Articolo non più disponibile
+		Articolo/i non più disponibile/i
 		<div style="visibility: hidden">		${count=0}</div>
 </c:if>
 

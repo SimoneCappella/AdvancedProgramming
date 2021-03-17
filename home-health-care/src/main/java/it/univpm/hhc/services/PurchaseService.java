@@ -15,7 +15,7 @@ public interface PurchaseService {
 	
 	Purchase findById(Long id);
 	
-	Purchase create (String pay_method, LocalDate date, double total, User user, Address address);
+	Purchase create (String pay_method, LocalDate date, double notdiscountedtotal, double total, User user, Address address);
 	
 	Purchase update(Purchase purchase);
 	

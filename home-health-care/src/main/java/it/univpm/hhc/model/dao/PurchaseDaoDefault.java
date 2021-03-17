@@ -37,8 +37,9 @@ public class PurchaseDaoDefault extends DefaultDao implements PurchaseDao {
 	}
 
 	@Override
-	public Purchase create(String pay_method, LocalDate date, double total, User user, Address address) {
+	public Purchase create(String pay_method, LocalDate date, double notdiscountedtotal, double total, User user, Address address) {
 		Purchase p = new Purchase();
+		p.setNotdiscountedtotal(notdiscountedtotal);
 		p.setPay_method(pay_method);
 		p.setDate(date);
 		p.setTotal(total);
