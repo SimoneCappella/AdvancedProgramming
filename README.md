@@ -1,4 +1,5 @@
-# AdvancedProgramming
+# Advanced Programming
+
 To run this app it is required an sql account with these credentials:
 - Username: root
 - Password: password
@@ -10,3 +11,5 @@ Here there are the test accounts:
 -  Email: user1@gmail.com  || Password: password        ####USER ACCOUNT####
 -  Email: user2@gmail.com  || Password: password        ####USER ACCOUNT####
 -  Email: user3@gmail.com  || Password: password        ####USER ACCOUNT####
+
+*This is a university project therefore it is in a embryonic state.*
